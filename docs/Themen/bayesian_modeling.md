@@ -25,6 +25,9 @@ Wo:
 Das Bayes-Theorem bietet eine Möglichkeit, die Wahrscheinlichkeit von Ereignis A unter Berücksichtigung vorhandener Kenntnisse und neuer Beweise zu berechnen. Es wird in verschiedenen Bereichen eingesetzt, darunter Statistik, maschinelles Lernen und Datenanalyse.
 
 
+\[ P(A|B) = \frac{P(B|A)P(A)}{P(B)} \]
+
+
 
 - Bayes Theorem
 - Inferenz
