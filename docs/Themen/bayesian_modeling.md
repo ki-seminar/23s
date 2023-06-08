@@ -9,7 +9,6 @@ Die folgenden Gliederung ist Beispielhaft und kann von Ihnen nach Wunsch angepas
 ## Vergeleich Frequentist und Bayes
 - Vorteile von Bayesian Modelling
 ## Einführung in die Bayes Statistik
-Beispiel: Medezinischer test
 
 ### Bayes-Theorem
 
@@ -22,10 +21,63 @@ Wo:
 - P(A) ist die Wahrscheinlichkeit, dass Ereignis A eintritt.
 - P(B) bezeichnet die Wahrscheinlichkeit, dass Ereignis B eintritt.
 
+$$ P(A|B) = \frac{P(B|A)P(A)}{P(B)} $$
+
 Das Bayes-Theorem bietet eine Möglichkeit, die Wahrscheinlichkeit von Ereignis A unter Berücksichtigung vorhandener Kenntnisse und neuer Beweise zu berechnen. Es wird in verschiedenen Bereichen eingesetzt, darunter Statistik, maschinelles Lernen und Datenanalyse.
 
+### Anwendungsbeispiel Medizinischer Test
 
-$$ P(A|B) = \frac{P(B|A)P(A)}{P(B)} $$
+- In 99,5% der Fälle fällt der Test positiv aus.
+- Sollte die Krankheit nicht vorliegen, beträgt die Wahrscheinlichkeit für einen positiven Test 1%.
+- Laut einer Studie leidet eine von vier Personen an der betreffenden Krankheit.
+- Wie groß ist die Wahrscheinlichkeit, dass jemand an der Krankheit leidet, obwohl der Test ein negatives Ergebnis zeigt?
+
+### Modell-Annahmen
+
+K = Person ist krank  
+T = Test fällt positiv aus
+
+\[
+P(T|K) = 0.995
+\]
+
+\[
+P(T|\overline{K}) = 0.01
+\]
+
+\[
+P(K) = 0.25
+\]
+
+### Gesucht wird die Wahrscheinlichkeit
+
+\[
+P(K|\overline{T})
+\`
+
+## Anwendungsbeispiel Bayes Theorem
+
+### Bayes Theorem
+
+\[
+P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+\`
+
+\[
+P(K|\overline{T}) = \frac{P(\overline{T}|K)P(K)}{P(\overline{T}|K)P(K) + P(\overline{T}|\overline{K})P(\overline{K})}
+\`
+
+\[
+= \frac{(1-0.995)\cdot 0.25}{(1-0.995)\cdot 0.25 + (1-0.01)\cdot 0.75}
+\`
+
+\[
+= 0.00185
+\`
+
+
+
+
 
 
 
