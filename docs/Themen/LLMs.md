@@ -14,14 +14,16 @@ In diesem Abschnitt werden verschiedene wichtige Konzepte und Techniken im Berei
 ### 3.1 Daten
 ---
 
-Die Daten sind das Herzstück der moderen Sprachverarbeitung. Es wird sehr viel in diese Richtung geforscht, um immer bessere Vektorrepräsentationen für Wörter zu finden. Diese Vektorrepräsentationen werden auch Embeddings genannt. Sie sind die Grundlage für die meisten NLP-Modelle. In diesem Abschnitt werden die wichtigsten Konzepte und Techniken zur Erstellung von Embeddings behandelt. Angefangen bei der Tokenisierung, die den Text in einzelne Tokens aufteilt, bis hin zu den Embeddings, die die Wörter in einen Vektorraum abbilden.
+Daten bilden das Herzstück der modernen Sprachverarbeitung und intensive Forschung wird in diesem Bereich betrieben, um immer fortschrittlichere Vektorrepräsentationen für Wörter zu entwickeln. Diese repräsentativen Vektoren werden auch als **Embeddings** bezeichnet und bilden die Grundlage für die meisten Modelle im Bereich der natürlichen Sprachverarbeitung (NLP). Dieser Abschnitt widmet sich den zentralen Konzepten und Techniken zur Erstellung von Embeddings – angefangen bei der Tokenisierung, die den Text in einzelne Token zerlegt, bis hin zu den Embeddings selbst, welche die Wörter in einem Vektorraum abbilden.
 
 #### 3.1.1 Tokenisierung
 
 In der Literatur gibt es sehr viele Tokenisierungstechniken. Hier werden nur ein paar davon näher betrachtet. Den Anfang machen die regelbasierten Tokenizer, deren Regeln von Menschen erstellt werden. Typische Tokenisierungsregeln sind: 
 
 - Trennung an Satzzeichen
+
 - Trennung an Leerzeichen
+
 - Trennung an Sonderzeichen
 
 Ein Beispiel für einen regelbasierten Tokenizer ist der [Penn Treebank Tokenizer](https://www.nltk.org/_modules/nltk/tokenize/treebank.html). Dieser Tokenizer ist in der Lage, die Tokens eines Textes zu extrahieren. Dabei werden die Tokens an Leerzeichen, Satzzeichen und Sonderzeichen getrennt. Im Kern verwendet er reguläre Ausdrücke, um die Tokens zu extrahieren. Weitergehend kann man auch auf Klein- und Großschreibung achten und diese Regeln in den Tokenizer einbauen. Zusätzlich kann man auch Lemmatizer und Stemmer verwenden, um die Tokens zu normalisieren.
@@ -108,10 +110,16 @@ tokenizer.load('spm_model.model')
 
 In diesem Abschnitt werden die Idee, die Speicherung und verschiedene Algorithmen und Modelle vorgestellt, durch die Embeddings erzeugt werden können. Embeddings sind der weitere Schritt in der Datenverarbeitung nach dem Erstellen des Vokabulars durch Tokenizer. Das Ziel ist es die Wörter in eine Computer verständliche Form zu bringen. Dies wird erreicht, indem die Wörter in einen Vektor umgewandelt werden. Dieser Vektor zeigt die Beziehungen zwischen einzelnen Wörtern an.
 
-Die Hauptidee hinter Embeddings ist, dass ähnliche Wörter ähnliche Vektoren haben, wodurch diese im n-dimensonalen Raum näher zusammen liegen.
+!!! info "Definition"
+
+        Die grundlegende Idee hinter Embeddings besteht darin, dass ähnliche Wörter ähnliche Vektoren besitzen, was dazu führt, dass sie im n-dimensionalen Raum räumlich nah beieinander liegen.
+        
 > “An embedding is a way of representing data as points in n-dimensional space so that similar data points cluster together.” 
 
-<img src="./img/llms/embedding_space.png">
+<figure markdown>
+  ![space](./img/llms/embedding_space.png){ width="400" }
+  <figcaption>Fig. Basic Function</figcaption>
+</figure>
 
 Um bei einen Embedding herauszufinden, wie ähnlich sich zwei Wortvektoren sind, wird der Cosinus-Abstand, euklidische Abstand oder das Skalarprodukt verwendet. Die Ergebnis des Skalarprodukts ist ein skalarer Wert. Wenn das Skalarprodukt von a · b einen Wert nahe der Null hat, sind die Vektoren senkrecht zueinander und haben somit keine Korrelation. Wenn das Skalarprodukt positiv ist, sind die Vektoren ähnlich oder parallel, während ein negatives Skalarprodukt auf eine entgegengesetzte oder divergierende Ausrichtung der Vektoren hinweist. 
 
@@ -120,10 +128,15 @@ $$ a \cdot b = a_1 * b_1 + ... + a_n * b_n $$
 Die Aussagekraft des euklidischen Abstandes ist besser als die des Skalarproduktes. Als Ergebnis kommt ein skalarer Wertraus, der die Distanz zwischen den Vektoren angibt. Je kleiner der Wert, desto ähnlicher sind die Vektoren. Jedoch wird der Wert durch die Komponenten der Vektor stark beeinflusst. An sich wird der Differenzenvektor von a und b berechnet, an dem die euklidische Norm verwendet wird. Die euklidische Norm ist die Länge eines Vektors.
 
 Den Abstand zweier Vektoren darf man für das Ähnlichkeitsmaß nutzen, da folgende Gleichungen erfüllt sind:
+
 - Kommutativgesetz: $ ||x, y|| = ||y, x|| $
+
 - Hilbert Norm: $ ||x|| = \sqrt{x \cdot x} $
+
 - Cauchy-Schwarz-Ungleichung: $ |x \cdot y| \leq ||x|| * ||y|| $
+
 - Homogenität: $ ||\alpha * x|| = |\alpha| * ||x|| $
+
 - Nichtnegativität: $ ||x|| \geq 0 $
 
 $$ d(a,b) = ||a - b||_2 = \sqrt{\prod\limits_k^n (a_k - b_k)^2} $$
@@ -134,31 +147,51 @@ $$ cos(\theta) = \frac{a \cdot b}{||a||_2 * ||b||_2} $$
 
 Die Berechnung der Ähnlichkeit, hilft nicht nur beim trainieren von Sprachmodellen, sonderen ist auch ein effizienter Weg Vektoren zu speichern. Für die Speicherung werden **Vektor Datenbanken** verwendet. Hierbei unterscheident man in eine reine Indeximplementierung wie [FAISS](https://www.pinecone.io/learn/faiss/) oder ein Datenbankmanagement System wie [Pinecone](https://www.pinecone.io/). Je nach Anwendungszweck muss entschieden werden, ob Geschwiningkeit oder Sicherheit wichtiger ist.
 Ein Vektor-Datenbankmanagesystem liefert die gängigen Werkzeuge, um die Speicherung von Vektoren zu verwalten. Dazu gehören die folgenden Funktionen:
+
 - Data Management: Speichern, Abrufen, Löschen und Aktualisieren von Vektoren
+
 - Indexing: Erstellen von Indizes für die Suche
+
 - Metadata Management: Speichern von Metadaten zu Vektoren
+
 - Scalability & Integration: Skalierung und Integration in bestehende Systeme
+
 - Real-Time updates: Echtzeit-Updates von Vektoren
+
 - Backups & Collection: Backups und Sammlungen von Vektoren(Window-Functions)
+
 - Security & access control: Sicherheit und Zugriffskontrolle
 
 Ein Index hat vieles davon nicht. Dementsprechend muss man sicher sehr sicher sein, falls man die Indeximplementierung wählt. Andernfalls werden einzelne Funktionen selbst implementiert, was zu einem Mehraufwand führt.
 
-<img src="./img/llms/embedding_db.png">
+<figure markdown>
+  ![db](./img/llms/embedding_db.png){ width="400" }
+  <figcaption>Fig. Vector Database</figcaption>
+</figure>
 
 Vektoren werden durch Algorithmen wie *Product Quantinization*, *Locality Sensitive Hashing* oder *Hierarchical Navigable Small World* in einen Index umgewandelt. Dieser Index landet mit dem dazugehörigen Originalvektor in der Vektor Datenbank. Beim Querying wird der Query-Vektor in den Index umgewandelt und mit den Indexvektoren verglichen. Die Ergebnisse werden dann zurückgegeben. Schließlich kommt es zum Postprocessing, bei dem die Ergebnisse gefiltert und / oder geordnet werden. Somit kommt es zu einer Neubewertung aller Ergebnisse und das beste Ergebnis wird zurückgegeben.
 
 Product Quantization ist eine Technik, die in der Vektorquantisierung verwendet wird, um hochdimensionale Vektoren durch eine kleinere Menge von Prototypvektoren zu repräsentieren und somit zu komprimieren. Das Ziel von Product Quantization besteht darin, den Speicherbedarf hochdimensionaler Vektoren zu reduzieren, während ihre wesentlichen Merkmale erhalten bleiben. Somit wird der originale Vektor in mehrere Subvektoren aufgeteilt, die einzeln quantisiert werden. Die Quantisierung wird durch *centroids* durchgeführt. Das sind Vektoren (*reproduction values*), die sich in einem Subraum befinden, wo die Komponenten der Subvektoren ihre nächsten Nachbarn suchen, indem diese k-nearest-neighbours (kNN) verwenden. Folglich wird auf das naheste reproduction value gemappt, um den Vektor zu repräsentieren.
 
-<img src="./img/llms/embedding_pq.png" width="35%" height="35%">
+<figure markdown>
+  ![pq](./img/llms/embedding_pq.png){ width="400" }
+  <figcaption>Fig. Product Quantinization</figcaption>
+</figure>
 
 Jetzt wo das sicher der Vektoren klargestellt ist, kann man anfangen Embeddings zu berechnen. Der bekannteste Ansatz ist *Word2Vec*. Hierzu gibt es zwei Architekturen: *Continuous Bag of Words* und *Skip-Gram*. Beide Architekturen sind neural network language models. Das Ziel ist es, die Wahrscheinlichkeit eines Wortes zu berechnen, das auf ein anderes Wort folgt. Die Architektur des CBOW-Modells und des Skip-Gram-Modells ist in der folgenden Abbildung dargestellt.
 
-<img src="./img/llms/embedding_w2v.png" width="35%" height="35%">
+<figure markdown>
+  ![w2v](./img/llms/embedding_w2v.png){ width="400" }
+  <figcaption>Fig. Word2Vec</figcaption>
+</figure>
+
 
 Das Ziel des CBOW ist es, ein Wort innerhalb eines Kontextes vorherzusagen, während das Ziel des Skip-Grams die Vorhersage desKontextes um ein Wort ist. Beide verwenden ein hidden layer ohne Aktivierungsfunktion. Folglich findet eine Projektion statt, indem das Skalarprodukt von Eingabevektor und Gewichtsmatrix gebildet wird. Schließlich wird in der Ausgabe Schicht ein hierachischer Softmax verwendet. Er nutzt einen binären Baum, um die Wahrscheinlichkeit eines Wortes zu berechnen. Anstatt alle Wörter im Vokabular zu berücksichtigen, wird der hierarchische Softmax die Wahrscheinlichkeit schrittweise berechnen, indem er den Baum durchläuft. Dieser Baum organisiert die Wörter hierarchisch, wobei häufigere Wörter näher an der Wurzel und seltenere Wörter weiter unten im Baum platziert werden. Indem der hierarchische Softmax den binären Baum verwendet, kann er die Anzahl der Berechnungen reduzieren, da er nur einen Teil des Baums durchlaufen muss, um die Wahrscheinlichkeit eines bestimmten Wortes zu bestimmen. Dies führt zu einer beschleunigten Vorhersagephase und ermöglicht die effiziente Verarbeitung großer Vokabulare. Zum Vallidieren der Ausgaben wird One-Hot-Encoding verwendet.
 
-<img src="./img/llms/embedding_binary_tree.png" width="35%" height="35%">
+<figure markdown>
+  ![bt](./img/llms/embedding_binary_tree.png){ width="400" }
+  <figcaption>Fig. hierachischer Softmax</figcaption>
+</figure>
 
 Zum Trainieren wird sub sampling als auch negative sampling verwendet. Sub sampling überprüft von vorne weg, ob ein Wort in das Context Fenster aufgenommen wird oder nicht. Ein Context Fenster entsteht, um ein betrachtetes Wort und seine direkten Nachbarn. Die Wahrscheinlichkeit, dass ein Wort in das Context Fenster aufgenommen wird, ist umgekehrt proportional zu seiner Häufigkeit. 
 
@@ -168,22 +201,39 @@ Negative sampling ist eine Technik, die die Trainingszeit verkürzt, indem sie n
 
 $$ P(w_i) = \frac{z(w_i)^{3/4}}{\sum_{j=0}^{n} z(w_j)^{3/4}} $$
 
-<img src="./img/llms/embedding_negative_sampling.png" width="35%" height="35%">
+<figure markdown>
+  ![ns](./img/llms/embedding_negative_sampling.png){ width="400" }
+  <figcaption>Fig. negative sampling</figcaption>
+</figure>
 
 Die Erweiterung von Word2Vec ist Fasttext, das von Facebook 2017 veröffentlicht wurde. Es berücktsichtigt die Morphologie von Wörtern. Im Gegensatz zu Word2Vec, das Wörter als diskrete Einheiten betrachtet, betrachtet Fasttext Wörter als eine Reihe von Zeichen oder n-Grammen. Somit wird es robuster gegen unbekannte Wörter. Das Resultat ist eine "Tasche" von verschiedenen n-Grammen zu einem Wort. Dies hat zur Folge, dass eine geteilte Repräsentation über Wörtern entsteht und somit die Repräsentation von seltenen Wörtern verbessert wird. Die Vorhersage, basiert auf eine Score-Funktion, die die Summe der Vektoren der n-Gramme des Wortes ist. Die Score-Funktion ist wie folgt definiert:
 
 $$ s(w, c) = \sum\limits_{g \in G_w} z_g^T * v_c $$
 
 - G ist die Menge der n-Gramme zu einem Wort w
+
 - z ist der Vektor eines n-Gramms
+
 - v ist der Vektor des zugehörigen Kontexts
 
 Es können auch Language Models für Embeddings verwendet werden. Ein Beispiel ist *GloVe*. Es verwendet eine Matrix, um die Beziehung zwischen Wörtern zu erfassen. Hierbei wird betrachtet wie oft Wörter miteinander in einem Kontext auftauchen. Mit der SVG (Singularwertzelegung) wird die ursprüngliche Matrix in kleiner Matrizen geteilt. Dabei werden die Wortembeddings erzeugt.
 Dennoch werden Embeddings auch mit Transformer Modellen wie Bert und GPT erstellt. Diese werden in den nächsten Kapitel genauer betrachtet. Doch ein weiteres Modell ist interessant: *ELMO*(Embeddings from Language Models). ELMO basiert auf einem didirektionalen LSTM. Das hat den Vorteil, dass Sequenzen von beiden Richtungen durchgegangen werden können. 
 
-$$ h_t^L = BiLSTM(x_t, h_{t-1}^L) $$
+$$ ELMO_k^{task} = E(R_k; \theta^{task}) = \gamma^{task}\sum\limits_{j=0}^L s_j^{task} h_{k, j}^{LM} $$
 
-LSTMs können durch ihre Zellen und rekusiver Natur für Sequenzverarbeitung verwendet werden. Die Zellen sind in der Lage, Informationen über einen längeren Zeitraum zu speichern und diese zu filtern. Die rekursive Natur eines LSTM kommt daher, dass es eine Verbesserung des RNNs ist. Das wichtigste für die Embeddinggenerierung ist es, dass die resultierenden Embeddings kontextabhängig sind. Die LSTM-Zellen liefern den Kontext, indem sie die vorherigen Ausgaben berücksichtigen. Ein weiterer Vorteil einer LSTM-Architektur ist es, dass pro Zelle über den Hidden State eine Vektorrepräsentation entsteht. Diese Vektorrepräsentationen werden für die Embeddinggenerierung verwendet. Somit glit für die linke Seite: $ h_{k, j}^{LM^{\rightarrow}} $ für $ t_{k+1} $ und für die rechte Seite gilt: $ h_{k, j}^{LM^{\leftarrow}} $ für $ t_{k} $.
+- $\gamma^{task}$ ist ein Skalarparameter, der für jede Aufgabe trainiert wird und den ELMo Vektor skaliert
+
+- $s_j^{task}$ sind softmax-normalisierte Gewichte, die für jede Aufgabe trainiert werden
+
+- $h_{k, j}^{LM}$ ist der j-te hidden LSTM Zustand für das k-te Token
+
+- $R_k$ ist die Repräsentation des k-ten Tokens
+
+- $\theta^{task}$ sind die Parameter der Aufgabe
+
+- $ELMo_k^{task}$ ein einziger Vektor aus der Reduzierung aller Schichten in R
+
+LSTMs können durch ihre Zellen und rekusiver Natur für Sequenzverarbeitung verwendet werden. Die Zellen sind in der Lage, Informationen über einen längeren Zeitraum zu speichern und diese zu filtern. Die rekursive Natur eines LSTM kommt daher, dass es eine Verbesserung des RNNs ist. Das wichtigste für die Embeddinggenerierung ist es, dass die resultierenden Embeddings kontextabhängig sind. Die LSTM-Zellen liefern den Kontext, indem sie die vorherigen Ausgaben berücksichtigen. Ein weiterer Vorteil einer LSTM-Architektur ist es, dass pro Zelle über den Hidden State eine Vektorrepräsentation entsteht. Diese Vektorrepräsentationen werden für die Embeddinggenerierung verwendet. Somit glit für die linke Seite: $h_{k, j}^{LM^{\rightarrow}}$ für $t_{k+1}$ und für die rechte Seite gilt: $h_{k, j}^{LM^{\leftarrow}}$ für $t_{k}$.
 
 Um diese Vektorrepräsentationen zu erzeugen, muss ELMO trainiert werden. Dies geschieht, indem die Wahrscheinlichkeit für das Vorkommen eines Wortes innerhalb einer Sequenz maximiert wird und die aufkommenden Fehler minimiert werden. Die Wahrscheinlichkeit wird wie folgt berechnet:
 
@@ -193,13 +243,21 @@ $$ max(
         log P(t_t | t_{k+1}, ..., t_K; \theta_x, \theta_{LSTM}^{\leftarrow }, \theta_s))
 $$
 
-Anhand der Gleichung sieht man genau, dass die Sequenzen von beiden Richtungen durchgegangen werden. Um die Wahrscheinlichkeit für das Vorkommen eines Wortes innerhalb einer Sequenz zu berechnen, wird in der Bedingung jeweils die linke oder rechte Seite verwendet. Zusätzlich werden noch die zugehörigen Gewichtsmatrizen $\theta_x, \theta_{LSTM}^{\rightarrow}, \theta_{LSTM}^{\leftarrow }, \theta_s$ in die Wahrscheinlichkeitsberechnung mit rein gerechnet. Schließlich kann jedes Token als eine Menge von Vektorrepräsentaion dargestellt werden. Die Größer einer solchen Menge ist abhängig von der Anzahl der LSTM-Zellen, wodruch sich folgende Gleichung ergibt: $ size(R_t) = 2 * L + 1 $, wobei L die Anzahl der LSTM-Zellen ist. Somit lässt sich jedes Token als eine Menge von Vektorrepräsentationen darstellen.
+Anhand der Gleichung sieht man genau, dass die Sequenzen von beiden Richtungen durchgegangen werden. Um die Wahrscheinlichkeit für das Vorkommen eines Wortes innerhalb einer Sequenz zu berechnen, wird in der Bedingung jeweils die linke oder rechte Seite verwendet. Zusätzlich werden noch die zugehörigen Gewichtsmatrizen $\theta_x, \theta_{LSTM}^{\rightarrow}, \theta_{LSTM}^{\leftarrow }, \theta_s$ in die Wahrscheinlichkeitsberechnung mit rein gerechnet. Schließlich kann jedes Token als eine Menge von Vektorrepräsentaion dargestellt werden. Die Größer einer solchen Menge ist abhängig von der Anzahl der LSTM-Zellen, wodruch sich folgende Gleichung ergibt: $size(R_t) = 2 * L + 1$, wobei L die Anzahl der LSTM-Zellen ist. Somit lässt sich jedes Token als eine Menge von Vektorrepräsentationen darstellen.
 
 $$ R_t = \{x_k^{LM}, h_{k, j}^{LM^{\rightarrow}}, h_{k, j}^{LM^{\leftarrow}} | j = 1, ... , L\} $$
 
+<figure markdown>
+  ![elmo](./img/llms/embedding_elmo.png){ width="400" }
+  <figcaption>Fig. ELMo</figcaption>
+</figure>
+
 Zu guter letzt muss man noch mutli-sense embeddings betrachten. Hier versucht man die Mehrdeutigkeit von Wörtern abzubilden. Mögliche Ansätze sind:
+
 - Sense2Vec
+
 - ELMO + Clustering
+
 - Transformer
 
 Speziell benutzt man clustering Methoden, um die Mehrdeutigkeit von Wörtern abzubilden. Hierbei werden die Embeddings von Wörtern in Cluster unterteilt, wobei pro Cluster ein neue Repräsentation des Wortes entsteht. Um dies zu erreichen, werden cluster Algorithmen benötigt, die mit hochdimensonalen Vektoren umgehen können. Beispiele sind: K-Means, DBSCAN, Mean-Shift, Affinity Propagation, Spectral Clustering, Hierarchical Clustering, Gaussian Mixture Models und noch viele mehr. Im folgenden werden die Algorithmen K-Means und Mean-Shift genauer betrachtet.
@@ -207,24 +265,35 @@ Speziell benutzt man clustering Methoden, um die Mehrdeutigkeit von Wörtern abz
 K-Means ist ein iterativer Algorithmus, der versucht die Daten in k Cluster zu unterteilen. Hierbei wird die Distanz zwischen den Datenpunkten und den Clusterzentren minimiert. Die Clusterzentren werden durch den Mittelwert der Datenpunkte gebildet. Der Algorithmus funktioniert wie folgt:
 
 1. Wähle k zufällige Punkte als Clusterzentren
+
 2. Berechne die Distanz zwischen den Datenpunkten und den Clusterzentren
+
 3. Weise jeden Datenpunkt dem nächstgelegenen Clusterzentrum zu
+
 4. Berechne die neuen Clusterzentren
+
 5. Wiederhole Schritt 2 bis 4, bis sich die Clusterzentren konvergieren
 
 Der Algorithmus ist einfach zu implementieren und schnell in der Ausführung. Doch er hat auch Nachteile. Zum einen muss die Anzahl der Cluster k bekannt sein. Zum anderen ist der Algorithmus anfällig für Ausreißer, was zu falschen Clusterzentren führen kann.
 
-Mean-Shift ist ein iterativer Algorithmus, der auf der Idee basiert, dass Datenpunkte zur lokalen Dichtemaxima tendieren. Er kann verwendet werden, um natürliche Cluster in Daten zu finden, ohne die Anzahl der Cluster im Voraus zu kennen. Somit benötig man einen Kernel, den man vorab initialisieren muss. Meistens wird hierfür der Gauß-Kernel verwendet. $ K(x) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{x^2}{2\sigma^2}} $. Danach kann die Suche nach den lokalen Dichtemaxima beginnen. Der Algorithmus funktioniert wie folgt:
+Mean-Shift ist ein iterativer Algorithmus, der auf der Idee basiert, dass Datenpunkte zur lokalen Dichtemaxima tendieren. Er kann verwendet werden, um natürliche Cluster in Daten zu finden, ohne die Anzahl der Cluster im Voraus zu kennen. Somit benötig man einen Kernel, den man vorab initialisieren muss. Meistens wird hierfür der Gauß-Kernel verwendet. $K(x) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{x^2}{2\sigma^2}}$. Danach kann die Suche nach den lokalen Dichtemaxima beginnen. Der Algorithmus funktioniert wie folgt:
 
 1. Wähle einen Datenpunkt als Startpunkt
+
 2. Berechne den Kreis mit Radius r um den Startpunkt
+
 3. Berechne den Schwerpunkt der Datenpunkte innerhalb des Kreises
+
 4. Setze den Schwerpunkt als neuen Mittelpunkt
+
 5. Wiederhole Schritt 2 bis 4, bis sich die Mittelpunkte konvergieren
 
 Somit wird der Mittelpunkt immer näher an das lokale Dichtemaxima herangeführt, da die Datenpunkte innherhalb des Kreises immer mehr werden sollen. Diese Eingenschaft des Algorithmus wird auch als hill climbing bezeichnet.
 
-<img src="./img/llms/embedding_msc.png" width="35%" height="35%">
+<figure markdown>
+  ![msc](./img/llms/embedding_msc.png){ width="400" }
+  <figcaption>Fig. Mean Shift</figcaption>
+</figure>
 
 Ein Vorteil von Mean-Shift-Clustering ist, dass es automatisch die Anzahl der Cluster bestimmt, da die Cluster durch die lokalen Maxima der Datenpunktdichte definiert werden. Der Algorithmus ist auch robust gegenüber Rauschen und kann Cluster mit komplexen Formen erfassen. Allerdings kann die Performance des Algorithmus bei großen Datensätzen beeinträchtigt sein, da er eine hohe Rechenleistung erfordert, um die Dichte in einem hochdimensionalen Raum zu berechnen.
 
