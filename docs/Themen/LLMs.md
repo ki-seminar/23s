@@ -365,9 +365,8 @@ Ein Vorteil von Mean-Shift-Clustering ist, dass es automatisch die Anzahl der Cl
 Hier einfach Youtube oder THD System embedden.
 
 ### 6.3 Demo
-Link zur Code Demonstration: 
 
-Link zum Repository: <?>
+Link zum Repository: https://github.com/CRY-TeX/demo-ki-seminar
 
 ## 7 Literaturliste
 [1] Acheampong, Francisca Adoma, Henry Nunoo-Mensah, und Wenyu Chen. „Transformer Models for Text-Based Emotion Detection: A Review of BERT-Based Approaches“. Artificial Intelligence Review 54, Nr. 8 (1. Dezember 2021): 5789–5829. https://doi.org/10.1007/s10462-021-09958-2.
