@@ -121,6 +121,105 @@ In diesem Abschnitt werden die Idee, die Speicherung und verschiedene Algorithme
   <figcaption>Fig. Basic Function</figcaption>
 </figure>
 
+```python
+import numpy as np
+from gensim.models import Word2Vec
+from tabulate import tabulate
+
+# Define the word list
+words = ["I", "love", "coding", "Python", "is", "great", "Machine", "learning", "fascinating"]
+
+# Create a list of sentences
+sentences = [["I", "love", "coding"],
+             ["Python", "is", "great"],
+             ["Machine", "learning", "is", "fascinating"]]
+
+# Train the Word2Vec model
+model = Word2Vec(sentences, min_count=1)
+
+# Create a word correlation matrix
+correlation_matrix = np.zeros((len(words), len(words)))
+
+# Populate the correlation matrix
+for i, word1 in enumerate(words):
+    for j, word2 in enumerate(words):
+        correlation_matrix[i, j] = model.wv.similarity(word1, word2)
+
+# Create a table with row and column headers
+table = [[word] + list(row) for word, row in zip(words, correlation_matrix)]
+
+# Add column headers
+table.insert(0, [''] + words)
+
+# Print the table
+print(tabulate(table, headers="firstrow", tablefmt="grid"))
+```
+
+```python
++-------------+-------------+-------------+-------------+-------------+------------+-------------+------------+-------------+---------------+
+|             |           I |        love |      coding |      Python |         is |       great |    Machine |    learning |   fascinating |
++=============+=============+=============+=============+=============+============+=============+============+=============+===============+
+| I           |  1          | -0.144546   |  0.00882618 |  0.0605919  |  0.0270575 | -0.0690033  |  0.0749756 |  0.199121   |    0.0336406  |
++-------------+-------------+-------------+-------------+-------------+------------+-------------+------------+-------------+---------------+
+| love        | -0.144546   |  1          |  0.0048425  | -0.0577458  |  0.0929172 | -0.028491   | -0.0136798 | -0.00275401 |   -0.115555   |
++-------------+-------------+-------------+-------------+-------------+------------+-------------+------------+-------------+---------------+
+| coding      |  0.00882618 |  0.0048425  |  1          |  0.0191523  |  0.0161347 |  0.0347649  |  0.0415774 |  0.145951   |   -0.114107   |
++-------------+-------------+-------------+-------------+-------------+------------+-------------+------------+-------------+---------------+
+| Python      |  0.0605919  | -0.0577458  |  0.0191523  |  1          | -0.0598763 |  0.13888    |  0.13149   |  0.0640898  |    0.00939116 |
++-------------+-------------+-------------+-------------+-------------+------------+-------------+------------+-------------+---------------+
+| is          |  0.0270575  |  0.0929172  |  0.0161347  | -0.0598763  |  1         | -0.0277504  | -0.111671  | -0.0523467  |   -0.0108392  |
++-------------+-------------+-------------+-------------+-------------+------------+-------------+------------+-------------+---------------+
+| great       | -0.0690033  | -0.028491   |  0.0347649  |  0.13888    | -0.0277504 |  1          | -0.0446171 |  0.170189   |    0.00450302 |
++-------------+-------------+-------------+-------------+-------------+------------+-------------+------------+-------------+---------------+
+| Machine     |  0.0749756  | -0.0136798  |  0.0415774  |  0.13149    | -0.111671  | -0.0446171  |  1         | -0.0135149  |    0.067976   |
++-------------+-------------+-------------+-------------+-------------+------------+-------------+------------+-------------+---------------+
+| learning    |  0.199121   | -0.00275401 |  0.145951   |  0.0640898  | -0.0523467 |  0.170189   | -0.0135149 |  1          |   -0.0236717  |
++-------------+-------------+-------------+-------------+-------------+------------+-------------+------------+-------------+---------------+
+| fascinating |  0.0336406  | -0.115555   | -0.114107   |  0.00939116 | -0.0108392 |  0.00450302 |  0.067976  | -0.0236717  |    1          |
++-------------+-------------+-------------+-------------+-------------+------------+-------------+------------+-------------+---------------+
+```
+
+```python
+# Print the model
+print(model)
+
+Output:
+Word2Vec<vocab=9, vector_size=100, alpha=0.025>
+
+
+# Print the word vector for the word "I"
+print(model.wv["I"])
+
+Output:
+[-9.5785465e-03  8.9431154e-03  4.1650687e-03  9.2347348e-03
+  6.6435025e-03  2.9247368e-03  9.8040197e-03 -4.4246409e-03
+ -6.8033109e-03  4.2273807e-03  3.7290000e-03 -5.6646108e-03
+  9.7047603e-03 -3.5583067e-03  9.5494064e-03  8.3472609e-04
+ -6.3384566e-03 -1.9771170e-03 -7.3770545e-03 -2.9795230e-03
+  1.0416972e-03  9.4826873e-03  9.3558477e-03 -6.5958775e-03
+  3.4751510e-03  2.2755705e-03 -2.4893521e-03 -9.2291720e-03
+  1.0271263e-03 -8.1657059e-03  6.3201892e-03 -5.8000805e-03
+  5.5354391e-03  9.8337233e-03 -1.6000033e-04  4.5284927e-03
+ -1.8094003e-03  7.3607611e-03  3.9400971e-03 -9.0103243e-03
+ -2.3985039e-03  3.6287690e-03 -9.9568366e-05 -1.2012708e-03
+ -1.0554385e-03 -1.6716016e-03  6.0495257e-04  4.1650953e-03
+ -4.2527914e-03 -3.8336217e-03 -5.2816868e-05  2.6935578e-04
+ -1.6880632e-04 -4.7855065e-03  4.3134023e-03 -2.1719194e-03
+  2.1035396e-03  6.6652300e-04  5.9696771e-03 -6.8423809e-03
+ -6.8157101e-03 -4.4762576e-03  9.4358288e-03 -1.5918827e-03
+ -9.4292425e-03 -5.4504158e-04 -4.4489228e-03  6.0000787e-03
+ -9.5836855e-03  2.8590010e-03 -9.2528323e-03  1.2498009e-03
+  5.9991982e-03  7.3973476e-03 -7.6214634e-03 -6.0530235e-03
+ -6.8384409e-03 -7.9183402e-03 -9.4990805e-03 -2.1254970e-03
+ -8.3593250e-04 -7.2562015e-03  6.7870365e-03  1.1196196e-03
+  5.8288667e-03  1.4728665e-03  7.8936579e-04 -7.3681297e-03
+ -2.1766580e-03  4.3210792e-03 -5.0853146e-03  1.1307895e-03
+  2.8833640e-03 -1.5363609e-03  9.9322954e-03  8.3496347e-03
+  2.4156666e-03  7.1182456e-03  5.8914376e-03 -5.5806171e-03]
+```
+
+Im einfachsten Fall, liegt ein Wert pro Spalte zwischen 0 und 1. Dieser Wert gibt an, wie stark das Wort mit dem jeweiligen Merkmal korreliert. Wenn der Wert 0 ist, ist die Korrelation zwischen dem Wort und dem Merkmal nicht vorhanden. Wenn der Wert 1 ist, ist die Korrelation zwischen dem Wort und dem Merkmal sehr stark. In der Praxis werden die Werte jedoch nicht immer zwischen 0 und 1 liegen. Die Werte können auch negativ sein oder größer als 1 werden.
+
 Um bei einen Embedding herauszufinden, wie ähnlich sich zwei Wortvektoren sind, wird der Cosinus-Abstand, euklidische Abstand oder das Skalarprodukt verwendet. Die Ergebnis des Skalarprodukts ist ein skalarer Wert. Wenn das Skalarprodukt von a · b einen Wert nahe der Null hat, sind die Vektoren senkrecht zueinander und haben somit keine Korrelation. Wenn das Skalarprodukt positiv ist, sind die Vektoren ähnlich oder parallel, während ein negatives Skalarprodukt auf eine entgegengesetzte oder divergierende Ausrichtung der Vektoren hinweist.
 
 $$ a \cdot b = a_1 * b_1 + ... + a_n * b_n $$
@@ -298,8 +397,15 @@ Somit wird der Mittelpunkt immer näher an das lokale Dichtemaxima herangeführt
 Ein Vorteil von Mean-Shift-Clustering ist, dass es automatisch die Anzahl der Cluster bestimmt, da die Cluster durch die lokalen Maxima der Datenpunktdichte definiert werden. Der Algorithmus ist auch robust gegenüber Rauschen und kann Cluster mit komplexen Formen erfassen. Allerdings kann die Performance des Algorithmus bei großen Datensätzen beeinträchtigt sein, da er eine hohe Rechenleistung erfordert, um die Dichte in einem hochdimensionalen Raum zu berechnen.
 
 ### 3.2 Transformer
-
 ---
+
+Der Transformer ist ein fortschrittliches neuronales Netzwerkmodell, das in der natürlichen Sprachverarbeitung (NLP) weit verbreitet ist. Er wurde erstmals 2017 in einem bahnbrechenden Paper namens "Attention is All You Need" vorgestellt. Im Gegensatz zu traditionellen rekurrenten und faltenden Architekturen hat der Transformer in NLP-Aufgaben wie maschineller Übersetzung, Textklassifikation und Spracherkennung für Aufsehen gesorgt. Das Kernkonzept des Transformers ist die Verwendung von Self-Attention-Mechanismen, die es dem Modell ermöglichen, relevante Teile der Eingabe zu identifizieren und deren Beziehungen zu modellieren. Der Transformer nutzt auch andere Techniken wie Positional Encoding, um die Positionsinformationen der Eingabesequenzen zu berücksichtigen, und Multi-Head Attention, um verschiedene Aufmerksamkeitsrepräsentationen zu erfassen. Darüber hinaus umfasst der Transformer Residual Connections und Layer Normalization, um den Trainingsprozess zu stabilisieren, sowie Dropout, um Overfitting zu verhindern. Der Optimizer steuert die Aktualisierung der Modellparameter, während die Ausgabeschicht die Vorhersagen des Modells erzeugt. Insgesamt bietet der Transformer eine effiziente Verarbeitung von Sequenzdaten und ist zu einem grundlegenden Modell in der NLP-Forschung und -Anwendung geworden.
+
+<figure markdown>
+  ![T](./img/llms/transformer_a.png){ width="400" }
+  <figcaption>Fig. Transformer Architektur</figcaption>
+</figure>
+
 
 #### 3.2.1 Positional Encoding
 
