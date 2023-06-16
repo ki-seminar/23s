@@ -28,17 +28,17 @@ Zu guter Letzt gibt es **perplexity.ai**, eine kostenlose KI-Suchmaschine, welch
 
 Dies sind nur ein Paar Beispiele, für welche Anwendungen LLMs bereits verwendet werden. Ihre Anzahl wird in den kommenden Jahren wohlmöglich explodieren.
 
-## 3 Methoden
+## 2 Methoden
 
 In diesem Abschnitt werden verschiedene wichtige Konzepte und Techniken im Bereich des Natural Language Processing (NLP) behandelt. Es wird auf die grundlegenden Bausteinen des Transformer-Modells eingegangen, das eine Revolution in der NLP-Forschung und -Anwendung darstellt. Der Transformer ist die Grundlage für viele fortschrittliche Modelle, einschließlich BERT (Bidirectional Encoder Representations from Transformers) und GPT (Generative Pre-Training). Neben der Beschreibung der Architektur und Funktionsweise von Transformer, BERT und GPT werden auch wichtige Aspekte wie Tokenisierung, Embeddings, Positional Encoding und Fine-Tuning behandelt. Des Weiteren werden Konzepte wie Meta-Learning und Benchmarking erläutert, die zur Weiterentwicklung und Evaluierung von NLP-Motdellen beiragen. Somit wird ein umfassender Überblick über die aktuellen Schlüsselkonzepten und Techniken im Bereich des NLP gegeben.
 
-### 3.1 Daten
+### 2.1 Daten
 
 ---
 
 Daten bilden das Herzstück der modernen Sprachverarbeitung und intensive Forschung wird in diesem Bereich betrieben, um immer fortschrittlichere Vektorrepräsentationen für Wörter zu entwickeln. Diese repräsentativen Vektoren werden auch als **Embeddings** bezeichnet und bilden die Grundlage für die meisten Modelle im Bereich der natürlichen Sprachverarbeitung (NLP). Dieser Abschnitt widmet sich den zentralen Konzepten und Techniken zur Erstellung von Embeddings – angefangen bei der Tokenisierung, die den Text in einzelne Token zerlegt, bis hin zu den Embeddings selbst, welche die Wörter in einem Vektorraum abbilden.
 
-#### 3.1.1 Tokenisierung
+#### 2.1.1 Tokenisierung
 
 In der Literatur gibt es sehr viele Tokenisierungstechniken. Hier werden nur ein paar davon näher betrachtet. Den Anfang machen die regelbasierten Tokenizer, deren Regeln von Menschen erstellt werden. Typische Tokenisierungsregeln sind:
 
@@ -89,7 +89,7 @@ print(tokens)
 
 ```
 
-#### 3.1.2 Subword Tokenization
+#### 2.1.2 Subword Tokenization
 
 Hier werden [WordPiece](https://huggingface.co/docs/tokenizers/v0.13.3/en/api/models#tokenizers.models.BPE), [Unigram](https://huggingface.co/docs/tokenizers/v0.13.3/en/api/models#tokenizers.models.WordPiece) und [SentencePiece](https://github.com/google/sentencepiece) vorgestellt. Diese Tokenizer sind sehr ähnlich zu BPE. Dennoch erstellen alle 4 Verfahren andere Vokabelsets. WordPiece ist ein Tokenisierungsalgorithmus, der ursprünglich von Google für das NLP-Modell BERT (Bidirectional Encoder Representations from Transformers) entwickelt wurde. Es ist ein statistisches Verfahren, das auf der Idee basiert, häufige Zeichenfolgen von Zeichen in einem Textkorpus zu identifizieren und sie zu einem neuen Wort zusammenzufassen. WordPiece überprüft, ob es sinvoll ist, k Zeichen zu einem neuen Zeichen zusammenzufassen. Dieser Vorgang wird so oft wiederholt, bis das Vokabular die gewünschte Größe erreicht hat.
 
@@ -126,7 +126,7 @@ tokenizer = spm.SentencePieceProcessor()
 tokenizer.load('spm_model.model')
 ```
 
-#### 3.1.3 Embeddings
+#### 2.1.3 Embeddings
 
 In diesem Abschnitt werden die Idee, die Speicherung und verschiedene Algorithmen und Modelle vorgestellt, durch die Embeddings erzeugt werden können. Embeddings sind der weitere Schritt in der Datenverarbeitung nach dem Erstellen des Vokabulars durch Tokenizer. Das Ziel ist es die Wörter in eine Computer verständliche Form zu bringen. Dies wird erreicht, indem die Wörter in einen Vektor umgewandelt werden. Dieser Vektor zeigt die Beziehungen zwischen einzelnen Wörtern an.
 
@@ -242,7 +242,7 @@ Im einfachsten Fall, liegt ein Wert pro Spalte zwischen 0 und 1. Dieser Wert gib
 
 Um bei einen Embedding herauszufinden, wie ähnlich sich zwei Wortvektoren sind, wird der Cosinus-Abstand, euklidische Abstand oder das Skalarprodukt verwendet. Die Ergebnis des Skalarprodukts ist ein skalarer Wert. Wenn das Skalarprodukt von a · b einen Wert nahe der Null hat, sind die Vektoren senkrecht zueinander und haben somit keine Korrelation. Wenn das Skalarprodukt positiv ist, sind die Vektoren ähnlich oder parallel, während ein negatives Skalarprodukt auf eine entgegengesetzte oder divergierende Ausrichtung der Vektoren hinweist.
 
-$$ a \cdot b = a_1 _ b_1 + ... + a_n _ b_n $$
+$$ a \cdot b = a_1 * b_1 + ... + a_n * b_n $$
 
 Die Aussagekraft des euklidischen Abstandes ist besser als die des Skalarproduktes. Als Ergebnis kommt ein skalarer Wertraus, der die Distanz zwischen den Vektoren angibt. Je kleiner der Wert, desto ähnlicher sind die Vektoren. Jedoch wird der Wert durch die Komponenten der Vektor stark beeinflusst. An sich wird der Differenzenvektor von a und b berechnet, an dem die euklidische Norm verwendet wird. Die euklidische Norm ist die Länge eines Vektors.
 
@@ -252,9 +252,9 @@ Den Abstand zweier Vektoren darf man für das Ähnlichkeitsmaß nutzen, da folge
 
 - Hilbert Norm: $ ||x|| = \sqrt{x \cdot x} $
 
-- Cauchy-Schwarz-Ungleichung: $ |x \cdot y| \leq ||x|| \* ||y|| $
+- Cauchy-Schwarz-Ungleichung: $ |x \cdot y| \leq ||x|| * ||y|| $
 
-- Homogenität: $ ||\alpha _ x|| = |\alpha| _ ||x|| $
+- Homogenität: $ ||\alpha * x|| = |\alpha| * ||x|| $
 
 - Nichtnegativität: $ ||x|| \geq 0 $
 
@@ -262,7 +262,7 @@ $$ d(a,b) = ||a - b||\_2 = \sqrt{\prod\limits_k^n (a_k - b_k)^2} $$
 
 Das wichtigste Maß für die Entscheidung über Ähnlichkeit ist die Cosinus-Ähnlichkeit. Sie ist definiert als der Kosinus des Winkels zwischen den beiden Vektoren, somit liegen die Werte zwischen -1 und 1, wobei 1 für perfekte Ähnlichkeit steht.
 
-$$ cos(\theta) = \frac{a \cdot b}{||a||\_2 \* ||b||\_2} $$
+$$ cos(\theta) = \frac{a \cdot b}{||a||_2 * ||b||_2} $$
 
 Die Berechnung der Ähnlichkeit, hilft nicht nur beim trainieren von Sprachmodellen, sonderen ist auch ein effizienter Weg Vektoren zu speichern. Für die Speicherung werden **Vektor Datenbanken** verwendet. Hierbei unterscheident man in eine reine Indeximplementierung wie [FAISS](https://www.pinecone.io/learn/faiss/) oder ein Datenbankmanagement System wie [Pinecone](https://www.pinecone.io/). Je nach Anwendungszweck muss entschieden werden, ob Geschwiningkeit oder Sicherheit wichtiger ist.
 Ein Vektor-Datenbankmanagesystem liefert die gängigen Werkzeuge, um die Speicherung von Vektoren zu verwalten. Dazu gehören die folgenden Funktionen:
@@ -313,11 +313,11 @@ Das Ziel des CBOW ist es, ein Wort innerhalb eines Kontextes vorherzusagen, wäh
 
 Zum Trainieren wird sub sampling als auch negative sampling verwendet. Sub sampling überprüft von vorne weg, ob ein Wort in das Context Fenster aufgenommen wird oder nicht. Ein Context Fenster entsteht, um ein betrachtetes Wort und seine direkten Nachbarn. Die Wahrscheinlichkeit, dass ein Wort in das Context Fenster aufgenommen wird, ist umgekehrt proportional zu seiner Häufigkeit.
 
-$$ P(w_i) = (\sqrt{\frac{z(w_i)}{0.001}} + 1) \* \frac{0.001}{z(w_i)} $$
+$$ P(w_i) = (\sqrt{\frac{z(w_i)}{0.001}} + 1) * \frac{0.001}{z(w_i)} $$
 
 Negative sampling ist eine Technik, die die Trainingszeit verkürzt, indem sie nur eine kleine Anzahl von negativen Beispielen und das positive Beispiel auswählt, um die Gewichte zu aktualisieren. Bei einer großen Anzahl von Perzeptronen in der Eingabeschicht kann das Training lange dauern, wenn man alle Gewichte anpasssen muss, obwohl man nur pro Wort anpasst. Die Anzahl der negativen Beispiele ist ein Hyperparameter, der die Genauigkeit und die Trainingszeit beeinflusst. Die Formel für die Berechnung der Wahrscheinlichkeit eines negativen Beispiels ist wie folgt:
 
-$$ P(w\*i) = \frac{z(w*i)^{3/4}}{\sum*{j=0}^{n} z(w_j)^{3/4}} $$
+$$ P(w*i) = \frac{z(w_i)^{3/4}}{\sum_{j=0}^{n} z(w_j)^{3/4}} $$
 
 <figure markdown>
   ![ns](./img/llms/embedding_negative_sampling.png){ width="400" }
@@ -326,7 +326,7 @@ $$ P(w\*i) = \frac{z(w*i)^{3/4}}{\sum*{j=0}^{n} z(w_j)^{3/4}} $$
 
 Die Erweiterung von Word2Vec ist Fasttext, das von Facebook 2017 veröffentlicht wurde. Es berücktsichtigt die Morphologie von Wörtern. Im Gegensatz zu Word2Vec, das Wörter als diskrete Einheiten betrachtet, betrachtet Fasttext Wörter als eine Reihe von Zeichen oder n-Grammen. Somit wird es robuster gegen unbekannte Wörter. Das Resultat ist eine "Tasche" von verschiedenen n-Grammen zu einem Wort. Dies hat zur Folge, dass eine geteilte Repräsentation über Wörtern entsteht und somit die Repräsentation von seltenen Wörtern verbessert wird. Die Vorhersage, basiert auf eine Score-Funktion, die die Summe der Vektoren der n-Gramme des Wortes ist. Die Score-Funktion ist wie folgt definiert:
 
-$$ s(w, c) = \sum\limits\_{g \in G_w} z_g^T v_c $$
+$$ s(w, c) = \sum\limits_{g \in G_w} z_g^T v_c $$
 
 - G ist die Menge der n-Gramme zu einem Wort w
 
@@ -334,10 +334,10 @@ $$ s(w, c) = \sum\limits\_{g \in G_w} z_g^T v_c $$
 
 - v ist der Vektor des zugehörigen Kontexts
 
-Es können auch Language Models für Embeddings verwendet werden. Ein Beispiel ist _GloVe_. Es verwendet eine Matrix, um die Beziehung zwischen Wörtern zu erfassen. Hierbei wird betrachtet wie oft Wörter miteinander in einem Kontext auftauchen. Mit der SVG (Singularwertzelegung) wird die ursprüngliche Matrix in kleiner Matrizen geteilt. Dabei werden die Wortembeddings erzeugt.
-Dennoch werden Embeddings auch mit Transformer Modellen wie Bert und GPT erstellt. Diese werden in den nächsten Kapitel genauer betrachtet. Doch ein weiteres Modell ist interessant: _ELMo_(Embeddings from Language Models). ELMo basiert auf einem didirektionalen LSTM. Das hat den Vorteil, dass Sequenzen von beiden Richtungen durchgegangen werden können.
+Es können auch Language Models für Embeddings verwendet werden. Ein Beispiel ist *GloVe*. Es verwendet eine Matrix, um die Beziehung zwischen Wörtern zu erfassen. Hierbei wird betrachtet wie oft Wörter miteinander in einem Kontext auftauchen. Mit der SVG (Singularwertzelegung) wird die ursprüngliche Matrix in kleiner Matrizen geteilt. Dabei werden die Wortembeddings erzeugt.
+Dennoch werden Embeddings auch mit Transformer Modellen wie Bert und GPT erstellt. Diese werden in den nächsten Kapitel genauer betrachtet. Doch ein weiteres Modell ist interessant: *ELMo*(Embeddings from Language Models). ELMo basiert auf einem didirektionalen LSTM. Das hat den Vorteil, dass Sequenzen von beiden Richtungen durchgegangen werden können.
 
-$$ ELMo*k^{task} = E(R_k; \theta^{task}) = \gamma^{task}\sum\limits*{j=0}^L s*j^{task} h*{k, j}^{LM} $$
+$$ ELMo_k^{task} = E(R_k; \theta^{task}) = \gamma^{task}\sum\limits_{j=0}^L s_j^{task} h_{k, j}^{LM} $$
 
 - $\gamma^{task}$ ist ein Skalarparameter, der für jede Aufgabe trainiert wird und den ELMo Vektor skaliert
 
@@ -355,7 +355,7 @@ LSTMs können durch ihre Zellen und rekusiver Natur für Sequenzverarbeitung ver
 
 Um diese Vektorrepräsentationen zu erzeugen, muss ELMo trainiert werden. Dies geschieht, indem die Wahrscheinlichkeit für das Vorkommen eines Wortes innerhalb einer Sequenz maximiert wird und die aufkommenden Fehler minimiert werden. Die Wahrscheinlichkeit wird wie folgt berechnet:
 
-$$
+$$ 
 max(
     \sum\limits_{k=1}^{K}
         log P(t_k | t_1, ..., t_{k-1}; \theta_x, \vec\theta_{LSTM}, \theta_s) +
@@ -364,7 +364,7 @@ $$
 
 Anhand der Gleichung sieht man genau, dass die Sequenzen von beiden Richtungen durchgegangen werden. Um die Wahrscheinlichkeit für das Vorkommen eines Wortes innerhalb einer Sequenz zu berechnen, wird in der Bedingung jeweils die linke oder rechte Seite verwendet. Zusätzlich werden noch die zugehörigen Gewichtsmatrizen $\theta_x, \vec\theta_{LSTM}, \overleftarrow{\theta}_{LSTM}, \theta_s$ in die Wahrscheinlichkeitsberechnung mit rein gerechnet. Schließlich kann jedes Token als eine Menge von Vektorrepräsentaion dargestellt werden. Die Größer einer solchen Menge ist abhängig von der Anzahl der LSTM-Zellen, wodruch sich folgende Gleichung ergibt: $size(R_t) = 2 * L + 1$, wobei L die Anzahl der LSTM-Zellen ist. Somit lässt sich jedes Token als eine Menge von Vektorrepräsentationen darstellen.
 
-$$ R*t = \{x_k^{LM}, \vec{h}*{k, j}^{LM}, \overleftarrow{h}\_{k, j}^{LM} | j = 1, ... , L\} $$
+$$ R_t = \{x_k^{LM}, \vec{h}_{k, j}^{LM}, \overleftarrow{h}_{k, j}^{LM} | j = 1, ... , L\} $$
 
 <figure markdown>
   ![elmo](./img/llms/embedding_elmo.png){ width="400" }
@@ -416,8 +416,8 @@ Somit wird der Mittelpunkt immer näher an das lokale Dichtemaxima herangeführt
 
 Ein Vorteil von Mean-Shift-Clustering ist, dass es automatisch die Anzahl der Cluster bestimmt, da die Cluster durch die lokalen Maxima der Datenpunktdichte definiert werden. Der Algorithmus ist auch robust gegenüber Rauschen und kann Cluster mit komplexen Formen erfassen. Allerdings kann die Performance des Algorithmus bei großen Datensätzen beeinträchtigt sein, da er eine hohe Rechenleistung erfordert, um die Dichte in einem hochdimensionalen Raum zu berechnen.
 
-### 3.2 Transformer
 
+### 2.2 Transformer
 ---
 
 Der Transformer ist ein fortschrittliches neuronales Netzwerkmodell, das in der natürlichen Sprachverarbeitung (NLP) weit verbreitet ist. Er wurde erstmals 2017 in einem bahnbrechenden Paper namens "Attention is All You Need" vorgestellt. Im Gegensatz zu traditionellen rekurrenten und faltenden Architekturen hat der Transformer in NLP-Aufgaben wie maschineller Übersetzung, Textklassifikation und Spracherkennung für Aufsehen gesorgt. Das Kernkonzept des Transformers ist die Verwendung von Self-Attention-Mechanismen, die es dem Modell ermöglichen, relevante Teile der Eingabe zu identifizieren und deren Beziehungen zu modellieren. Der Transformer nutzt auch andere Techniken wie Positional Encoding, um die Positionsinformationen der Eingabesequenzen zu berücksichtigen, und Multi-Head Attention, um verschiedene Aufmerksamkeitsrepräsentationen zu erfassen. Darüber hinaus umfasst der Transformer Residual Connections und Layer Normalization, um den Trainingsprozess zu stabilisieren, sowie Dropout, um Overfitting zu verhindern. Der Optimizer steuert die Aktualisierung der Modellparameter, während die Ausgabeschicht die Vorhersagen des Modells erzeugt. Insgesamt bietet der Transformer eine effiziente Verarbeitung von Sequenzdaten und ist zu einem grundlegenden Modell in der NLP-Forschung und -Anwendung geworden.
@@ -427,81 +427,81 @@ Der Transformer ist ein fortschrittliches neuronales Netzwerkmodell, das in der 
   <figcaption>Fig. Transformer Architektur</figcaption>
 </figure>
 
-#### 3.2.1 Positional Encoding
+#### 2.2.1 Positional Encoding
 
-#### 3.2.2 Aechitektur
+#### 2.2.2 Aechitektur
 
-#### 3.2.3 Self-Attention
+#### 2.2.3 Self-Attention
 
-#### 3.2.4 Cross-Attention
+#### 2.2.4 Cross-Attention
 
-#### 3.2.5 Masked Attention
+#### 2.2.5 Masked Attention
 
-#### 3.2.6 Multi-Head Attention
+#### 2.2.6 Multi-Head Attention
 
-#### 3.2.7 Feed Forward Network
+#### 2.2.7 Feed Forward Network
 
-#### 3.2.8 Residual Connections
+#### 2.2.8 Residual Connections
 
-#### 3.2.9 Layer Normalization
+#### 2.2.9 Layer Normalization
 
-#### 3.2.10 Dropout & Optimizer
+#### 2.2.10 Dropout & Optimizer
 
-#### 3.2.11 Output Layer
+#### 2.2.11 Output Layer
 
-### 3.3 BERT
-
----
-
-#### 3.3.1 Architektur
-
-#### 3.3.2 Masked Language Model
-
-#### 3.3.3 Next Sentence Prediction
-
-#### 3.3.4 Pre-Training
-
-#### 3.3.5 Fine-Tuning
-
-### 3.4 Fine-Tuning
+### 2.3 BERT
 
 ---
 
-#### 3.4.1 Aufgaben
+#### 2.3.1 Architektur
 
-#### 3.4.2 Overfitting
+#### 2.3.2 Masked Language Model
 
-### 3.5 Generative Pre-Training
+#### 2.3.3 Next Sentence Prediction
 
----
+#### 2.3.4 Pre-Training
 
-#### 3.5.1 Architektur
+#### 2.3.5 Fine-Tuning
 
-#### 3.5.2 Pre-Training
-
-#### 3.5.3 Fine-Tuning
-
-#### 3.5.4 Reward Model
-
-#### 3.5.5 Reinforcement Learning
-
-### 3.6 Meta-Learning
+### 2.4 Fine-Tuning
 
 ---
 
-#### 3.6.1 Zero-Shot Learning
+#### 2.4.1 Aufgaben
 
-#### 3.6.2 One-Shot Learning
+#### 2.4.2 Overfitting
 
-#### 3.6.3 Few-Shot Learning
-
-### 3.7 Benchmarking
+### 2.5 Generative Pre-Training
 
 ---
 
-## 4 Anwendungen
+#### 2.5.1 Architektur
 
-### Limitationen heutiger Large Language Models
+#### 2.5.2 Pre-Training
+
+#### 2.5.3 Fine-Tuning
+
+#### 2.5.4 Reward Model
+
+#### 2.5.5 Reinforcement Learning
+
+### 2.6 Meta-Learning
+
+---
+
+#### 2.6.1 Zero-Shot Learning
+
+#### 2.6.2 One-Shot Learning
+
+#### 2.6.3 Few-Shot Learning
+
+### 2.7 Benchmarking
+
+---
+
+## 3 Anwendungen
+
+### 3.1 Limitationen heutiger Large Language Models
 
 Mit dem Aufstieg von Large Language Model wie OpenAI's ChatGPT erleben wir eine Revolution im Bereich der automatischen Generierung von Inhalten. Aber wie mit jeder Technologie haben auch solch mächtige Modelle Probleme und Limitationen. In diesem Gebiet können wir 2 Hauptprobleme ausmachen.
 
@@ -512,7 +512,7 @@ Vielleicht sind Sie Teil einer Firma die mit ihrem neusten Produkt eine Werbekam
 
 Die denkbaren Möglichkeiten auf diesem Gebiet sind fast unbegrenzt, dennoch ist dies nicht mit der Implementation des Standardprodukts _ChatGPT_ machbar, oder vielleicht doch?...
 
-### Die Lösung: [LangChain](https://python.langchain.com/en/latest/index.html)
+### 3.2 Die Lösung: [LangChain](https://python.langchain.com/en/latest/index.html)
 
 Die beschriebenen Limitationen scheinen ein sehr komplexes Problem aufzuwerfen, aber wie so oft wird dadurch nur die Tür für innovative Lösungen aufgemacht. Das ist der Punkt an dem [LangChain](https://python.langchain.com/en/latest/index.html) ins Spiel kommt.
 
@@ -529,7 +529,7 @@ Diese Aufgabe können wir somit in 3 Schritte unterteilen:
 2. Nachforschungen zu den aktuellsten Themen in diesem Gebiet recherchieren
 3. Mithilfe der Anforderungen und Recherchen unser Podcast Skript generieren
 
-### Code Demo: Der allwissende Podcast Schreiber
+### 3.3 Code Demo: Der allwissende Podcast Schreiber
 
 Um ein möglichst gutes Ergebnis zu erzielen benutzen wir zu erstellen des Skripts ChatGPT, Model _GPT3.5-turbo_. Um Zugriff auf Antworten des Modells in LangChain zu erreichen müssen wir einen sogenannten _API Token_ erstellen und angeben.
 
@@ -640,7 +640,7 @@ Mit den gesammelten Informationen ist es uns jetzt möglich den Podcast zu erste
 Die traurige Antwort auf diese Frage ist leider nein. Das liegt daran, dass _GPT3.5_ ein maximales Eingabe- & Ausgabelimit hat. Dieses liegt bei 4096. Wenn wir also einen längern Podcast erstellen wollen müssen wir in einem iterativen Prozess vorgehen. Das macht die selbst definierte Funktion `run_repeated_chain`. Sie wird so oft ausgeführt bis das Stop Wort `[END]` erreicht wird, oder ein Limit für die maximalen Iterationen (Standardwert: `8`).
 Am Ende bekommen wir ein hochwertiges Podcastskript, dessen Erstellung mit LangChain auf triviale Weise möglich war. Selbst an diesem einfachen Beispiel können wir die Macht eines Toolsets sehen, dass LLMs mit anderen Diensten und Pipelines integriert.
 
-### Eine Neue Art des Programmierens: Prompt Engineering
+### 3.4 Eine Neue Art des Programmierens: Prompt Engineering
 
 Wie wir an dem Code der Demo sehen konnten ist ein integraler Teil immer wieder aufgetaucht: Die spezifische Syntax der `PromptTemplates`. Warum ist dies nun so wichtig? Na weil LLMs einen riesigen Wissensschatz in sich bergen, aber man kann diesen nicht auf optimale Art und Weise nutzen, wenn man nicht dazu in der Lage ist auf die richtige Art und Weise Fragen und Anweisungen zu stellen. Um dieses Problem zu lösen is das neue Gebiet des [Prompt Engineerings](https://de.wikipedia.org/wiki/Prompt_Engineering) entstanden.
 
@@ -654,7 +654,7 @@ Eines können wir jedoch feststellen, und zwar das dieses Gebiet nicht mehr ein 
 
 Trotzdem möchte hier nochmal gesagt sein, dass die Technik des _Prompt Engineering_ nicht die allgemeinen Limitationen von LLMs überkommen kann.
 
-### Open Source Alternativen
+### 3.5 Open Source Alternativen
 
 Wenn man sich die jetzige Lage von LLM Anbietern anschaut zeichnet sich ein klarer Trend ab. Proprietäre, gigantische Tech-Konzerne wie OpenAI, Microsoft, Google, etc. dominieren den Markt. Vor allem ChatGPT mit den zugrunde liegenden Modellen _GPT3.5-turbo_ und _GPT4_ sind ihrer Konkurrenz meilenweit voraus.
 
@@ -680,23 +680,23 @@ Allerdings haben die _Open Source_ Varianten große Probleme zu lösen:
 
 Zusammenfassend ist es wichtig eine wachsende Open Source Community, sowie performante offene Modelle zu haben. Dies fördert Wettbewerb, Privatsphäre und das Aufkommen von kreativen Ideen. Diversität fördert Fortschritt und Fortschritt ist der Inbegriff dieses faszinierenden Gebietes.
 
-## 5 Fazit
+## 4 Fazit
 
-## 6 Weiterführendes Material
+## 5 Weiterführendes Material
 
-### 6.1 Podcast
+### 5.1 Podcast
 
 [Der Campus Talk – Silicon Forest – Folge 3](https://der-campustalk-der-thd.letscast.fm/episode/der-campus-talk-silicon-forest-folge-3)
 
-### 6.2 Talk
+### 5.2 Talk
 
 Hier einfach Youtube oder THD System embedden.
 
-### 6.3 Demo
+### 5.3 Demo
 
 Link zum Repository: https://github.com/CRY-TeX/demo-ki-seminar
 
-## 7 Literaturliste
+## 6 Literaturliste
 
 [1] Acheampong, Francisca Adoma, Henry Nunoo-Mensah, und Wenyu Chen. „Transformer Models for Text-Based Emotion Detection: A Review of BERT-Based Approaches“. Artificial Intelligence Review 54, Nr. 8 (1. Dezember 2021): 5789–5829. https://doi.org/10.1007/s10462-021-09958-2.
 
