@@ -75,7 +75,7 @@ Im [IMDB-WIKI][26] Datensatz wurden ein große Sammlung von Bildern und Metadten
 
 Auf der [Webseite][26] des Datensatzes können die Bilder und Metadaten in verschiedensten Varianten heruntergeladen werden. Auch bereits vortrainierte Gewichte zu implementierten Modellen sind hier zu finden.
 
-### Methoden
+### Generative Adversarial Networks (GANS)
 
 Mit der folgenden Abbildung wollen wir die Entwicklung der GAN-Methoden darstellen, die wir für dieses Projekt betrachtet haben. Die Zeitreihe stellt die jeweiligen Paper mit dem Jahr der Veröffentlich dar.
 
@@ -96,7 +96,9 @@ Die prototypenbasierten Methoden verwenden ein nichtparametrisches Modell. Die G
 
 ### Deep Generative Networks
 
-Die obengenannten Ansätze erfordern jedoch häufig die Erstellung von Alterungssequenzen derselben Person mit einem breiten Altersspektrum, deren Erfassung sehr kostspielig ist. Generative Adversarial Networks (GANs) können besser mit Altersverläufen umgehen.
+Die obengenannten Ansätze erfordern jedoch häufig die Erstellung von Alterungssequenzen derselben Person mit einem breiten Altersspektrum, deren Erfassung sehr schwierig und kostspielig ist. Generative Adversarial Networks (GANs) können besser mit Altersverläufen umgehen.
+
+Bei den hier vorgestellten Methoden gehen wir ganz grob auf das Paper ein. Das jeweilige Paper wurde verlinkt und ist auch in der Literaturliste zu finden.
 
 #### Generative Adversarial Networks (GANs)
 
@@ -107,6 +109,349 @@ Ein solches neuronales Netzwerk besteht aus zwei weiteren Netzwerken. Einem Gene
 Viele GAN-basierte Methoden können im Bereich Face Aging die plausibelsten und realistischsten Bilder erzeugen, die aufgrund des Alters nur schwer von echten Daten zu unterscheiden sind. Allerdings nutzen alle diese die sequentiellen Daten nicht vollständig aus. Diese Methoden können die Übergangsmuster, die als Korrelationen der Gesichtsmerkmale zwischen verschiedenen Altersgruppen für eine Person definiert sind, nicht explizit berücksichtigen. Daher sind ihre Ergebnisse normalerweise nicht in der Lage, die Gesichtsidentität beizubehalten oder die Übergangsregeln für Kreuzungen nicht gut zu erfüllen.
 
 Um diese Probleme zu lösen und den Alterungsprozess von Personen mit Hilfe von GANs noch detaillierter und akkurater darzustellen, wurden verschiedene Variationen von diesen Netzwerken entwickelt.
+
+##### PyTorch Example - TODO
+
+In diesem kurzen Code-Beispiel wollen wir eine einfache Implementierung eines Generative Adversarial Networks mit dem PyTorch-Framework zeigen.
+
+Wir starten mit der Implementierung der Klasse des Generator-Netzwerks. Wir erben hier von der `nn.Module` Klasse. Dies ist die Basisklasse für alle neuronalen Netzwerke in PyTorch.
+
+```python
+class Generator(nn.Module):
+    """
+    Generator.
+    """
+    def __init__(self, z_dim, n_feature_maps, n_channels):
+        super(Generator, self).__init__()
+
+        self.z_dim = z_dim
+        self.n_feature_maps = n_feature_maps
+        self.n_channels = n_channels
+
+        self._init_network()
+
+    def _init_network(self):
+        layer = []
+
+        # input is Z, going into a convolution
+        layer.append(nn.ConvTranspose2d(
+            in_channels=self.z_dim,
+            out_channels=self.n_feature_maps * 8,
+            kernel_size=4,
+            stride=1,
+            padding=0,
+            bias=False
+        ))
+
+        layer.append(nn.BatchNorm2d(self.n_feature_maps * 8))
+        layer.append(nn.ReLU(True))
+
+        # state size. ``(ngf*8) x 4 x 4``
+        layer.append(nn.ConvTranspose2d(
+            in_channels=self.n_feature_maps * 8,
+            out_channels=self.n_feature_maps * 4,
+            kernel_size=4,
+            stride=2,
+            padding=1,
+            bias=False
+        ))
+
+        layer.append(nn.BatchNorm2d(self.n_feature_maps * 4))
+        layer.append(nn.ReLU(True))
+
+        # state size. ``(ngf*4) x 8 x 8``
+        layer.append(nn.ConvTranspose2d(
+            in_channels=self.n_feature_maps * 4,
+            out_channels=self.n_feature_maps * 2,
+            kernel_size=4,
+            stride=2,
+            padding=1,
+            bias=False
+        ))
+
+        layer.append(nn.BatchNorm2d(self.n_feature_maps * 2))
+        layer.append(nn.ReLU(True))
+
+        # state size. ``(ngf*2) x 16 x 16``
+        layer.append(nn.ConvTranspose2d(
+            in_channels=self.n_feature_maps * 2,
+            out_channels=self.n_feature_maps,
+            kernel_size=4,
+            stride=2,
+            padding=1,
+            bias=False
+        ))
+
+        layer.append(nn.BatchNorm2d(self.n_feature_maps))
+        layer.append(nn.ReLU(True))
+
+        # state size. ``(ngf) x 32 x 32``
+        layer.append(nn.ConvTranspose2d(
+            in_channels=self.n_feature_maps,
+            out_channels=self.n_channels,
+            kernel_size=4,
+            stride=2,
+            padding=1,
+            bias=False
+        ))
+
+        layer.append(nn.Tanh())
+
+        self.main = nn.Sequential(*layer)
+
+    def forward(self, x):
+        """
+        Forward operation for the generator network.
+        """
+        return self.main(x)
+```
+
+Als nächstes programmieren wir die Klasse des Diskriminator-Netzwerks.
+
+```python
+class Discriminator(nn.Module):
+    """
+    Discriminator.
+    """
+    def __init__(self, n_channels, n_feature_maps):
+        super(Discriminator, self).__init__()
+
+        self.n_channels = n_channels
+        self.n_feature_maps = n_feature_maps
+
+        self._init_network()
+
+    def _init_network(self):
+        layers = []
+
+        # input is ``(nc) x 64 x 64``
+        layers.append(nn.Conv2d(
+            self.n_channels,
+            self.n_feature_maps,
+            4,
+            2,
+            1,
+            bias=False
+        ))
+
+        layers.append(nn.LeakyReLU(0.2, inplace=True))
+
+        # state size. ``(ndf) x 32 x 32``
+        layers.append(nn.Conv2d(
+            self.n_feature_maps,
+            self.n_feature_maps * 2,
+            4,
+            2,
+            1,
+            bias=False
+        ))
+        layers.append(nn.BatchNorm2d(self.n_feature_maps * 2))
+        layers.append(nn.LeakyReLU(0.2, inplace=True))
+
+        # state size. ``(ndf*2) x 16 x 16``
+        layers.append(nn.Conv2d(
+            self.n_feature_maps * 2,
+            self.n_feature_maps * 4,
+            4,
+            2,
+            1,
+            bias=False
+        ))
+        layers.append(nn.BatchNorm2d(self.n_feature_maps * 4))
+        layers.append(nn.LeakyReLU(0.2, inplace=True))
+
+        # state size. ``(ndf*4) x 8 x 8``
+        layers.append(nn.Conv2d(
+            self.n_feature_maps * 4,
+            self.n_feature_maps * 8,
+            4,
+            2,
+            1,
+            bias=False
+        ))
+        layers.append(nn.BatchNorm2d(self.n_feature_maps * 8))
+        layers.append(nn.LeakyReLU(0.2, inplace=True))
+
+        # state size. ``(ndf*8) x 4 x 4``
+        layers.append(nn.Conv2d(
+            self.n_feature_maps * 8,
+            1,
+            4,
+            1,
+            0,
+            bias=False
+        ))
+        layers.append(nn.Sigmoid())
+
+        self.main = nn.Sequential(*layers)
+
+    def forward(self, x):
+        """
+        Forward Operation.
+        """
+        return self.main(x)
+```
+
+Als nächstes verbinden wir die zwei neuronalen Netze in einer Klasse, um die beiden Netzwerke zu trainieren und Bilder generieren zu lassen.
+
+```python
+class GAN(object):
+    """
+    Generative Adversarial Network.
+    """
+    @staticmethod
+    def load(path, device, ngpus=0):
+        gan = GAN(device, ngpus)
+        gan.discriminator.load_state_dict(load(os.path.join(path, 'discriminator.obj')))
+        gan.generator.load_state_dict(load(os.path.join(path, 'generator.obj')))
+        
+    def __init__(self, device, n_gpus=0):
+        self.device = device
+        self.n_gpus = n_gpus
+        self._init_model()
+
+    def _init_model(self):
+        self.discriminator = Discriminator(3, 64).to(self.device)
+        self.discriminator.apply(self._weights_init)
+
+        if (self.device.type == 'cuda') and (self.n_gpus > 1):
+            self.discriminator = nn.DataParallel(self.discriminator, list(range(self.n_gpus)))
+
+        self.generator = Generator(100, 64, 3).to(self.device)
+        self.generator.apply(self._weights_init)
+
+        if (self.device.type == 'cuda') and (self.n_gpus > 1):
+            self.generator = nn.DataParallel(self.generator, list(range(self.n_gpus)))
+
+        self.criterion= nn.BCELoss()
+
+        self.fixed_noise = randn(64, 100, 1, 1, device=self.device)
+
+        self.real_label = 1.
+        self.fake_label = 0.
+
+        self.optimizer_discriminator = Adam(
+            self.discriminator.parameters(),
+            lr=0.0002,
+            betas=(0.5, 0.999)
+        )
+
+        self.optimizer_generator = Adam(
+            self.generator.parameters(),
+            lr=0.0002,
+            betas=(0.5, 0.999)
+        )
+
+    def train(self, n_epochs, dataloader : DataLoader):
+        """
+        Train the model.
+        """
+        img_list = []
+        generator_losses = []
+        discriminator_losses = []
+        iters = 0
+        for epoch in range(n_epochs):
+            for i, data in enumerate(dataloader, 0):
+                ############################
+                # (1) Update D network: maximize log(D(x)) + log(1 - D(G(z)))
+                ###########################
+                ## Train with all-real batch
+                self.discriminator.zero_grad()
+
+                # Format batch
+                real_cpu = data[0].to(self.device)
+                b_size = real_cpu.size(0)
+                label = full(
+                    (b_size,),
+                    self.real_label,
+                    dtype=tfloat,
+                    device=self.device
+                )
+                # Forward pass real batch through D
+                output = self.discriminator(real_cpu).view(-1)
+                # Calculate loss on all-real batch
+                discriminator_error_real = self.criterion(output, label)
+                # Calculate gradients for D in backward pass
+                discriminator_error_real.backward()
+                discriminator_x = output.mean().item()
+
+                ## Train with all-fake batch
+                # Generate batch of latent vectors
+                noise = randn(b_size, 100, 1, 1, device=self.device)
+                # Generate fake image batch with G
+                fake = self.generator(noise)
+                label.fill_(self.fake_label)
+                # Classify all fake batch with D
+                output = self.discriminator(fake.detach()).view(-1)
+                # Calculate D's loss on the all-fake batch
+                error_discriminator_fake = self.criterion(output, label)
+                # Calculate the gradients for this batch,
+                # accumulated (summed) with previous gradients
+                error_discriminator_fake.backward()
+                discriminator_gradients_z1 = output.mean().item()
+                # Compute error of D as sum over the fake and the real batches
+                discriminator_error = discriminator_error_real + error_discriminator_fake
+                # Update D
+                self.optimizer_discriminator.step()
+
+                ############################
+                # (2) Update G network: maximize log(D(G(z)))
+                ###########################
+                self.generator.zero_grad()
+                label.fill_(self.real_label)  # fake labels are real for generator cost
+                # Since we just updated D, perform another forward pass of all-fake batch through D
+                output = self.discriminator(fake).view(-1)
+                # Calculate G's loss based on this output
+                generator_error = self.criterion(output, label)
+                # Calculate gradients for G
+                generator_error.backward()
+                discriminator_gradients_z2 = output.mean().item()
+                # Update G
+                self.optimizer_generator.step()
+
+                # Output training stats
+                if i % 50 == 0:
+                    print('[%d/%d][%d/%d]\tLoss_D: %.4f\tLoss_G: %.4f\tD(x): %.4f\tD(G(z)): %.4f / %.4f'
+                        % (epoch, n_epochs, i, len(dataloader),
+                            discriminator_error.item(), generator_error.item(), discriminator_x, discriminator_gradients_z1, discriminator_gradients_z2))
+
+                    self._save_model(os.path.join('model', 'gan', 'checkpoint'), n_epoch=epoch, is_checkpoint=True)
+
+                # Save Losses for plotting later
+                generator_losses.append(generator_error.item())
+                discriminator_losses.append(discriminator_error.item())
+
+                # Check how the generator is doing by saving G's output on fixed_noise
+                if (iters % 500 == 0) or ((epoch == n_epochs-1) and (i == len(dataloader)-1)):
+                    with no_grad():
+                        fake = self.generator(self.fixed_noise).detach().cpu()
+                    img_list.append(vutils.make_grid(fake, padding=2, normalize=True))
+
+                    self._save_model(os.path.join('model', 'gan'))
+
+                iters += 1
+
+        return {
+            'images': img_list,
+            'generator_losses': generator_losses,
+            'discriminator_losses': discriminator_losses
+        }
+
+    def _weights_init(self, m):
+        classname = m.__class__.__name__
+        if classname.find('Conv') != -1:
+            nn.init.normal_(m.weight.data, 0.0, 0.02)
+        elif classname.find('BatchNorm') != -1:
+            nn.init.normal_(m.weight.data, 1.0, 0.02)
+            nn.init.constant_(m.bias.data, 0)
+    
+    def _save_model(self, path, n_epoch=0, is_checkpoint=False):
+        if not os.path.exists(path):
+            os.makedirs(path)
+        
+        save(self.discriminator.state_dict(), os.path.join(path, 'discriminator.obj') if not is_checkpoint else os.path.join(path, f'discriminator_{n_epoch}.obj'))
+        save(self.generator.state_dict(), os.path.join(path, 'generator.obj') if not is_checkpoint else os.path.join(path, f'generator_{n_epoch}.obj'))
+```
 
 #### Conditional Generative Adversiral Networks
 
@@ -134,6 +479,18 @@ Conditional GANs verfügen nicht über einen expliziten Mechanismus zur inversen
   <figcaption>Verwendete Methode. (a) Approximative Gesichtsrekonstruktion mit Age-cGAN (b) Wechseln der Altersbedingung am Eingang des Generators G, um die Gesichtsalterung durchzuführen.</figcaption>
 </figure>
 
+In der folgenden Abbildung werden Beispiele für die Rekonstruktion und Alterung von Gesichtern dargestellt. 
+
+- (a) Zeigt die Originalen Testbilder
+- (b) Zeigt die rekonstruierten Bilder
+- (c) Zeigt die rekonstruiertern Bilder, die inklusive den "pixelweisen" und "identitätserhaltenden" Methoden generiert wurden
+- (d) Zeigt die rekonstruierten Bilder, dieunter Verwendung der identitätserhaltenden Approximationen und konditioniert auf die jeweilige Alterskategorie (eine pro Spalte)
+
+<figure markdown>
+  ![Results Age-c-GAN](./img/Face Aging/Age-c-GAN_Results.png){ width="800" }
+  <figcaption>Beispiele von generierten Bildern druch das Age-c-GAN</figcaption>
+</figure>
+
 Die Autoren kamen zum Schluss, dass der Teil der Gesichtsrekonstruktion mit deren Methode weiter verbessert werden kann, indem "pixelweise" (Pixelwise) und "identitätserhaltende" (Identity-Preserving) Ansätze in einem Optimizerungsziel kombiniert werden.
 
 #### Face Aging with Contextual Generative Adversarial Nets
@@ -152,6 +509,13 @@ Conextual-GANs bestehen aus drei neuronalen Netzwerken. Um sicherzustellen, dass
   <figcaption>Struktur des vorgeschlagenen C-GANs.</figcaption>
 </figure>
 
+In der nächsten Abbildungen werden die generierten Gesichter qualitativ verglichen mit der Grundwahrheit dargestellt. In jedem Triplett sind das erste und dritte Bild die Grundwahrheiten mit Altersgruppe 1 und Altersgruppe 2, während das zweite Bild das Alterungsergebnis ist.
+
+<figure markdown>
+  ![Results Contextual GAN](./img/Face Aging/Context-GAN_Results.png){ width="800" }
+  <figcaption>Ergebnisse Contextual GANs</figcaption>
+</figure>
+
 #### Face Aging With Identity-Preserved Conditional Generative Adversarial Networks
 
 In diesem [Paper][7], welches 2018 veröffentlicht wurde, schlug das Autorenteam ein Identity-Preserved Conditional Generative Adversarial Network (IPCGAN) - zu Deutsch: identitätserhaltendes bedingtes generatives adversariales Netzwerk - für die Gesichtsalterung vor. Dieses besteht aus drei Modulen. Einem Conditional Generative Adversarial Network (CGAN), einem identitätserhaltenden (Identity-Preserved) Modul und einem Altersklassifikator.
@@ -163,6 +527,13 @@ Als Eingabe für den Generator im CGAN wird ein Eingabebild und eine Zielalterkl
   <figcaption>Struktur des vorgeschlagenen IPCGAN.</figcaption>
 </figure>
 
+Das folgende Bild zeigt ein generiertes Beispielbild des IPCGAN Ansatzes.
+
+<figure markdown>
+  ![IPCGAN](./img/Face Aging/IPCGAN_Result.png){ width="600" }
+  <figcaption>Generiertes Beispiel des IPCGAN</figcaption>
+</figure>
+
 #### Learning Face Age Progression: A Pyramid Architecture of GANs
 
 2019 veröffentlichten die Autoren Hongyu Yang, Di Huang, Yunhong Wang und Anil K. Jain ein Paper mit dem Titel ["Learning Face Age Progression: A Pyramid Architecture of GANs"][8], indem ein neuartiger Ansatz zur Alterung von Gesichtern vorgeschlagen wird. Hierbei werden die Vorteile von Generative Adversarial Netweorks (GAN) bei  der Synthese visuell plausibler Bilder mit dem Vorwissen über  die menschliche Alterung verbunden. Die Autoren versprechen, dass ihr Modell im Vergleich zu bestehenden Methoden in der Literatur besser in der Lage ist, die beiden kritischen Anforderungen bei der Altersentwicklung zu erfüllen, d.h. Identitätsbeständigkeit und Alterungsgenauigkeit.
@@ -172,6 +543,13 @@ In dieser Methode nimmt der CNN-basierte Generator junge Gesichter als Input und
 <figure markdown>
   ![Pyramid GAN](./img/Face Aging/Pyramid_GAN.png){ width="600" }
   <figcaption>Framework der vorgeschlagenen Methode der Altersprogression.</figcaption>
+</figure>
+
+Beispiele für die Ergebnisse der Altersentwicklung sind in der nächsten Abbildung zu sehen. Es werden visuell plausible und überzeugende Alterungseffekte erzielt, obwohl die Beispiele eine breite Palette von Personen in Bezug auf Rasse, Geschlecht, Pose, Make-up und Ausdruck abdecken.
+
+<figure markdown>
+  ![Results Pyramid GAN](./img/Face Aging/Pyramid-GAN_Results.png){ width="800" }
+  <figcaption>Alterungseffekte, die für die CACD (die ersten beiden Zeilen) und MORPH (die letzten beiden Zeilen) Datensätze für 12 verschiedene Personen generiert wurden.</figcaption>
 </figure>
 
 #### Triple-GAN: Progressive Face Aging with Triple Translation Loss
@@ -197,11 +575,28 @@ Das Framework der Autoren beinhaltet vier Komponenten:
   <figcaption>Framework des vorgeschlagenen Triple-GAN für Gesichtsalterung</figcaption>
 </figure>
 
+Die Ergebnisse des Triple-GANs in der folgenden Abbildung zeigen, dass die generiertern Bilder einen offensichtlichen Alterungseffekt und einer gut erhaltenden Identität erzielen.
+
+<figure markdown>
+  ![Results Triple GAN](./img/Face Aging/Triple-GAN_Results.png){ width="800" }
+  <figcaption>Ergebnisse Triple-GAN</figcaption>
+</figure>
+
 #### Only a Matter of Style: Age Transformation Using a Style-Based Regression Model
 
-[9]
+Mit dem Paper [Only a Matter of Style: Age Transformation Using a Style-Based Regression Model][9] stellten die Autoren eine Implementierung namens SAM -Style-based Age Manipulation - vor. Hierbei versuchen sie die gewünschte Alterveränderung zu erfassen und gleichzeitig die Identität zu bewahren. Die Gesichtsalterung wird hier versucht durch ein Bild-zu-Bild Übersetzung(Image-to-Image Translation) zu lösen. Zu diesen Techniken gehören auch die Conditional GANs, die wir oben bereits erwähnt haben. In der Forschungsarbeit wird ein vortrainierter (pre-trained) StyleGAN-Generator mit einer Encoder-Architektur kombiniert. Der Encoder hat die Aufgabe, ein Gesichtsbild als Eingabe direkt in eine Reihe von Stilvektoren zu kodieren, die der gewünschten Altersveränderung unterliegen. Diese Vektoren werden anschließend an das StyleGAN übergeben, um das Ausgangsbild zu erzeugen, das die gewünschte Altersveränderung darstellt. Um den Encoder bei der Generierung anzuleiten, wird ein vortrainiertes Alterregressionsnetzwerk während des Trainingsprozesses als zusätzliche Einschränkung verwendet. SAM betrachtet die menschliche Alterung als ein Regressionsproblem auf das gewünschte Zielalter.
 
-https://yuval-alaluf.github.io/SAM/
+<figure markdown>
+  ![SAM Architecture](./img/Face Aging/SAM_Architecture.png){ width="600" }
+  <figcaption>Architektur des SAM Netzwerks</figcaption>
+</figure>
+
+<figure markdown>
+  ![SAM Results](./img/Face Aging/SAM_Results.png){ width="600" }
+  <figcaption>Mit SAM erzeugte Alterungsergebnisse</figcaption>
+</figure>
+
+Die Ergebnisse dieser Methode werden durch die Style-Repräsentation bestimmt. D.h. diese ist auf Bilder beschränkt, die genau in den latenten Raum von StyleGAN eingebettet werden können. Die Modellierung von Gesichtern, die außerhalb des StyleGAN-Bereichs liegen, können daher eine Herausforderung darstellen. Ebenso kann es durch die Einbettung eines Bildes in eine Reihe von Vektoren schwieriger werden, die Eingangsmerkmale wie den Bildhintergrund originalgetreu zu erhalten. In den Evaluierungen wurde gezeigt, dass die vorgeschlagene Methode das Alter und andere Merkmale wie Haarfarbe und Frisur erfolgreich voneinander trennt. Allerdings ändern sich solche Attribute natürlich mit dem Alter. Um diese Veränderungen zu modellieren, wurden daher zwei Bearbeitungstechniken zur Kontrolle globaler Veränderungen (z. B. Haarfarbe) und lokaler Veränderungen (z. B. das Vorhandensein von Brillen und Gesichtsbehaarung) vorgeschlagen. Die Erfassung komplexerer Veränderungen, wie z. B. zurückweichende Haarlinien und Veränderungen der Hautfarbe, ist mit den heute verfügbaren Methoden nach wie vor eine Herausforderung, auch weil sie schwieriger zu erfassen sind.
 
 #### PFA-GAN: Progressive Face Aging With Generative Adversarial Network
 
@@ -209,9 +604,14 @@ https://yuval-alaluf.github.io/SAM/
 
 ## Anwendungen
 
+Die meisten Anwendungen findet man aktuell im Bereich der Unterhaltung. Unzählige Apps für das Smartphone, sowohl für iOS als auch für Android, 
+
+
 - https://play.google.com/store/apps/details?id=com.agt.smokerface&hl=de & https://pubmed.ncbi.nlm.nih.gov/30111525/
 
 ## Fazit
+
+Erzeugung qualitativ hochwertiger Bilder ermöglicht, kann dies die effektive Modellierung extremer Posen, anspruchsvoller Ausdrücke und Accessoires erschweren.
 
 ## Weiterführendes Material
 
