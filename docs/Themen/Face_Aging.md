@@ -604,12 +604,26 @@ Die Ergebnisse dieser Methode werden durch die Style-Repräsentation bestimmt. D
 
 ## Anwendungen
 
-Die meisten Anwendungen findet man aktuell im Bereich der Unterhaltung. Unzählige Apps für das Smartphone, sowohl für iOS als auch für Android, 
+Die meisten Anwendungen findet man aktuell im Bereich der Unterhaltung. Man findet unzählige Apps für das Smartphone, sowohl für iOS als auch für Android, welche einen ein älteres Bild einer Person generieren lassen.
 
+### Smokerface App
 
-- https://play.google.com/store/apps/details?id=com.agt.smokerface&hl=de & https://pubmed.ncbi.nlm.nih.gov/30111525/
+Aber auch sinnvollere Anwendungen wurden schon umgesetzt. In der Studie [A Face-Aging App for Smoking Cessation in a Waiting Room Setting: Pilot Study in an HIV Outpatient Clinic][29] wurde eine Face-Aging App zur Intervention zur Raucherentwöhnung entwickelt. Hintergrund zu dieser Studie war, dass die Einführung von Technologien zur Raucherentwühnung in ambulanten Wartezimmerneine wirksame Strategie für eine Veränderung sein kann, die das Potenzial hat, fast alle Patienten, die einen Gesundheitsdienstleister aufsuchen, zu erreichen, ohne dass der Arzt vorher tätig werden muss. Das Ziel der Studie war es, eine Intervention zur Raucherentwöhnung zu entwickeln, die die Zeit, die Patienten in einem Wartezimmer verbringen, nutzt, indem sie sie passiv einer Tablet-basierten App mit Gesichtsveränderung und öffentlichem Morphing aussetzt, die Intervention in einem Wartezimmer einer HIV-Ambulanz zu testen und die Wahrnehmung dieser Intervention unter rauchenden und nicht rauchenden HIV-Patienten zu messen. Dabei entwickelte das Team eine Kioskversion der dreidimensionalen Gesichtsalterungs-App Smokerface, die dem Benutzer zeigt, wie sein Gesicht mit oder ohne Zigarettenrauchen in 1 bis 15 Jahren aussehen würde. Es wurde ein Tablet mit der App auf einem Tisch in der Mitte des Wartezimmers einer HIV-Ambulanz platziert. Verbunden mit einem großen Monitor, der an einer gegenüberliegenden Wand angebracht war. Ein Forscher notierte alle Patienten, die den Warteraum nutzten. Wenn ein Patient die App nicht innerhalb von 30 Sekunden der Wartezeit nutzte, forderte der Forscher ihn auf, dies zu tun. Diejenigen, die die App nutzten, wurden gebeten, einen Fragebogen auszufüllen. Die Studie kam zum Schluss, dass ein im Wartezimmer implementierte Face-Aging-App eine neuartige Möglichkeit bietet, Patienten, die einen Gesundheitsdienstleister aufsuchen, dazu zu motivieren, mit dem Rauchen aufzuhören, die Raucherentwöhnung bei ihrem nächsten Termin anzusprechen und dadurch die ärztlich verordnete Raucherentwöhnung zu fördern oder das Rauchen nicht wieder aufzunehmen.
+
+Falls ihr die App selbst ausprobieren wollt, könnt ihr sie hier downloaden:
+
+- [Android](https://play.google.com/store/apps/details?id=com.agt.smokerface&hl=de)
+- [iOS](https://apps.apple.com/de/app/smokerface/id946861642)
+
+### Sunface - UV-Selfie
+
+In einer weiteren Studie mit dem Titel [Effect of a Face-Aging Mobile App-Based Intervention on Skin Cancer Protection Behavior in Secondary Schools in Brazil: A Cluster-Randomized Clinical Trial][30] wurde untersucht, wie sich eine kostenlose mobile Gesichtsalterungs-App mit den Namen Sunface auf das Hautkrebsschutzverhalten von Jugendlichen auswirkt. Da die Exposition gegenüber UV-Strahlung in jungen Jahren ein wichtiger Risikofaktor für die Entstehung von Melanomen ist, ist die Reduzierung der UV-Exposition bei Kindern und Jugendlichen von größter Bedeutung.
+
+TODO
 
 ## Fazit
+
+TODO
 
 Erzeugung qualitativ hochwertiger Bilder ermöglicht, kann dies die effektive Modellierung extremer Posen, anspruchsvoller Ausdrücke und Accessoires erschweren.
 
@@ -666,6 +680,10 @@ Hier der Link zum [GIT Repository](https://github.com/julian-steiner-ai/face-agi
 - [Yuval Alaluf, , Or Patashnik, and Daniel Cohen-Or. "Only a Matter of Style: Age Transformation Using a Style-Based Regression Model." (2021). ][9]
 - [Mehdi Mirza, , and Simon Osindero. "Conditional Generative Adversarial Nets." (2014).][28]
 
+### Anwendungen
+- [Brinker, T. J., Brieske, C. M., Esser, S., Klode, J., Mons, U., Batra, A., Rüther, T., Seeger, W., Enk, A. H., von Kalle, C., Berking, C., Heppt, M. V., Gatzka, M. V., Bernardes-Souza, B., Schlenk, R. F., & Schadendorf, D. (2018). A Face-Aging App for Smoking Cessation in a Waiting Room Setting: Pilot Study in an HIV Outpatient Clinic. Journal of medical Internet research, 20(8), e10976. https://doi.org/10.2196/10976][29]
+- [Brinker, T. J., Faria, B. L., de Faria, O. M., Klode, J., Schadendorf, D., Utikal, J. S., Mons, U., Krieghoff-Henning, E., Lisboa, O. C., Oliveira, A. C. C., Lino, H. A., & Bernardes-Souza, B. (2020). Effect of a Face-Aging Mobile App-Based Intervention on Skin Cancer Protection Behavior in Secondary Schools in Brazil: A Cluster-Randomized Clinical Trial. JAMA dermatology, 156(7), 737–745. https://doi.org/10.1001/jamadermatol.2020.0511][30]
+
 [1]: https://arxiv.org/abs/2012.03459
 [2]: https://ieeexplore.ieee.org/document/5406526
 [3]: https://arxiv.org/abs/1406.2661
@@ -694,3 +712,5 @@ Hier der Link zum [GIT Repository](https://github.com/julian-steiner-ai/face-agi
 [26]: https://data.vision.ee.ethz.ch/cvl/rrothe/imdb-wiki/
 [27]: https://vis-www.cs.umass.edu/lfw/
 [28]: https://arxiv.org/abs/1411.1784
+[29]: https://pubmed.ncbi.nlm.nih.gov/30111525/
+[30]: https://pubmed.ncbi.nlm.nih.gov/32374352/
