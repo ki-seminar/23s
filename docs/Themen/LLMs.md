@@ -427,17 +427,135 @@ Der Transformer ist ein fortschrittliches neuronales Netzwerkmodell, das in der 
   <figcaption>Fig. Transformer Architektur</figcaption>
 </figure>
 
+!!! info "Wichtig"
+
+        Die Transformer Architektur ist die **state of the art** Architektur für NLP Aufgaben.
+
 #### 2.2.1 Positional Encoding
+
+Positional Encoding wird verwendet, um die Positionsinformationen der Eingabesequenzen in den Wortembeddings zu berücksichtigen. Da der Transformer keine rekurrenten oder faltenden Schichten enthält, müssen die Positionsinformationen explizit in das Modell integriert werden. Das Positional Encoding wird den Wortembeddings hinzugefügt und ermöglicht es dem Transformer, die relative Position der Wörter in der Eingabesequenz zu berücksichtigen.
+
+Es besteht aus Sinus- und Kosinus-Funktionen mit unterschiedlichen Frequenzen und Phasen. Die Idee dahinter ist, dass die Kombination dieser Funktionen eine eindeutige Repräsentation für jede Position in der Sequenz erzeugt. Das Positional Encoding wird dann elementweise zu den Wortembeddings addiert, um die Information über die Positionen in den Gesamtvektor einzufügen.
+
+Die Formel für das Positional Encoding lautet:
+
+$$ PE_{(pos, 2i)} = \sin (\frac{pos}{10000^{2i/d_{\text{model}}}})$$
+
+$$ PE_{(pos, 2i+1)} = \cos (\frac{pos}{10000^{2i/d_{\text{model}}}}) $$
+
+Hierbei steht $pos$ für die Position in der Sequenz, $i$ für die Dimension des Wortembeddings und $d_{\text{model}}$ für die Größe des Wortembeddings. Das Positional Encoding hat die gleiche Dimension wie die Wortembeddings, sodass es direkt zu ihnen addiert werden kann.
+
+<figure markdown>
+  ![POE](./img/llms/POE.png){ width="400" }
+  <figcaption>Fig. positional encoding</figcaption>
+</figure>
+
+Durch schafft man es, dass die Position von Wörtern in unterschiedlichen Satzlängen gleich repräsentiert werden. Den sowohl $i$ als auch $d_{\text{model}}$ sind konstant, sodass die Positionsinformationen von einzelnen Wörtern an der gleichen Stelle nicht von der Länge der Eingabesequenz abhängen.
+
+<figure markdown>
+  ![POE2](./img/llms/POE2.png){ width="400" }
+  <figcaption>Fig. positional encoding Tabelle: (i, pos) </figcaption>
+</figure>
+
+Durch die Verwendung des Positional Encoding kann der Transformer die Positionsinformationen der Wörter berücksichtigen, ohne dass hierfür rekurrente oder faltende Schichten benötigt werden. Dies ermöglicht dem Modell, sowohl die Bedeutung der Wörter als auch ihre Position in der Sequenz zu erfassen und komplexe Zusammenhänge zwischen ihnen zu erlernen, die auf längere Sequenzen verallgemeinert werden können. Dadurch könnte das Modell effektiv Eingabesequenzen unterschiedlicher Längen verarbeiten.
+Vereinfacht lässt es sich so darstellen:
+
+$$ pe_{k} = \frac{1}{10000^{2k/d_{\text{model}}}} $$
+
+$$\begin{bmatrix}
+e_0  \\
+e_1  \\
+e_2  \\
+e_3  \\
+...  \\
+e_n  \\
+\end{bmatrix}_{d_n \times 1} + \begin{bmatrix}
+\sin(pe_1 * 1) \\ 
+\cos(pe_1 * 1) \\ 
+\sin(pe_2 * 1) \\ 
+\cos(pe_2 * 1) \\
+... \\ 
+\sin(pe_{n/2} * 1) \\ 
+\cos(pe_{n/2} * 1) \\
+\end{bmatrix}_{d_n \times 1}$$
 
 #### 2.2.2 Aechitektur
 
+Der Encoder schafft ein Verständnis für die Eingabesequenz, indem er die Embeddings durch mehrere hintereinandere kommende _Attenttion_ und _fully connected feed forward_ Schichten verarbeitet. Ein Encoder-Schicht besteht aus einer _multi-head self attention_ und einem _fully connected feed forward network_. Diese beiden werden Subschichten genannt. Zwishcen den Subschichten gibt es _residual connections_ und _layer normalization_, um das Netzwerk zu stabilisieren und die Trainingszeit zu verkürzen. Die Aufgabe des Encoders ist es, eine Repräsentation der Eingabesequenz zu erzeugen, wo die Bedeutung der Wörter, ihre Position in der Sequenz, Merkmale und globale Abhängigkeiten berücksichtigt werden, damit der Decoder die Ausgabe erzeugen kann.
+
+<figure markdown>
+  ![EC](./img/llms/Encoder.png){ width="400" }
+  <figcaption>Fig. Encoder - Layer </figcaption>
+</figure>
+
+Der Decoder generiert die Ausgabe des Transformer Modelles. Eine Schicht des Decoders besteht aus einer _masked multi-head attention_ gefolgt von einer _mulit-head cross-attention_ und schließlich einem _fully connected feed forward network_. Diese drei Schichten sind die Subschichten einer Decoder-Schicht. Die _masked multi-head attention_ Schicht ist eine _multi-head attention_ Schicht, die eine Maske verwendet, um die Aufmerksamkeit auf die zukünftigen Wörter zu beschränken. Die _multi-head cross-attention_ Schicht verwendet die Ausgabe der _masked multi-head attention_ Schicht als Query und die Ausgabe des Encoders als Key und Value. Die Berechnung der _masked attention_ gleicht der, der _self attention_. Somit wird dem Decoder ermöglicht, die Ausgabe des Encoders zu verwenden, um die Bedeutung der Wörter in der Eingabesequenz zu verstehen und die Ausgabe zu erzeugen. Die _fully connected feed forward network_ Schicht ist die gleiche wie im Encoder. Der Decoder verwendet auch _residual connections_ und _layer normalization_ zwischen den Subschichten, um das Modell weiter zu stabilisieren.
+
+<figure markdown>
+  ![DC](./img/llms/Decoder.png){ width="500" }
+  <figcaption>Fig. Decoder - Layer </figcaption>
+</figure>
+
+Attention ist ein zentrales Konzept in Transformer-Modellen und ermöglicht es dem Modell, sich auf relevante Teile der Eingabesequenz zu konzentrieren oder relevante Informationen zu extrahieren. Der Sinn von Attention besteht darin, die Verbindungen und Abhängigkeiten zwischen verschiedenen Teilen der Eingabesequenz zu erfassen und diese Informationen in der Modellverarbeitung zu berücksichtigen. Die Attention kann in verschiedene Typen unterteilt werden, die in den folgenden Abschnitten beschrieben werden.
+
+<figure markdown>
+  ![A](./img/llms/Attention.png){ width="600" }
+  <figcaption>Fig. Attention Typen </figcaption>
+</figure>
+
 #### 2.2.3 Self-Attention
+
+Self-attention wird auch als _intra_ oder __scaled dot product__ attention bezeichnet. Wie der Name schon vorwegnimmt, geht es darum verschiedenste Vektoren durch das Skalarprodukt zu verrechnen, um die Relevanz zwischen einzelnen Positionen zu berechnen. Somit wird jeder Vektor in einen Query, Key und Valuevektor zerlegt, wobei die Dimension dieser drei Vektoren kleiner ist als zum Originalvektor. Um Query, Key und Value Vektoren zu erhalten, muss man den Original Vektor mit drei spezifischen Gewichtsmatrizen multiplizieren.
+
+$$Q = XW^Q; K = XW^K; V = XW^V$$
+
+Die Gewichtsmatrizen werden während des Trainings gelernt. Die Dimension der Gewichtsmatrizen ist $d_{\text{model}} \times d_k$ für $W^Q$ und $W^K$ und $d_{\text{model}} \times d_v$ für $W^V$. Die Dimension des Originalvektors wird als $d_{\text{model}}$ bezeichnet und $d_k$ als auch $d_v$ sind die Dimensionen der Query, Key und Value Vektoren.
+
+<figure markdown>
+  ![A2](./img/llms/Attention2.png){ width="200" }
+  <figcaption>Fig. Self-Attention </figcaption>
+</figure>
+
+Als erstes wird das Skalarprodukt zwischen den Query und Key Vektoren berechnet. Das Skalarprodukt wird durch die Division mit $\sqrt{d_k}$ skaliert. Die Skalierung ist wichtig, da sie bei der Berechnung der Aufmerksamkeitsgewichte hilft, die Varianz der Werte zu reduzieren und die Stabilität der Gradienten zu verbessern. Danach folgt die Anwendung der Softmax Funktion, um die Summe aller positiven Wert auf 1 bringen und damit das Ergebnis zu normalisieren. Schließlich werden alle Value Vektoren mit dem Softmax Ergebnis multipliziert, um wichtige Informationen zu verstärken und unwichtige Informationen zu unterdrücken. Das Ergebnis ist die Summe aller gewichteten Value Vektoren. Die Self-Attention Formel kann wie folgt dargestellt werden, wenn man die Matrixmultiplikationen berücksichtigt:
+
+$$\text{Attention}(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V$$
+
+Das Ergebnis der self-attention wird dann angepasst durch _residual connections_ und _layer normalization_, was dann in das _feed forward network_ eingespeist wird.
 
 #### 2.2.4 Cross-Attention
 
+Cross-attention wird auch als _inter_ attention bezeichnet. Die Brechnung ist gleich der, der self-attention, wobei die Query Vektoren aus dem Decoder kommen und die Key und Value Vektoren aus dem Encoder. Die cross-attention Formel kann wie folgt dargestellt werden:
+
+$$\text{Attention}(Q_D, K_E, V_E) = \text{softmax}(\frac{Q_DK_E^T}{\sqrt{d_k}})V_E$$
+
+Der Zweck der Cross-Attention besteht darin, dem Decoder Kontextinformationen zu liefern, die auf den Inhalten der Eingabesequenz basieren. Dadurch kann der Decoder relevante Informationen aus der Eingabe extrahieren und sie in den Generierungsprozess der Ausgabe einbeziehen. Dies ermöglicht dem Modell eine bessere Berücksichtigung der globalen Zusammenhänge und Kontexte während der Generierung und verbessert die Leistungsfähigkeit des Modells insgesamt.
+
 #### 2.2.5 Masked Attention
 
+Die Idee der Masked Attention ist es, die Aufmerksamkeit auf zukünftige Tokens zu beschränken. Dies wird erreicht, indem die Repräsentation der zukünftigen Tokens auf $-\infty$ gesetzt werden. Dadurch wird die Softmax Funktion dazu gezwungen, die Aufmerksamkeitsgewichte der zukünftigen Tokens auf 0 zu setzen. Die Masked Attention Formel kann wie folgt dargestellt werden:
+
+$$\text{Attention}(Q, K, V) = \text{softmax}(\frac{QK^TM}{\sqrt{d_k}})V$$
+
+Die Maskierung in der maskierten Aufmerksamkeit besteht aus einer Matrix, die $-\infty$ für zukünftige Positionen und Einsen für aktuelle Positionen enthält. Diese Matrix wird auf die Aufmerksamkeitsgewichte angewendet, um sicherzustellen, dass das Modell nur auf bereits generierte Teile der Ausgabe zugreift. Eine gängige Methode für die Maskierung ist die Dreiecksmatrix. Ein Beispiel dafür:
+
+$$M = \begin{bmatrix}
+1 & -\infty & -\infty & -\infty & -\infty \\
+1 & 1       & -\infty & -\infty & -\infty \\
+1 & 1       & 1       & -\infty & -\infty \\
+1 & 1       & 1       & 1       & -\infty \\
+1 & 1       & 1       & 1       & 1       \\
+\end{bmatrix}$$
+
 #### 2.2.6 Multi-Head Attention
+
+Multi-Head Attention ist eine Erweiterung aller bevorigen Attention Typen. Die Idee ist es, eine Attention mehrmals mit unterschiedlichen Gewichtsmatrizen zu berechnen. Die Ergebnisse werden dann zusammengeführt und mit einer weiteren Gewichtsmatrix multipliziert $W^O$. Die Multi-Head Attention Formel kann wie folgt dargestellt werden:
+
+$$\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, ..., \text{head}_h)W^O$$
+
+$$\text{head}_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)$$
+
+Beim Zusammenfügen der verschiedenen _attention heads_ darf kein Durchschnitt gebildet werden, ansonsten würden Informationen verloren gehen, die zuvor berechnet wurden. Deshalb werden die _attention heads_ konkateniert.
+
+
 
 #### 2.2.7 Feed Forward Network
 
@@ -699,6 +817,10 @@ Link zum Repository: https://github.com/CRY-TeX/demo-ki-seminar
 ## 6 Literaturliste
 
 [1] Acheampong, Francisca Adoma, Henry Nunoo-Mensah, und Wenyu Chen. „Transformer Models for Text-Based Emotion Detection: A Review of BERT-Based Approaches“. Artificial Intelligence Review 54, Nr. 8 (1. Dezember 2021): 5789–5829. https://doi.org/10.1007/s10462-021-09958-2.
+
+Alammar, Jay. „The Illustrated Transformer“. Zugegriffen 18. Juni 2023. http://jalammar.github.io/illustrated-transformer/.
+
+Amirhossein Kazemnejad. „Transformer Architecture: The Positional Encoding - Amirhossein Kazemnejad’s Blog“. Zugegriffen 18. Juni 2023. https://kazemnejad.com/blog/transformer_architecture_positional_encoding/.
 
 [2] Bojanowski, Piotr, Edouard Grave, Armand Joulin, und Tomas Mikolov. „Enriching Word Vectors with Subword Information“. arXiv, 19. Juni 2017. http://arxiv.org/abs/1607.04606.
 
