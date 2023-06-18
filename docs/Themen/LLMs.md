@@ -547,25 +547,114 @@ $$M = \begin{bmatrix}
 
 #### 2.2.6 Multi-Head Attention
 
-Multi-Head Attention ist eine Erweiterung aller bevorigen Attention Typen. Die Idee ist es, eine Attention mehrmals mit unterschiedlichen Gewichtsmatrizen zu berechnen. Die Ergebnisse werden dann zusammengeführt und mit einer weiteren Gewichtsmatrix multipliziert $W^O$. Die Multi-Head Attention Formel kann wie folgt dargestellt werden:
+Die Multihead Attention ist ein Schlüsselelement in Transformer-Modellen und ermöglicht es dem Modell, mehrere Aufmerksamkeitsgewichtungen gleichzeitig zu berechnen und verschiedene Aspekte der Eingabesequenz zu erfassen. Sie besteht aus mehreren parallelen Aufmerksamkeitsköpfen, die unabhängig voneinander arbeiten. Jeder Aufmerksamkeitskopf hat seine eigenen Parametermatrizen für Query (Q), Key (K) und Value (V). Diese Matrizen werden verwendet, um die Aufmerksamkeitsgewichte für jede Position in der Eingabesequenz zu berechnen. Damit wird erreicht, dass sich das Transformer Modell auf verschiedene Aspekte der Eingabesequenz konzentrieren kann. Die Multihead Attention Formel kann wie folgt dargestellt werden:
 
 $$\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, ..., \text{head}_h)W^O$$
 
 $$\text{head}_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)$$
 
-Beim Zusammenfügen der verschiedenen _attention heads_ darf kein Durchschnitt gebildet werden, ansonsten würden Informationen verloren gehen, die zuvor berechnet wurden. Deshalb werden die _attention heads_ konkateniert.
+Beim Zusammenfügen der verschiedenen _attention heads_ darf kein Durchschnitt gebildet werden, ansonsten würden Informationen verloren gehen, die zuvor berechnet wurden. Deshalb werden die _attention heads_ konkateniert. Schließlich muss die Dimensonalität der konkatenierten _attention heads_ reduziert werden, damit die Dimensionen mit der Dimension der Eingabeschicht des feed forward network übereinstimmen. Dies wird durch die Matrix $W^O$ erreicht.
 
+<figure markdown>
+  ![A3](./img/llms/Attention3.png){ width="200" }
+  <figcaption>Fig. Multi-head Attention </figcaption>
+</figure>
 
+An dieser Stelle ist es wichtig zu erwähnen, dass die Multihead Attention nicht nur für die self-attention verwendet wird, sondern auch für die cross-attention und die masked attention. Dank der hohen Parallelität, kann das Sprachverstehen im Transformer auf mehreren unterschiedlich tiefen Ebenen stattfinden.
 
 #### 2.2.7 Feed Forward Network
 
+Das _Feed Forward Network_ (FFN) besteht aus zwei linearen Transformationen mit einer ReLU Aktivierungsfunktion dazwischen. Das Ziel des FFNs ist es, die Aufmerksamkeitsrepräsentationen zu verfeinern und weitere komplexe Zusammenhänge über die Nicht-Linearität zu erfassen. Die Nicht-Linearität wird durch die Verwendung von Aktivierungsfunktionen wie ReLU erreicht. Die Formel für das FFN kann wie folgt dargestellt werden:
+
+$$\text{FFN}(x) = \text{max}(0, xW_1 + b_1)W_2 + b_2$$
+
+Es wären neben der ReLU Aktivierungsfunktion auch andere Aktivierungsfunktionen möglich, wie z.B. GELU oder ELU. Die ReLU Aktivierungsfunktion ist jedoch die am häufigsten verwendete Aktivierungsfunktion in der Praxis. Die ReLU Aktivierungsfunktion ist definiert als: $f(x) = \text{max}(0, x)$ und ist somit effektiv und einfach umzusetzen. GELU - _Gaussian Error Linear Unit_ - eine Variante der ReLU Aktivierungsfunktion ist. Sie wird auch als die geglättete ReLU-Funktion bezeichnet. Die GELU Aktivierungsfunktion ist definiert als: $f(x) = x\Phi(x)$, wobei $\Phi(x)$ die kumulative Verteilungsfunktion der Standardnormalverteilung ist und lautet daher: $\Phi(x) = \frac{1 + \text{erf}(x / \sqrt{2})}{2}$ mit $\text{erf}(z) = \frac{2}{\sqrt{\Pi}} * \int_{0}^{z} e^{-t^2} dt$. Die GELU Aktivierungsfunktion ist eine stetige Funktion, weshalb sie differenzierbar ist und mit negativen Zahlen subtiler verfährt, wodurch - je nach Aufgabe - eine bessere Anpassung des Modelles stattfindet. Die ELU-Funktion - _Exponential Linear Unit_ - ist eine weitere Aktivierungsfunktion und ist definiert als: $f(x) = x$ für $x > 0$ und $f(x) = \alpha(e^x - 1)$ für $x \leq 0$, wobei $\alpha$ eine Konstante ist. Die ELU Aktivierungsfunktion ist eine stetige Funktion, die den gleichen Gedanken verfolgt wie die ReLU-Funktion. Jede dieser Funktionen kann eine Verbesserung des Modells bewirken, somit muss man diese der Aufgabe entsprechend auswählen. Die GELU-Funktion ist sehr gut bei der Verarbeitung von Texten wie zum Beispiel bei der Übersetzung von Texten. Die ELU-Funktion wiederum löst das Problem der toten Neuronen, die bei der Verwendung der ReLU-Funktion auftreten können. Die ELU-Funktion ist jedoch nicht so effizient wie die ReLU-Funktion, da sie exponentielle Funktionen verwendet. 
+
+$$\text{ReLU}(x) = \begin{cases} x & \text{if } x > 0 \\ x & \text{if } x \leq 0 \end{cases}$$
+
+$$\text{GELU}(x) = x\Phi(x)$$
+
+$$\text{ELU}(x) = \begin{cases} x & \text{if } x > 0 \\ \alpha(e^x - 1) & \text{if } x \leq 0 \end{cases}$$
+
+<figure markdown>
+  ![A4](./img/llms/Attention4.png){ width="500" }
+  <figcaption>Fig. Aktivierungsfunktionen </figcaption>
+</figure>
+
 #### 2.2.8 Residual Connections
+
+Mit den Residual Connections wird die Performance des Transformer Modells verbessert, indem gegen das Problem des __Vanishing Gradients__ vorgegangen wird. Sie sind eine Art von Skip Connections, die es ermöglichen, die Informationen aus den vorherigen Schichten zu erhalten. Dabei wird die Ausgabe der vorherigen Schicht mit der Ausgabe der aktuellen Schicht addiert. Die Residual Connections werden wie folgt definiert:
+
+$$\text{LayerNorm}(x + \text{Sublayer}(x))$$
+
+Diese werden pro Sublayer einmal angewendet und tragen somit zur Stabilisierung des Netzes bei, sowie zur Verbesserung der Erkennung von komplexen Datenmuster.
 
 #### 2.2.9 Layer Normalization
 
+Die Layer Normalization ist eine Technik, die es ermöglicht, die Aktivierungen der vorherigen Schicht zu normalisieren um den Mittelwert von 0 mit der Standardabweichung von 1. Daraus folgt, dass die eizelnen Werte weniger streuen und somit die Aktivierungen der vorherigen Schicht weniger variieren. Die Layer Normalization wird wie folgt definiert:
+
+$$\text{LayerNorm}(x) = \alpha \frac{x - \mu}{\sqrt{\sigma^2 + \epsilon}} + \beta$$
+
+- x die Eingabeaktivierungen der Schicht
+
+- $\mu$ ist der Durchschnitt der Aktivierungen über die Merkmalsdimension
+
+- $\sigma$ ist die Varianz der Aktivierungen über die Merkmalsdimension
+
+- $\epsilon$ ist ein kleiner Wert zur Stabilität, um eine Division durch Null zu verhindern
+
+- $\alpha$ ist der skalare Parameter zur Skalierung der normalisierten Aktivierung
+
+- $\beta$ ist der skalare Parameter zur Verschiebung der normalisierten Aktivierung
+
+Die Layer Normalization wird pro Schicht angewendet und trägt somit zur Stabilisierung des Netzes bei, da ähnlich große Gradientenschritte vollzogen werden und die einzelnen Wert nicht mehr zustark voneinander variieren.
+
+<figure markdown>
+  ![A5](./img/llms/Attention5.png){ width="500" }
+  <figcaption>Fig. Feature Dimension </figcaption>
+</figure>
+
 #### 2.2.10 Dropout & Optimizer
 
+_Dropout_ ist eine Regularisierungstechnik, die versucht zufällig Perzeptronen aka Neuronen zu deaktivieren, um die Generalisierung des Modells zu verbessern. Dies wird erreicht, indem die Gewichte der deaktivierten Neuronen auf 0 gesetzt werden. Die Dropout Rate ist ein Hyperparameter, der die Wahrscheinlichkeit bestimmt, mit der ein Neuron deaktiviert wird. Er liegt zwischen $0.1$ und $0.5$. Es wird eingesetzt, um das Problem des Overfittings zu vermeiden. Dropout lässt sich wie folgt definieren: $\frac{EM}{1-p}$, dabei sind _E_ die Aktivierungen oder Werte der vorherigen Schicht, _M_ eine binäre Maske mit derselben Form wie die Eingabe, die zufällig auf 0 oder 1 gesetzt wird und _p_ die Wahrscheinlichkeit, dass eine Aktivierung deaktiviert wird. Die Binärmaske _M_ wird immer wieder neu generiert und ist somit nicht statisch. 
+
+$$M = \begin{cases} 1 & \text{if } \text{Bernoulli}(p) == 1 \\ 0 & \text{if } \text{Bernoulli}(p) == 0 \end{cases} $$
+
+Der _Adam Optimizer_ - Adaptive Momentum - ist ein Optimierungsalgorithmus, der die Lernrate für jedes Gewicht individuell anpasst. Er wird verwendet, um die Lernrate $\alpha$ anzupassen, sodass das globale Minimum schnellst möglich erreicht wird. Der Adam Optimizer ist eine Kombination aus dem Momentum und der adaptiven Anpassung der Lernrate. Er nutzt die Konzepte der Impulserhaltung des _Stochastic Gradient Descent_ und das des _RMSProp_. Der Adam Optimizer wird wie folgt definiert:
+
+$$\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{\hat{v}_t} + \epsilon} \hat{m}_t$$
+
+- $\theta_t$ sind die Gewichte des Netzes
+
+- $\hat{v}_t$ ist die geschätzte Varianz des Gradienten: $\hat{v}_t = \beta_2 v_{t-1} + (1 - \beta_2)g_t^2$
+
+- $\hat{m}_t$ ist der geschätzte Mittelwert des Gradienten: $\hat{m}_t = \beta_1 m_{t-1} + (1 - \beta_1)g_t$
+
+- $\beta_1$ und $\beta_2$ sind die Exponentialfaktoren für den Mittelwert und die Varianz
+
+- $\epsilon$ ist ein kleiner Wert zur Stabilität, um eine Division durch Null zu verhindern
+
+<figure markdown>
+  ![Adam](./img/llms/Adam.png){ width="500" }
+  <figcaption>Fig. Gradient Descent </figcaption>
+</figure>
+
 #### 2.2.11 Output Layer
+
+Die Ausgabe des Transformers ist ein Vektor, der die Wahrscheinlichkeit für jedes Token im Vokabular angibt. Somit wird nur das nächste Token vorrausgesagt und dann sequentiel folgend der Rest. Die Wahrscheinlichkeit wird mit der Softmax Funktion berechnet. Die Softmax Funktion wird wie folgt definiert:
+
+$$\text{softmax}(z_{ij}) = \frac{e^{z_{ij}}}{\sum_{j=1}^{L} e^{z_{ij}}}$$
+
+- $z_{ij}$ ist die Aktivierung an der Position $i$ und $j$ innerhalb einer Ausgabematrix
+
+- $L$ ist die Anzahl der Feautures
+
+Die Softmax Funktion wird pro Zeile angewendet und somit wird die Summe der Wahrscheinlichkeiten pro Zeile 1 ergeben.
+
+<figure markdown>
+  ![Softmax](./img/llms/Softmax.png){ width="400" }
+  <figcaption>Fig. Softmax </figcaption>
+</figure>
 
 ### 2.3 BERT
 
