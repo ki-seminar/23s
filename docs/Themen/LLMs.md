@@ -660,12 +660,16 @@ Die Softmax Funktion wird pro Zeile angewendet und somit wird die Summe der Wahr
 
 ---
 
+Bert - _Bidirectional Encoder Representations from Transformers_ - ist ein Transformermodell, dass auf der Encoderstruktur basiert. Es gehört zu der Kategorie der _auto encoding models_. Es ist spezialisiert auf das Verstehen der Benutzereingabe.
+
 <figure markdown>
   ![Bert](./img/llms/Bert.png){ width="400" }
   <figcaption>Fig. Bert </figcaption>
 </figure>
 
 #### 2.3.1 Architektur
+
+
 
 #### 2.3.2 Masked Language Model
 
@@ -676,8 +680,9 @@ Die Softmax Funktion wird pro Zeile angewendet und somit wird die Summe der Wahr
 #### 2.3.5 Fine-Tuning
 
 ### 2.4 Fine-Tuning
-
 ---
+
+??
 
 #### 2.4.1 Aufgaben
 
@@ -686,6 +691,8 @@ Die Softmax Funktion wird pro Zeile angewendet und somit wird die Summe der Wahr
 ### 2.5 Generative Pre-Training
 
 ---
+
+??
 
 #### 2.5.1 Architektur
 
@@ -698,14 +705,38 @@ Die Softmax Funktion wird pro Zeile angewendet und somit wird die Summe der Wahr
 #### 2.5.5 Reinforcement Learning
 
 ### 2.6 Meta-Learning
-
 ---
+
+Meta-Learning ist ein Ansatz im maschinellen Lernen, bei dem Modelle trainiert werden, um aus Erfahrungen zu lernen und dieses Wissen auf neue, ähnliche Aufgaben anzuwenden. Es ermöglicht schnelles und effizientes Lernen mit begrenzten Trainingsdaten und Anpassung an neue Situationen. Es gibt viel versschiedene Arten von Meta-Learning, wie z.B. Zero-Shot Learning, One-Shot Learning und Few-Shot Learning. Andere Ansätze beinhalten einen _Meta Learner_, der schwächere Modelle rauswirft und die Anpassungsfähigkeiten der restlichen Modelle zu verbessern. Im folgenden wird auf die _shot-learning Ansätze_ eingegangen.
+
+Ziel der Shot-Learning Methoden ist es das Modell robuster gegen Unbekanntes machen, indem neue Klassen, Beziehungen oder Embeddings hinzugefügt werden. Das Modell soll in der Lage sein, neue Klassen zu erkennen, die es noch nie gesehen hat und mit ihnen umgehenzu können. Es werden keine Parameterupdates durchgeführt während der Inferenzzeit (Vorhersagen).
 
 #### 2.6.1 Zero-Shot Learning
 
+<figure markdown>
+  ![ML](./img/llms/MetaLearning.png){ width="400" }
+  <figcaption>Fig. Zero-Shot Learning </figcaption>
+</figure>
+
+Das Zero-Shot Learning wird als unfair angesehen, da der Transformer nur durch die Aufgabenbeschreibung für einen Input die richtige Antwort vorhersagen muss. Folglich muss das Modell die Aufgabenbeschreibung verstehen und die richtige Antwort vorhersagen.
+
 #### 2.6.2 One-Shot Learning
 
+<figure markdown>
+  ![ML2](./img/llms/MetaLearning2.png){ width="400" }
+  <figcaption>Fig. One-Shot Learning </figcaption>
+</figure>
+
+Beim One-Shot Learning wird das Modell mit einem zusätzlichen Beispiel zu der Zero-Shot Methode trainiert und muss dann die richtige Antwort vorhersagen. Das Modell soll in der Lage sein, die Beziehung zwischen Beispiel, Aufgabe und der Antwort zu verstehen.
+
 #### 2.6.3 Few-Shot Learning
+
+<figure markdown>
+  ![ML3](./img/llms/MetaLearning3.png){ width="400" }
+  <figcaption>Fig. Few-Shot Learning </figcaption>
+</figure>
+
+Das Few-Shot Learning ist eine Erweiterung des One-Shot Learning, indem mehrere Beispiele zu der Aufgabe hinzugefügt werden. Es wird vorgeschlage zwischen 10 und 100 Beispiele zu verwenden.
 
 ### 2.7 Benchmarking
 
@@ -717,10 +748,56 @@ Die Softmax Funktion wird pro Zeile angewendet und somit wird die Summe der Wahr
 
 #### 2.7.1 GLUE
 
+GLUE steht für _General Language Understanding Evaluation_ und ist ein Benchmark-Datensatz für die Evaluation von Modellen zur Sprachverarbeitung und zum Textverständnis. Der Datensatz besteht aus 9 verschiedenen Aufgaben, die jeweils eine andere Art von Sprachverständnis erfordern. Die Aufgaben sind wie folgt:
+
+1. **CoLA** - _Corpus of Linguistic Acceptability_: Aufgabe zur binären Klassifikation, bei der die Akzeptanz grammatischer Sätze bestimmt werden soll.
+
+2. **SST-2** - _Stanford Sentiment Treebank_: Aufgabe zur binären Klassifikation, bei der die Sentiment-Klassifizierung von Sätzen gefordert wird.
+
+3. **MRPC** - _Microsoft Research Paraphrase Corpus_: Aufgabe zur Bestimmung der semantischen Ähnlichkeit zwischen Sätzen durch die Erkennung von Paraphrasen.
+
+4. **QQP** - _Quora Question Pairs_: Aufgabe zur Erkennung von Paraphrasen, bei der die Ähnlichkeit von Fragepaaren beurteilt werden soll.
+
+5. **STS-B** - _Semantic Textual Similarity Benchmark_: Aufgabe zur Berechnung der semantischen Ähnlichkeit zwischen Sätzen anhand von kontinuierlichen Wertungen.
+
+6. **MNLI** - _Multi-Genre Natural Language Inference_: Aufgabe zur Überprüfung der Textual Entailment-Fähigkeiten, bei der die logische Beziehung zwischen Satzpaaren bestimmt werden soll.
+
+7. **QNLI** - _Question Natural Language Inference_: Aufgabe zur Textual Entailment-Bestimmung basierend auf Fragen und Antworttexten.
+
+8. **RTE** - _Recognizing Textual Entailment_: Aufgabe zur Bestimmung der Textual Entailment-Beziehung zwischen Sätzen.
+
+9. **WNLI** - _Winograd Schema Challenge_: Aufgabe zur maschinellen Resolution von referenziellen Ausdrücken in einer Frage-Antwort-Form.
+
 #### 2.7.2 SuperGLUE
+
+SuperGLUE steht für "Super General Language Understanding Evaluation" und ist eine Weiterentwicklung des GLUE-Benchmarks. Während GLUE neun Aufgaben zur Bewertung von Modellen zur Sprachverarbeitung umfasst, erweitert SuperGLUE den Benchmark um zusätzliche und anspruchsvollere Aufgaben, um die Leistung von Modellen für Sprachverständnis und Textverarbeitung weiter zu testen. SuperGLUE umfasst insgesamt acht Aufgaben, die komplexere Sprachverständnisfähigkeiten erfordern. Die Aufgaben sind:
+
+1. **BoolQ** - _Boolean Questions_: Aufgabe zur Beantwortung von Ja/Nein-Fragen auf der Grundlage eines gegebenen Kontexts.
+
+2. **CB** - _CommitmentBank_: Aufgabe zur Bestimmung der semantischen Implikation zwischen zwei Sätzen.
+
+3. **COPA** - _Choice of Plausible Alternatives_: Aufgabe zur Kausalitätsbeurteilung, bei der aus zwei möglichen Ursachen die plausiblere ausgewählt werden soll.
+
+4. **MultiRC** - _Multi-Sentence Reading Comprehension_: Aufgabe zum Leseverständnis mehrerer Sätze, bei der mehrere Fragen zu einem gegebenen Text beantwortet werden müssen.
+
+5. **ReCoRD** - _Reading Comprehension with Commonsense Reasoning Dataset_: Aufgabe zum Leseverständnis mit "Commonsense" -Reasoning, bei der fehlende Informationen in einem gegebenen Text ergänzt werden müssen.
+
+6. **RTE** - _Recognizing Textual Entailment_: Ähnlich wie im GLUE-Benchmark ist diese Aufgabe darauf ausgerichtet, die Textual Entailment-Beziehung zwischen Sätzen zu bestimmen.
+
+7. **WiC** - _Word-in-Context_: Aufgabe zur Beurteilung der Bedeutung eines Wortes in verschiedenen Kontexten.
+
+8. **WSC** - _Winograd Schema Challenge_: Ähnlich wie im GLUE-Benchmark ist dies eine Aufgabe zur maschinellen Resolution von referenziellen Ausdrücken in einer Frage-Antwort-Form.
 
 #### 2.7.3 SQuAD
 
+SQuAD steht für "Stanford Question Answering Dataset" und ist ein bekannter Benchmark-Datensatz für maschinelles Lesen und Frage-Antwort-Aufgaben. Der SQuAD-Datensatz besteht aus einer umfangreichen Sammlung von Frage-Antwort-Paaren, die auf Textpassagen aus Wikipedia-Artikeln basieren. Die Besonderheit von SQuAD besteht darin, dass die Fragen im Kontext des Textes gestellt werden, d.h., die Antworten auf die Fragen können direkt aus dem gegebenen Text extrahiert werden, ohne externe Quellen zu konsultieren. Dies macht SQuAD zu einer herausfordernden Aufgabe für maschinelles Lesen und Textverständnis.
+
+#### 2.7.4 Modelle
+
+<figure markdown>
+  ![Modelle](./img/llms/Modelle.png){ width="600" }
+  <figcaption>Fig. Modelle </figcaption>
+</figure>
 
 
 ## 3 Anwendungen
