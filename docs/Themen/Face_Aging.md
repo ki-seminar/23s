@@ -12,9 +12,12 @@ Im Fachvortrag gehen wir detaillierter auf das Paper ["PFA-GAN: Progressive Face
 
 ## Einleitung / Motivation
 
-!!! info Definition
+!!! info "Definition"
 
-    Gesichtsalterung (Face Aging), auch bekannt als Alterssynthese (Age Synthesis) und Altersprogression (Age Progression), wird als ästhetische Darstellung eines Gesichtsbildes mit natürlichen Alterungs- und Verjüngungseffekten auf das einzelne Gesicht definiert.[2]
+    Gesichtsalterung (Face Aging), auch bekannt als Alterssynthese (Age Synthesis) und Altersprogression (Age Progression), wird als ästhetische Darstellung eines Gesichtsbildes mit natürlichen Alterungs- und Verjüngungseffekten auf das einzelne Gesicht definiert.
+
+
+    *[Fu Y, Guo G, Huang TS][2]*
 
 Anwendung finden diese Methoden zum Beispiel in den Bereichen der Unterhaltung, sozialer Sicherheit, altersübergreifenden Gesichtserkennung, Forensik und Medizin.
 
@@ -98,7 +101,7 @@ Die prototypenbasierten Methoden verwenden ein nichtparametrisches Modell. Die G
 
 Die obengenannten Ansätze erfordern jedoch häufig die Erstellung von Alterungssequenzen derselben Person mit einem breiten Altersspektrum, deren Erfassung sehr schwierig und kostspielig ist. Generative Adversarial Networks (GANs) können besser mit Altersverläufen umgehen.
 
-Bei den hier vorgestellten Methoden gehen wir ganz grob auf das Paper ein. Das jeweilige Paper wurde verlinkt und ist auch in der Literaturliste zu finden.
+Bei den hier vorgestellten Methoden gehen wir ganz grob auf das jeweilige Paper ein. Dieses wurde verlinkt und ist auch in der Literaturliste zu finden.
 
 #### Generative Adversarial Networks (GANs)
 
@@ -106,15 +109,17 @@ Generative Adversarial Networks sind tiefe neuronale Netzwerke. Diese nutzen unb
 
 Ein solches neuronales Netzwerk besteht aus zwei weiteren Netzwerken. Einem Generator Netzwerk und einem Discriminator Netzwerk. Durch mehrere Generations- und Diskriminierungszyklen trainieren sich beide Netzwerke gegenseitig und versuchen gleichzeitig, sich gegenseitig zu überlisten. Das Ziel solcher Netze ist es, Datenpunkte zu generieren, die einigen Datenpunkten im Trainingssatz stark ähneln.
 
-Viele GAN-basierte Methoden können im Bereich Face Aging die plausibelsten und realistischsten Bilder erzeugen, die aufgrund des Alters nur schwer von echten Daten zu unterscheiden sind. Allerdings nutzen alle diese die sequentiellen Daten nicht vollständig aus. Diese Methoden können die Übergangsmuster, die als Korrelationen der Gesichtsmerkmale zwischen verschiedenen Altersgruppen für eine Person definiert sind, nicht explizit berücksichtigen. Daher sind ihre Ergebnisse normalerweise nicht in der Lage, die Gesichtsidentität beizubehalten oder die Übergangsregeln für Kreuzungen nicht gut zu erfüllen.
+##### PyTorch Example
 
-Um diese Probleme zu lösen und den Alterungsprozess von Personen mit Hilfe von GANs noch detaillierter und akkurater darzustellen, wurden verschiedene Variationen von diesen Netzwerken entwickelt.
+In diesem kurzen Code-Beispiel wollen wir eine einfache Implementierung eines Generative Adversarial Networks mit dem PyTorch-Framework zeigen. Den kompletten Code inklusive dem Laden der Daten und dem Trainieren findet ihr in der [GIT Repository](https://github.com/julian-steiner-ai/face-aging) unter dem Kapitel `01_GAN`. 
 
-##### PyTorch Example - TODO
+!!! Note
 
-In diesem kurzen Code-Beispiel wollen wir eine einfache Implementierung eines Generative Adversarial Networks mit dem PyTorch-Framework zeigen.
+    Wichtig ist hier noch zu nennen, dass diese Implementierung noch nicht den Aspekt Face Aging berücksichtigt. Mit diesem GAN können nur Gesichter anhand des Trainingdatensatzes generiert werden. Ohne Bedingungen etc.
 
-Wir starten mit der Implementierung der Klasse des Generator-Netzwerks. Wir erben hier von der `nn.Module` Klasse. Dies ist die Basisklasse für alle neuronalen Netzwerke in PyTorch.
+Wir starten mit der Implementierung der Generator-Netzwerks. Hierbei erben wir von der `nn.Module` Klasse. Dies ist die Basisklasse für alle neuronalen Netzwerke in PyTorch. 
+
+In der `_init_network` Methode definieren wir wie die einzelnen Schichten des jeweiligen neuronalen Netzwerks. Hierzu fügen wir die einzelnen Klassen der Liste mit dem Namen `layer` hinzu. Anschließend übergeben wir diese an einen `Sequential`-Container. Dieser ermöglicht einen einfachen Aufruf der `forward()`-Methode, da dieser die Ausgaben einer Schicht mit den Eingaben des nachfolgenden Moduls automatisch miteinander "verkettet". Schließlich wird die Ausgabe des letzten Moduls zurückgegeben. 
 
 ```python
 class Generator(nn.Module):
@@ -206,7 +211,7 @@ class Generator(nn.Module):
         return self.main(x)
 ```
 
-Als nächstes programmieren wir die Klasse des Diskriminator-Netzwerks.
+Mit der nächsten Klasse implementieren wir das Diskriminator-Netzwerk. Das vorgehen ist identisch mit dem des Generator-Netzwerks von oben.
 
 ```python
 class Discriminator(nn.Module):
@@ -292,170 +297,15 @@ class Discriminator(nn.Module):
         return self.main(x)
 ```
 
-Als nächstes verbinden wir die zwei neuronalen Netze in einer Klasse, um die beiden Netzwerke zu trainieren und Bilder generieren zu lassen.
+##### Fazit
 
-```python
-class GAN(object):
-    """
-    Generative Adversarial Network.
-    """
-    @staticmethod
-    def load(path, device, ngpus=0):
-        gan = GAN(device, ngpus)
-        gan.discriminator.load_state_dict(load(os.path.join(path, 'discriminator.obj')))
-        gan.generator.load_state_dict(load(os.path.join(path, 'generator.obj')))
-        
-    def __init__(self, device, n_gpus=0):
-        self.device = device
-        self.n_gpus = n_gpus
-        self._init_model()
+Viele GAN-basierte Methoden können im Bereich Face Aging die plausibelsten und realistischsten Bilder erzeugen, die aufgrund des Alters nur schwer von echten Daten zu unterscheiden sind. Allerdings nutzen alle diese die sequentiellen Daten nicht vollständig aus. Diese Methoden können die Übergangsmuster, die als Korrelationen der Gesichtsmerkmale zwischen verschiedenen Altersgruppen für eine Person definiert sind, nicht explizit berücksichtigen. Daher sind ihre Ergebnisse normalerweise nicht in der Lage, die Gesichtsidentität beizubehalten oder die Übergangsregeln für Kreuzungen nicht gut zu erfüllen.
 
-    def _init_model(self):
-        self.discriminator = Discriminator(3, 64).to(self.device)
-        self.discriminator.apply(self._weights_init)
-
-        if (self.device.type == 'cuda') and (self.n_gpus > 1):
-            self.discriminator = nn.DataParallel(self.discriminator, list(range(self.n_gpus)))
-
-        self.generator = Generator(100, 64, 3).to(self.device)
-        self.generator.apply(self._weights_init)
-
-        if (self.device.type == 'cuda') and (self.n_gpus > 1):
-            self.generator = nn.DataParallel(self.generator, list(range(self.n_gpus)))
-
-        self.criterion= nn.BCELoss()
-
-        self.fixed_noise = randn(64, 100, 1, 1, device=self.device)
-
-        self.real_label = 1.
-        self.fake_label = 0.
-
-        self.optimizer_discriminator = Adam(
-            self.discriminator.parameters(),
-            lr=0.0002,
-            betas=(0.5, 0.999)
-        )
-
-        self.optimizer_generator = Adam(
-            self.generator.parameters(),
-            lr=0.0002,
-            betas=(0.5, 0.999)
-        )
-
-    def train(self, n_epochs, dataloader : DataLoader):
-        """
-        Train the model.
-        """
-        img_list = []
-        generator_losses = []
-        discriminator_losses = []
-        iters = 0
-        for epoch in range(n_epochs):
-            for i, data in enumerate(dataloader, 0):
-                ############################
-                # (1) Update D network: maximize log(D(x)) + log(1 - D(G(z)))
-                ###########################
-                ## Train with all-real batch
-                self.discriminator.zero_grad()
-
-                # Format batch
-                real_cpu = data[0].to(self.device)
-                b_size = real_cpu.size(0)
-                label = full(
-                    (b_size,),
-                    self.real_label,
-                    dtype=tfloat,
-                    device=self.device
-                )
-                # Forward pass real batch through D
-                output = self.discriminator(real_cpu).view(-1)
-                # Calculate loss on all-real batch
-                discriminator_error_real = self.criterion(output, label)
-                # Calculate gradients for D in backward pass
-                discriminator_error_real.backward()
-                discriminator_x = output.mean().item()
-
-                ## Train with all-fake batch
-                # Generate batch of latent vectors
-                noise = randn(b_size, 100, 1, 1, device=self.device)
-                # Generate fake image batch with G
-                fake = self.generator(noise)
-                label.fill_(self.fake_label)
-                # Classify all fake batch with D
-                output = self.discriminator(fake.detach()).view(-1)
-                # Calculate D's loss on the all-fake batch
-                error_discriminator_fake = self.criterion(output, label)
-                # Calculate the gradients for this batch,
-                # accumulated (summed) with previous gradients
-                error_discriminator_fake.backward()
-                discriminator_gradients_z1 = output.mean().item()
-                # Compute error of D as sum over the fake and the real batches
-                discriminator_error = discriminator_error_real + error_discriminator_fake
-                # Update D
-                self.optimizer_discriminator.step()
-
-                ############################
-                # (2) Update G network: maximize log(D(G(z)))
-                ###########################
-                self.generator.zero_grad()
-                label.fill_(self.real_label)  # fake labels are real for generator cost
-                # Since we just updated D, perform another forward pass of all-fake batch through D
-                output = self.discriminator(fake).view(-1)
-                # Calculate G's loss based on this output
-                generator_error = self.criterion(output, label)
-                # Calculate gradients for G
-                generator_error.backward()
-                discriminator_gradients_z2 = output.mean().item()
-                # Update G
-                self.optimizer_generator.step()
-
-                # Output training stats
-                if i % 50 == 0:
-                    print('[%d/%d][%d/%d]\tLoss_D: %.4f\tLoss_G: %.4f\tD(x): %.4f\tD(G(z)): %.4f / %.4f'
-                        % (epoch, n_epochs, i, len(dataloader),
-                            discriminator_error.item(), generator_error.item(), discriminator_x, discriminator_gradients_z1, discriminator_gradients_z2))
-
-                    self._save_model(os.path.join('model', 'gan', 'checkpoint'), n_epoch=epoch, is_checkpoint=True)
-
-                # Save Losses for plotting later
-                generator_losses.append(generator_error.item())
-                discriminator_losses.append(discriminator_error.item())
-
-                # Check how the generator is doing by saving G's output on fixed_noise
-                if (iters % 500 == 0) or ((epoch == n_epochs-1) and (i == len(dataloader)-1)):
-                    with no_grad():
-                        fake = self.generator(self.fixed_noise).detach().cpu()
-                    img_list.append(vutils.make_grid(fake, padding=2, normalize=True))
-
-                    self._save_model(os.path.join('model', 'gan'))
-
-                iters += 1
-
-        return {
-            'images': img_list,
-            'generator_losses': generator_losses,
-            'discriminator_losses': discriminator_losses
-        }
-
-    def _weights_init(self, m):
-        classname = m.__class__.__name__
-        if classname.find('Conv') != -1:
-            nn.init.normal_(m.weight.data, 0.0, 0.02)
-        elif classname.find('BatchNorm') != -1:
-            nn.init.normal_(m.weight.data, 1.0, 0.02)
-            nn.init.constant_(m.bias.data, 0)
-    
-    def _save_model(self, path, n_epoch=0, is_checkpoint=False):
-        if not os.path.exists(path):
-            os.makedirs(path)
-        
-        save(self.discriminator.state_dict(), os.path.join(path, 'discriminator.obj') if not is_checkpoint else os.path.join(path, f'discriminator_{n_epoch}.obj'))
-        save(self.generator.state_dict(), os.path.join(path, 'generator.obj') if not is_checkpoint else os.path.join(path, f'generator_{n_epoch}.obj'))
-```
+Um diese Probleme zu lösen und den Alterungsprozess von Personen mit Hilfe von GANs noch detaillierter und akkurater darzustellen, wurden verschiedene Variationen von diesen Netzwerken entwickelt.
 
 #### Conditional Generative Adversiral Networks
 
-Ebenfalls im Jahr führten die Autoren Mehdi Mirza und Simon Osindero das [Conditional Generative Adversarial Network][28] ein. Bei einem unkonditionierten generativen gibt es keine Kontrolle über die Modi der erzeugten Daten. Durch die Konditionierung des Modells auf zusätzliche Informationen ist es jedoch möglich, den Datengenerierungsprozess zu steuern. Eine solche Konditionierung könnte auf Klassenlabels, auf einem Teil der Daten für Inpainting wie oder sogar auf Daten aus verschiedenen Modalitäten basieren. 
+Ebenfalls im Jahr 2014 führten die Autoren Mehdi Mirza und Simon Osindero das [Conditional Generative Adversarial Network][28] ein. Bei einem unkonditionierten generativen gibt es keine Kontrolle über die Modi der erzeugten Daten. Durch die Konditionierung des Modells auf zusätzliche Informationen ist es jedoch möglich, den Datengenerierungsprozess zu steuern. Eine solche Konditionierung könnte auf Klassenlabels, auf einem Teil der Daten für Inpainting wie oder sogar auf Daten aus verschiedenen Modalitäten basieren. 
 
 GANs können zu einem konditionalen Modell (Conditional GAN) erweitert werden, wenn sowohl der Generator als auch der Diskriminator durch eine zusätzliche Information konditioniert werden. Die Konditionierung kann durchgeführt werden, indem die Information sowohl in den Diskriminator als auch in den Generator als zusätzliche Eingabeschicht eingespeist wird.
 
@@ -584,7 +434,7 @@ Die Ergebnisse des Triple-GANs in der folgenden Abbildung zeigen, dass die gener
 
 #### Only a Matter of Style: Age Transformation Using a Style-Based Regression Model
 
-Mit dem Paper [Only a Matter of Style: Age Transformation Using a Style-Based Regression Model][9] stellten die Autoren eine Implementierung namens SAM -Style-based Age Manipulation - vor. Hierbei versuchen sie die gewünschte Alterveränderung zu erfassen und gleichzeitig die Identität zu bewahren. Die Gesichtsalterung wird hier versucht durch ein Bild-zu-Bild Übersetzung(Image-to-Image Translation) zu lösen. Zu diesen Techniken gehören auch die Conditional GANs, die wir oben bereits erwähnt haben. In der Forschungsarbeit wird ein vortrainierter (pre-trained) StyleGAN-Generator mit einer Encoder-Architektur kombiniert. Der Encoder hat die Aufgabe, ein Gesichtsbild als Eingabe direkt in eine Reihe von Stilvektoren zu kodieren, die der gewünschten Altersveränderung unterliegen. Diese Vektoren werden anschließend an das StyleGAN übergeben, um das Ausgangsbild zu erzeugen, das die gewünschte Altersveränderung darstellt. Um den Encoder bei der Generierung anzuleiten, wird ein vortrainiertes Alterregressionsnetzwerk während des Trainingsprozesses als zusätzliche Einschränkung verwendet. SAM betrachtet die menschliche Alterung als ein Regressionsproblem auf das gewünschte Zielalter.
+Mit dem Paper [Only a Matter of Style: Age Transformation Using a Style-Based Regression Model][9] stellten die Autoren eine Implementierung namens SAM -Style-based Age Manipulation - vor. Hierbei versuchen sie die gewünschte Alterveränderung zu erfassen und gleichzeitig die Identität zu bewahren. Die Gesichtsalterung wird hier versucht durch ein Bild-zu-Bild Übersetzung (Image-to-Image Translation) zu lösen. Zu diesen Techniken gehören auch die Conditional GANs, die wir oben bereits erwähnt haben. In der Forschungsarbeit wird ein vortrainierter (pre-trained) StyleGAN-Generator mit einer Encoder-Architektur kombiniert. Der Encoder hat die Aufgabe, ein Gesichtsbild als Eingabe direkt in eine Reihe von Stilvektoren zu kodieren, die der gewünschten Altersveränderung unterliegen. Diese Vektoren werden anschließend an das StyleGAN übergeben, um das Ausgangsbild zu erzeugen, das die gewünschte Altersveränderung darstellt. Um den Encoder bei der Generierung anzuleiten, wird ein vortrainiertes Alterregressionsnetzwerk während des Trainingsprozesses als zusätzliche Einschränkung verwendet. SAM betrachtet die menschliche Alterung als ein Regressionsproblem auf das gewünschte Zielalter.
 
 <figure markdown>
   ![SAM Architecture](./img/Face Aging/SAM_Architecture.png){ width="600" }
@@ -617,15 +467,28 @@ Falls ihr die App selbst ausprobieren wollt, könnt ihr sie hier downloaden:
 
 ### Sunface - UV-Selfie
 
-In einer weiteren Studie mit dem Titel [Effect of a Face-Aging Mobile App-Based Intervention on Skin Cancer Protection Behavior in Secondary Schools in Brazil: A Cluster-Randomized Clinical Trial][30] wurde untersucht, wie sich eine kostenlose mobile Gesichtsalterungs-App mit den Namen Sunface auf das Hautkrebsschutzverhalten von Jugendlichen auswirkt. Da die Exposition gegenüber UV-Strahlung in jungen Jahren ein wichtiger Risikofaktor für die Entstehung von Melanomen ist, ist die Reduzierung der UV-Exposition bei Kindern und Jugendlichen von größter Bedeutung.
+In einer weiteren Studie mit dem Titel [Effect of a Face-Aging Mobile App-Based Intervention on Skin Cancer Protection Behavior in Secondary Schools in Brazil: A Cluster-Randomized Clinical Trial][30] wurde untersucht, wie sich eine kostenlose mobile Gesichtsalterungs-App mit den Namen Sunface auf das Hautkrebsschutzverhalten von Jugendlichen auswirkt. Da der Kontakt mit UV-Strahlung in jungen Jahren ein wichtiger Risikofaktor für die Entstehung von Melanomen ist, ist die Reduzierung der UV-Exposition bei Kindern und Jugendlichen von größter Bedeutung. Der primäre Endpunkt der Studie war der Unterschied in der täglichen Verwendung von Sonnenschutzmitteln bei der Nachbeobachtung nach 6 Monaten. Zu den sekundären Endpunkten gehörten der Unterschied bei der täglichen Verwendung von Sonnenschutzmitteln nach 3 Monaten Nachbeobachtung, mindestens eine Selbstuntersuchung der Haut innerhalb von 6 Monaten und mindestens eine Bräunungssitzung in den vorangegangenen 30 Tagen. Alle Analysen wurden im Voraus festgelegt und basierten auf der Absicht, die Studie zu behandeln. Clustereffekte wurden berücksichtigt. Die Ergebnisse dieser Studie deuten darauf hin, dass Interventionen auf der Grundlage von Apps zur Gesichtsalterung das Hautkrebsschutzverhalten brasilianischer Jugendlicher verbessern können.
 
-TODO
+Auch diese App könnt ihr selbst ausprobieren. Dazu könnt ihr diese hier einfach downloaden:
+
+- [Android](https://play.google.com/store/apps/details?id=com.agt.sunface&hl=de)
+- [iOS](https://apps.apple.com/de/app/sunface-uv-selfie/id1226606410?l=en)
+
+### AprilAge Inc.
+
+Auch das Unternehmen [AprilAge][31] entwickelt Gesichts- und Körpervisualisierungssoftware für verschiedene Unternehmen, die Menschen dazu bewegen und motivieren müssen, riskante Lebensgewohnheiten zu ändern, die zu chronischen Krankheiten und hohen Behandlungskosten führen. Die Software zeigt den Einfluss von Rauchen, erhöhter SOnnenbestrahlung und Übergewicht auf den Alterungsprozess des Gesichtes.
 
 ## Fazit
 
-TODO
+Generative Adversarial Networks in verschiedenen Implementierungen lösten die herkömmlichen Methoden, phyikalische modellbasierte und prototypbasierte, ab. Mit den neuen neuronalen Netzwerken benötigte man nicht mehr die kostspielig zu erfassenden Datensätze. Der datengetriebene Ansatz konnte mit den Alterungsverläufen besser umgehen.
 
-Erzeugung qualitativ hochwertiger Bilder ermöglicht, kann dies die effektive Modellierung extremer Posen, anspruchsvoller Ausdrücke und Accessoires erschweren.
+Im Zuge der Forschung in anderen Bereichen, z.B. Face Recognition, wurden verschiedene Datensätze weiterentwickelt und neu erstellt. Diese können problemlos für das Thema Face Aging verwendet werden. 
+
+Seit der Einführung der GANs im Jahr 2014 wurden unterschiedliche Implementierung auf deren Basis umgesetzt. All diese versuchten Bilder zu generieren, welche die Identität der Person bei der Alterung erhalten sollen. Dazu wurden verschiedene Techniken verwendet. Die generierten Ergebnisse der neuen neuronalen Netzwerke auf den Testdaten waren kaum von echten Bildern zu unterscheiden. Trotzdem wird die Erzeugung qualitativ hochwertiger Bilder bei extremen Posen, anspruchsvollen Ausdrücken und/oder Accessoires in Bildern unabhängig von den Trainings- oder Testdaten erschwert.
+
+Theoretische Bereiche der Anwendung gibt es zahlreiche. Wirklich viele  Anwendungen findet man im Bereich der Unterhaltung. In verschiedenen Apps wird Face Aging als lustiger Filter angeboten, um Freunden das ältere Ich als kleiner Scherz für zwischendurch zukokmmen zu lassen. Zwei Studien und eine Firma mit Anwendungen im Bereich der Medizin haben wir im Report vorgestellt. Weitere Applikationen z.B. bei der Hilfe der Bekämpfung des Menschenhandels wären wünschenswert. Vielleicht werden diese auch schon eingesetzt und man findet in öffentlichen Artikeln nichts darüber.
+
+Die Forschung auf diesem Gebiet bleibt spannend. Neuartige Methoden im Bereich des maschinellen Lernens könnten die Generierung qualitativ hochwertiger Bilder für die Gesichtsalterung weiterhin verbessern. 
 
 ## Weiterführendes Material
 
@@ -640,7 +503,6 @@ Hier Link zum Demo Video + Link zum GIT Repository mit dem Demo Code.
 Hier der Link zum [GIT Repository](https://github.com/julian-steiner-ai/face-aging)
 
 ## Literaturliste
-
 
 ### Datensätze
 - [K. Ricanek and T. Tesafaye, "MORPH: a longitudinal image database of normal adult age-progression," 7th International Conference on Automatic Face and Gesture Recognition (FGR06), Southampton, UK, 2006, pp. 341-345, doi: 10.1109/FGR.2006.78.][21]
@@ -683,6 +545,7 @@ Hier der Link zum [GIT Repository](https://github.com/julian-steiner-ai/face-agi
 ### Anwendungen
 - [Brinker, T. J., Brieske, C. M., Esser, S., Klode, J., Mons, U., Batra, A., Rüther, T., Seeger, W., Enk, A. H., von Kalle, C., Berking, C., Heppt, M. V., Gatzka, M. V., Bernardes-Souza, B., Schlenk, R. F., & Schadendorf, D. (2018). A Face-Aging App for Smoking Cessation in a Waiting Room Setting: Pilot Study in an HIV Outpatient Clinic. Journal of medical Internet research, 20(8), e10976. https://doi.org/10.2196/10976][29]
 - [Brinker, T. J., Faria, B. L., de Faria, O. M., Klode, J., Schadendorf, D., Utikal, J. S., Mons, U., Krieghoff-Henning, E., Lisboa, O. C., Oliveira, A. C. C., Lino, H. A., & Bernardes-Souza, B. (2020). Effect of a Face-Aging Mobile App-Based Intervention on Skin Cancer Protection Behavior in Secondary Schools in Brazil: A Cluster-Randomized Clinical Trial. JAMA dermatology, 156(7), 737–745. https://doi.org/10.1001/jamadermatol.2020.0511][30]
+- [AprilAge - Face Aging and Body Visualization Software][31]
 
 [1]: https://arxiv.org/abs/2012.03459
 [2]: https://ieeexplore.ieee.org/document/5406526
@@ -714,3 +577,4 @@ Hier der Link zum [GIT Repository](https://github.com/julian-steiner-ai/face-agi
 [28]: https://arxiv.org/abs/1411.1784
 [29]: https://pubmed.ncbi.nlm.nih.gov/30111525/
 [30]: https://pubmed.ncbi.nlm.nih.gov/32374352/
+[31]: https://aprilage.com/
