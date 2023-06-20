@@ -660,33 +660,125 @@ Die Softmax Funktion wird pro Zeile angewendet und somit wird die Summe der Wahr
 
 ---
 
-Bert - _Bidirectional Encoder Representations from Transformers_ - ist ein Transformermodell, dass auf der Encoderstruktur basiert. Es gehört zu der Kategorie der _auto encoding models_. Es ist spezialisiert auf das Verstehen der Benutzereingabe.
+Bert, vollständig bekannt als _Bidirectional Encoder Representations from Transformers_, ist ein Transformer-Modell, das auf der Encoder-Struktur basiert. Es zählt zur Kategorie der Autoencoder-Modelle und ist darauf spezialisiert, Benutzereingaben zu verstehen und zu verarbeiten.
 
 <figure markdown>
-  ![Bert](./img/llms/Bert.png){ width="400" }
+  ![Bert](./img/llms/Bert.png){ width="600" }
   <figcaption>Fig. Bert </figcaption>
 </figure>
 
 #### 2.3.1 Architektur
 
+BERT - _Bidirectional Encoder Representations from Transformers_ - ist ein Modell für maschinelles Lernen, das Kontextinformationen berücksichtigt, indem es die umgebenden Wörter verwendet, was in der traditionellen Tranformerarchitektur nicht der Fall ist. BERT verwendet eine Kombination aus Masked Language Model (MLM) und Next Sentence Prediction (NSP) Aufgaben, um den Kontext zu erfassen.
 
+<figure markdown>
+  ![Bert2](./img/llms/Bert2.png){ width="600" }
+  <figcaption>Fig. Kontext </figcaption>
+</figure>
+
+Die Basisarchitektur von BERT besteht aus einem Stapel von 12 Encoder-Layern. Jeder Encoder-Layer setzt sich aus einer Multi-Head Attention-Schicht und einer Feed Forward-Schicht zusammen, die ihre Verarbeitung der Eingabesquenz an das nächste Layer weitergeben. Für die Multi-Head Attention wird eine Aufteilung in 12 _attention heads_ vorgenommen. Jeder Attention-Head fokussiert sich auf unterschiedliche Aspekte des Kontexts und erfasst verschiedene Beziehungen zwischen den Wörtern. Diese Vielfalt an Attention-Heads ermöglicht es BERT, verschiedene Arten von Abhängigkeiten und Zusammenhängen in der Benutzereingabe zu berücksichtigen. Die Größe der Embeddings, die BERT verwendet, beträgt 768. Das bedeutet, dass jedes Token in der Eingabe in einem Vektorraum mit einer Dimension von 768 repräsentiert wird.
+
+<figure markdown>
+  ![Bert4](./img/llms/Bert4.png){ width="400" }
+  <figcaption>Fig. Architektur </figcaption>
+</figure>
+
+Bevor die Eingabe an den Encoder weitergegeben wird, wird sie durch einen Tokenizer in einzelne Token aufgeteilt. Diese Tokens werden dann in Embeddings umgewandelt, die die semantische Bedeutung der Wörter repräsentieren. Zusätzlich werden Positionsinformationen hinzugefügt, um die Reihenfolge und Zugehörigkeit der Wörter im Satz zu kodieren. Dies ist notwendig, da der Transformer-Algorithmus, auf dem BERT basiert, parallele Strukturen verwendet und die Positionsinformationen helfen, den Kontext korrekt zu erfassen.
+
+Die Ausgabe des Encoders wird schließlich durch einen Softmax-Layer in Token-Wahrscheinlichkeiten umgewandelt. Diese Wahrscheinlichkeiten geben an, wie wahrscheinlich es ist, dass jedes Token an einer bestimmten Position im Satz auftritt.
+
+<figure markdown>
+  ![Bert3](./img/llms/Bert3.png){ width="600" }
+  <figcaption>Fig. Encoding </figcaption>
+</figure>
+
+Bert verwendet einen WordPiece-Tokenizer, der die Eingabesätze in einzelne Tokens aufteilt. Jede Sequenz beginnt mit einem speziellen Token [CLS], gefolgt von den Tokens des ersten Satzes, dann einem Trennungs-Token [SEP], und schließlich den Tokens des zweiten Satzes, wieder gefolgt von einem Trennungs-Token [SEP].
+
+Der Tokenizer kann auch Subword-Aufteilung durchführen, wobei ein Token mit dem #-Zeichen gekennzeichnet wird, um anzuzeigen, dass es in mehrere Subtokens aufgeteilt wurde. Dies ermöglicht eine flexiblere Darstellung von Wörtern, insbesondere bei seltenen oder unbekannten Wörtern.
+
+Das Vokabular von Bert besteht insgesamt aus 30.000 Tokens, die zur Kodierung von Wörtern verwendet werden können. Jedes Token wird in einem Token-Embedding repräsentiert, das die semantische Bedeutung des Tokens erfasst. Zusätzlich gibt es ein Segment-Embedding, das die Zugehörigkeit eines Tokens zu einem bestimmten Satz angibt. Dadurch kann Bert zwischen den beiden Sätzen unterscheiden und den Kontext richtig erfassen. Schließlich gibt es ein Position-Embedding, das die Position jedes Tokens im Satz angibt. Dies ist wichtig, da der Transformer-Algorithmus parallele Strukturen verwendet und die Positionsinformationen helfen, den Kontext korrekt zu kodieren.
+
+Zusammen bilden das Token-Embedding, das Segment-Embedding und das Position-Embedding das Gesamt-Embedding für die Eingabe von Bert. Dieses Embedding erfasst die Beziehungen zwischen den Tokens, die Zugehörigkeit zu verschiedenen Sätzen und die Position in den Sätzen, was zur präzisen Modellierung des Kontexts beiträgt.
 
 #### 2.3.2 Masked Language Model
 
+Beim _Masked Language Modeling_ (MLM) in BERT wird versucht, maskierte Wörter in der Eingabesequenz vorherzusagen, um dem Modell ein grundlegendes Sprachverständnis zu ermöglichen. Dieser Prozess wird durchgeführt, indem etwa 15% der Tokens in der Eingabesequenz zufällig durch das [MASK]-Token ersetzt werden. Das Modell versucht dann, das ursprüngliche Token anhand einer Wahrscheinlichkeitsverteilung des Vokabulars zu bestimmen. Durch das Maskieren und Vorhersagen von Wörtern wird das Modell dazu angeleitet, den Kontext und die Beziehungen zwischen den Wörtern zu verstehen. Indem es den umgebenden Kontext verwendet, um die maskierten Tokens zu rekonstruieren, entwickelt das Modell ein Verständnis für die Bedeutung und Struktur von Sätzen. Die Wahrscheinlichkeiten für die vorhergesagten Wörter basieren auf einer Verteilung über das Vokabular, die durch den Softmax-Layer im BERT-Modell berechnet wird. Das Modell gibt Wahrscheinlichkeiten für jedes mögliche Token im Vokabular aus, und das wahrscheinlichste Token wird als Vorhersage für das maskierte Token genommen.
+
+<figure markdown>
+  ![Bert5](./img/llms/Bert5.png){ width="600" }
+  <figcaption>Fig. Masked Language Model </figcaption>
+</figure>
+
 #### 2.3.3 Next Sentence Prediction
+
+Bei der _Next Sentence Prediction_ (NSP) geht es darum, dass BERT versucht, zu bestimmen, ob ein Satz A auf einen Satz B folgt. Dieser Ansatz ermöglicht es BERT, das Verständnis für den Zusammenhang zwischen Sätzen zu erlernen. Während des Trainings wird eine Aufteilung von 50/50 verwendet, bei der BERT sowohl positive als auch negative Beispiele für die NSP-Aufgabe erhält. Positive Beispiele bestehen aus aufeinanderfolgenden Sätzen, während negative Beispiele aus zufällig ausgewählten Sätzen bestehen, die nicht in einem direkten Zusammenhang stehen. Durch diese Aufteilung wird BERT dazu angeleitet, die Beziehungen zwischen Sätzen zu verstehen und zu lernen, ob ein Satz auf den vorherigen folgt oder nicht. Dies trägt dazu bei, dass BERT ein umfassendes Verständnis des Kontexts und der Abhängigkeiten zwischen Sätzen entwickelt.
+
+<figure markdown>
+  ![Bert7](./img/llms/Bert7.png){ width="600" }
+  <figcaption>Fig. Next Sentence Prediction </figcaption>
+</figure>
+
+Die Entscheidung, ob zwei Sätze aufeinander folgen, wird über die Sigmoid-Funktion getroffen. Der Klassifikator besteht in der Regel aus einem Fully Connected Layer, gefolgt von einer Sigmoid-Aktivierungsfunktion. Das Fully Connected Layer nimmt die Ausgabe des BERT-Modells und projiziert sie auf eine einzige Ausgabedimension. Diese Ausgabedimension wird dann der Sigmoid-Funktion übergeben, die eine Wahrscheinlichkeit zwischen 0 und 1 erzeugt.
+
+$$ \sigma(W_{NSP} \cdot [CLS]_{NSP} + b_{NSP}) $$
+
+Hierbei stellt $\sigma$ die Sigmoid-Funktion dar, $W_{\text{NSP}}$ sind die Gewichte des Fully Connected Layers für die NSP-Aufgabe und $b_{\text{NSP}}$ ist der Bias-Term. $[CLS]_{NSP}$ ist das Embedding des [CLS]-Tokens, das als Eingabe für den Klassifikator verwendet wird. Es beinhaltet die wichtigsten Informationen über die ganze Sequenz, wodurch es in der Lage es ist, die NSP-Aufgabe zu lösen.
 
 #### 2.3.4 Pre-Training
 
+Während des Trainings von BERT wird die Ausgabe des Modells für das _Masked Language Modeling_ (MLM) mit One-Hot-kodierten Vektoren validiert, während die Ausgabe für die _Next Sentence Prediction_ (NSP) mit einem Binärwert validiert wird. Das Modell wird mithilfe des _Cross-Entropy Loss_ trainiert, wobei die Wahrscheinlichkeitsverteilung der Vorhersagen mit den tatsächlichen Werten verglichen wird. Der Loss wird nur bei den maskierten Tokens verwendet, um Trainingszeit zu sparen.
+
+$$ L_i = -\sum_{j=1}^{V} y_{ij} \log(\hat{y}_{ij}) $$
+
+Dabei steht $y_{ij}$ für den tatsächlichen Wert des Labels und $\hat{y}_{ij}$ für die vorhergesagte Wahrscheinlichkeit des Modells für die jeweilige Klasse oder Kategorie. Der Loss wird für jedes Token oder jeden Satz berechnet und aggregiert. Das Pre-Training von BERT wird mit einer Batch-Größe von 256 und einer Lernrate von $1e-4$, die mit dem  _Adam Optimizer_ angepasst wird, durchgeführt. Dabei werden Cloud-TPUv3-Ressourcen verwendet.
+
 #### 2.3.5 Fine-Tuning
+
+<figure markdown>
+  ![Bert6](./img/llms/Bert6.png){ width="600" }
+  <figcaption>Fig. Fine tuning Bert </figcaption>
+</figure>
+
+Nach dem Pre-Training kann BERT für spezifische Aufgaben durch sogenanntes Fine-Tuning weiter optimiert werden. Das initiale BERT-Modell wird dabei als Ausgangspunkt verwendet, da es bereits auf das grundlegende Sprachverständnis trainiert ist. Beim Fine-Tuning werden die Parameter des vortrainierten Modells an die spezifische Aufgabe angepasst, indem bestimmte Teile des Modells mit einem Aufgabendatensatz neu trainiert werden.
+
+Die Ausgabe eines feinabgestimmten BERT-Modells variiert je nach Aufgabe und erfordert die Identifizierung der relevanten Sequenzteile. Dieser Prozess unterscheidet sich von Aufgabe zu Aufgabe. Nehmen wir als Beispiel eine Frage-Antwort-Aufgabe, bei der die Antwort auf eine gestellte Frage gefunden werden soll. In diesem Fall befinden sich die relevanten Informationen, die die Antwort enthalten, hinter dem ersten [SEP]-Token in der Sequenz. Das bedeutet, dass die Tokens nach dem [SEP]-Token die Antwort repräsentieren. Bei der Textklassifikation hingegen wird die Ausgabe des Modells durch das erste [SEP]-Token dargestellt, da es die Klassifikation des Textes widerspiegelt. Hierbei ist das erste [SEP]-Token das entscheidende Element, um die Kategorie oder Klasse des Textes zu identifizieren. Die genaue Identifizierung der relevanten Sequenzteile kann je nach Aufgabe unterschiedlich sein und erfordert eine Aufgaben-spezifische Behandlung der Modellausgabe.
+
 
 ### 2.4 Fine-Tuning
 ---
 
-??
+Das Fine-Tuning-Prozess besteht darin, das vorhandene Wissen und die Sprachrepräsentationen, die im Pre-Training gelernt wurden, auf die spezifische Aufgabe anzuwenden. Hierbei werden die Gewichte des Modells aktualisiert, um die Leistung auf der spezifischen Aufgabe zu verbessern. Während des Fine-Tuning können verschiedene Schichten oder Komponenten des Modells, wie die oberen Schichten des Modells oder der Klassifikator, angepasst werden, während tiefere schichten des Modells fixiert / gefroren bleiben. Hierbei ist zu beachten, dass in den tieferen Schichten die Fähigkeit des Modelles steckt, Sprache zu verstehen, während in den oberen Schichten die Aufgabe spezifisch gelernt wird. Das Fine-Tuning kann mit einem kleineren Datensatz als der des initialen Trainings durchgeführt werden, da das Modell bereits ein grundlegendes Sprachverständnis hat. Dies ermöglicht es, dass das Modell mit nur wenigen Trainingsbeispielen gute Ergebnisse erzielt.
 
 #### 2.4.1 Aufgaben
 
+<figure markdown>
+  ![FT](./img/llms/FT.png){ width="600" }
+  <figcaption>Fig. FT-Aufgaben </figcaption>
+</figure>
+
+Die Trainingsstrategie für Sprachmodelle wie BERT besteht darin, zunächst ein allgemeines Sprachverständnis zu erlernen und anschließend spezifische Aufgaben mithilfe von Labeldaten zu trainieren. Die Aufgaben, auf die ein Sprachmodell feinabgestimmt werden kann, sind vielfältig und abhängig von den spezifischen Anforderungen und Zielen. Beispiele für solche Aufgaben können in der Abbildung _FT-Aufgaben_ gefunden werden, die verschiedene Anwendungsbereiche wie Textklassifikation, Named Entity Recognition, Sentimentanalyse und vieles mehr umfasst.
+
 #### 2.4.2 Overfitting
+
+<figure markdown>
+  ![FT2](./img/llms/FT2.png){ width="400" }
+  <figcaption>Fig. Overfitting </figcaption>
+</figure>
+
+Beim fine tuning kann es zu einem Overfitting kommen, wenn das Modell zu stark auf die Trainingsdaten angepasst wird und die Fähigkeit verliert, auf neue Daten zu generalisieren. Dies kann durch die Verwendung von Regularisierungsstrategien verhindert werden. Einige dieser Techniken sind: 
+
+- Dropout
+- Early Stopping
+- $L_1 / L_2$ Regularisierung
+- Verteilungsanpassung
+
+Dropout ist eine Technik, bei der zufällig ausgewählte Neuronen während des Trainings deaktiviert werden, um zu verhindern, dass das Modell zu stark auf die Trainingsdaten angepasst wird. Early Stopping ist eine Technik, bei der das Training gestoppt wird, wenn die Leistung des Modells auf den Validierungsdaten nicht mehr verbessert wird. Dies verhindert, dass das Modell zu stark auf die Trainingsdaten angepasst wird. $L_1 / L_2$ Regularisierung ist eine Technik, bei der die Gewichte des Modells mit einem Strafterm belegt werden, um zu verhindern, dass das Modell zu stark auf die Trainingsdaten angepasst wird. Folglich werden die Gewichtungen geglättet und das Modell ist stabiler gegen Unbekanntes, Rauschen und Ausreißer. Dies dient dazu, dass der Verlustfunktionswert erhöht wird, wenn die Gewichte des Modells zu groß werden. Die $L_1 / L_2$ Regularisierung wird durch die folgenden Gleichungen definiert: $L_1 = \sum_{i=1}^{n} |w_i|$ und $L_2 = \sum_{i=1}^{n} w_i^2$, wobei zu beachten ist, dass der Loss auch auf dem Bias berechnet werden muss. Schließlich addiert man den Loss der $L_1 / L_2$ Regularisierung mit dem Loss der Daten, um den Gesamtloss zu erhalten.
+
+$$ regularization\_loss = L_1 + L_2 $$
+
+$$ L = data\_loss + regularization\_loss $$
+
+Das Ziel der Verteilungsanpassung besteht darin, sicherzustellen, dass die Verteilung der Daten, auf die das feinabgestimmte Modell trainiert wird, ähnlich oder vergleichbar mit der Verteilung des ursprünglichen Trainingsdatensatzes ist. Es geht darum, eine konsistente Verteilung der Daten beizubehalten, um sicherzustellen, dass das Modell auf ähnliche Beispiele und Muster trifft wie während des ursprünglichen Trainings. Es darf nicht vergessen werden, dass die Daten des fine-tuned Modellesgebündelt sind und die des pre-trained Modelles gestreut sind.
 
 ### 2.5 Generative Pre-Training
 
@@ -983,7 +1075,7 @@ Zusammenfassend ist es wichtig eine wachsende Open Source Community, sowie perfo
 
 ## 4 Fazit
 
-!!! info "Fazit"
+!!! summary "Fazit"
 
       LLMs sind eine der spannendsten und vielversprechendsten Technologien der letzten Jahre. Sie haben das Potential die Art und Weise wie wir mit Computern interagieren zu revolutionieren. Allerdings sind sie noch nicht perfekt und haben ihre Limitationen. Diese sind aber nicht unüberwindbar und mit der Zeit werden sie immer besser werden. Es ist wichtig sich mit dieser Technologie auseinanderzusetzen und sie zu verstehen, denn sie wird in Zukunft immer wichtiger werden.
 
