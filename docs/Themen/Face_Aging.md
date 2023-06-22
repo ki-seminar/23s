@@ -99,9 +99,9 @@ Die prototypenbasierten Methoden verwenden ein nichtparametrisches Modell. Die G
 
 ### Deep Generative Networks
 
-Die obengenannten Ansätze erfordern jedoch häufig die Erstellung von Alterungssequenzen derselben Person mit einem breiten Altersspektrum, deren Erfassung sehr schwierig und kostspielig ist. Generative Adversarial Networks (GANs) können besser mit Altersverläufen umgehen.
+Die beiden obengenannten Ansätze erfordern jedoch häufig die Erstellung von Alterungssequenzen derselben Person mit einem breiten Altersspektrum, deren Erfassung sehr schwierig und kostspielig ist. Generative Adversarial Networks (GANs) benötigen keine gepaarten Bilder von Gesichtern und erzielen dabei eine bessere Alterungsleistung als diese Methode.
 
-Bei den hier vorgestellten Methoden gehen wir ganz grob auf das jeweilige Paper ein. Dieses wurde verlinkt und ist auch in der Literaturliste zu finden.
+Bei den hier vorgestellten Methoden gehen wir ganz grob auf das jeweilige Paper ein. Diese wurden verlinkt und sind auch in der Literaturliste zu finden.
 
 #### Generative Adversarial Networks (GANs)
 
@@ -299,7 +299,7 @@ class Discriminator(nn.Module):
 
 ##### Fazit
 
-Viele GAN-basierte Methoden können im Bereich Face Aging die plausibelsten und realistischsten Bilder erzeugen, die aufgrund des Alters nur schwer von echten Daten zu unterscheiden sind. Allerdings nutzen alle diese die sequentiellen Daten nicht vollständig aus. Diese Methoden können die Übergangsmuster, die als Korrelationen der Gesichtsmerkmale zwischen verschiedenen Altersgruppen für eine Person definiert sind, nicht explizit berücksichtigen. Daher sind ihre Ergebnisse normalerweise nicht in der Lage, die Gesichtsidentität beizubehalten oder die Übergangsregeln für Kreuzungen nicht gut zu erfüllen.
+Verschiedene Varianten der GAN-basierten Methode können im Bereich Face Aging die plausibelsten und realistischsten Bilder erzeugen, die aufgrund des Alters nur schwer von echten Daten zu unterscheiden sind. Allerdings nutzen alle diese die sequentiellen Daten nicht vollständig aus. Diese Methoden können die Übergangsmuster, die als Korrelationen der Gesichtsmerkmale zwischen verschiedenen Altersgruppen für eine Person definiert sind, nicht explizit berücksichtigen. Daher sind ihre Ergebnisse normalerweise nicht in der Lage, die Gesichtsidentität beizubehalten oder die Übergangsregeln für Kreuzungen nicht gut zu erfüllen.
 
 Um diese Probleme zu lösen und den Alterungsprozess von Personen mit Hilfe von GANs noch detaillierter und akkurater darzustellen, wurden verschiedene Variationen von diesen Netzwerken entwickelt.
 
@@ -386,7 +386,7 @@ Das folgende Bild zeigt ein generiertes Beispielbild des IPCGAN Ansatzes.
 
 #### Learning Face Age Progression: A Pyramid Architecture of GANs
 
-2019 veröffentlichten die Autoren Hongyu Yang, Di Huang, Yunhong Wang und Anil K. Jain ein Paper mit dem Titel ["Learning Face Age Progression: A Pyramid Architecture of GANs"][8], indem ein neuartiger Ansatz zur Alterung von Gesichtern vorgeschlagen wird. Hierbei werden die Vorteile von Generative Adversarial Netweorks (GAN) bei  der Synthese visuell plausibler Bilder mit dem Vorwissen über  die menschliche Alterung verbunden. Die Autoren versprechen, dass ihr Modell im Vergleich zu bestehenden Methoden in der Literatur besser in der Lage ist, die beiden kritischen Anforderungen bei der Altersentwicklung zu erfüllen, d.h. Identitätsbeständigkeit und Alterungsgenauigkeit.
+2019 veröffentlichten die Autoren um Yang et. al. ein Paper mit dem Titel ["Learning Face Age Progression: A Pyramid Architecture of GANs"][8], indem ein neuartiger Ansatz zur Alterung von Gesichtern vorgeschlagen wird. Hierbei werden die Vorteile von Generative Adversarial Netweorks (GAN) bei  der Synthese visuell plausibler Bilder mit dem Vorwissen über  die menschliche Alterung verbunden. Die Autoren versprechen, dass ihr Modell im Vergleich zu bestehenden Methoden in der Literatur besser in der Lage ist, die beiden kritischen Anforderungen bei der Altersentwicklung zu erfüllen, d.h. Identitätsbeständigkeit und Alterungsgenauigkeit.
 
 In dieser Methode nimmt der CNN-basierte Generator junge Gesichter als Input und lernt eine Zuordnung zu einem Bereich, der älteren Gesichtern entspricht. Um Alterungseffekte zu erzielen und gleichzeitig personenspezifische Informationen beizubehalten, wird ein zusammengesetzter Loss verwendet.
 
@@ -450,7 +450,123 @@ Die Ergebnisse dieser Methode werden durch die Style-Repräsentation bestimmt. D
 
 #### PFA-GAN: Progressive Face Aging With Generative Adversarial Network
 
-[1]
+Die Autoren von diesem [Paper][1] nutzen die Tatsache, dass Gesichter im Laufer der Zeit allmählich altern und modellieren den Alterungsprozess im Gesicht in einer progressiven Weise. Mit dem neuen progressiven Face-Aging-Framework, das auf einem Generative Adversarial Network basiert (Progressive Face Aging with Generative Adversarial Networks - PFA-GAN). Dieses besteht aus mehreren kleinen Generator-Subnetzwerken, die sich jeweils nur  mit spezifischen Alterungseffekten zwischen zwei angrenzenden Altersgruppen befassen. Der Hauptunterschied zu anderen GAN-basierten Methoden besteht ebenfalls darin, dass das PFA-GAN die Subnetze gleichzeitig trainiert. Frühere GAN-Varianten trainierten verschiedene Netzwerke unabhängig voneinander. 
+
+Die Autoren heben dabei die Bedeutung der folgenden vier Aspekte für eine progressive Modellierung der Geischtslaterung hervor:
+
+1. Konzentration auf die Modellierung Gesichtsalterungseffekten zwischen zwei angrenzenden Altersgruppen
+2. Durch das durchgängige Trainieren der progressiven Gesichtsalterung kann das Netzwerk dazu gezwungen werden, glatte Gesichtsalterungsergebnisse zu erzielen
+3. Die ordinale Beziehung zwischen den Altersgruppen kann genutzt werden, um die Alterungsglätte zu verbessern
+4. Die Leistung der Cross-Age-Verifizierung kann verbessert werden
+
+Die folgende Abbildung zeigt, dass das $i$-te Teilnetzwerk $G_i$ dazu dient, Gesichter von der Altersgruppe $i$ bis $i + 1$ zu altern.
+
+<figure markdown>
+  ![PFA-GAN Subnetworks](./img/Face Aging/PFA-GAN_Subnetworks.png){ width="800" }
+  <figcaption>Der vorgeschlagene PFA-GAN für die Gesichtsalterung mit 4 Altersgruppen</figcaption>
+</figure>
+
+Der progressive Alterungsrahmen von der Ausgangsaltersgruppe bis zur Zielaltersgruppe $t$ lässt sich wie folgt formulieren:
+
+$$X_t = \overline{G}_{t-1} \circ \overline{G}_{t-2} \circ \dots \circ \overline{G}_{s}(X_s)$$
+
+Im Generator-Netzwerke werden zusätzlich [Residual-Skip-Verbindung][32] genutzt. Diese verhindert, dass die exakte Kopie des Gesichtes des Eingabebilds über mehrere Subnetze hin gespeichert wird. Durch die Einführung der Skip-Verbindung kann die Zielaltersgruppe leicht in eine Sequenz von binären Gattern umgewandelt werden, die den Alterungsfluss steuern. 
+
+Die Veränderungen von der Altersgruppe $i$ zu $i + 1$ lässt sich wie folgt umschreiben:
+
+$$ X_{t+1} = \overline{G}_{i}(X_i) = X_i + \lambda_i G_i (X_i) $$
+
+Somit besteht ein Generator-Subnetzwerk aus einer Resudial-Skip-Verbindung, einem binären Gatter und dem Netzwerk an sich. Bei $\lambda_i \in \{0,1\}$ handelt es sich um das binäre Gatter, welches kontrolliert ob das Subnetzwerke $G_i$ in den Alterungsprozess zum jeweiligen Zielalter mit einbezogen wird.
+
+Mit dem vorgeschlagenen Framework lässt sich die Altersprogression, z.B. von der Altersgruppe 1 bis 4, wie in der obigen Abbildung dargestellt, wie folgt ausdrücken:
+
+
+$$
+\begin{equation}
+X_4 = X_3 + \underbrace{\lambda_3 G_3(X_3)}_\text{Alterseffekte Gruppe 3 bis 4} \\
+= X_2 + \underbrace{\lambda_2 G_2(X_2) + \lambda_3 G_3(X_3)}_\text{Alterseffekte Gruppe 2 bis 4}
+\end{equation} \\
+= X_1 + \underbrace{\lambda_1 G_1(X_1) + \lambda_2 G_2(X_2) + \lambda_3 G_3(X_3)}_\text{Alterseffekte Gruppe 1 bis 4}
+$$
+
+Wenn jetzt ein Benuzer das Gesicht von der Altersgruppe 2 bis 3 vorhersagen will, reduziert sich die obige Gleichung auf $X_3 = X_2 + G_2(X_2)$. Der Vektor für $\lambda$ für diese Generierung lautet folgendermaßen $\begin{pmatrix}0 & 1 & 0\end{pmatrix}$ und somit werden die Subnetze $G_1$ und $G_3$ bei der Berechnung ausgeschalten.
+
+Schließlich können wir den Alterungsprozess vom einem Gesicht $X_s$ von einer gegebenen Altersgruppe $s$ hinzu einer Zielaltersgruppe wie folgt formulieren:
+
+$$X_t = G(X_s, \lambda_{s:t})$$
+
+$G = \overline{G}_{N-1} \circ \overline{G}_{N-2} \circ \dots \circ \overline{G}_{1}$ beschreibt das progressive Gesichtsalterungsnetzwerk. $\lambda_{s:t}$ kontrolliert den Alterungsprozess.
+
+Zusätzlich zum Generator- und Diskrimanator Netzwerk, die Hauptbestandteile von GANS sind, wird noch ein weiteres Netzwerk für das Erlernen von Alterungseffekten verwendet. Hierbei handelt es sich um ein Altersschätzungsnetzwerk (Age Estimation Network). Diese dient dazu die Gesichtsaltersverteilung für eine verbesserte Altersgenauigkeit besser zu charakterisieren. In früheren Arbeiten wurde in der Regel entweder die Alterklassifikation oder die Altersregression verwendet, um zu überprüfen ob das erzeugte Gesicht zur Zielaltersgruppe gehört, was möglicherweise nicht ausreicht, um die Altersverteilung des Gesichts zu charakterisieren. In dieser Implementierung verwendeten die Autoren den [Deep Expectation (DEX)][33] Ansatz. Das Altersschätzungsnetzwerk wurde vor dem Trainingsprozesses des PFA-GAN trainiert. Einmal trainiert, wurden die Gewichte des Netzwerks eingeforeren. Es reguliert den Generator für eine verbesserte Alterungsgenauigkeit.
+
+Die folgenden Abbildung zeigt die komplette Architektur des vorgeschlagenen PFA-GANs.
+
+<figure markdown>
+  ![PFA-GAN](./img/Face Aging/GAN_Framework_for_PFA-GAN.png){ width="600" }
+  <figcaption>Das GAN Framework für das PFA-GAN</figcaption>
+</figure>
+
+Bei diesem Ansatz werden verschiedenen Losses (Verlustberechnungen) verwendet, um die folgenden Anforderungen für die Gesichtsalterung berücksichtigen:
+
+1. Adversarial Loss zielt darauf ab, qualitativ hochwertige, gealterte Gesichter zu erzeugen, die nicht von echten zu unterscheiden sind
+2. Der Verlust der Altersschätzung soll die Alterungsgenauigkeit verbessern
+3. Der Verlust der Identitätskonsistenz zielt darauf ab, die gleiche Identität zu bewahren
+
+Bei einem jungen Gesicht $X_s$ aus der Altersgruppe $s$ ist das Ergebnis von $G$ von $s$ zu einer alten Altersgruppe $t$ $G(X_s, \lambda_{s:t})$. Im Kontext von GANs der kleinsten Quadrate ist der gegnerische Verlust für den Generator $G$ somit definiert als:
+
+$$L_{\text{adv}} = \frac{1}{2} \mathbb{E}_{X_{s}} [D([G(X_s,\lambda_{s:t});C_t]) - 1]^2$$
+
+Der Altersschätzverlust zwischen dem geschätzten Alter $\hat{y}$ und dem Zielalter $y$ für den Generator $G$ ist definiert als:
+
+$$L_{\text{age}} = \mathbb{E}_{X_{s}} [ || y - \hat{y} ||_2 + l(A(X)W, c_t) ]$$
+
+$W \in \mathbb{R}^{101 \times N}$ bezeichnet die letzte vollständig verbundene Schicht für des Altersgruppenklassifizierungsnetzwerks und $l$ ist der Verlust der Kreuzentropie für die Altersgruppenlkassifizierung.
+
+Um die identitätsbezogenen Informationen des Gesichts zu bewahren und die identitätsirrelevanten Informationen wie den Hintergrund unverändert zu lassen, wird ein gemischter Identitätskonsistenzverlust zwischen dem Eingabegesicht und dem generierten Gesicht verwendet. Hierzu zählen:
+
+- ein pixelweise Verlust (pixel-wise loss)
+- ein Verlust für die strukturelle Ähnlichkeit ([Structural Similarity (SSIM) loss][34])
+- ein Feature-Level Loss
+
+Diese drei sind wie folgt definiert:
+
+$$L_{\text{pix}} = \mathbb{E}_{X_{s}} | G(X_s, \lambda_{s:t}) - X_s |$$
+
+$$L_{\text{ssim}} = \mathbb{E}_{X_{s}} [ 1- \text{SSIM}(G(X_s, \lambda_{s:t}), X_s]$$
+
+$$L_{\text{fea}} = \mathbb{E}_{X_{s}} || \phi(G(X_s, \lambda_{s:t})) - \phi(X_s) ||_{F}^2 $$
+
+Schließlich kann der Identitätskonsistenz Verslust (Identity Consistency Loss) für das Generator-Netzwerk wie folgt definiert werden:
+
+$$L_{\text{fea}} = (1 - \alpha_{\text{ssim}}) * L_{\text{pix}} + \alpha_{\text{ssim}} * L_{\text{ssim}} + \alpha_{\text{fea}} * L_{\text{fea}}$$
+
+$\alpha_{\text{ssim}}$ und $\alpha_{\text{fea}}$ sind Hyperparameter, die dazu dienen die Balance zwischen den drei Verlusten zu kontrollieren.
+
+Der finale Verlust für den Generator ergibt sich aus der Zusammenzesetzung aller einzelnen Verlustberechnungen:
+
+$$L_G = \lambda_{\text{adv}} L_{\text{adv}} + \lambda_{\text{age}} L_{\text{age}} + \lambda_{\text{ide}} L_{\text{ide}}$$
+
+Die einzelnen $\lambda$ dienen ebenfalls wieder als Hyperparameter.
+
+
+Die folgende Darstellung zeigt Beispielergebnisse zur Gesichtsalterung und -verjüngung durch Anwendung des PFA-GANs auf drei externe Datensätze:
+
+- [FG-NET][23]
+- [CelebA][35]
+- [IMDB-WIKI][26]
+ 
+Die roten Kästschen kennzeichenen die Einbagebilder.
+
+<figure markdown>
+  ![Results PFA-GAN](./img/Face Aging/PFA-GAN_Results.png){ width="800" }
+  <figcaption>Generierte Gesichter durch das PFA-GAN</figcaption>
+</figure>
+
+Trotz qualitativer und quantitativer Leistungen des PFA-GANs, bestehen auch einige Einschränkungen:
+
+- Die Hauptbeschränkung der GANs-basierten Methoden besteht im Vergleich zu cGANs-basierten Methoden darin, dass die Netzwerke als Eingabe die Alterskennzeichnung der Quelle benötigen der Alterungsprozess
+- Das PFA-GAN muss ein anderes Modell für die Gesichtsverjüngung neu trainieren, obwohl wir lediglich die Reihenfolge der Altersgruppen für das Training der Gesichtsverjüngung umkehren müssen
+- mit mehr Altersgruppen oder einer kleinen Zeitspanne jeder Altersgruppe wird es bei der Gesichtsalterung schwieriger, ein Gesichtsalterungsmodell zu trainieren, und die Muster zwischen zwei benachbarten Altersgruppen werden weniger klar, was fast alle Gesichtsalterungsgruppen vor Herausforderungen stellt
 
 ## Anwendungen
 
@@ -541,6 +657,10 @@ Hier der Link zum [GIT Repository](https://github.com/julian-steiner-ai/face-agi
 - [Hongyu Yang, , Di Huang, Yunhong Wang, and Anil K. Jain. "Learning Face Age Progression: A Pyramid Architecture of GANs." (2019). ][8]
 - [Yuval Alaluf, , Or Patashnik, and Daniel Cohen-Or. "Only a Matter of Style: Age Transformation Using a Style-Based Regression Model." (2021). ][9]
 - [Mehdi Mirza, , and Simon Osindero. "Conditional Generative Adversarial Nets." (2014).][28]
+- [Kaiming He, , Xiangyu Zhang, Shaoqing Ren, and Jian Sun. "Deep Residual Learning for Image Recognition." (2015).][32]
+- [Rothe, R., Timofte, R. & Van Gool, L. Deep Expectation of Real and Apparent Age from a Single Image Without Facial Landmarks. Int J Comput Vis 126, 144–157 (2018). https://doi.org/10.1007/s11263-016-0940-3][33]
+- [Zhou Wang, A. C. Bovik, H. R. Sheikh and E. P. Simoncelli, "Image quality assessment: from error visibility to structural similarity," in IEEE Transactions on Image Processing, vol. 13, no. 4, pp. 600-612, April 2004, doi: 10.1109/TIP.2003.819861.][34]
+- [Z. Liu, P. Luo, X. Wang and X. Tang, "Deep Learning Face Attributes in the Wild," 2015 IEEE International Conference on Computer Vision (ICCV), Santiago, Chile, 2015, pp. 3730-3738, doi: 10.1109/ICCV.2015.425.][35]
 
 ### Anwendungen
 - [Brinker, T. J., Brieske, C. M., Esser, S., Klode, J., Mons, U., Batra, A., Rüther, T., Seeger, W., Enk, A. H., von Kalle, C., Berking, C., Heppt, M. V., Gatzka, M. V., Bernardes-Souza, B., Schlenk, R. F., & Schadendorf, D. (2018). A Face-Aging App for Smoking Cessation in a Waiting Room Setting: Pilot Study in an HIV Outpatient Clinic. Journal of medical Internet research, 20(8), e10976. https://doi.org/10.2196/10976][29]
@@ -578,3 +698,7 @@ Hier der Link zum [GIT Repository](https://github.com/julian-steiner-ai/face-agi
 [29]: https://pubmed.ncbi.nlm.nih.gov/30111525/
 [30]: https://pubmed.ncbi.nlm.nih.gov/32374352/
 [31]: https://aprilage.com/
+[32]: https://arxiv.org/abs/1512.03385
+[33]: https://link.springer.com/article/10.1007/s11263-016-0940-3
+[34]: https://ieeexplore.ieee.org/document/1284395
+[35]: https://ieeexplore.ieee.org/document/7410782
