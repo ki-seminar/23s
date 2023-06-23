@@ -906,18 +906,80 @@ $0 \le \gamma \le 1$                                          | $\pi$: Strategie
 
 _Wertefunktion_:
 
+Kalkuliert den erwarteten kumulativen Gewinn einer Aktion in einem Zustand
 
-Techniken von RL:
+Gleichungen                                                                           | Symbole
+-----------                                                                           | --------
+$V^{\pi}(s_t) = E_{\pi, p}[\sum_{k=0}^{\infty} \gamma^k R(s_{t+k}, \pi(s_{t+k}))]$    | $V^{\pi}(s_t)$: Wertefunktion	
+$Q^{\pi}(s_t, a_t) = R(s_t, a_t) + V^{\pi}(s_t)_{k=1}$                                | $Q^{\pi}(s_t, a_t)$: Aktionenwertefunktion
 
-- Q - Learning
 
-- Deep Q - Learning
+_Bellman Gleichung_:
 
-- REINFORCE
+Gleichungen                                                                             | Symbole
+-----------                                                                             | --------
+$V^{\pi}(s_t) = E_{\pi, p}[R(s_t, \pi(s_t)) + \gamma V^{\pi}(s_{t+1})]$                 | $V^{\pi}(s_t)$: Wertefunktion
+$Q^{\pi}(s_t, a_t) = E_{\pi, p}[R(s_t, a_t) + \gamma Q^{\pi}(s_{t+1}, \pi(s_{t+1}))]$   | $Q^{\pi}(s_t, a_t)$: Aktionenwertefunktion
+$\pi^*(s) = \text{argmax}_{a \in A}(\max_{\pi}Q^{\pi}(s, a))$                                 | $\pi^*$: otimale Strategie des Agenten
 
-- __Proximal Policy Optimization (PPO)__ wird in den GPT-Nachfolgern verwendet
 
-Zeigen wie RL bei GPT angewendet wird
+_Policy_:
+
+Die Policy ist die Strategie des Agenten, die angibt, welche Aktionen in einem bestimmten Zustand ausgeführt werden sollen. Die Policy kann deterministisch oder stochastisch sein.
+
+Gleichungen                                                   | Symbole
+-----------                                                   | --------
+$\pi_{k+1}(s) = \text{argmax}_aQ^{\pi_k}(s, a)$               | $\pi(s_t)$: Policy
+
+Aus diesen vier Grundgleichungen entstehen folgende Algorithmen:
+
+- Die Hauptidee des _Q-Learning_ besteht darin, mithilfe einer Q-Funktion die optimale Handlungsstrategie eines Agenten in einer Umgebung zu erlernen. Die Q-Funktion gibt den erwarteten Nutzen (Q-Wert) einer Aktion in einem gegebenen Zustand an. Durch das Lernen und Aktualisieren der Q-Werte während des Lernprozesses kann der Agent die beste Aktion in jedem Zustand auswählen und so die Gesamtbelohnung maximieren.
+
+- _Deep Q - Learning_ (DQL) ist eine Erweiterung des klassischen Q-Learning-Algorithmus, der tiefe neuronale Netzwerke verwendet, um komplexe Zustandsräume zu modellieren und eine optimale Handlungsstrategie zu erlernen. Durch die Integration von Deep Learning-Techniken ermöglicht DQL den Agenten, in hochdimensionalen Umgebungen mit großen Zustands- und Aktionsräumen effektiv zu operieren.
+
+- _REINFORCE_ ist ein Algorithmus des Reinforcement Learning, der zur Lösung von Aufgaben des verstärkenden Lernens eingesetzt wird. Er basiert auf der Idee, Richtlinien (Policies) zu erlernen, die einem Agenten ermöglichen, eine optimale Handlungsstrategie in einer gegebenen Umgebung zu entwickeln. Der REINFORCE-Algorithmus verwendet Monte Carlo-Sampling, um die Richtlinie zu verbessern, indem er die Gesamtbelohnung der durchgeführten Aktionen maximiert.
+
+- __Proximal Policy Optimization (PPO)__ wird in den GPT-Nachfolgern verwendet. PPO zielt darauf ab, die Vorzüge von Policy Gradient-Methoden und Trust Region Policy Optimization (TRPO) zu kombinieren, um ein effizientes und stabiles Lernen zu ermöglichen und bestmögliche Policies für den Agenten zu finden.
+
+Allgemein ist PPO eine _stochastic gradient ascent_ Methode, um das bestmögliche Ergebnis zu erreichen. Dabei wird die optimale Policy mit einem Gradientenverfahren gesucht, indem eine Policy zu einem Zeitpunkt $t$ mit der Vorteilsfunktion an dieser Stelle verrechnet wird. Die Standardformel hierfür ist:
+
+$$ \hat{g} = \frac{1}{T} \sum_{t=1}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t|s_t) A^{\pi_{\theta}}(s_t, a_t) $$
+
+Um die Policy zu verbessern, wird ein sogenanntes _surrogate objective_ verwendet. Dieses ist eine Funktion, die die Policy verbessert, ohne sie zu stark zu verändern. Es basiert auf dem Ansatz der _trust region_, der die Änderung der Policy begrenzt, indem er die Divergenz zwischen der alten und der neuen Policy begrenzt. Dies wird erreicht, indem die Veränderungen der Policy mit einem Faktor $\epsilon$ geklippt werden. Die Verlustfunktion, die für dieses Ziel verwendet wird, lautet:
+
+$$ L^{CLIP}(\theta) = \hat{E}_t [min(r_t(\theta) \hat{A}_t, clip(r_t(\theta), 1 - \epsilon, 1 + \epsilon) \hat{A}_t)]; $$
+
+$$ r_t(\theta)=\frac{\pi_{\theta}(a_t, s_t)}{\pi_{\theta_{old}}(a_t, s_t)} $$
+
+Hierbei steht $\theta$ für die Parameter der Policy, $E_t$ repräsentiert die erwartete Wertung über den Zeitpunkt $t$, $r_t(\theta)$ ist das Verhältnis zwischen den Wahrscheinlichkeiten der aktuellen Policy und der alten Policy für eine bestimmte Aktion im Zustand $s_t$, $A_t$ ist der Vorteil (Advantage) der Aktion und clip ist eine Funktion, die den Wert $r_t(\theta)$ innerhalb eines bestimmten Intervalls einschränkt.
+
+Die Verlustfunktion $L_clip(\theta)$ vergleicht die Aktionen der aktuellen Policy mit denen der alten Policy und berücksichtigt dabei den Vorteil der Aktionen. Sie sorgt dafür, dass die Änderungen der Policy begrenzt bleiben und die Divergenz zwischen der alten und der neuen Policy kontrolliert wird. Die Klippfunktion im Ausdruck $\text{clip}(r_t(\theta), 1 - \epsilon, 1 + \epsilon)$ stellt sicher, dass das Verhältnis $r_t(\theta)$ innerhalb des Intervalls $[1 - \epsilon, 1 + \epsilon]$ bleibt.
+
+Durch die Verwendung dieses _surrogate objectives_ in Kombination mit der _trust region_ wird sichergestellt, dass die Policy allmählich verbessert wird, ohne dass sie zu stark von der alten Policy abweicht. Dies trägt zur Stabilität des Lernprozesses bei und ermöglicht eine kontrollierte Anpassung der Policy, um bessere Ergebnisse zu erzielen.
+
+Bei der PPO-Funktion von GPT wird die Verlustfunktion $L^{CLIP}(\theta)$ mit einem Faktor $\lambda$ gewichtet, um die Veränderung der Policy zu begrenzen. Die PPO - Funktion lautet:
+
+$$ \text{objective}(\phi) = E_{(x, y) \sim D_{\phi}^{RL}} [r_{\theta}(x, y) - \beta \log(\pi_{\phi}^{RL}(y | x) / \pi^{SFT}(y | x))] + \gamma * E_{x \sim D_{pretrain}} [ log(\pi_{\phi}^{RL}(x))] $$
+
+- $E$: Erwartungswert
+
+- $x, y$: Eingabe- und Ausgabedatenpaare
+
+- $D_{\phi}^{RL}$: Datenverteilung, die durch die RL-Policy $\pi^{RL}$ bestimmt wird
+
+- $r_{\theta}(x, y)$: Rückgabewert (Reward) für das Datenpaar $(x, y)$ unter den aktuellen Parametern $\theta$
+
+- $\beta$: Ein Gewichtungsfaktor für die Regularisierung des Rewards
+
+- $\pi_{\phi}^{RL}(y | x)$: Wahrscheinlichkeit der Ausgabe y gegeben der Eingabe x unter der RL-Policy $\pi^{RL}$ mit den Parametern $\phi$
+
+- $\pi^{SFT}(y | x)$: Wahrscheinlichkeit der Ausgabe y gegeben der Eingabe x von dem fine-tuning-Modell
+
+- $\gamma$: Ein Gewichtungsfaktor für den Pretraining-Term (normal $\gamma=0$ für PPO)
+
+- $D{pretrain}$: Datenverteilung für das Pretraining
+
+- $\pi_{\phi}^{RL}(x)$: Wahrscheinlichkeit der Eingabe x unter der RL-Policy $\pi^{RL}$ mit den Parametern $\phi$
 
 <figure markdown>
   ![GPT6](./img/llms/GPT6.png){ width="600" }
