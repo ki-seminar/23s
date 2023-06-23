@@ -784,17 +784,145 @@ Das Ziel der Verteilungsanpassung besteht darin, sicherzustellen, dass die Verte
 
 ---
 
-??
+Generative Pre-Training, kurz GPT, ist eine Architektur, die auf der Decoder-Seite von Transformers basiert. GPT zählt zu den sogenannten _auto-regressiven Modellen_. Seine herausragende Fähigkeit liegt in der Generierung von Texten, wie das aktuelle GPT-4-Modell beeindruckend demonstriert.
 
-#### 2.5.1 Architektur
+<figure markdown>
+  ![GPT](./img/llms/GPT.png){ width="800" }
+  <figcaption>Fig. CHAT - GPT </figcaption>
+</figure>
 
-#### 2.5.2 Pre-Training
+Im Folgenden werden wir über die drei grundlegenden Säulen von GPT sprechen, die es zu einem beeindruckenden Sprachmodell machen: Pre-Training + Fine-Tuning, Reward Model und Reinforcement Learning. Diese drei Säulen bilden die Grundlage für das Training des Modells, um Texte zu generieren und weitere NLP-Aufgaben zu meistern. 
 
-#### 2.5.3 Fine-Tuning
+Die erste Säule ist das Pre-Training + Fine-Tuning. Beim Pre-Training wird das GPT-Modell auf einer riesigen Menge an Textdaten trainiert. Hierbei wird dem Modell beigebracht, Sprachstrukturen, Zusammenhänge und Semantik zu verstehen. Dabei wird ein sogenanntes _unsupervised Learning_ verwendet, bei dem das Modell keine explizite Zielvorgabe erhält, sondern selbstständig Muster und Regelmäßigkeiten im Text erkennt und generalisiert. Das Pre-Training erfolgt normalerweise auf einer großen Textsammlung, wie beispielsweise dem gesamten Internet. Nach dem Pre-Training folgt das Fine-Tuning, bei dem das Modell auf eine spezifische Aufgabe oder Domäne angepasst wird. Hierbei werden Textdaten verwendet, die durch Labeler vorbereitet werden, um das Modell auf spezifische Kontexte, Stile und Vorgaben einzustellen.
 
-#### 2.5.4 Reward Model
+Die zweite Säule ist das Reward Model. Um das Modell auf bestimmte Ziele oder Präferenzen auszurichten, wird ein sogenanntes Reward Model verwendet. Das Reward Model bewertet die Qualität der generierten Texte anhand vorgegebener Kriterien wie Kohärenz, Relevanz, Grammatik oder anderen domänenspezifischen Merkmalen. Das Modell wird dann durch Reinforcement Learning darauf trainiert, die jeweiligen NLP-Aufgaben zu meistern, die ein höheres Belohnungssignal vom Reward Model erhalten. Dadurch kann das Modell lernen den gewünschten Kriterien besser entsprechen.
 
-#### 2.5.5 Reinforcement Learning
+Das Reinforcement Learning ermöglicht es dem Modell, aus Erfahrung zu lernen und seine Textgenerierung kontinuierlich zu verfeinern. Indem es auf das Feedback des Reward Models reagiert und seine Strategien entsprechend anpasst, kann das Modell immer bessere Texte erzeugen, die den Anforderungen und Zielen gerecht werden.
+
+#### 2.5.1 Architektur / Pre-Training
+
+<figure markdown>
+  ![GPT2](./img/llms/GPT2.png){ width="400" }
+  <figcaption>Fig. Decoder-Layout </figcaption>
+</figure>
+
+Wie schon erwähnt, basiert GPT auf dem Decoder Teil des originalen Transformermodelles. Dementsprechend benötigt es, wie auch das Transformermodell, eine Eingabe, die aus einer Sequenz von Token besteht, welche durch ein Embedding-Layer in einen Vektor umgewandelt wird. Dieser Vektor bekommt zusätzlich über das positional Encoding Informationen über die Position der einzelnen Tokens. Schließlich wird der Eingabevektor durch mehrere Decoderschichten verarbeitet. 
+
+$$ h_0 = UW_e + W_p $$
+
+- $U$ ist der Context Vektor: $U = (u_{-k}, ... , u_{-1})$ bei einem Corpus von $C = {u_1, ... , u_n}$
+
+- $k$ ist die Größe des Kontextes
+
+- $W_e$ ist die Embeddingmatrix der Tokens
+
+- $W_p$ ist die _positional encoding_ Matrix
+
+Diese Gleichung makiert den Startpunkt von GPT, in welcher die Initialisierungsschritte des GPT-Modells dargestellt werden. Der Vektor $h_0$ repräsentiert den Anfangszustand des Modells, der durch eine lineare Transformation von zwei Eingabevektoren erzeugt wird. Schließlich wandern die Eingaben durch die Transformerblöcke.
+
+$$ h_i = TransformerBlock(h_{i-1}) \forall{i} \in [1, n]$$
+
+Damit wird durch die ganzen Schichten des GPT-Modelles iteriert. Die Ausgabe des letzten Transformerblocks wird dann durch eine lineare Transformation in die Wahrscheinlichkeitsverteilung der nächsten Token umgewandelt.
+
+$$ P(u) = \text{softmax}(h_nW_e^T) $$
+
+Die Ausgabeformell basiert auf dem Hintergrund, dass die Wahrscheinlichkeit von einem Token $u$ abhängt, welche Tokens im aktuellen Kontex vorausgehen. Die Wahrscheinlichkeit von $u$ ist also abhängig von der Wahrscheinlichkeit der vorherigen Tokens und der Parameter des Modells. 
+
+$$P(u_i | u_{i-k}, ... , u_{i-1}; \theta)$$
+
+Das Modelle optimiert somit die Wahrscheinlichkeit $L_1(C) = \sum_i \log P(u_i | u_{i-k}, ... , u_{i-1}; \theta)$. Die Optimierung erfolgt durch das _unsupervised Learning_ mit dem Ziel, die Wahrscheinlichkeit der nächsten Token zu maximieren.
+
+Um bessere und natürlichere Ergebnisse zu erhalten, werden zukünftige GPT-Modelle mit _sample_ Algorithmen erweitert, damit die Ausgaben im Wortlaut varrieren und nicht immer die gleichen Texte generiert werden.
+
+1. __Top-K-Verfahren__: Die Wahrscheinlichkeiten der Tokens werden sortiert und _k_ Tokens mit der höchsten Wahrscheinlichkeit werden ausgewählt. Von denen wird dann zufällig ein Token ausgewählt, welches dann als nächstes Token verwendet wird.
+
+2. __Nucleus__: Dieses Verfahren funktioniert ähnlich zu Top-K, jedoch wird hier nicht eine feste Anzahl von Tokens ausgewählt, sondern die Tokens werden solange ausgewählt, bis die Summe der Wahrscheinlichkeiten der ausgewählten Tokens einen bestimmten Wert überschreitet. Dieser Wert wird als _p_ bezeichnet und ist ein Hyperparameter des Modells.
+
+3. __Temperature__: Dieses Verfahren wird verwendet, um die Wahrscheinlichkeiten der Tokens zu verändern. Die Wahrscheinlichkeiten werden durch die Temperatur _T_ geteilt. Je höher die Temperatur, desto höher ist die Wahrscheinlichkeit, dass ein Token mit einer niedrigen Wahrscheinlichkeit ausgewählt wird. Bei einer niedrigen Temperatur werden die Wahrscheinlichkeiten der Tokens erhöht, die bereits eine hohe Wahrscheinlichkeit haben. Die Formell hierfür lautet: $\text{softmax}(z_i) = \frac{e^{z_i/T}}{\sum_j e^{z_j/T}}$
+
+4. __Greedy-Verfahren__: Dieses Verfahren wählt immer das Token mit der höchsten Wahrscheinlichkeit aus.
+
+5. __Beam Search__: Dieses Verfahren wählt die _k_ wahrscheinlichsten Tokens aus und erzeugt für jedes Token eine neue Sequenz. Diese Sequenzen werden dann wiederum durch die Wahrscheinlichkeiten der nächsten Tokens erweitert. Dieser Vorgang wird solange wiederholt, bis die Sequenzen eine bestimmte Länge - _beam size_ - erreicht haben. Die Sequenz mit der höchsten Wahrscheinlichkeit wird dann als Ausgabe verwendet.
+
+Aktuell verwendet OpenAI das nucleus-Verfahren und das Temperaturverfahren, um die Textgenerierung zu verbessern.
+
+#### 2.5.2 Fine-Tuning
+
+Im Fine-Tuning muss das Modelle verschiedene Aufgaben erkennen können und diese dann lösen. Dafür wird das Modell mit einem Datensatz trainiert, der aus einer großen Menge von Texten besteht, die mit den jeweiligen Aufgaben verknüpft sind. Die Aufgaben können beispielsweise darin bestehen, dass das Modell Texte vervollständigen, Fragen beantworten oder Texte klassifizieren muss.
+Foglich gibt es ein Label $y$ und ein zugehörige Sequenz an Tokens $x^1, \dots , x^m$. Um die Wahrscheinlichkeit für das Label $y$ zu berechnen, werden die Aktivierungen des Modelles und die Ausgabematrix benötigt.
+
+$$ P(y|x^1, \dots , x^m) = \text{softmax}(h_l^mW_y) $$
+
+Somit ergibt sich ein neues Ziel, das optimiert werden muss, um die Parameter optimal einzustellen: $L_2(D) = \sum_{(x,y) \in D} \log P(y|x^1, \dots , x^m)$. Die Optimierung erfolgt durch das _supervised Learning_ mit dem Ziel, die Wahrscheinlichkeit des Labels $y$ zu maximieren.
+
+Insgesamt kann man das pre-trained Sprachmodell beim fine-tuning mitverwenden, damit die Generalisierung verbessert wird und die Konvergenz beschleunigt wird.
+
+$$ L_3(D) = L_2(D) + \lambda L_1(D) $$
+
+#### 2.5.3 Reward Model
+
+Das Reward Model basiert auf dem Likert-Scale, der verwendet wird, um die menschlichen Bewertungen der Plausibilität der GPT-Ausgaben zu erfassen. Hierbei werden die generierten Texte von einem Menschen auf einer Skala von 1 bis 7 bewertet. Diese Skala ermöglicht es, die Qualität und die Plausibilität der Texte abzubilden, wobei eine höhere Zahl eine bessere Bewertung darstellt. Zusätzlich zur Likert-Skala wird der Mensch auch dazu aufgefordert, ja-nein Fragen zu beantworten, um zu erklären, warum er die bestimmte Bewertung abgegeben hat. Dieses zusätzliche Feedback ermöglicht es, Einblicke in die Entscheidungsfindung des Bewerters zu erhalten und zu verstehen, welche spezifischen Aspekte des Textes zur Bewertung beigetragen haben. Auf Grundlage dieser menschlichen Bewertungen entsteht ein umfangreicher Datensatz, der verwendet wird, um ein kleineres GPT-Modell zu trainieren. Dieses kleinere Modell besitzt in der Regel rund 6 Milliarden Parameter und wird speziell für die Aufgabe der Textbewertung eingesetzt. Das trainierte kleinere GPT-Modell wird anschließend eingesetzt, um die Ausgaben des großen GPT-Modells zu bewerten. Es analysiert die generierten Texte und weist ihnen eine Bewertung zu, die auf den erlernten Kriterien basiert. Diese Bewertung dient dann als Rückmeldung für das große GPT-Modell, um seine Textgenerierung kontinuierlich zu verbessern. Indem das kleinere GPT-Modell die Textausgaben des großen Modells bewertet, wird ein iterativer Feedback-Loop geschaffen. Das große Modell kann durch das erhaltene Feedback lernen und seine Textgenerierungsfähigkeiten entsprechend optimieren, um qualitativ hochwertigere und plausiblere Texte zu erzeugen.
+
+$$ loss(\theta) = - \frac{1}{\binom{K}{2}} E_{(x, y_w, y_l) \sim D}[\log(\sigma(r_{\theta}(x, y_w) - r_{\theta}(x, y_l)))] $$
+
+- $D$: Datensatz mit den menschlichen Bewertungen
+- $K$: Anzahl der Antworten von GPT-Modell
+- $x$: Eingabesquenz
+- $y_w$: präfferierte Ausgabe von GPT
+- $y_l$: Ausgabe von GPT
+- $r_{\theta}$: Skalar zum Reward-Modell zu den Parametern $\theta$
+- $\sigma$: Sigmoid-Funktion
+
+Die Hauptidee ist, wenn die präferierte Ausgabe $y_w$ eine höhere Bewertung als die Ausgabe $y_l$ erhält, dann wird der Verlust minimiert. Wenn die Ausgabe $y_l$ eine höhere Bewertung als die präferierte Ausgabe $y_w$ erhält, dann wird der Verlust maximiert. Die Sigmoid-Funktion wird verwendet, um die Wahrscheinlichkeit zu berechnen, dass die präferierte Ausgabe $y_w$ eine höhere Bewertung als die Ausgabe $y_l$ erhält. Die Sigmoid-Funktion ist definiert als $\sigma(x) = \frac{1}{1 + e^{-x}}$. Die Sigmoid-Funktion ist eine monoton steigende Funktion, die Werte zwischen 0 und 1 zurückgibt. Wenn die Differenz zwischen den Bewertungen $r_{\theta}(x, y_w)$ und $r_{\theta}(x, y_l)$ groß ist, dann ist die Wahrscheinlichkeit, dass die präferierte Ausgabe $y_w$ eine höhere Bewertung als die Ausgabe $y_l$ erhält, nahe 1. Wenn die Differenz zwischen den Bewertungen $r_{\theta}(x, y_w)$ und $r_{\theta}(x, y_l)$ klein ist, dann ist die Wahrscheinlichkeit, dass die präferierte Ausgabe $y_w$ eine höhere Bewertung als die Ausgabe $y_l$ erhält, nahe 0. Der Logarithmus steigert das Verhalten der Sigmoidfunktion ins negative und ermöglicht die Berechnung des Verlustes, da er für kleine Werte nahe 0 nach $- \infty$ anstrebt und bei 1 seine Nullstelle hat.
+
+<figure markdown>
+  ![GPT3](./img/llms/GPT3.png){ width="600" }
+  <figcaption>Fig. Reward Model with Sigmoid & Logarithm </figcaption>
+</figure>
+
+
+#### 2.5.4 Reinforcement Learning
+
+<figure markdown>
+  ![GPT7](./img/llms/GPT7.png){ width="800" }
+  <figcaption>Fig. Reinforcement Learning </figcaption>
+</figure>
+
+Reinforcement Learning (RL) ist eine Methode des maschinellen Lernens, bei der ein Agent in einer Umgebung agiert und durch Interaktion mit dieser Umgebung lernen kann, welche Aktionen zu belohnenden Ergebnissen führen. Das Ziel des RL besteht darin, eine optimale Handlungsstrategie zu erlernen, um maximale Belohnungen zu erhalten. Der RL-Prozess besteht aus mehreren Iterationen, in denen der Agent versucht, seine Handlungsstrategie zu verbessern. Dies geschieht durch das Lernen aus Erfahrung, indem der Agent wiederholt Aktionen ausführt, den Zustand der Umgebung wahrnimmt und Belohnungen erhält. Der Agent verwendet dann Algorithmen des maschinellen Lernens, um eine Strategie zu entwickeln, die die erwarteten Belohnungen maximiert.
+
+Dieser Prozess baut auf folgenden Gleichungen auf:
+
+_Markov Decision Process (MDP)_:
+
+Gleichungen                                                   | Symbole
+-----------                                                   | --------
+$M = (S, A, P, R, \gamma)$                                    | $S$: Zustandsraum  
+Markov Chain: $P_a(s, s')= \frac{P(s', s, a)}{P(s, a)}$       | $A$: Aktionen   
+$R: (S × A)$                                                  | $P$: Übergangsfunktion
+$\pi: S \to A$                                                | $R$: Belohnungsfunktion
+$E_{\pi, p}[\sum_{t=0}^{\infty} \gamma^t R(s_t, \pi(s_t))]$   | $\gamma$: Diskontierungsfaktor
+$0 \le \gamma \le 1$                                          | $\pi$: Strategie des Agenten
+
+
+_Wertefunktion_:
+
+
+Techniken von RL:
+
+- Q - Learning
+
+- Deep Q - Learning
+
+- REINFORCE
+
+- __Proximal Policy Optimization (PPO)__ wird in den GPT-Nachfolgern verwendet
+
+Zeigen wie RL bei GPT angewendet wird
+
+<figure markdown>
+  ![GPT6](./img/llms/GPT6.png){ width="600" }
+  <figcaption>Fig. GPT full learning cycle </figcaption>
+</figure>
 
 ### 2.6 Meta-Learning
 ---
