@@ -479,7 +479,7 @@ e_n  \\
 \cos(pe_{n/2} * 1) \\
 \end{bmatrix}_{d_n \times 1}$$
 
-#### 2.2.2 Aechitektur
+#### 2.2.2 Architektur
 
 Der Encoder schafft ein Verständnis für die Eingabesequenz, indem er die Embeddings durch mehrere hintereinandere kommende _Attenttion_ und _fully connected feed forward_ Schichten verarbeitet. Ein Encoder-Schicht besteht aus einer _multi-head self attention_ und einem _fully connected feed forward network_. Diese beiden werden Subschichten genannt. Zwishcen den Subschichten gibt es _residual connections_ und _layer normalization_, um das Netzwerk zu stabilisieren und die Trainingszeit zu verkürzen. Die Aufgabe des Encoders ist es, eine Repräsentation der Eingabesequenz zu erzeugen, wo die Bedeutung der Wörter, ihre Position in der Sequenz, Merkmale und globale Abhängigkeiten berücksichtigt werden, damit der Decoder die Ausgabe erzeugen kann.
 
