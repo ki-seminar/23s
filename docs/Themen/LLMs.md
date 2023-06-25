@@ -778,7 +778,7 @@ $$ regularization\_loss = L_1 + L_2 $$
 
 $$ L = data\_loss + regularization\_loss $$
 
-Das Ziel der Verteilungsanpassung besteht darin, sicherzustellen, dass die Verteilung der Daten, auf die das feinabgestimmte Modell trainiert wird, ähnlich oder vergleichbar mit der Verteilung des ursprünglichen Trainingsdatensatzes ist. Es geht darum, eine konsistente Verteilung der Daten beizubehalten, um sicherzustellen, dass das Modell auf ähnliche Beispiele und Muster trifft wie während des ursprünglichen Trainings. Es darf nicht vergessen werden, dass die Daten des fine-tuned Modellesgebündelt sind und die des pre-trained Modelles gestreut sind.
+Das Ziel der Verteilungsanpassung besteht darin, sicherzustellen, dass die Verteilung der Daten, auf die das feinabgestimmte Modell trainiert wird, ähnlich oder vergleichbar mit der Verteilung des ursprünglichen Trainingsdatensatzes ist. Es geht darum, eine konsistente Verteilung der Daten beizubehalten, um sicherzustellen, dass das Modell auf ähnliche Beispiele und Muster trifft wie während des ursprünglichen Trainings. Es darf nicht vergessen werden, dass die Daten des fine-tuned Modelles gebündelt sind und die des pre-trained Modelles gestreut sind.
 
 ### 2.5 Generative Pre-Training
 
@@ -1265,14 +1265,25 @@ Zusammenfassend ist es wichtig eine wachsende Open Source Community, sowie perfo
 
 ## 4 Fazit
 
+__Leistungsstarke Sprachverarbeitung__: LLMs wie GPT-4 oder Bard sind äußerst leistungsfähige Modelle, die eine breite Palette von sprachlichen Aufgaben bewältigen können. Sie können Texte generieren, Fragen beantworten, Übersetzungen liefern, Dialoge führen und vieles mehr. Ihre Fähigkeiten haben sich in den letzten Jahren erheblich verbessert und sie können mittlerweile oft erstaunlich menschenähnliche Antworten liefern. Das hat sie zu einem der vielversprechendsten Bereiche der KI-Forschung gemacht und deren Einsatzmöglichkeiten sind noch lange nicht ausgeschöpft.
+
+__Kreative Textgenerierung__: LLMs haben gezeigt, dass sie in der Lage sind, kreativen Text zu generieren, wie Gedichte, Geschichten oder Songtexte. Sie können auf der Grundlage des ihnen gegebenen Kontextes innovative und unterhaltsame Inhalte erstellen. Dies hat das Interesse von Künstlern, Schriftstellern und Kreativen geweckt, die LLMs als Werkzeug zur Inspiration und Unterstützung nutzen können. Auch Google ist auf diesen Zug aufgesprungen und verfolgt das Ziel, dass Menschen sich zukünftig nur noch für die wichtigsten Aufgaben konzentrieren müssen, während die Maschinen den Rest erledigen.
+
+__Herausforderungen der Ethik und Verantwortung__: Mit der Macht der LLMs kommen auch ethische und verantwortungsvolle Bedenken. LLMs lernen aus großen Mengen an Textdaten und spiegeln daher die Vorurteile und Verzerrungen wider, die in diesen Daten enthalten sind. Dies kann zu ungewollter Diskriminierung, Fehlinformationen oder der Verbreitung von Hassrede führen. Die Forschung und Entwicklung von LLMs erfordert daher eine bewusste Auseinandersetzung mit diesen Fragen und die Implementierung von Mechanismen zur Vermeidung von Missbrauch.
+
+__Datenschutz und Sicherheit__: Der Betrieb von LLMs erfordert große Mengen an Daten, um gute Leistungen zu erzielen. Dies stellt eine Herausforderung für den Datenschutz dar, insbesondere wenn sensible Informationen in die Modelle eingegeben werden. Der Schutz der Privatsphäre und die Gewährleistung der Datensicherheit müssen bei der Verwendung von LLMs berücksichtigt werden, um Missbrauch oder Datenlecks zu vermeiden.
+
+__Chancen und Potenziale__: Trotz der Herausforderungen bieten LLMs auch viele Chancen und Potenziale. Sie können beispielsweise in Bildungssystemen eingesetzt werden, um personalisierte Lerninhalte bereitzustellen oder bei der Automatisierung von Kundeninteraktionen in Unternehmen helfen. LLMs könnten auch bei der Bewältigung komplexer Probleme wie der medizinischen Diagnose oder der Entwicklung neuer Materialien unterstützen. Darüber hinaus können LLMs durch ihre beeindruckende Fähigkeit zur Textgenerierung auch kreative Prozesse in der Softwareentwicklung unterstützen. Sie können Code generieren, der von professionellen Entwicklern weiterverarbeitet werden kann, wodurch diese sich auf den Kern der Aufgabe konzentrieren können. Dies stellt nur ein konkretes Beispiel von vielen dar, wie LLMs die Arbeit von Menschen unterstützen können, ohne sie zu ersetzen.
+
 !!! summary "Fazit"
 
-      LLMs sind eine der spannendsten und vielversprechendsten Technologien der letzten Jahre. Sie haben das Potential die Art und Weise wie wir mit Computern interagieren zu revolutionieren. Allerdings sind sie noch nicht perfekt und haben ihre Limitationen. Diese sind aber nicht unüberwindbar und mit der Zeit werden sie immer besser werden. Es ist wichtig sich mit dieser Technologie auseinanderzusetzen und sie zu verstehen, denn sie wird in Zukunft immer wichtiger werden.
+      LLMs sind eine der spannendsten und vielversprechendsten Technologien der letzten Jahre. Sie haben das Potential die Art und Weise wie wir mit Computern interagieren zu revolutionieren. Allerdings sind sie noch nicht perfekt und haben ihre Limitationen. Diese sind aber nicht unüberwindbar und mit der Zeit werden sie immer besser werden. Es ist wichtig sich mit dieser Technologie auseinanderzusetzen und sie zu verstehen, denn sie wird in Zukunft immer bedeutender werden.
 
 ## 5 Weiterführendes Material
 
 ### 5.1 Podcast
 
+Hier einfach den Podcast embedden.
 [Der Campus Talk – Silicon Forest – Folge 3](https://der-campustalk-der-thd.letscast.fm/episode/der-campus-talk-silicon-forest-folge-3)
 
 ### 5.2 Talk
@@ -1281,7 +1292,7 @@ Hier einfach Youtube oder THD System embedden.
 
 ### 5.3 Demo
 
-Link zum Repository: https://github.com/CRY-TeX/demo-ki-seminar
+Link zum Repository: [demo-ki-seminar](https://github.com/CRY-TeX/demo-ki-seminar)
 
 ## 6 Literaturliste
 
