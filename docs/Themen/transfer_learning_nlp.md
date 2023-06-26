@@ -1,5 +1,6 @@
 # Transfer Learning in der Sprachverarbeitung
-# Abstract
+von *Simon Wolf, Tim Staudinger und Miguel Meindl*
+## Abstract
 Die Sprachverarbeitung ist ein grundlegender Aspekt der künstlichen Intelligenz (KI) und hat in den letzten Jahren beträchtliche Fortschritte erzielt. Eine vielversprechende Methode zur Verbesserung der Leistung von Sprachmodellen ist das Transfer Learning. Transfer Learning ermöglicht es, vortrainierte Modelle auf eine neue Aufgabe anzuwenden, indem das Wissen, das in einem Modell für eine bestimmte Aufgabe erlernt wurde, auf eine andere, verwandte Aufgabe übertragen wird.
 
 Der Podcast bietet eine oberflächliche Einführung in das Thema Transfer Learning in der Sprachverarbeitung, um fachfremde Zuhörer mit den grundlegenden Konzepten vertraut zu machen. Er erklärt, wie Transfer Learning funktioniert und genutzt werden kann, um vortrainierte Modelle auf neue sprachverarbeitende Aufgaben anzuwenden. Der Podcast gibt einen Überblick über verschiedene Anwendungsfälle und beleuchtet die Herausforderungen von Transfer Learning. Dabei werden auch die Auswirkungen von Datenmenge und Qualität  diskutiert.
@@ -8,7 +9,7 @@ Der Fachvortrag liefert einen tieferen Einblick in das Transfer Learning und zei
 
 Zuletzt werden durch die Codedemonstration verschiedene Ansätze für die Verwendung von Transfer Learning in der Sprachverarbeitung aufgezeigt. Es wird vorgestellt, wie ...... verwendet wird. Dafür werden ... 
 
-# Einleitung und Motivation
+## Einleitung und Motivation
 In der heutigen digitalen Zeit hat die Spracherkennung einen enormen Einfluss auf unser tägliches Leben. Von virtuellen Assistenten über Sprachbefehle in mobilen Geräten bis hin zu automatisierten Kundenservice-Systemen - die Fähigkeit, menschliche Sprache zu verstehen und zu verarbeiten, hat zahlreiche Anwendungen revolutioniert. Doch die Entwicklung präziser und effizienter Spracherkennungssysteme stellt nach wie vor eine Herausforderung dar.
 
 Transfer Learning bietet in der Spracherkennung eine Reihe von Vorteilen. Anstatt jedes Mal von Grund auf ein neues Modell für jede spezifische Aufgabe zu trainieren, kann Transfer Learning genutzt werden, um auf bereits existierende Modelle zurückzugreifen, die auf ähnlichen Sprachdaten trainiert wurden. Dadurch wird nicht nur die Trainingszeit erheblich verkürzt, sondern auch der Bedarf an umfangreichen Datenmengen reduziert.
@@ -19,7 +20,7 @@ Die Anwendungsmöglichkeiten von Transfer Learning in der Spracherkennung sind v
 
 Die Idee des Transfer Learnings hat ihre Wurzeln in der Künstlichen Intelligenz und dem maschinellen Lernen. In den letzten Jahrzehnten wurden verschiedene Ansätze und Techniken entwickelt, um Transfer Learning zu ermöglichen. Diese Fortschritte haben die Spracherkennung maßgeblich beeinflusst.
 
-# Stand der Forschung
+## Stand der Forschung
 Doch wie sieht der aktuelle Stand der Forschung im Bereich Transfer Learning in der Spracherkennung aus? Welche neuen Ansätze und Techniken wurden entwickelt, um die Effizienz und Genauigkeit von Spracherkennungssystemen weiter zu verbessern? Im nachfolgenden Abschnitt wird genauer auf dieses Thema eingegangen und diese Fragen beantwortet.
 
 In den letzten Jahren hat die Forschung intensiv daran gearbeitet, Transfer Learning in der Spracherkennung voranzutreiben. Ein herausragendes Beispiel für ein erfolgreiches vortrainiertes Sprachmodell ist ChatGPT. Ursprünglich entwickelt für die Generierung von Texten, hat ChatGPT das Potenzial gezeigt, auch für die Spracherkennung genutzt zu werden.
@@ -34,25 +35,25 @@ Ein weiterer vielversprechender Aspekt ist die Erweiterung von Transfer Learning
 
 Der aktuelle Stand der Forschung im Bereich Transfer Learning in der Spracherkennung zeigt das Potenzial dieser Technik. Durch den Einsatz von vortrainierten Sprachmodellen wie ChatGPT, kombiniert mit Active Learning, Reinforcement Learning und anderen Techniken, können Spracherkennungssysteme effizienter, präziser und anpassungsfähiger trainiert werden.
 
-# Methoden
+## Methoden
 Fachpräsentation hier vorstellen
 
-# Anwendungen
+## Anwendungen
 Codedemo hier vorstellen
 
-# Fazit
+## Fazit
 
 
-# Weiterführendes Material
+## Weiterführendes Material
 
-## Podcast
+### Podcast
 Hier Link zum Podcast.
 
-## Talk
+### Talk
 Hier einfach Youtube oder THD System embedden.
 
-## Demo
+### Demo
 Hier Link zum Demo Video + Link zum GIT Repository mit dem Demo Code.
 
-## Literaturliste
+### Literaturliste
 [Matthew E. Taylor, Peter Stone. (2009). Transfer Learning for Reinforcement Learning Domains: A Survey. Journal of Machine Learning Research 10](https://www.jmlr.org/papers/volume10/taylor09a/taylor09a.pdf?ref=https://codemonkey.link)
