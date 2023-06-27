@@ -37,15 +37,15 @@ In den folgenden Kapiteln werden wir die Herausforderungen bei der Erstellung de
 
 ### Datensätze
 
-In diesem Abschnitt wollen wir die wichtigsten aktuell verfügbaren und verwendeten Datensätze für das Thema Face Aging vorstellen. Diese Datensätze wurden in den Papern, die im Kapitel Methoden genauer vorgestellt werden, verwendet. Bei den Datensätzen MORPH und CACD handelt es sich um die meistverwendeten Datensätze.
+In diesem Abschnitt wollen wir die wichtigsten aktuell verfügbaren und verwendeten Datensätze für das Thema Face Aging vorstellen. Diese Datensätze wurden hauptsächlich in den Papern verwendet, die im Kapitel Methoden genauer vorgestellt werden. Bei MORPH und CACD handelt es sich dabei um die meistverwendeten Datensätze.
 
 #### MORPH
 
-Im Jahr 2006 gab es nur drei öffentlich bekannte zugängliche Datenbanken, die Doppelbilder einer Person in verschiedenen Altersstufen enthielten. [MORPH][21], [FERET][22] und [FG-NET][23].
+Im Jahr 2006 gab es nur drei öffentlich zugängliche, bekannte Datenbanken, die Doppelbilder einer Person in verschiedenen Altersstufen enthielten. [MORPH][21], [FERET][22] und [FG-NET][23].
 
-MORPH war zu diesem Zeitpunkt die einzige dieser drei Datenbanken, die die ethnische Zugehörigkeit, die Größe, das Gewicht und das Geschlecht der Probanden erfasste. Diese Eigenschaften sind für das Verständnis der Veränderung des Aussehens des menschlichen Gesichts im Alter aber von entscheidender Bedeutung. Zusätzlich beinhaltete diese Datenbank den größten Satz öffentlich verfügbarer Bilder von Personen über einen längeren Zeitraum. Dieser konnte von ein paar Monaten von bis zu über zwanzig Jahren sein. Bei den damaligen Methoden war diese Eigenschaft Voraussetzung für die Erstellung eines erfolgreichen Modells.
+MORPH war zu diesem Zeitpunkt die einzige dieser drei Datenbanken, die die ethnische Zugehörigkeit, die Größe, das Gewicht und das Geschlecht der Probanden erfasste. Diese Eigenschaften sind für das Verständnis der Veränderung des Aussehens des menschlichen Gesichts im Alter von entscheidender Bedeutung. Zusätzlich beinhaltete diese Datenbank den größten Satz öffentlich verfügbarer Bilder von Personen über einen längeren Zeitraum, von einigen Monaten bis zu einer Zeitspanne von mehreren Jahrzehnten. Bei den damaligen Methoden war diese Eigenschaft Voraussetzung für die Erstellung eines erfolgreichen Modells.
 
-Seitdem wird dieser Datensatz ständig weiterentwickelt. Aktuell gibt es den Datensatz der University of North Carolina Wilmington in drei unterschiedliche Varianten. Dem MORPH Commercial Set, MORPH Academic Set und der MORPH Longitudinal Database. Um den Datensatz zu erhalten muss man die Universität kontaktieren um anschließend eine Lizenz und die Daten zu erhalten. Weitere Informationen finden Sie auf dieser [Website](https://uncw.edu/myuncw/research/innovation-commercialization/technology-portfolio/morph).
+Seitdem wird der Datensatz ständig weiterentwickelt. Aktuell gibt es den Datensatz der University of North Carolina Wilmington in drei unterschiedliche Varianten: Dem MORPH Commercial Set, MORPH Academic Set und die MORPH Longitudinal Database. Um den Datensatz zu erhalten, muss die Universität persönlich kontaktiert werden. Anschließend wird eine Lizenz ausgestellt und Zugriff auf die Daten gewährt. Weitere Informationen finden Sie auf dieser [Website](https://uncw.edu/myuncw/research/innovation-commercialization/technology-portfolio/morph).
 
 <figure markdown>
   ![MORPH Figure Examples](./img/Face Aging/MORPH_Fig_Example.jpg){ width="800" }
@@ -65,11 +65,11 @@ Der Datensatz und die Metadaten können auf der [Homepage][24] heruntergeladen w
 
 #### FG-NET
 
-Eingeführt wurde der Datensatz FG-NET mit dem Paper [Toward automatic simulation of aging effects on face images][25]. Insgesamt beinhaltet er über 1.000 Bilder von 82 Personen. Es wird beim Alter eine Spanne von 0 bis 69 Jahren und ein Altersunterschied von bis zu 45 Jahren abgedeckt. Heruntergeladen kann der Datensatz auf dieser [Webseite][23].
+Eingeführt wurde der Datensatz FG-NET mit dem Paper [Toward automatic simulation of aging effects on face images][25]. Insgesamt beinhaltet er über 1.000 Bilder von 82 Personen. Es wird beim Alter eine Spanne von 0 bis 69 Jahren und ein Altersunterschied von bis zu 45 Jahren abgedeckt. Der Datensatz auf dieser [Webseite][23] verfügbar.
 
 #### IMDB-WIKI
 
-Im [IMDB-WIKI][26] Datensatz wurden ein große Sammlung von Bildern und Metadten von Berühmtheiten zusammengestellt. Hierbei sammelten die Ersteller automatisch das Geburtsdatum, den Namen, das Geschlecht und alle Bilder der 100.000 beliebtesten Schauspieler auf der IMDb-Website. Zusätzlich wurden zu diesen Personen alle Profilbilder von Personenseiten aus Wikipedia mit denselben Metadaten automatische gesammelt. Entfernt wurden die Bilder, die keinen Zeitstempel hatten. Das reale Alter der Person auf einem Bild wurde durch das Geburtsdatum und den Zeitstempel des Bildes errechnet. Der Datensatz beinhaltet über 460.000 Gesichtsbilder von mehr als 20.000 Prominenten aus IMDb und mehr als 62.000 Bilder aus Wikipedia. Insgesamt umfasst er über 520.000 Bilder.
+Im [IMDB-WIKI][26] Datensatz wurden eine große Sammlung von Bildern und Metadten von Berühmtheiten zusammengestellt. Hier sammelten die Ersteller automatisch das Geburtsdatum, den Namen, das Geschlecht und alle Bilder der 100.000 beliebtesten Schauspieler auf der IMDb-Website. Zusätzlich wurden zu diesen Personen alle Profilbilder von Personenseiten aus Wikipedia mit denselben Metadaten automatische gesammelt. Entfernt wurden die Bilder, die keinen Zeitstempel hatten. Das reale Alter der Person auf einem Bild wurde durch das Geburtsdatum und den Zeitstempel des Bildes errechnet. Der Datensatz beinhaltet über 460.000 Gesichtsbilder von mehr als 20.000 Prominenten aus IMDb und mehr als 62.000 Bilder aus Wikipedia. Insgesamt umfasst er über 520.000 Bilder.
 
 <figure markdown>
   ![IMDB-WIKI Figure Examples](./img/Face Aging/imdb-wiki-teaser.png){ width="600" }
@@ -91,23 +91,23 @@ Mit der folgenden Abbildung wollen wir die Entwicklung der GAN-Methoden darstell
 
 ### Physikalische modellbasierte Methoden
 
-Physikalische, modellbasierte Methoden befassen sich mit dem Entwurf eines komplexen Modells zur Nachahmung des Gesichtsaussehens und zur Simulation von Alterungsmechanismen in Bezug auf Haare, Muskeln und Textur bei Erwachsenen und mit der Anwendung spezifischer Transformationen auf eine Reihe von Orientierungspunkten oder statistischer Parameter zur Modellierung altersbedingter Formveränderungen bei Kindern. Für diese Methode muss jedoch ein parametrisches Modell erstellt werden, und es werden viele Gesichter derselben Identitäten in verschiedenen Altersstufen benötigt, was rechenintensiv und schwer zu erfassen ist.
+Physikalische, modellbasierte Methoden befassen sich mit dem Entwurf eines komplexen Modells zur Nachahmung des Gesichtsaussehens und zur Simulation von Alterungsmechanismen in Bezug auf Haare, Muskeln und Haut bei Erwachsenen und mit der Anwendung spezifischer Transformationen auf eine Reihe von Orientierungspunkten oder statistischer Parameter zur Modellierung altersbedingter Formveränderungen bei Kindern. Für diese Methode muss jedoch ein parametrisches Modell erstellt werden, und es werden viele Gesichter derselben Identitäten in verschiedenen Altersstufen benötigt, was rechenintensiv und schwer zu erfassen ist.
 
 ### Prototypbasierte Methoden
 
-Die prototypenbasierten Methoden verwenden ein nichtparametrisches Modell. Die Gesichter sollten zunächst in Gruppen nach verschiedenen Altersgruppen eingeteilt werden. Das durchschnittliche Gesicht jeder Altersgruppe wird als Prototyp und Altersmuster einer bestimmten Altersgruppe bezeichnet. Im Paper [Personalized Age Progression with Aging Dictionary][12] hat das Autorenteam eine auf Wörterbüchern basierende Alterssynthesemethode vorgeschlagen. [Yang et al.][13] haben mit Hilfe der Hidden Factor Analysis eine gemeinsame spärliche Darstellung eingeführt. Diese vorgeschlagenen Alterungsmethoden modellieren getrennt die stabilen personenabhängigen Eigenschaften über einen relativ langen Zeitraum und die altersabhängigen Informationen, die sich im Laufe der Zeit allmählich ändern. Da das Altersmuster jedoch aus dem Durchschnittsgesicht gewonnen wird, können prototypbasierte Methoden die personalisierten Informationen ignorieren.
+Die prototypenbasierten Methoden verwenden ein nichtparametrisches Modell. Die Gesichter sollten zunächst in Gruppen nach verschiedenen Altersgruppen eingeteilt werden. Das durchschnittliche Gesicht jeder Altersgruppe wird als Prototyp und Altersmuster einer bestimmten Altersgruppe bezeichnet. Im Paper [Personalized Age Progression with Aging Dictionary][12] hat das Autorenteam eine auf Wörterbüchern basierende Alterssynthesemethode vorgeschlagen. [Yang et al.][13] haben mit Hilfe der Hidden Factor Analysis eine gemeinsame spärliche Darstellung eingeführt. Diese vorgeschlagenen Alterungsmethoden modellieren getrennt die stabilen personenabhängigen Eigenschaften über einen relativ langen Zeitraum und die altersabhängigen Informationen, die sich im Laufe der Zeit allmählich ändern. Da das Altersmuster jedoch aus dem Durchschnittsgesicht gewonnen wird, tendieren prototypbasierte Methoden dazu die identitätsgebenden Merkmale eines speziellen Gesichtes zu verlieren.
 
 ### Deep Generative Networks
 
-Die beiden obengenannten Ansätze erfordern jedoch häufig die Erstellung von Alterungssequenzen derselben Person mit einem breiten Altersspektrum, deren Erfassung sehr schwierig und kostspielig ist. Generative Adversarial Networks (GANs) benötigen keine gepaarten Bilder von Gesichtern und erzielen dabei eine bessere Alterungsleistung als diese Methode.
+Die beiden obengenannten Ansätze erfordern jedoch häufig die Erstellung von Alterungssequenzen derselben Person mit einem breiten Altersspektrum, deren Erfassung sehr schwierig und kostspielig ist. Generative Adversarial Networks (GANs) benötigen keine gepaarten Bilder von Gesichtern und erzielen dabei eine bessere Alterungsleistung als diese Methoden.
 
-Bei den hier vorgestellten Methoden gehen wir ganz grob auf das jeweilige Paper ein. Diese wurden verlinkt und sind auch in der Literaturliste zu finden.
+Bei den nachfolgend vorgestellten Methoden gehen wir ganz grob auf das jeweilige Paper ein. Diese wurden verlinkt und sind auch in der Literaturliste zu finden.
 
 #### Generative Adversarial Networks (GANs)
 
-Generative Adversarial Networks sind tiefe neuronale Netzwerke. Diese nutzen unbeaufsichtigtes maschinelles Lernen um Daten zu generieren. Eingeführt wurden diese 2014 in einem [Paper][3] von Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
+Generative Adversarial Networks sind tiefe neuronale Netzwerke. Sie nutzen unbeaufsichtigtes maschinelles Lernen um Daten zu generieren. Eingeführt wurden solche Netze 2014 in einem [Paper][3] von Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
 
-Ein solches neuronales Netzwerk besteht aus zwei weiteren Netzwerken. Einem Generator Netzwerk und einem Discriminator Netzwerk. Durch mehrere Generations- und Diskriminierungszyklen trainieren sich beide Netzwerke gegenseitig und versuchen gleichzeitig, sich gegenseitig zu überlisten. Das Ziel solcher Netze ist es, Datenpunkte zu generieren, die einigen Datenpunkten im Trainingssatz stark ähneln.
+Ein solches neuronales Netzwerk besteht aus zwei weiteren Netzwerken. Einem Generator Netzwerk und einem Discriminator Netzwerk. Durch mehrere Zyklen von Generierung und Diskriminierung neuer Inhalte trainieren sich beide Netzwerke gegenseitig und versuchen gleichzeitig, sich gegenseitig zu überlisten. Das Ziel solcher Netze ist es, Datenpunkte zu generieren, die einigen Datenpunkten im Trainingssatz so stark ähneln, dass sie vom Discriminator Netz nicht mehr als KI-generiert erkannt werden.
 
 ##### PyTorch Example
 
@@ -119,7 +119,7 @@ In diesem kurzen Code-Beispiel wollen wir eine einfache Implementierung eines Ge
 
 Wir starten mit der Implementierung der Generator-Netzwerks. Hierbei erben wir von der `nn.Module` Klasse. Dies ist die Basisklasse für alle neuronalen Netzwerke in PyTorch. 
 
-In der `_init_network` Methode definieren wir wie die einzelnen Schichten des jeweiligen neuronalen Netzwerks. Hierzu fügen wir die einzelnen Klassen der Liste mit dem Namen `layer` hinzu. Anschließend übergeben wir diese an einen `Sequential`-Container. Dieser ermöglicht einen einfachen Aufruf der `forward()`-Methode, da dieser die Ausgaben einer Schicht mit den Eingaben des nachfolgenden Moduls automatisch miteinander "verkettet". Schließlich wird die Ausgabe des letzten Moduls zurückgegeben. 
+In der `_init_network` Methode definieren wir die einzelnen Schichten des jeweiligen neuronalen Netzwerks. Hierzu fügen wir die einzelnen Klassen der Liste mit dem Namen `layer` hinzu. Anschließend übergeben wir diese an einen `Sequential`-Container. Dieser ermöglicht einen einfachen Aufruf der `forward()`-Methode, da dieser die Ausgaben einer Schicht mit den Eingaben des nachfolgenden Moduls automatisch miteinander "verkettet". Schließlich wird die Ausgabe des letzten Moduls zurückgegeben. 
 
 ```python
 class Generator(nn.Module):
