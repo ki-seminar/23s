@@ -22,7 +22,7 @@ Im Folgenden wollen wir einen Blick auf die Welt der Empfehlungssysteme werfen, 
 ### 2.1 Inhaltsbasierte Filterung
 Die Inhaltsfilterung analysiert die Merkmale der Objekt (z. B. Filme, Produkte, Artikel) und Benutzervorlieben und versucht, auf der Grundlage dieser Merkmalen geeignete Empfehlungen zu generieren.
 
-Der Prozess der Inhaltsfilterung beinhaltet in der Regel die folgenden Schritte:
+Der Prozess der Inhaltsbasierten Filterung beinhaltet in der Regel die folgenden Schritte:
 
 **Objekt-Profileerstellung:** Für jedes Objekt werden relevante Merkmale extrahiert und daraus ein oder mehrere Profile erstellt. Bei Filmen könnten dies beispielsweise Genre, Schauspieler, Regisseur oder Handlungsbeschreibung sein. Die Merkmale können aus Metadaten oder Inhalten des Objekts (z.B. Textanalyse) gewonnen werden. 
 
