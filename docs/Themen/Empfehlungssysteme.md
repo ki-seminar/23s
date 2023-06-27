@@ -2,7 +2,13 @@
 von *Olha Solodovnyk, Daria Likhacheva und Zi Xun Tan*
 
 ## Abstract 
+Diese Arbeit behandelt das Thema Empfehlungssysteme und präsentiert es in verschiedenen Formaten, darunter einem Podcast, einem Vortrag und einer Code-Demo.
 
+Der **Podcast** bietet eine einfache und unkomplizierte Einführung in Empfehlungssysteme. Es werden verschiedene Arten von Empfehlungssystemen behandelt, darunter inhaltsbasierte, kollaborative, kontext-basierte und hybride Ansätze. Der Podcast richtet sich an ein allgemeines Publikum und soll Zuhörer einbeziehen und ihnen einen Überblick über die Funktionsweise von Empfehlungssystemen und -anwendungen geben.
+
+In dem **Vortrag** wird hingegen näher auf Empfehlungssysteme eingegangen. Die Grundlagen und Funktionsweise inhaltsbasierter, kollaborativer und hybrider Empfehlungssysteme werden erläutert und die Vor- und Nachteile dieser Ansätze diskutiert. Der Vortrag richtet sich an ein technisch versiertes Publikum und vermittelt ein tieferes Verständnis der Konzepte und Algorithmen hinter Empfehlungssystemen.
+
+Die **Code-Demo** zeigt eine praktische Implementierung eines einfachen Filmempfehlungssystems. Es werden verschiedene Algorithmen und Techniken präsentiert, einschließlich inhaltsbasierter, kollaborativer und hybrider Filter. Durch die Demonstration des Codes wird gezeigt, wie ein Datensatz verarbeitet und Empfehlungen generiert werden, die sowohl auf Inhaltsinformationen als auch auf Benutzerinteraktionen basieren. Der bereitgestellte Code ist frei verfügbar, sodass jeder die Implementierung von Empfehlungssystemen besser verstehen und damit experimentieren kann.
 ## 1 Einleitung / Motivation
 In der heutigen digitalen Welt werden die Empfehlungssysteme fast jeden Tag benutzt. Sie haben einen sehr großen Einfluss auf unsere täglichen Aktivitäten. Von Online-Shopping-Plattformen bis hin zu Streaming-Dienste (wie Spotify oder Netflix) werden die Empfehlungen benutzt, um unsere Entscheidungen zu beeinflussen und unsere Erfahrungen zu personalisieren. Was bedeuten aber diese Empfehlungssysteme und wie funktionieren sie?
 
@@ -14,14 +20,62 @@ Im Folgenden wollen wir einen Blick auf die Welt der Empfehlungssysteme werfen, 
 ## 2 Methoden
 
 ### 2.1 Inhaltsbasierte Filterung
+Die Inhaltsfilterung analysiert die Merkmale der Objekt (z. B. Filme, Produkte, Artikel) und Benutzervorlieben und versucht, auf der Grundlage dieser Merkmalen geeignete Empfehlungen zu generieren.
+
+Der Prozess der Inhaltsfilterung beinhaltet in der Regel die folgenden Schritte:
+
+**Objekt-Profileerstellung:** Für jedes Objekt werden relevante Merkmale extrahiert und daraus ein oder mehrere Profile erstellt. Bei Filmen könnten dies beispielsweise Genre, Schauspieler, Regisseur oder Handlungsbeschreibung sein. Die Merkmale können aus Metadaten oder Inhalten des Objekts (z.B. Textanalyse) gewonnen werden. 
+
+**Benutzer-Profilerstellung:** Für jeden Benutzer wird ein Profil erstellt, das seine Vorlieben basierend auf seinen vergangenen Bewertungen oder Interaktionen widerspiegelt. Das Profil kann durch Gewichtung der Merkmale entsprechend der Wichtigkeit für den Benutzer erstellt werden.
+
+**Übereinstimmungsberechnung:** Die Ähnlichkeit zwischen Objektvektoren kann mit drei Methoden berechnet werden: 
+* Euklidischer Abstand
+* Pearson-Korrelation und 
+* Kosinus-Ähnlichkeit, die wir in unserer Arbeit genauer betrachten.
+
+Kosinus-Ähnlichkeit ist ein Maß dafür, wie ähnlich zwei Vektoren sind. Der Kosinus des Winkels zwischen zwei Vektoren wird bestimmt. 
+
+$$
+Kosinus-Ähnlichkeit(u, i) = cos(u,i)= \frac{u \cdot i}{\|u\| \cdot \|i\|}
+$$
+
+Der Nutzervektor $u$ repräsentiert die Präferenzen, Eigenschaften oder Merkmale des Nutzers, während der Objektvektor $i$ die Merkmale oder Eigenschaften des Items oder eines anderen Nutzers darstellt.
+Die Euklidische Norm $∥u∥$ des Nutzervektors gibt an, wie groß der Vektor ist, während die Euklidische Norm $∥i∥$ des Objektvektors dessen Größe angibt.
+Das Skalarprodukt $u⋅i$ zwischen dem Nutzervektor $u$ und dem Objektvektor $i$ ergibt sich aus der Summe der Produkte der entsprechenden Elemente beider Vektoren.
+
+Der Kosinus des eingeschlossenen Nullwinkels ist $1$, was 100 % Ähnlichkeit bedeutet. Für jeden anderen Winkel ist der Kosinus des eingeschlossenen Winkels kleiner als $1$.
+
+**Empfehlungsgenerierung:** Basierend auf den Ähnlichkeiten werden Objekte ausgewählt, die dem Benutzer empfohlen werden sollen. Dies können Objekte sein, die eine hohe Ähnlichkeit zu den vom Benutzer bevorzugten Merkmalen aufweisen.
 
 ### 2.2 Kollaborative Filterung
 Die kollaborative Filterung ist ein Ansatz, der die vergangenen Bewertungen eines Benutzers nutzt, um eine Datenbank (Benutzer-Objekt-Matrix) von Präferenzen zu erstellen und Vorhersagen über Gegenstände zu treffen, die mit den Vorlieben des Benutzers übereinstimmen. Sie wird in zwei Hauptkategorien unterteilt: memory-basierte kollaborative Filterung und modellbasierte kollaborative Filterung.
 
 #### 2.2.1 Memory-basierte kollaborative Filterung
+Die klassische kollaborative Filterung umfasst den memory-basierten Ansatz. Dieser Ansatz nutzt Informationen über die Vergangenheit von Benutzern und/oder Objekten, um Empfehlungen zu generieren. Der Schwerpunkt liegt auf der Speicherung und Auswertung von Informationen über Benutzerinteraktionen und Bewertungen, um Ähnlichkeiten zwischen Benutzern oder Objekten zu berechnen. 
+
+Es gibt zwei Haupttypen memory-basierter Ansätze, beide sind k-nearest neighbor Algorithmen, aber sie haben dennoch große Unterschiede:
+
+#### Benutzer-basierte Methode:
+Das Benutzer-basierte Verfahren analysiert die Ähnlichkeit zwischen Benutzern. Die Idee ist, dass Benutzer mit ähnlichen Vorlieben ähnliche Interaktionen mit Objekten haben. Das Empfehlungssystem sucht nach Benutzern mit ähnlichem Verhalten und generiert basierend auf deren Bewertungen Empfehlungen für einen bestimmten Benutzer. 
+
+<figure markdown>
+  ![User-basierte-Methode](./img/Empfehlungssysteme/user-user.png){ width="600" }
+  <figcaption> Eine Illustration der Benutzer-basierte-Methode.</figcaption>
+</figure>
+
+
+#### Objekt-basierte Methode:
+Das Objekt-basierte Verfahren konzentriert sich auf die Ähnlichkeit zwischen Objekten. Die Hauptidee besteht darin, ähnliche Objekte anhand von Bewertungen oder Benutzerinteraktionen zu finden. Das Empfehlungssystem vergleicht Benutzer-Bewertung-Modelle für verschiedene Objekte und sucht nach ähnlichen Objekte. 
+
+<figure markdown>
+  ![Objekt-basierte-Methode](./img/Empfehlungssysteme/item-item.png){ width="600" }
+  <figcaption> Illustration der Objekt-basierte-Methode. </figcaption>
+</figure>
+
+In beiden Fällen kann Ähnlichkeitsmaß wie die Kosinus-Ähnlichkeit oder andere verwendet werden, um die Ähnlichkeit zwischen Benutzern oder  Objekten zu berechnen.
 
 #### 2.2.2 Modellbasierte kollaborative Filterung
-Bei der Verwendung von memory-basierte Methoden entsteht das Problem, dass die Benutzer-Objekt-Matrix aufgrud einer großen Anzahl von fehlenden Bewertungen sehr dünn besetzt ist. Diese Datenspärlichkeit beeinträchtigt die Fähigkeit, Benutzervorlieben genau einzuschätzen und zuverlässige Empfehlungen zu geben. 
+Bei der Verwendung von memory-basierte Methoden entsteht das Problem, dass die Benutzer-Objekt-Matrix aufgrund einer großen Anzahl von fehlenden Bewertungen sehr dünn besetzt ist. Diese Datenspärlichkeit beeinträchtigt die Fähigkeit, Benutzervorlieben genau einzuschätzen und zuverlässige Empfehlungen zu geben. 
 
 Ein Lösungsansatz für dieses Problem besteht in der Verwendung von modellbasierten Methoden. Im Gegensatz zu memory-basierte Methoden lernen modellbasierte Algorithmen aus den vorhandenen Bewertungen ein Modell, das dann zur Vorhersage fehlender Bewertungen genutzt werden kann. Diese Modelle können auf Techniken wie Clustering, Bayes'schen Klassifikatoren oder Matrixfaktorisierung basieren.
 
@@ -71,7 +125,7 @@ Bei der Optimierung des SVD-Modells in der Surprise-Bibliothek gibt es mehrere w
 `lr_all`: Dieser Hyperparameter steuert die Lernrate, die den Schrittweite im Optimierungsalgorithmus bestimmt. Eine höhere Lernrate kann zu schnellerer Konvergenz führen, aber auch dazu führen, dass das optimale Ergebnis überschritten wird.
 
 `reg_all`: Dieser Hyperparameter steuert den Regularisierungsterm für alle Parameter im Modell. Regularisierung hilft, Overfitting zu verhindern, indem eine Strafe für komplexe Modelle hinzugefügt wird. Die Anpassung dieses Hyperparameters kann einen Kompromiss zwischen der Erfassung nützlicher Muster und der Vermeidung von Overfitting darstellen.
-### 2.3 Hybride Empfehlungssyteme 
+### 2.3 Hybride Empfehlungssysteme 
 Sowohl das Inhaltsbasierte als auch das kollaborative Filtermodell haben ihre Einschränkungen. Inhaltsbasierte Empfehlungssysteme haben die Einschränkung, dass sie stark von den verfügbaren Merkmalen oder Attributen eines Objekts abhängen, um Ähnlichkeiten zu ermitteln. Dadurch können sie Schwierigkeiten haben, komplexe und subtile Zusammenhänge zwischen verschiedenen Objekten zu erfassen, die sich nicht einfach durch Attribute beschreiben lassen.
 
 Auf der anderen Seite können kollaborative Filterungssysteme Einschränkungen aufweisen, wenn es um die Bewältigung des sogenannten "Cold-Start"-Problems geht. Dieses Problem tritt auf, wenn ein neuer Benutzer oder ein neues Objekt in das System eingeführt wird und keine ausreichenden Informationen über die Vorlieben oder Ähnlichkeiten zu anderen Benutzern oder Objekten vorliegen. Dadurch kann die Genauigkeit der Empfehlungen in solchen Situationen beeinträchtigt werden.
@@ -124,3 +178,8 @@ Hier Link zum Demo Video
 
 [Isinkaye, F. O., Folajimi, Y., & Ojokoh, B. A. (2015). Recommendation systems: Principles, methods and evaluation. Egyptian Informatics Journal; Elsevier BV. https://doi.org/10.1016/j.eij.2015.06.005](https://doi.org/10.1016/j.eij.2015.06.005)
 
+[Baptiste Rocca (2019). Introduction to recommender systems
+Overview of some major recommendation algorithms. https://towardsdatascience.com/introduction-to-recommender-systems-6c66cf15ada](https://towardsdatascience.com/introduction-to-recommender-systems-6c66cf15ada)
+
+
+[G. Adomavicius, A. Tuzhilin. (2005). Toward the next generation of recommender systems: a survey of the state-of-the-art and possible extensions.  https://ieeexplore.ieee.org/abstract/document/1423975](https://ieeexplore.ieee.org/abstract/document/1423975)
