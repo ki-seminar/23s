@@ -299,30 +299,30 @@ class Discriminator(nn.Module):
 
 ##### Fazit
 
-Verschiedene Varianten der GAN-basierten Methode können im Bereich Face Aging die plausibelsten und realistischsten Bilder erzeugen, die aufgrund des Alters nur schwer von echten Daten zu unterscheiden sind. Allerdings nutzen alle diese die sequentiellen Daten nicht vollständig aus. Diese Methoden können die Übergangsmuster, die als Korrelationen der Gesichtsmerkmale zwischen verschiedenen Altersgruppen für eine Person definiert sind, nicht explizit berücksichtigen. Daher sind ihre Ergebnisse normalerweise nicht in der Lage, die Gesichtsidentität beizubehalten oder die Übergangsregeln für Kreuzungen nicht gut zu erfüllen.
+Verschiedene Varianten der GAN-basierten Methode können im Bereich Face Aging die plausibelsten und realistischsten Bilder erzeugen, die aufgrund des Alters nur schwer von echten Daten zu unterscheiden sind. Allerdings nutzen sie die sequentiellen Daten nicht vollständig aus. Diese Methoden können die Übergangsmuster, die als Korrelationen der Gesichtsmerkmale zwischen verschiedenen Altersgruppen für eine Person definiert sind, nicht explizit berücksichtigen. Daher sind ihre Ergebnisse meist nicht in der Lage, die Gesichtsidentität beizubehalten oder die Übergangsregeln zwischen verschiedenen Altersgruppen zu berücksichtigen.
 
-Um diese Probleme zu lösen und den Alterungsprozess von Personen mit Hilfe von GANs noch detaillierter und akkurater darzustellen, wurden verschiedene Variationen von diesen Netzwerken entwickelt.
+Um diese Probleme zu lösen und den Alterungsprozess von Personen mit Hilfe von GANs noch detaillierter und realistischer darzustellen, wurden verschiedene Variationen von diesen Netzwerken entwickelt.
 
 #### Conditional Generative Adversiral Networks
 
-Ebenfalls im Jahr 2014 führten die Autoren Mehdi Mirza und Simon Osindero das [Conditional Generative Adversarial Network][28] ein. Bei einem unkonditionierten generativen gibt es keine Kontrolle über die Modi der erzeugten Daten. Durch die Konditionierung des Modells auf zusätzliche Informationen ist es jedoch möglich, den Datengenerierungsprozess zu steuern. Eine solche Konditionierung könnte auf Klassenlabels, auf einem Teil der Daten für Inpainting wie oder sogar auf Daten aus verschiedenen Modalitäten basieren. 
+Ebenfalls im Jahr 2014 führten die Autoren Mehdi Mirza und Simon Osindero das [Conditional Generative Adversarial Network][28] ein. Bei einem nicht-konditionierten GAN gibt es keine Kontrolle über die Modi der erzeugten Daten. Durch die Konditionierung des Modells auf zusätzliche Informationen ist es jedoch möglich, den Datengenerierungsprozess zu steuern. Eine solche Konditionierung könnte auf Klassenlabels, auf einem Teil der Daten für Inpainting oder sogar auf Daten aus verschiedenen Modalitäten basieren. 
 
-GANs können zu einem konditionalen Modell (Conditional GAN) erweitert werden, wenn sowohl der Generator als auch der Diskriminator durch eine zusätzliche Information konditioniert werden. Die Konditionierung kann durchgeführt werden, indem die Information sowohl in den Diskriminator als auch in den Generator als zusätzliche Eingabeschicht eingespeist wird.
+GANs können zu einem konditionalen Modell (conditional GAN) erweitert werden, wenn sowohl der Generator als auch der Diskriminator durch eine zusätzliche Information konditioniert werden. Die Konditionierung kann durchgeführt werden, indem die Information sowohl in den Diskriminator als auch in den Generator als zusätzliche Eingabeschicht eingespeist wird.
 
 <figure markdown>
   ![c-GAN](./img/Face Aging/Structure_of_Conditional_Adversarial_Net.png){ width="400" }
   <figcaption>Conditional Adversarial Net</figcaption>
 </figure>
 
-Die Ergebnisse des Papers demonstrierten das Potenzial von diesen Netzwerken.  
+Die Ergebnisse des Papers demonstrierten das Potenzial von solchen Netzwerken.  
 
 #### Face Aging with Conditional Generative Adversarial Networks
 
-Auch mit dem nächsten Paper - ["Face Aging with Conditional Generative Adversarial Networks"][5] -, aus dem Jahr 2017, wurde versucht, die Probleme mit dem Verlust der Identität der ursprünglichen Person in modifizierten Bildern, zu minimieren. Daher konzentriert sich diese Studie auf die identitätserhaltende Gesichtsalterung. Dafür entwickelten die Autoren das Age-cGAN (Age Conditional Generative Adversarial Network). Es sollte das erste GAN sein, das qualitativ hochwertige synthetische Bilder innerhalb der geforderten Alterskategorien erzeugt. Zusätzlich schlug das Team einen neuartigen Ansatz zur Optimierung latenter Vektoren vor, der es Age-cGAN ermöglicht, ein eingegebenes Gesichtsbild zu rekonstruieren, ohne die Identität der ursprünglichen Person zu verändern.
+Auch mit dem nächsten Paper - ["Face Aging with Conditional Generative Adversarial Networks"][5] -, aus dem Jahr 2017, wurde versucht, die Probleme mit dem Verlust der Identität der ursprünglichen Person in modifizierten Bildern zu minimieren. Daher konzentriert sich diese Studie auf die identitätserhaltende Gesichtsalterung. Dafür entwickelten die Autoren das Age-cGAN (Age Conditional Generative Adversarial Network). Es sollte das erste GAN sein, das qualitativ hochwertige synthetische Bilder innerhalb der geforderten Alterskategorien erzeugt. Zusätzlich schlug das Team einen neuartigen Ansatz zur Optimierung latenter Vektoren vor, der es Age-cGAN ermöglichte, ein eingegebenes Gesichtsbild zu rekonstruieren, ohne die Identität der ursprünglichen Person zu verändern.
 
-Ein Conditional GAN (cGAN) erweitert das GAN-Modell und ermöglicht die Erzeugung von Bildern mit bestimmten Bedingungen (Attributen). Diese Bedingungen können jede beliebige Information, die sich auf das Zielgesichtsbild bezieht. Zum Beispiel Beleuchtungsniveau, Gesichtshaltung oder Gesichtsattribute. Hierbei wird die bedingte Information in den Eingang des Generators und in die erste Faltungsschicht (Convolution Layer) von dem Discriminator Netzwerk injiziert.
+Ein Conditional GAN (cGAN) erweitert das GAN-Modell und ermöglicht die Erzeugung von Bildern mit bestimmten Bedingungen (Attributen). Diese Bedingungen können jede beliebige Information beinhalten, die sich auf das Zielgesichtsbild bezieht. Zum Beispiel Beleuchtungsniveau, Gesichtshaltung oder Gesichtsattribute. Die bedingte Information wird dabei in den Eingang des Generators und in die erste Faltungsschicht (Convolution Layer) von dem Discriminator Netzwerk injiziert.
 
-Conditional GANs verfügen nicht über einen expliziten Mechanismus zur inversen Abbildung eines Eingangsbildes $x$ mit Attributen $y$ auf einen latenten Vektor $z$, der für die Bildrekonstruktion notwendig. Die Autoren umgehen dieses Problem, indem ein Encoder $E$ trainiert wird. Bei diesen handelt es sich um ein neuronales Netz, das die inverse Abbildung annhähert. Dieser erzeugtanfängliche latente Approximationen, die gut genug sind, um als Initalisierungen für den Optimierungsalgorithmus zu dienen. Das Team nutzt einen neuartigen "identitätserhaltenden Ansatz" (Identity-Preserving) zur Optimierung latenter Vektoren. Hierbei lautet der Grundgedanke folgendermaßen: Bei einem neuronalen Gesichtserkennungsnetz (Face Recognition), das in der Lage ist, die Identität einer Person in einem eingegebenen Gesichtsbild zu erkennen, kann der Unterschied zwischen den Identiäten in den ursprünglichen und rekonstruiertern Bildern als euklidischer Abstand zwischen den entsprechenenden Einbettungen ausgedrückt werden. Daher sollte die Minimierung dieses Abstands die Erhaltung der Identität im rekonstruierten Bild verbessern.
+Conditional GANs verfügen herkömmlicherweise nicht über einen expliziten Mechanismus zur inversen Abbildung eines Eingangsbildes $x$ mit Attributen $y$ auf einen latenten Vektor $z$, der für die Bildrekonstruktion notwendig ist. Die Autoren umgehen dieses Problem, indem ein Encoder $E$ trainiert wird. Bei diesen handelt es sich um ein neuronales Netz, das die inverse Abbildung annähert. Dieser erzeugt anfängliche latente Approximationen, die gut genug sind, um als Initalisierungen für den Optimierungsalgorithmus zu dienen. Das Team nutzt einen neuartigen "identitätserhaltenden Ansatz" (Identity-Preserving) zur Optimierung latenter Vektoren. Hierbei lautet der Grundgedanke folgendermaßen: Bei einem neuronalen Netz zur Gesichtserkennung (Face Recognition), das in der Lage ist, die Identität einer Person in einem eingegebenen Gesichtsbild zu erkennen, kann der Unterschied zwischen den Identiäten in den ursprünglichen und rekonstruiertern Bildern als euklidischer Abstand zwischen den entsprechenenden Einbettungen ausgedrückt werden. Daher sollte die Minimierung dieses Abstands die Erhaltung der Identität im rekonstruierten Bild verbessern.
 
 <figure markdown>
   ![Age-c-GAN](./img/Face Aging/Age-c-GAN.png){ width="800" }
@@ -331,35 +331,35 @@ Conditional GANs verfügen nicht über einen expliziten Mechanismus zur inversen
 
 In der folgenden Abbildung werden Beispiele für die Rekonstruktion und Alterung von Gesichtern dargestellt. 
 
-- (a) Zeigt die Originalen Testbilder
+- (a) Zeigt die originalen Testbilder
 - (b) Zeigt die rekonstruierten Bilder
-- (c) Zeigt die rekonstruiertern Bilder, die inklusive den "pixelweisen" und "identitätserhaltenden" Methoden generiert wurden
-- (d) Zeigt die rekonstruierten Bilder, dieunter Verwendung der identitätserhaltenden Approximationen und konditioniert auf die jeweilige Alterskategorie (eine pro Spalte)
+- (c) Zeigt die rekonstruierten Bilder, die inklusive den "pixelweisen" und "identitätserhaltenden" Methoden generiert wurden
+- (d) Zeigt die rekonstruierten Bilder, die unter Verwendung der identitätserhaltenden Approximationen und konditioniert auf die jeweilige Alterskategorie (eine pro Spalte) generiert wurden
 
 <figure markdown>
   ![Results Age-c-GAN](./img/Face Aging/Age-c-GAN_Results.png){ width="800" }
   <figcaption>Beispiele von generierten Bildern druch das Age-c-GAN</figcaption>
 </figure>
 
-Die Autoren kamen zum Schluss, dass der Teil der Gesichtsrekonstruktion mit deren Methode weiter verbessert werden kann, indem "pixelweise" (Pixelwise) und "identitätserhaltende" (Identity-Preserving) Ansätze in einem Optimizerungsziel kombiniert werden.
+Die Autoren kamen zu dem Schluss, dass die Gesichtsrekonstruktion mit ihrer Methode weiter verbessert werden kann, indem "pixelweise" (pixelwise) und "identitätserhaltende" (Identity-Preserving) Ansätze in einem Optimizerungsziel kombiniert werden.
 
-#### Face Aging with Contextual Generative Adversarial Nets
+#### Face Aging with Contextual Generative Adversarial Networks
 
-Im Jahr 2018 veröffentlichten eine Autorengruppe um Liu et. al., ein Paper mit dem Titel ["Face Aging with Contextual Generative Adversarial Nets"][4]. Im Gegensatz zu traditionellen GANs, die nur die reale Datenverteilung jedes einzelnen Alters modellieren, konzentrierte sich das Team auf die altersübergreifenden Korrelationen höherer Ordnung, die die Ergebnisse der Gesichtsalterung attraktiver machen. Um dies umzusetzen, schlugen die Autoren die Umsetzung der Gesichtsalterung mittels einem "Contextual Generative Adversarial (C-GANs)" vor.
+Im Jahr 2018 veröffentlichten eine Autorengruppe um Liu et. al. ein Paper mit dem Titel ["Face Aging with Contextual Generative Adversarial Nets"][4]. Im Gegensatz zu traditionellen GANs, die nur die reale Datenverteilung jedes einzelnen Alters modellieren, konzentrierte sich das Team auf die altersübergreifenden Korrelationen höherer Ordnung, die die Ergebnisse der Gesichtsalterung attraktiver machen sollten. Um dies zu realisieren, schlugen die Autoren die Umsetzung der Gesichtsalterung mittels eines "Contextual Generative Adversarial Networks (C-GANs)" vor.
 
 <figure markdown>
   ![c-GAN](./img/Face Aging/c-GANs.png){ width="400" }
   <figcaption>Vorgeschlagener C-GANs-Algorithmus für die Gesichtsalterung.</figcaption>
 </figure>
 
-Conextual-GANs bestehen aus drei neuronalen Netzwerken. Um sicherzustellen, dass die erzeugten Bilder echt sind, werden zwei diskriminierende Netzwerke verwendet, um die Verteilung jeder einzelnen Altersgruppe sowie die Übergangspaare von zwei benachbarten Gruppen zu modellieren. Das altersdiskriminierende Netz (Age Discriminative Network) hilft bei der Erzeugung von Bildern, die von den echten nicht zu unterscheiden sind. Das bedingte Transformationsnetzwerk (Conditional Transformation Network) transformiert das Gesicht der Eingabe in das gewünschte Alter. Das diskriminierende Netz für Übergangsmuster (Transition Pattern Discriminative Network) reguliert die erzeugten Bilder, die den altersübergreifenden Alterungsregeln entsprechen
+Conextual-GANs bestehen aus drei neuronalen Netzwerken. Um sicherzustellen, dass die erzeugten Bilder echt wirken, werden zwei diskriminierende Netzwerke verwendet, um die Verteilung jeder einzelnen Altersgruppe sowie die Übergangspaare von zwei benachbarten Gruppen zu modellieren. Das altersdiskriminierende Netz (Age Discriminative Network) hilft bei der Erzeugung von Bildern, die von den echten nicht zu unterscheiden sind. Das bedingte Transformationsnetzwerk (Conditional Transformation Network) transformiert das Gesicht der Eingabe in das gewünschte Alter. Das diskriminierende Netz für Übergangsmuster (Transition Pattern Discriminative Network) reguliert die erzeugten Bilder, damit sie den den Alterungsregeln entsprechen.
 
 <figure markdown>
   ![Structure C-GAN](./img/Face Aging/Structure_c-GANs.png){ width="400" }
   <figcaption>Struktur des vorgeschlagenen C-GANs.</figcaption>
 </figure>
 
-In der nächsten Abbildungen werden die generierten Gesichter qualitativ verglichen mit der Grundwahrheit dargestellt. In jedem Triplett sind das erste und dritte Bild die Grundwahrheiten mit Altersgruppe 1 und Altersgruppe 2, während das zweite Bild das Alterungsergebnis ist.
+In der nächsten Abbildung werden die generierten Gesichter qualitativ verglichen mit der Grundwahrheit dargestellt. In jedem Triplett sind das erste und dritte Bild die Grundwahrheiten, jeweils in Altersgruppe 1 und Altersgruppe 2, während das zweite Bild das generierte Alterungsergebnis ist.
 
 <figure markdown>
   ![Results Contextual GAN](./img/Face Aging/Context-GAN_Results.png){ width="800" }
@@ -370,7 +370,7 @@ In der nächsten Abbildungen werden die generierten Gesichter qualitativ verglic
 
 In diesem [Paper][7], welches 2018 veröffentlicht wurde, schlug das Autorenteam ein Identity-Preserved Conditional Generative Adversarial Network (IPCGAN) - zu Deutsch: identitätserhaltendes bedingtes generatives adversariales Netzwerk - für die Gesichtsalterung vor. Dieses besteht aus drei Modulen. Einem Conditional Generative Adversarial Network (CGAN), einem identitätserhaltenden (Identity-Preserved) Modul und einem Altersklassifikator.
 
-Als Eingabe für den Generator im CGAN wird ein Eingabebild und eine Zielalterklasse verwendet. Dieser versucht ein Gesicht mit dem Alter in der Zielalterklasse zu erzeugen. Das generierte Gesicht soll sich nciht von realen Gesichtern in der Zielaltersgruppe unterscheiden. Um die Identitätsinformationen zu erhalten, wird ein Wahrnehmungsverlust (Perceptual Loss) eingeführt. Um zu garantieren, dass die synthetisierten Gesichter in die Zielaltersgruppe fallen, werden die erzeugten gealterten Gesichter an einen vortrainiertern Alterklassifikator übergeben und ein Altersklassifikationsverlust hinzugefügt.   
+Als Eingabe für den Generator im IPCGAN wird ein Eingabebild und eine Zielaltersklasse verwendet. Es wird versucht ein Gesicht mit dem Alter in der Zielaltersklasse zu erzeugen. Das generierte Gesicht soll sich nicht von realen Gesichtern in der Zielaltersgruppe unterscheiden. Um die Identitätsinformationen zu erhalten, wird ein Wahrnehmungsverlust (Perceptual Loss) eingeführt und um zu garantieren, dass die synthetisierten Gesichter in die Zielaltersgruppe fallen, werden die erzeugten gealterten Gesichter an einen vortrainiertern Alterklassifikator übergeben und ein Altersklassifikationsverlust hinzugefügt.   
 
 <figure markdown>
   ![IPCGAN](./img/Face Aging/IPCGAN.png){ width="600" }
@@ -386,16 +386,16 @@ Das folgende Bild zeigt ein generiertes Beispielbild des IPCGAN Ansatzes.
 
 #### Learning Face Age Progression: A Pyramid Architecture of GANs
 
-2019 veröffentlichten die Autoren um Yang et. al. ein Paper mit dem Titel ["Learning Face Age Progression: A Pyramid Architecture of GANs"][8], indem ein neuartiger Ansatz zur Alterung von Gesichtern vorgeschlagen wird. Hierbei werden die Vorteile von Generative Adversarial Netweorks (GAN) bei  der Synthese visuell plausibler Bilder mit dem Vorwissen über  die menschliche Alterung verbunden. Die Autoren versprechen, dass ihr Modell im Vergleich zu bestehenden Methoden in der Literatur besser in der Lage ist, die beiden kritischen Anforderungen bei der Altersentwicklung zu erfüllen, d.h. Identitätsbeständigkeit und Alterungsgenauigkeit.
+2019 veröffentlichten die Autoren Yang et. al. ein Paper mit dem Titel ["Learning Face Age Progression: A Pyramid Architecture of GANs"][8], in dem ein neuartiger Ansatz zur Alterung von Gesichtern vorgeschlagen wurde. Hierbei werden die Vorteile von Generative Adversarial Networks (GAN) bei  der Synthese visuell plausibler Bilder mit Vorwissen über die menschliche Alterung verbunden. Die Autoren versprechen, dass ihr Modell im Vergleich zu bestehenden Methoden in der Literatur besser in der Lage ist, die beiden kritischen Anforderungen bei der Altersentwicklung zu erfüllen, d.h. Identitätsbeständigkeit und Alterungsgenauigkeit.
 
-In dieser Methode nimmt der CNN-basierte Generator junge Gesichter als Input und lernt eine Zuordnung zu einem Bereich, der älteren Gesichtern entspricht. Um Alterungseffekte zu erzielen und gleichzeitig personenspezifische Informationen beizubehalten, wird ein zusammengesetzter Loss verwendet.
+In dieser Methode nimmt der Convolutional Neural Network (CNN) basierte Generator junge Gesichter als Input und lernt eine Zuordnung zu einem Bereich, der älteren Gesichtern entspricht. Um Alterungseffekte zu erzielen und gleichzeitig personenspezifische Informationen beizubehalten, wird ein zusammengesetzter Loss verwendet.
 
 <figure markdown>
   ![Pyramid GAN](./img/Face Aging/Pyramid_GAN.png){ width="600" }
   <figcaption>Framework der vorgeschlagenen Methode der Altersprogression.</figcaption>
 </figure>
 
-Beispiele für die Ergebnisse der Altersentwicklung sind in der nächsten Abbildung zu sehen. Es werden visuell plausible und überzeugende Alterungseffekte erzielt, obwohl die Beispiele eine breite Palette von Personen in Bezug auf Rasse, Geschlecht, Pose, Make-up und Ausdruck abdecken.
+Beispiele für die Ergebnisse der Altersentwicklung sind in der nächsten Abbildung zu sehen. Es werden visuell plausible und überzeugende Alterungseffekte erzielt, obwohl die Beispiele eine breite Palette von Personen in Bezug auf Ethnie, Geschlecht, Pose, Make-up und Ausdruck abdecken.
 
 <figure markdown>
   ![Results Pyramid GAN](./img/Face Aging/Pyramid-GAN_Results.png){ width="800" }
@@ -404,14 +404,14 @@ Beispiele für die Ergebnisse der Altersentwicklung sind in der nächsten Abbild
 
 #### Triple-GAN: Progressive Face Aging with Triple Translation Loss
 
-Mit dem Triple-GAN aus dem Jahr 2020 wollten die Autoren die Probleme bei der Gesichtsalterung mittels Deep-Learning-Methoden lösen. Hierbei handelt es sich um die nicht zufriedenstellenden Ergebnisse in der gewünschten Altersgruppe, die Ignorierung der fortschreitenden Veränderung der Altersmuster und die Identitätserhlautng zwischen den synthetisierten Bildern. Dazu erforschten sie, wie man verschiedene Altermsuter gleichzeitig übersetzen kann, um mehrere Trainingsphasen für kontraddiktorisches Lernen zu erhalten. Das Discriminator-Netzwerk wurde so angepasst, dass es nicht nur auf der Ebene von echt und falsch unterscheidet, sondern auch effizienten Zuordnungen zwischen Mustern und Bezeichnungen erstellt, indem verschiedene Altersmuster gemeinsam gelernt werden. Um die Altersbeziehungen zwischen den verschiedenen Altersgruppen zu modellieren wurde die Leistung des Generators verbessert und zusätzlich eine dreifache Überstzung (Triple-Translation) hinzugefügt. Diese hilft, um das synthetisierte Gesicht eines bestimmten Alters in ein anderes Alter zu übersetzern. 
+Mit dem Triple-GAN aus dem Jahr 2020 wollten die Autoren die Probleme bei der Gesichtsalterung mittels Deep-Learning-Methoden lösen. Konkret wollten sie die nicht zufriedenstellenden Ergebnisse in der gewünschten Altersgruppe, die Ignorierung der fortschreitenden Veränderung der Altersmuster und die Identitätserhalutng im synthetisierten Bild lösen. Dazu erforschten sie, wie man verschiedene Altersmuster gleichzeitig übersetzen kann, um mehrere Trainingsphasen für kontradiktorisches Lernen zu erhalten. Das Discriminator-Netzwerk wurde so angepasst, dass es nicht nur auf der Ebene von echt und falsch unterscheidet, sondern auch effiziente Zuordnungen zwischen Mustern und Bezeichnungen erstellt, indem verschiedene Altersmuster gemeinsam erlernt wurden. Um die Altersbeziehungen zwischen den verschiedenen Altersgruppen zu modellieren, wurde die Leistung des Generators verbessert und zusätzlich eine dreifache Überstzung (Triple-Translation) hinzugefügt. Diese hilft dabei, das synthetisierte Gesicht eines bestimmten Alters in ein anderes Alter zu übersetzern. 
 
 <figure markdown>
   ![Triple GAN](./img/Face Aging/Triple_GAN.png){ width="400" }
   <figcaption>Pipeline für die dreifache Überstzung (Triple Translation)</figcaption>
 </figure>
 
-Durch die Verwendung eines dreifachen Übersetzungsverlust (Triple Translation Loss) werden synthetisierte Gesichter im gleichen Ziel aus verschiedenen Pfaden gezwungen, nahe beieinander zu liegen, so dass die Übersetzung von Altersmustern korreliert werden kann, um progressive in kontinuierliche Veränderungen der Gesichtsalterung besser zu simulieren.
+Durch die Verwendung eines dreifachen Übersetzungsverlust (Triple Translation Loss) werden verschiedene synthetisierte Gesichter der gleichen Zielaltersgruppe gezwungen, hohe Ähnlichkeit aufzuweisen. So kann die Übersetzung von Altersmustern korreliert werden, um progressive und kontinuierliche Veränderungen in der Gesichtsalterung besser zu simulieren.
 
 Das Framework der Autoren beinhaltet vier Komponenten:
 
@@ -425,7 +425,7 @@ Das Framework der Autoren beinhaltet vier Komponenten:
   <figcaption>Framework des vorgeschlagenen Triple-GAN für Gesichtsalterung</figcaption>
 </figure>
 
-Die Ergebnisse des Triple-GANs in der folgenden Abbildung zeigen, dass die generiertern Bilder einen offensichtlichen Alterungseffekt und einer gut erhaltenden Identität erzielen.
+Die Ergebnisse des Triple-GANs in der folgenden Abbildung zeigen, dass die generiertern Bilder einen offensichtlichen Alterungseffekt und eine gut erhaltene Identität vorweisen können.
 
 <figure markdown>
   ![Results Triple GAN](./img/Face Aging/Triple-GAN_Results.png){ width="800" }
@@ -434,7 +434,7 @@ Die Ergebnisse des Triple-GANs in der folgenden Abbildung zeigen, dass die gener
 
 #### Only a Matter of Style: Age Transformation Using a Style-Based Regression Model
 
-Mit dem Paper [Only a Matter of Style: Age Transformation Using a Style-Based Regression Model][9] stellten die Autoren eine Implementierung namens SAM -Style-based Age Manipulation - vor. Hierbei versuchen sie die gewünschte Alterveränderung zu erfassen und gleichzeitig die Identität zu bewahren. Die Gesichtsalterung wird hier versucht durch ein Bild-zu-Bild Übersetzung (Image-to-Image Translation) zu lösen. Zu diesen Techniken gehören auch die Conditional GANs, die wir oben bereits erwähnt haben. In der Forschungsarbeit wird ein vortrainierter (pre-trained) StyleGAN-Generator mit einer Encoder-Architektur kombiniert. Der Encoder hat die Aufgabe, ein Gesichtsbild als Eingabe direkt in eine Reihe von Stilvektoren zu kodieren, die der gewünschten Altersveränderung unterliegen. Diese Vektoren werden anschließend an das StyleGAN übergeben, um das Ausgangsbild zu erzeugen, das die gewünschte Altersveränderung darstellt. Um den Encoder bei der Generierung anzuleiten, wird ein vortrainiertes Alterregressionsnetzwerk während des Trainingsprozesses als zusätzliche Einschränkung verwendet. SAM betrachtet die menschliche Alterung als ein Regressionsproblem auf das gewünschte Zielalter.
+Mit dem Paper [Only a Matter of Style: Age Transformation Using a Style-Based Regression Model][9] stellten die Autoren eine Implementierung namens SAM -Style-based Age Manipulation - vor. Hierbei versuchten sie die gewünschte Altersveränderung zu erfassen und gleichzeitig die Identität zu bewahren. Die Gesichtsalterung wurde dabei durch eine Bild-zu-Bild Übersetzung (Image-to-Image Translation) versucht gelöst zu werden. Zu dieser Technik gehören auch die Conditional GANs, die wir weiter oben bereits erwähnt haben. In der Forschungsarbeit wird ein vortrainierter (pre-trained) StyleGAN-Generator mit einer Encoder-Architektur kombiniert. Der Encoder hat die Aufgabe, ein Gesichtsbild als Eingabe direkt in eine Reihe von Stilvektoren zu kodieren, die der gewünschten Altersveränderung unterliegen. Diese Vektoren werden anschließend an StyleGAN übergeben, um das Ausgangsbild zu erzeugen, das die gewünschte Altersveränderung darstellt. Der Encoder wird bei der Generierung durch ein vortrainiertes Alterregressionsnetzwerk während des Trainingsprozesses als zusätzliche Einschränkung angeleitet. SAM betrachtet die menschliche Alterung also als ein Regressionsproblem auf das gewünschte Zielalter hin.
 
 <figure markdown>
   ![SAM Architecture](./img/Face Aging/SAM_Architecture.png){ width="600" }
@@ -446,20 +446,20 @@ Mit dem Paper [Only a Matter of Style: Age Transformation Using a Style-Based Re
   <figcaption>Mit SAM erzeugte Alterungsergebnisse</figcaption>
 </figure>
 
-Die Ergebnisse dieser Methode werden durch die Style-Repräsentation bestimmt. D.h. diese ist auf Bilder beschränkt, die genau in den latenten Raum von StyleGAN eingebettet werden können. Die Modellierung von Gesichtern, die außerhalb des StyleGAN-Bereichs liegen, können daher eine Herausforderung darstellen. Ebenso kann es durch die Einbettung eines Bildes in eine Reihe von Vektoren schwieriger werden, die Eingangsmerkmale wie den Bildhintergrund originalgetreu zu erhalten. In den Evaluierungen wurde gezeigt, dass die vorgeschlagene Methode das Alter und andere Merkmale wie Haarfarbe und Frisur erfolgreich voneinander trennt. Allerdings ändern sich solche Attribute natürlich mit dem Alter. Um diese Veränderungen zu modellieren, wurden daher zwei Bearbeitungstechniken zur Kontrolle globaler Veränderungen (z. B. Haarfarbe) und lokaler Veränderungen (z. B. das Vorhandensein von Brillen und Gesichtsbehaarung) vorgeschlagen. Die Erfassung komplexerer Veränderungen, wie z. B. zurückweichende Haarlinien und Veränderungen der Hautfarbe, ist mit den heute verfügbaren Methoden nach wie vor eine Herausforderung, auch weil sie schwieriger zu erfassen sind.
+Die Ergebnisse dieser Methode werden durch die Style-Repräsentation bestimmt. D.h. sie ist auf Bilder beschränkt, die genau in den latenten Raum von StyleGAN eingebettet werden können. Die Modellierung von Gesichtern, die außerhalb des StyleGAN-Bereichs liegen, kann daher eine Herausforderung darstellen. Ebenso kann es durch die Einbettung eines Bildes in eine Reihe von Vektoren schwieriger werden, die Eingangsmerkmale wie den Bildhintergrund originalgetreu zu erhalten. In den Evaluierungen wurde gezeigt, dass die vorgeschlagene Methode das Alter und andere Merkmale wie Haarfarbe und Frisur erfolgreich voneinander trennt. Allerdings ändern sich solche Attribute natürlich mit dem Alter. Um diese Veränderungen zu modellieren, wurden daher zwei Bearbeitungstechniken zur Kontrolle globaler Veränderungen (z. B. Haarfarbe) und lokaler Veränderungen (z. B. das Vorhandensein von Brillen und Gesichtsbehaarung) vorgeschlagen. Die Erfassung komplexerer Veränderungen, wie z. B. zurückweichende Haarlinien und Veränderungen der Hautfarbe, ist mit diesert Methode aber nach wie vor eine Herausforderung.
 
 #### PFA-GAN: Progressive Face Aging With Generative Adversarial Network
 
-Die Autoren von diesem [Paper][1] nutzen die Tatsache, dass Gesichter im Laufer der Zeit allmählich altern und modellieren den Alterungsprozess im Gesicht in einer progressiven Weise. Mit dem neuen progressiven Face-Aging-Framework, das auf einem Generative Adversarial Network basiert (Progressive Face Aging with Generative Adversarial Networks - PFA-GAN). Dieses besteht aus mehreren kleinen Generator-Subnetzwerken, die sich jeweils nur  mit spezifischen Alterungseffekten zwischen zwei angrenzenden Altersgruppen befassen. Der Hauptunterschied zu anderen GAN-basierten Methoden besteht ebenfalls darin, dass das PFA-GAN die Subnetze gleichzeitig trainiert. Frühere GAN-Varianten trainierten verschiedene Netzwerke unabhängig voneinander. 
+Die Autoren von diesem [Paper][1] nutzen die Tatsache, dass Gesichter im Laufe der Zeit fortlaufend altern und modellieren den Alterungsprozess im Gesicht daher in einer progressiven Weise mit ihrem neuen progressive Face-Aging-Framework, das auf einem GAN basiert (Progressive Face Aging with Generative Adversarial Network - PFA-GAN). Dieses besteht aus mehreren kleinen Generator-Subnetzwerken, die sich jeweils nur  mit spezifischen Alterungseffekten zwischen zwei angrenzenden Altersgruppen befassen. Der Hauptunterschied zu anderen GAN-basierten Methoden besteht darin, dass das PFA-GAN die Subnetze gleichzeitig trainiert. Frühere GAN-Varianten trainierten verschiedene Netzwerke unabhängig voneinander. 
 
-Die Autoren heben dabei die Bedeutung der folgenden vier Aspekte für eine progressive Modellierung der Geischtslaterung hervor:
+Die Autoren heben dabei die Bedeutung der folgenden vier Aspekte für eine progressive Modellierung der Gesichtsalterung hervor:
 
-1. Konzentration auf die Modellierung Gesichtsalterungseffekten zwischen zwei angrenzenden Altersgruppen
-2. Durch das durchgängige Trainieren der progressiven Gesichtsalterung kann das Netzwerk dazu gezwungen werden, glatte Gesichtsalterungsergebnisse zu erzielen
-3. Die ordinale Beziehung zwischen den Altersgruppen kann genutzt werden, um die Alterungsglätte zu verbessern
+1. Konzentration auf die Modellierung von Gesichtsalterungseffekten zwischen zwei angrenzenden Altersgruppen
+2. Fortlaufende Alterungsergebnisse durch das durchgängige Trainieren der progressiven Gesichtsalterung
+3. Verbesserung der Alterungsglätte durch eine ordinale Beziehung zwischen den Altersgruppen
 4. Die Leistung der Cross-Age-Verifizierung kann verbessert werden
 
-Die folgende Abbildung zeigt, dass das $i$-te Teilnetzwerk $G_i$ dazu dient, Gesichter von der Altersgruppe $i$ bis $i + 1$ zu altern.
+Die folgende Abbildung zeigt, dass das $i$-te Teilnetzwerk $G_i$ dazu dient, Gesichter von der Altersgruppe $i$ zur Gruppe $i + 1$ zu altern.
 
 <figure markdown>
   ![PFA-GAN Subnetworks](./img/Face Aging/PFA-GAN_Subnetworks.png){ width="800" }
@@ -470,15 +470,15 @@ Der progressive Alterungsrahmen von der Ausgangsaltersgruppe bis zur Zielaltersg
 
 $$X_t = \overline{G}_{t-1} \circ \overline{G}_{t-2} \circ \dots \circ \overline{G}_{s}(X_s)$$
 
-Im Generator-Netzwerke werden zusätzlich [Residual-Skip-Verbindung][32] genutzt. Diese verhindert, dass die exakte Kopie des Gesichtes des Eingabebilds über mehrere Subnetze hin gespeichert wird. Durch die Einführung der Skip-Verbindung kann die Zielaltersgruppe leicht in eine Sequenz von binären Gattern umgewandelt werden, die den Alterungsfluss steuern. 
+In den Generator-Netzwerken werden zusätzlich [Residual-Skip-Verbindung][32] genutzt. Diese verhindern, dass die exakte Kopie des Gesichtes des Eingabebilds über mehrere Subnetze hinweg gespeichert wird. Durch die Einführung der Skip-Verbindung kann die Zielaltersgruppe leicht in eine Sequenz von binären Gattern umgewandelt werden, die den Alterungsfluss steuern. 
 
-Die Veränderungen von der Altersgruppe $i$ zu $i + 1$ lässt sich wie folgt umschreiben:
+Die Veränderungen von der Altersgruppe $i$ zu $i + 1$ lässt sich mathematisch wie folgt beschreiben:
 
 $$ X_{t+1} = \overline{G}_{i}(X_i) = X_i + \lambda_i G_i (X_i) $$
 
 Somit besteht ein Generator-Subnetzwerk aus einer Resudial-Skip-Verbindung, einem binären Gatter und dem Netzwerk an sich. Bei $\lambda_i \in \{0,1\}$ handelt es sich um das binäre Gatter, welches kontrolliert ob das Subnetzwerke $G_i$ in den Alterungsprozess zum jeweiligen Zielalter mit einbezogen wird.
 
-Mit dem vorgeschlagenen Framework lässt sich die Altersprogression, z.B. von der Altersgruppe 1 bis 4, wie in der obigen Abbildung dargestellt, wie folgt ausdrücken:
+Mit dem vorgeschlagenen Framework lässt sich die Altersprogression, z.B. von der Altersgruppe 1 bis 4 wie in der obigen Abbildung dargestellt, wie folgt ausdrücken:
 
 
 $$
@@ -489,24 +489,24 @@ X_4 = X_3 + \underbrace{\lambda_3 G_3(X_3)}_\text{Alterseffekte Gruppe 3 bis 4} 
 = X_1 + \underbrace{\lambda_1 G_1(X_1) + \lambda_2 G_2(X_2) + \lambda_3 G_3(X_3)}_\text{Alterseffekte Gruppe 1 bis 4}
 $$
 
-Wenn jetzt ein Benuzer das Gesicht von der Altersgruppe 2 bis 3 vorhersagen will, reduziert sich die obige Gleichung auf $X_3 = X_2 + G_2(X_2)$. Der Vektor für $\lambda$ für diese Generierung lautet folgendermaßen $\begin{pmatrix}0 & 1 & 0\end{pmatrix}$ und somit werden die Subnetze $G_1$ und $G_3$ bei der Berechnung ausgeschalten.
+Wenn jetzt die Alterung von Gruppe 2 nach Gruppe vorhergesagt werden soll, so reduziert sich die obige Gleichung auf $X_3 = X_2 + G_2(X_2)$. Der Vektor für $\lambda$ für diese Generierung lautet folgendermaßen $\begin{pmatrix}0 & 1 & 0\end{pmatrix}$ und somit werden die Subnetze $G_1$ und $G_3$ bei der Berechnung außenvorgelassen.
 
-Schließlich können wir den Alterungsprozess vom einem Gesicht $X_s$ von einer gegebenen Altersgruppe $s$ hinzu einer Zielaltersgruppe wie folgt formulieren:
+Schließlich können wir den Alterungsprozess vom einem Eingabe-Gesicht $X_s$ von einer gegebenen Altersgruppe $s$ hin zu einer Zielaltersgruppe $t$ wie folgt formulieren:
 
 $$X_t = G(X_s, \lambda_{s:t})$$
 
 $G = \overline{G}_{N-1} \circ \overline{G}_{N-2} \circ \dots \circ \overline{G}_{1}$ beschreibt das progressive Gesichtsalterungsnetzwerk. $\lambda_{s:t}$ kontrolliert den Alterungsprozess.
 
-Zusätzlich zum Generator- und Diskrimanator Netzwerk, die Hauptbestandteile von GANS sind, wird noch ein weiteres Netzwerk für das Erlernen von Alterungseffekten verwendet. Hierbei handelt es sich um ein Altersschätzungsnetzwerk (Age Estimation Network). Diese dient dazu die Gesichtsaltersverteilung für eine verbesserte Altersgenauigkeit besser zu charakterisieren. In früheren Arbeiten wurde in der Regel entweder die Alterklassifikation oder die Altersregression verwendet, um zu überprüfen ob das erzeugte Gesicht zur Zielaltersgruppe gehört, was möglicherweise nicht ausreicht, um die Altersverteilung des Gesichts zu charakterisieren. In dieser Implementierung verwendeten die Autoren den [Deep Expectation (DEX)][33] Ansatz. Das Altersschätzungsnetzwerk wurde vor dem Trainingsprozesses des PFA-GAN trainiert. Einmal trainiert, wurden die Gewichte des Netzwerks eingeforeren. Es reguliert den Generator für eine verbesserte Alterungsgenauigkeit.
+Zusätzlich zum Generator und Diskriminator Netzwerk, die Hauptbestandteile von GANs sind, wird im PFA-GAN noch ein weiteres Netzwerk verwendet. Hierbei handelt es sich um ein Altersschätzungsnetzwerk (Age Estimation Network). Es dient dazu, die Gesichtsaltersverteilung für eine verbesserte Altersgenauigkeit besser zu charakterisieren. In früheren Arbeiten wurde in der Regel entweder die Alterklassifikation oder die Altersregression verwendet, um zu überprüfen ob das erzeugte Gesicht zur Zielaltersgruppe gehört. In dieser Implementierung verwendeten die Autoren den [Deep Expectation (DEX)][33] Ansatz. Das Altersschätzungsnetzwerk wurde vortrainiert und die erzielten Gewichte eingefroren. Es reguliert den Generator für eine verbesserte Alterungsgenauigkeit.
 
-Die folgenden Abbildung zeigt die komplette Architektur des vorgeschlagenen PFA-GANs.
+Die folgende Abbildung zeigt die komplette Architektur des vorgeschlagenen PFA-GANs.
 
 <figure markdown>
   ![PFA-GAN](./img/Face Aging/GAN_Framework_for_PFA-GAN.png){ width="600" }
   <figcaption>Das GAN Framework für das PFA-GAN</figcaption>
 </figure>
 
-Bei diesem Ansatz werden verschiedenen Losses (Verlustberechnungen) verwendet, um die folgenden Anforderungen für die Gesichtsalterung berücksichtigen:
+Bei diesem Ansatz werden verschiedene Losses (Verlustberechnungen) kombiniert, um die folgenden Anforderungen für die Gesichtsalterung berücksichtigen:
 
 1. Adversarial Loss zielt darauf ab, qualitativ hochwertige, gealterte Gesichter zu erzeugen, die nicht von echten zu unterscheiden sind
 2. Der Verlust der Altersschätzung soll die Alterungsgenauigkeit verbessern
@@ -520,11 +520,11 @@ Der Altersschätzverlust zwischen dem geschätzten Alter $\hat{y}$ und dem Ziela
 
 $$L_{\text{age}} = \mathbb{E}_{X_{s}} [ || y - \hat{y} ||_2 + l(A(X)W, c_t) ]$$
 
-$W \in \mathbb{R}^{101 \times N}$ bezeichnet die letzte vollständig verbundene Schicht für des Altersgruppenklassifizierungsnetzwerks und $l$ ist der Verlust der Kreuzentropie für die Altersgruppenlkassifizierung.
+$W \in \mathbb{R}^{101 \times N}$ bezeichnet die letzte vollständig verbundene Schicht für das Altersgruppenklassifizierungsnetzwerks und $l$ ist der Verlust der Kreuzentropie für die Altersgruppenlkassifizierung.
 
 Um die identitätsbezogenen Informationen des Gesichts zu bewahren und die identitätsirrelevanten Informationen wie den Hintergrund unverändert zu lassen, wird ein gemischter Identitätskonsistenzverlust zwischen dem Eingabegesicht und dem generierten Gesicht verwendet. Hierzu zählen:
 
-- ein pixelweise Verlust (pixel-wise loss)
+- ein pixelweiser Verlust (pixel-wise loss)
 - ein Verlust für die strukturelle Ähnlichkeit ([Structural Similarity (SSIM) loss][34])
 - ein Feature-Level Loss
 
@@ -536,18 +536,17 @@ $$L_{\text{ssim}} = \mathbb{E}_{X_{s}} [ 1- \text{SSIM}(G(X_s, \lambda_{s:t}), X
 
 $$L_{\text{fea}} = \mathbb{E}_{X_{s}} || \phi(G(X_s, \lambda_{s:t})) - \phi(X_s) ||_{F}^2 $$
 
-Schließlich kann der Identitätskonsistenz Verslust (Identity Consistency Loss) für das Generator-Netzwerk wie folgt definiert werden:
+Schließlich kann der Identitätskonsistenz Verslust (Identity Consistency Loss) für das Generator-Netzwerk definiert werden als:
 
 $$L_{\text{fea}} = (1 - \alpha_{\text{ssim}}) * L_{\text{pix}} + \alpha_{\text{ssim}} * L_{\text{ssim}} + \alpha_{\text{fea}} * L_{\text{fea}}$$
 
 $\alpha_{\text{ssim}}$ und $\alpha_{\text{fea}}$ sind Hyperparameter, die dazu dienen die Balance zwischen den drei Verlusten zu kontrollieren.
 
-Der finale Verlust für den Generator ergibt sich aus der Zusammenzesetzung aller einzelnen Verlustberechnungen:
+Der finale Verlust für den Generator ergibt sich aus der Zusammensetzung aller einzelnen Verlustberechnungen:
 
 $$L_G = \lambda_{\text{adv}} L_{\text{adv}} + \lambda_{\text{age}} L_{\text{age}} + \lambda_{\text{ide}} L_{\text{ide}}$$
 
 Die einzelnen $\lambda$ dienen ebenfalls wieder als Hyperparameter.
-
 
 Die folgende Darstellung zeigt Beispielergebnisse zur Gesichtsalterung und -verjüngung durch Anwendung des PFA-GANs auf drei externe Datensätze:
 
@@ -562,59 +561,53 @@ Die roten Kästschen kennzeichenen die Einbagebilder.
   <figcaption>Generierte Gesichter durch das PFA-GAN</figcaption>
 </figure>
 
-Trotz qualitativer und quantitativer Leistungen des PFA-GANs, bestehen auch einige Einschränkungen:
+Trotz qualitativer und quantitativer Überlegenheit des PFA-GANs gegenüber vorhergehenden Methoden, bestehen auch einige Einschränkungen:
 
-- Die Hauptbeschränkung der GANs-basierten Methoden besteht im Vergleich zu cGANs-basierten Methoden darin, dass die Netzwerke als Eingabe die Alterskennzeichnung der Quelle benötigen der Alterungsprozess
-- Das PFA-GAN muss ein anderes Modell für die Gesichtsverjüngung neu trainieren, obwohl wir lediglich die Reihenfolge der Altersgruppen für das Training der Gesichtsverjüngung umkehren müssen
-- mit mehr Altersgruppen oder einer kleinen Zeitspanne jeder Altersgruppe wird es bei der Gesichtsalterung schwieriger, ein Gesichtsalterungsmodell zu trainieren, und die Muster zwischen zwei benachbarten Altersgruppen werden weniger klar, was fast alle Gesichtsalterungsgruppen vor Herausforderungen stellt
+- Die Haupteinschränkung der GAN-basierten Methoden besteht im Vergleich zu cGAN-basierten Methoden darin, dass die Netzwerke als Eingabe die Alterskennzeichnung der Quelle benötigen
+- Das PFA-GAN muss ein zweites, umgekehrtes Modell für die Gesichtsverjüngung trainieren, währed andere Methoden das gleiche Netzwerk für Alterung und Verjüngung nutzen können
+- mit mehr Altersgruppen oder einer kleinen Zeitspanne in jeder Altersgruppe wird es bei der Gesichtsalterung schwieriger, ein Gesichtsalterungsmodell zu trainieren, und die Muster zwischen zwei benachbarten Altersgruppen werden weniger klar, was fast alle Methoden gleichermaßen vor Herausforderungen stellt
 
 ## Anwendungen
 
-Die meisten Anwendungen findet man aktuell im Bereich der Unterhaltung. Man findet unzählige Apps für das Smartphone, sowohl für iOS als auch für Android, welche einen ein älteres Bild einer Person generieren lassen.
+Die meisten Anwendungen findet man aktuell im Bereich der Unterhaltung. Man findet unzählige Apps für das Smartphone, sowohl für iOS als auch für Android, welche ein älteres Bild einer Person generieren lassen.
 
 ### Smokerface App
 
-Aber auch sinnvollere Anwendungen wurden schon umgesetzt. In der Studie [A Face-Aging App for Smoking Cessation in a Waiting Room Setting: Pilot Study in an HIV Outpatient Clinic][29] wurde eine Face-Aging App zur Intervention zur Raucherentwöhnung entwickelt. Hintergrund zu dieser Studie war, dass die Einführung von Technologien zur Raucherentwühnung in ambulanten Wartezimmerneine wirksame Strategie für eine Veränderung sein kann, die das Potenzial hat, fast alle Patienten, die einen Gesundheitsdienstleister aufsuchen, zu erreichen, ohne dass der Arzt vorher tätig werden muss. Das Ziel der Studie war es, eine Intervention zur Raucherentwöhnung zu entwickeln, die die Zeit, die Patienten in einem Wartezimmer verbringen, nutzt, indem sie sie passiv einer Tablet-basierten App mit Gesichtsveränderung und öffentlichem Morphing aussetzt, die Intervention in einem Wartezimmer einer HIV-Ambulanz zu testen und die Wahrnehmung dieser Intervention unter rauchenden und nicht rauchenden HIV-Patienten zu messen. Dabei entwickelte das Team eine Kioskversion der dreidimensionalen Gesichtsalterungs-App Smokerface, die dem Benutzer zeigt, wie sein Gesicht mit oder ohne Zigarettenrauchen in 1 bis 15 Jahren aussehen würde. Es wurde ein Tablet mit der App auf einem Tisch in der Mitte des Wartezimmers einer HIV-Ambulanz platziert. Verbunden mit einem großen Monitor, der an einer gegenüberliegenden Wand angebracht war. Ein Forscher notierte alle Patienten, die den Warteraum nutzten. Wenn ein Patient die App nicht innerhalb von 30 Sekunden der Wartezeit nutzte, forderte der Forscher ihn auf, dies zu tun. Diejenigen, die die App nutzten, wurden gebeten, einen Fragebogen auszufüllen. Die Studie kam zum Schluss, dass ein im Wartezimmer implementierte Face-Aging-App eine neuartige Möglichkeit bietet, Patienten, die einen Gesundheitsdienstleister aufsuchen, dazu zu motivieren, mit dem Rauchen aufzuhören, die Raucherentwöhnung bei ihrem nächsten Termin anzusprechen und dadurch die ärztlich verordnete Raucherentwöhnung zu fördern oder das Rauchen nicht wieder aufzunehmen.
+Aber auch sinnvollere Anwendungen wurden schon umgesetzt. In der Studie [A Face-Aging App for Smoking Cessation in a Waiting Room Setting: Pilot Study in an HIV Outpatient Clinic][29] wurde eine Face-Aging App zur Intervention und Raucherentwöhnung entwickelt. Hintergrund zu dieser Studie war, dass die Einführung von Technologien zur Raucherentwöhnung in ambulanten Wartezimmern eine wirksame Strategie für eine Veränderung sein kann, die das Potenzial hat, fast alle Patienten die einen Gesundheitsdienstleister aufsuchen, zu erreichen, ohne dass der Arzt vorher tätig werden muss. Das Ziel der Studie war es, eine Intervention zur Raucherentwöhnung zu entwickeln, die Patienten während Wartezeiten passiv einer Tablet-basierten App mit Gesichtsveränderung und öffentlichem Morphing aussetzt. Diese Intervention wurde in einem Wartezimmer einer HIV-Ambulanz getestet und die Wahrnehmung dieser Intervention unter rauchenden und nicht rauchenden HIV-Patienten gemessen. Dabei entwickelte das Team eine Kioskversion der dreidimensionalen Gesichtsalterungs-App Smokerface, die dem Benutzer zeigt, wie sein Gesicht mit oder ohne Zigarettenrauchen in 1 bis 15 Jahren aussehen würde. Es wurde ein Tablet mit der App auf einem Tisch in der Mitte des Wartezimmers platziert, verbunden mit einem großen Monitor, der an einer gegenüberliegenden Wand angebracht war. Ein Forscher notierte alle Patienten, die den Warteraum nutzten. Wenn ein Patient die App nicht innerhalb von 30 Sekunden nach Betreten nutzte, forderte der Forscher ihn auf, dies zu tun. Die Nutzer wurden danach gebeten, einen Fragebogen auszufüllen. Die Studie kam zum Schluss, dass eine im Wartezimmer implementierte Face-Aging-App eine neuartige Möglichkeit bietet, Patienten, die einen Gesundheitsdienstleister aufsuchen, dazu zu motivieren, mit dem Rauchen aufzuhören, die Raucherentwöhnung bei ihrem nächsten Termin anzusprechen und dadurch die ärztlich verordnete Raucherentwöhnung zu fördern.
 
-Falls ihr die App selbst ausprobieren wollt, könnt ihr sie hier downloaden:
+Nachfolgend der Link um die App auf dem eigenen Gerät zu testen:
 
 - [Android](https://play.google.com/store/apps/details?id=com.agt.smokerface&hl=de)
 - [iOS](https://apps.apple.com/de/app/smokerface/id946861642)
 
 ### Sunface - UV-Selfie
 
-In einer weiteren Studie mit dem Titel [Effect of a Face-Aging Mobile App-Based Intervention on Skin Cancer Protection Behavior in Secondary Schools in Brazil: A Cluster-Randomized Clinical Trial][30] wurde untersucht, wie sich eine kostenlose mobile Gesichtsalterungs-App mit den Namen Sunface auf das Hautkrebsschutzverhalten von Jugendlichen auswirkt. Da der Kontakt mit UV-Strahlung in jungen Jahren ein wichtiger Risikofaktor für die Entstehung von Melanomen ist, ist die Reduzierung der UV-Exposition bei Kindern und Jugendlichen von größter Bedeutung. Der primäre Endpunkt der Studie war der Unterschied in der täglichen Verwendung von Sonnenschutzmitteln bei der Nachbeobachtung nach 6 Monaten. Zu den sekundären Endpunkten gehörten der Unterschied bei der täglichen Verwendung von Sonnenschutzmitteln nach 3 Monaten Nachbeobachtung, mindestens eine Selbstuntersuchung der Haut innerhalb von 6 Monaten und mindestens eine Bräunungssitzung in den vorangegangenen 30 Tagen. Alle Analysen wurden im Voraus festgelegt und basierten auf der Absicht, die Studie zu behandeln. Clustereffekte wurden berücksichtigt. Die Ergebnisse dieser Studie deuten darauf hin, dass Interventionen auf der Grundlage von Apps zur Gesichtsalterung das Hautkrebsschutzverhalten brasilianischer Jugendlicher verbessern können.
+In einer weiteren Studie mit dem Titel [Effect of a Face-Aging Mobile App-Based Intervention on Skin Cancer Protection Behavior in Secondary Schools in Brazil: A Cluster-Randomized Clinical Trial][30] wurde untersucht, wie sich eine kostenlose mobile Gesichtsalterungs-App mit den Namen Sunface auf das Hautkrebsschutzverhalten von Jugendlichen auswirkt. Da der Kontakt mit UV-Strahlung in jungen Jahren ein wichtiger Risikofaktor für die Entstehung von Melanomen ist, ist die Reduzierung der UV-Exposition bei Kindern und Jugendlichen von größter Bedeutung. Das primäre Ziel der Studie war der Unterschied in der täglichen Verwendung von Sonnenschutzmitteln bei der Nachbeobachtung nach 6 Monaten. Zu den sekundären Zielen gehörten der Unterschied bei der täglichen Verwendung von Sonnenschutzmitteln nach 3 Monaten Nachbeobachtung, mindestens eine Selbstuntersuchung der Haut innerhalb von 6 Monaten und mindestens eine Bräunungssitzung in den vorangegangenen 30 Tagen. Alle Analysen wurden im Voraus festgelegt und basierten auf der Absicht, die Studie zu behandeln. Clustereffekte wurden berücksichtigt. Die Ergebnisse dieser Studie deuten darauf hin, dass Interventionen auf der Grundlage von Apps zur Gesichtsalterung das Hautkrebsschutzverhalten brasilianischer Jugendlicher verbessern können.
 
-Auch diese App könnt ihr selbst ausprobieren. Dazu könnt ihr diese hier einfach downloaden:
+Auch diese App kann selbst getestet werden:
 
 - [Android](https://play.google.com/store/apps/details?id=com.agt.sunface&hl=de)
 - [iOS](https://apps.apple.com/de/app/sunface-uv-selfie/id1226606410?l=en)
 
 ### AprilAge Inc.
 
-Auch das Unternehmen [AprilAge][31] entwickelt Gesichts- und Körpervisualisierungssoftware für verschiedene Unternehmen, die Menschen dazu bewegen und motivieren müssen, riskante Lebensgewohnheiten zu ändern, die zu chronischen Krankheiten und hohen Behandlungskosten führen. Die Software zeigt den Einfluss von Rauchen, erhöhter SOnnenbestrahlung und Übergewicht auf den Alterungsprozess des Gesichtes.
+Auch das Unternehmen [AprilAge][31] entwickelt Gesichts- und Körpervisualisierungssoftware für verschiedene Unternehmen, die Menschen dazu bewegen und motivieren sollen, riskante Lebensgewohnheiten zu ändern, die zu chronischen Krankheiten und hohen Behandlungskosten führen. Die Software zeigt den Einfluss von Rauchen, erhöhter Sonnenbestrahlung und Übergewicht auf den Alterungsprozess des Gesichtes.
 
 ## Fazit
 
-Generative Adversarial Networks in verschiedenen Implementierungen lösten die herkömmlichen Methoden, phyikalische modellbasierte und prototypbasierte, ab. Mit den neuen neuronalen Netzwerken benötigte man nicht mehr die kostspielig zu erfassenden Datensätze. Der datengetriebene Ansatz konnte mit den Alterungsverläufen besser umgehen.
+Generative Adversarial Networks in verschiedenen Implementierungen lösten die herkömmlichen Methoden, physikalisch-modellbasierte und prototypbasierte, ab. Mit den neuen neuronalen Netzwerken benötigte man nicht mehr die große Menge an kostspielig zu erfassenden Datensätze. Der datengetriebene Ansatz konnte mit den Alterungsverläufen besser umgehen.
 
 Im Zuge der Forschung in anderen Bereichen, z.B. Face Recognition, wurden verschiedene Datensätze weiterentwickelt und neu erstellt. Diese können problemlos für das Thema Face Aging verwendet werden. 
 
-Seit der Einführung der GANs im Jahr 2014 wurden unterschiedliche Implementierung auf deren Basis umgesetzt. All diese versuchten Bilder zu generieren, welche die Identität der Person bei der Alterung erhalten sollen. Dazu wurden verschiedene Techniken verwendet. Die generierten Ergebnisse der neuen neuronalen Netzwerke auf den Testdaten waren kaum von echten Bildern zu unterscheiden. Trotzdem wird die Erzeugung qualitativ hochwertiger Bilder bei extremen Posen, anspruchsvollen Ausdrücken und/oder Accessoires in Bildern unabhängig von den Trainings- oder Testdaten erschwert.
+Seit der Einführung der GANs im Jahr 2014 wurden unterschiedliche Implementierungen auf deren Basis umgesetzt. Sie versuchten Bilder zu generieren, welche die Identität der Person bei der Alterung erhalten sollen. Dazu wurden verschiedene Techniken verwendet. Die generierten Ergebnisse der neuen neuronalen Netzwerke auf den Testdaten waren kaum von echten Bildern zu unterscheiden. Trotzdem wird die Erzeugung qualitativ hochwertiger Bilder bei extremen Posen, anspruchsvollen Ausdrücken und/oder Accessoires in Bildern unabhängig von den Trainings- oder Testdaten erschwert.
 
-Theoretische Bereiche der Anwendung gibt es zahlreiche. Wirklich viele  Anwendungen findet man im Bereich der Unterhaltung. In verschiedenen Apps wird Face Aging als lustiger Filter angeboten, um Freunden das ältere Ich als kleiner Scherz für zwischendurch zukokmmen zu lassen. Zwei Studien und eine Firma mit Anwendungen im Bereich der Medizin haben wir im Report vorgestellt. Weitere Applikationen z.B. bei der Hilfe der Bekämpfung des Menschenhandels wären wünschenswert. Vielleicht werden diese auch schon eingesetzt und man findet in öffentlichen Artikeln nichts darüber.
+Theoretische Bereiche der Anwendung gibt es zahlreiche. Wirklich viele Anwendungen findet man im Bereich der Unterhaltung. In verschiedenen Apps wird Face Aging als lustiger Filter angeboten, um Freunden das ältere Ich als kleiner Scherz für Zwischendurch zu zeigen. Zwei Studien und eine Firma mit Anwendungen im Bereich der Medizin haben wir im Report vorgestellt. Weitere Applikationen z.B. bei der Hilfe der Bekämpfung des Menschenhandels wären wünschenswert.
 
 Die Forschung auf diesem Gebiet bleibt spannend. Neuartige Methoden im Bereich des maschinellen Lernens könnten die Generierung qualitativ hochwertiger Bilder für die Gesichtsalterung weiterhin verbessern. 
 
 ## Weiterführendes Material
 
-### Talk
-
-Hier einfach Youtube oder THD System embedden.
-
 ### Demo
-
-Hier Link zum Demo Video + Link zum GIT Repository mit dem Demo Code.
 
 Hier der Link zum [GIT Repository](https://github.com/julian-steiner-ai/face-aging)
 
