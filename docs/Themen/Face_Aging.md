@@ -607,9 +607,15 @@ Die Forschung auf diesem Gebiet bleibt spannend. Neuartige Methoden im Bereich d
 
 ## Weiterführendes Material
 
+### Talk
+
+Hier einfach Youtube oder THD System embedden.
+
 ### Demo
 
-Hier der Link zum [GIT Repository](https://github.com/julian-steiner-ai/face-aging)
+Hier Link zum Demo Video.
+
+Hier der Link zum [GitHub Repository](https://github.com/julian-steiner-ai/face-aging) der Code-Demonstration.
 
 ## Literaturliste
 
