@@ -50,7 +50,7 @@ Zu guter Letzt muss das Modell noch evaluiert werden.
 
 | ![STEPS](./img/TransferLearningNLP/steps.png) |
 |:--:|
-| Abbildung 1: Verschiedene Phasen |
+| Abbildung 1: Verschiedene Phasen der Code Demo |
 
 ### 1.1 Daten - Visualisierung
 Beide Datensätze bestehen aus folgenden Variablen:
@@ -74,7 +74,7 @@ Als Nächstes wurde die Verteilung der Daten visualisiert, um sicherzustellen, d
 52,3 % Fake- und 47,7 % Echt-Daten, ist dies der Fall. Die Länge der Schlagzeilen wurde ebenfalls visualisiert. Diese wird später beim Tokenisieren noch 
 eine Rolle spielen.
 
-| ![STEPS](./img/TransferLearningNLP/length_headers.png){width="400"}  |
+| ![STEPS](./img/TransferLearningNLP/length_headers.png) |
 |:--:|
 | Abbildung 2: Länge der Überschriften |
 
@@ -303,12 +303,15 @@ def train():
 Nachdem das Modell trainiert wurde, ist es an der Zeit die Performance des Modells auf den Testdaten zu überprüfen. Die folgende 
 Tabelle zeigt die erhaltenen Metriken:
 
-| | precision | recall | f1-score | support |
-| 0 | 0.99 | 0.99 | 0.99 | 3212 |
-| 1 | 0.99 | 0.99 | 0.99 | 3523 |
-| accuracy |  |  | 0.99 | 6735 |
-| macro avg | 0.99 | 0.99 | 0.99 | 6735 |
-| weighted avg | 0.99 | 0.99 | 0.99 | 6735 |
+
+|        | precision | recall | f1-score | support |
+|--------|-----------|--------|----------|---------|
+| 0      | 0.99      | 0.99   | 0.99     | 3212    |
+| 1      | 0.99      | 0.99   | 0.99     | 3523    |
+| accuracy |           |        | 0.99     | 6735    |
+| macro avg | 0.99     | 0.99   | 0.99     | 6735    |
+| weighted avg | 0.99 | 0.99   | 0.99     | 6735    |
+
 
 
 ### 6. Inference 
