@@ -1,39 +1,74 @@
 # Transfer Learning in der Sprachverarbeitung
 von *Simon Wolf, Tim Staudinger und Miguel Meindl*
 ## Abstract
-Die Sprachverarbeitung ist ein grundlegender Aspekt der künstlichen Intelligenz (KI) und hat in den letzten Jahren beträchtliche Fortschritte erzielt. Eine vielversprechende Methode zur Verbesserung der Leistung von Sprachmodellen ist das Transfer Learning. Transfer Learning ermöglicht es, vortrainierte Modelle auf eine neue Aufgabe anzuwenden, indem das Wissen, das in einem Modell für eine bestimmte Aufgabe erlernt wurde, auf eine andere, verwandte Aufgabe übertragen wird.
+Die Sprachverarbeitung ist ein grundlegender Aspekt der künstlichen Intelligenz (KI) und hat in den letzten Jahren beträchtliche Fortschritte erzielt. 
+Eine vielversprechende Methode zur Verbesserung der Leistung von Sprachmodellen ist Transfer Learning. Transfer Learning ermöglicht es, 
+vortrainierte Modelle auf eine neue Aufgabe anzuwenden, indem das Wissen, das in einem Modell für eine bestimmte Aufgabe erlernt wurde, 
+auf eine andere, verwandte Aufgabe übertragen wird.
 
-Der Podcast bietet eine oberflächliche Einführung in das Thema Transfer Learning in der Sprachverarbeitung, um fachfremde Zuhörer mit den grundlegenden Konzepten vertraut zu machen. Er erklärt, wie Transfer Learning funktioniert und genutzt werden kann, um vortrainierte Modelle auf neue sprachverarbeitende Aufgaben anzuwenden. Der Podcast gibt einen Überblick über verschiedene Anwendungsfälle und beleuchtet die Herausforderungen von Transfer Learning. Dabei werden auch die Auswirkungen von Datenmenge und Qualität  diskutiert.
+Der Podcast bietet eine oberflächliche Einführung in das Thema Transfer Learning in der Sprachverarbeitung, 
+um fachfremde Zuhörer mit den grundlegenden Konzepten vertraut zu machen. Er erklärt, wie Transfer Learning funktioniert 
+und genutzt werden kann, um vortrainierte Modelle auf neue sprachverarbeitende Aufgaben anzuwenden. Außerdem gibt er einen Überblick über 
+verschiedene Anwendungsfälle und beleuchtet die Herausforderungen von Transfer Learning. Zudem werden die Auswirkungen der Datenmenge und Qualität diskutiert.
 
-Der Fachvortrag liefert einen tieferen Einblick in das Transfer Learning und zeigt ... auf.
+Der Fachvortrag liefert einen tieferen Einblick in das Thema und zeigt ... auf.
 
-Zuletzt werden durch die Codedemonstration verschiedene Ansätze für die Verwendung von Transfer Learning in der Sprachverarbeitung aufgezeigt. Es wird vorgestellt, wie ...... verwendet wird. Dafür werden ... 
+Im Schlussteil der Arbeit wird anhand eines konkreten Beispiels gezeigt, wie Transfer Learning angewandt werden kann. 
+Hierfür wird das Sprachmodell _BERT_ auf den Anwendungsfall der Fake-News-Erkennung trainiert. Die einzelnen Phasen dieses Prozesses
+werden im Detail erläutert und mit Codebeispielen versehen.
 
 ## Einleitung und Motivation
-In der heutigen digitalen Zeit hat die Spracherkennung einen enormen Einfluss auf unser tägliches Leben. Von virtuellen Assistenten über Sprachbefehle in mobilen Geräten bis hin zu automatisierten Kundenservice-Systemen - die Fähigkeit, menschliche Sprache zu verstehen und zu verarbeiten, hat zahlreiche Anwendungen revolutioniert. Doch die Entwicklung präziser und effizienter Spracherkennungssysteme stellt nach wie vor eine Herausforderung dar.
+In der heutigen digitalen Zeit hat die Spracherkennung einen enormen Einfluss auf unser tägliches Leben. Von virtuellen Assistenten 
+über Sprachbefehle in mobilen Geräten bis hin zu automatisierten Kundenservice-Systemen - die Fähigkeit, menschliche Sprache zu verstehen 
+und zu verarbeiten, hat zahlreiche Anwendungen revolutioniert. Doch die Entwicklung präziser und effizienter Spracherkennungssysteme 
+stellt nach wie vor eine Herausforderung dar.
 
-Transfer Learning bietet in der Spracherkennung eine Reihe von Vorteilen. Anstatt jedes Mal von Grund auf ein neues Modell für jede spezifische Aufgabe zu trainieren, kann Transfer Learning genutzt werden, um auf bereits existierende Modelle zurückzugreifen, die auf ähnlichen Sprachdaten trainiert wurden. Dadurch wird nicht nur die Trainingszeit erheblich verkürzt, sondern auch der Bedarf an umfangreichen Datenmengen reduziert.
+Transfer Learning bietet in der Spracherkennung eine Reihe von Vorteilen. Anstatt jedes Mal von Grund auf ein neues Modell für 
+jede spezifische Aufgabe zu trainieren, kann Transfer Learning genutzt werden, um auf bereits existierende Modelle zurückzugreifen, 
+die auf ähnlichen Sprachdaten trainiert wurden. Dadurch wird nicht nur die Trainingszeit erheblich verkürzt, sondern auch der 
+Bedarf an umfangreichen Datenmengen reduziert.
 
-Des Weiteren ermöglicht Transfer Learning die Nutzung von vortrainiertem Wissen, das bereits in einem anderen Kontext erworben wurde. Dieses Wissen kann auf die Spracherkennung angewendet werden, um eine bessere Anpassung an spezifische Aufgaben zu erreichen. Dadurch wird die Genauigkeit der Spracherkennungssysteme verbessert, selbst wenn die verfügbaren Daten begrenzt sind.
+Des Weiteren ermöglicht Transfer Learning die Nutzung von vortrainiertem Wissen, das bereits in einem anderen Kontext erworben wurde. 
+Dieses Wissen kann auf die Spracherkennung angewendet werden, um eine bessere Anpassung an spezifische Aufgaben zu erreichen. 
+Dadurch wird die Genauigkeit der Spracherkennungssysteme verbessert, selbst wenn die verfügbaren Daten begrenzt sind.
 
-Die Anwendungsmöglichkeiten von Transfer Learning in der Spracherkennung sind vielfältig. Egal ob es darum geht, Sprachbefehle in Smart-Home-Geräten zu erkennen, Transkriptionen von Audioaufnahmen zu erstellen oder Sprachanrufe automatisch zu analysieren, Transfer Learning bietet eine effektive Methode, um maßgeschneiderte Modelle für spezifische Aufgaben zu entwickeln.
+Die Anwendungsmöglichkeiten von Transfer Learning in der Spracherkennung sind vielfältig. Egal ob es darum geht, 
+Sprachbefehle in Smart-Home-Geräten zu erkennen, Transkriptionen von Audioaufnahmen zu erstellen oder Sprachanrufe automatisch zu analysieren, 
+Transfer Learning bietet eine effektive Methode, um maßgeschneiderte Modelle für spezifische Aufgaben zu entwickeln.
 
-Die Idee des Transfer Learnings hat ihre Wurzeln in der Künstlichen Intelligenz und dem maschinellen Lernen. In den letzten Jahrzehnten wurden verschiedene Ansätze und Techniken entwickelt, um Transfer Learning zu ermöglichen. Diese Fortschritte haben die Spracherkennung maßgeblich beeinflusst.
+Die Idee von Transfer Learning hat ihre Wurzeln in der Künstlichen Intelligenz und dem maschinellen Lernen. In den letzten Jahrzehnten wurden 
+verschiedene Ansätze und Techniken entwickelt, um Transfer Learning zu ermöglichen. Diese Fortschritte haben die Spracherkennung maßgeblich beeinflusst.
 
 ## Stand der Forschung
-Doch wie sieht der aktuelle Stand der Forschung im Bereich Transfer Learning in der Spracherkennung aus? Welche neuen Ansätze und Techniken wurden entwickelt, um die Effizienz und Genauigkeit von Spracherkennungssystemen weiter zu verbessern? Im nachfolgenden Abschnitt wird genauer auf dieses Thema eingegangen und diese Fragen beantwortet.
+Doch wie sieht der aktuelle Stand der Forschung im Bereich Transfer Learning in der Spracherkennung aus? 
+Welche neuen Ansätze und Techniken wurden entwickelt, um die Effizienz und Genauigkeit von Spracherkennungssystemen weiter zu verbessern? 
+Im nachfolgenden Abschnitt wird genauer auf diese Themen eingegangen.
 
-In den letzten Jahren hat die Forschung intensiv daran gearbeitet, Transfer Learning in der Spracherkennung voranzutreiben. Ein herausragendes Beispiel für ein erfolgreiches vortrainiertes Sprachmodell ist ChatGPT. Ursprünglich entwickelt für die Generierung von Texten, hat ChatGPT das Potenzial gezeigt, auch für die Spracherkennung genutzt zu werden.
+In den letzten Jahren hat die Forschung intensiv daran gearbeitet, Transfer Learning in der Spracherkennung voranzutreiben. 
+Ein herausragendes Beispiel für ein erfolgreiches vortrainiertes Sprachmodell ist ChatGPT. Ursprünglich entwickelt für 
+die Generierung von Texten, hat ChatGPT das Potenzial gezeigt, auch für die Spracherkennung genutzt zu werden.
 
-Durch den Einsatz von ChatGPT als Ausgangspunkt für Transfer Learning können Spracherkennungsmodelle von dem breiten Wissen profitieren, das im Modell von ChatGPT vorhanden ist. Dies ermöglicht eine verbesserte Sprachverarbeitung. Durch die Übertragung des vortrainierten Wissens von ChatGPT auf spezifische Spracherkennungsaufgaben können Modelle schneller und genauer lernen wodurch die Genauigkeit der Spracherkennungssysteme erhöht wird.
+Durch den Einsatz von ChatGPT als Ausgangspunkt für Transfer Learning können Spracherkennungsmodelle von dem breiten Wissen profitieren, 
+das im Modell von ChatGPT vorhanden ist. Dies ermöglicht eine verbesserte Sprachverarbeitung. Durch die Übertragung des vortrainierten Wissens
+auf spezifische Spracherkennungsaufgaben können Modelle schneller und genauer lernen, wodurch die Genauigkeit der Spracherkennungssysteme erhöht wird.
 
-Ein weiterer vielversprechender Ansatz ist die Kombination von Transfer Learning mit Active Learning. Active Learning ermöglicht es, gezielt unsichere Beispiele auszuwählen, um das Modell iterativ zu trainieren. Durch den gezielten Einsatz von Transfer Learning in Kombination mit Active Learning können Spracherkennungsmodelle schneller und effizienter lernen. Das Modell kann von bereits gelernten Aufgaben profitieren und sich schneller an neue Spracherkennungsaufgaben anpassen.
+Ein weiterer vielversprechender Ansatz ist die Kombination von Transfer Learning mit Active Learning. 
+Active Learning ermöglicht es, gezielt unsichere Beispiele auszuwählen, um das Modell iterativ zu trainieren. Durch den gezielten Einsatz von Transfer Learning 
+in Kombination mit Active Learning können Spracherkennungsmodelle schneller und effizienter lernen. Das Modell kann von bereits gelernten Aufgaben 
+profitieren und sich schneller an neue Spracherkennungsaufgaben anpassen.
 
-Darüber hinaus wird als weiterer Ansatz Transfer Learning mit weiteren Techniken wie Reinforcement Learning und Generative Adversarial Networks (GANs) kombiniert. Diese Kombination eröffnet neue Möglichkeiten, die Leistungsfähigkeit von Spracherkennungssystemen zu steigern. Beispielsweise können Reinforcement Learning-Algorithmen eingesetzt werden, um die Interaktion mit dem Spracherkennungssystem zu verbessern und es an spezifische Nutzerpräferenzen anzupassen.
+Darüber hinaus wird als weiterer Ansatz Transfer Learning mit weiteren Techniken wie Reinforcement Learning und Generative Adversarial Networks (GANs) kombiniert. 
+Diese Kombination eröffnet neue Möglichkeiten, die Leistungsfähigkeit von Spracherkennungssystemen zu steigern. 
+Beispielsweise können Reinforcement Learning-Algorithmen eingesetzt werden, um die Interaktion mit dem Spracherkennungssystem zu verbessern und es an spezifische Nutzerpräferenzen anzupassen.
 
-Ein weiterer vielversprechender Aspekt ist die Erweiterung von Transfer Learning auf mehrsprachige Szenarien. Indem Modelle auf verschiedenen Sprachen trainiert und dann auf neue Sprachen übertragen werden, kann die Effizienz und Genauigkeit der Spracherkennung in verschiedenen Sprachen verbessert werden. Dies ist besonders relevant in globalen Umgebungen, in denen mehrsprachige Unterstützung von entscheidender Bedeutung ist.
+Ein weiterer vielversprechender Aspekt ist die Erweiterung von Transfer Learning auf mehrsprachige Szenarien. 
+Indem Modelle auf verschiedenen Sprachen trainiert und dann auf neue Sprachen übertragen werden, kann die Effizienz und Genauigkeit 
+der Spracherkennung in verschiedenen Sprachen verbessert werden. Dies ist besonders relevant in globalen Umgebungen, 
+in denen mehrsprachige Unterstützung von entscheidender Bedeutung ist.
 
-Der aktuelle Stand der Forschung im Bereich Transfer Learning in der Spracherkennung zeigt das Potenzial dieser Technik. Durch den Einsatz von vortrainierten Sprachmodellen wie ChatGPT, kombiniert mit Active Learning, Reinforcement Learning und anderen Techniken, können Spracherkennungssysteme effizienter, präziser und anpassungsfähiger trainiert werden.
+Der aktuelle Stand der Forschung im Bereich Transfer Learning in der Spracherkennung zeigt das Potenzial dieser Technik. 
+Durch den Einsatz von vortrainierten Sprachmodellen wie ChatGPT, kombiniert mit Active Learning, Reinforcement Learning und anderen Techniken, 
+können Spracherkennungssysteme effizienter, präziser und anpassungsfähiger trainiert werden.
 
 ## Methoden
 Fachpräsentation hier vorstellen
@@ -43,7 +78,7 @@ Im Folgenden wird anhand eines Beispiels die Vorgehensweise bei der Implementier
 Konkret geht es hierbei um die Implementierung einer Fake-News-Erkennung. 
 
 Zunächst ein kurzer Überblick über die einzelnen Phasen, welche wir durchlaufen werden. In Phase 1 werden die Daten visualisiert und vorbereitet. 
-Phase 2 beschäftigt sich mit dem Large Language Model BERT, welches wir für unseren Anwendungsfall fine-tunen wollen. Es wird auf die ursprünglichen Anwendungsfälle 
+Phase 2 beschäftigt sich mit dem Large Language Model _BERT_, welches wir für unseren Anwendungsfall fine-tunen wollen. Es wird auf die ursprünglichen Anwendungsfälle 
 eingegangen, wofür das Modell einst trainiert wurde. Anschließend wird das Modell angepasst, damit es für die Fake-News-Erkennung verwendet werden kann. 
 Ein entscheidender Schritt im Transfer Learning ist das Einfrieren der einzelnen Schichten. Dies wird im Phase 4 erläutert bevor in Phase 5 das Modell trainiert wird. 
 Zu guter Letzt muss das Modell noch evaluiert werden.
