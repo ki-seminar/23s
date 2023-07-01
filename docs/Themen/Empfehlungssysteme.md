@@ -4,11 +4,11 @@ von *Olha Solodovnyk, Daria Likhacheva und Zi Xun Tan*
 ## Abstract 
 Diese Arbeit behandelt das Thema Empfehlungssysteme und präsentiert es in verschiedenen Formaten, darunter einem Podcast, einem Vortrag und einer Code-Demo.
 
-Der **Podcast** bietet eine einfache und unkomplizierte Einführung in Empfehlungssysteme. Es werden verschiedene Arten von Empfehlungssystemen behandelt, darunter inhaltsbasierte, kollaborative, kontext-basierte und hybride Ansätze. Der Podcast richtet sich an ein allgemeines Publikum und soll Zuhörer einbeziehen und ihnen einen Überblick über die Funktionsweise von Empfehlungssystemen und -anwendungen geben.
+Der Podcast bietet eine einfache und unkomplizierte Einführung in Empfehlungssysteme. Es werden verschiedene Arten von Empfehlungssystemen behandelt, darunter inhaltsbasierte, kollaborative, kontext-basierte und hybride Ansätze. Der Podcast richtet sich an ein allgemeines Publikum und soll Zuhörer einbeziehen und ihnen einen Überblick über die Funktionsweise von Empfehlungssystemen und -anwendungen geben.
 
-In dem **Vortrag** wird hingegen näher auf Empfehlungssysteme eingegangen. Die Grundlagen und Funktionsweise inhaltsbasierter, kollaborativer und hybrider Empfehlungssysteme werden erläutert und die Vor- und Nachteile dieser Ansätze diskutiert. Der Vortrag richtet sich an ein technisch versiertes Publikum und vermittelt ein tieferes Verständnis der Konzepte und Algorithmen hinter Empfehlungssystemen.
+In dem Vortrag wird hingegen näher auf Empfehlungssysteme eingegangen. Die Grundlagen und Funktionsweise inhaltsbasierter, kollaborativer und hybrider Empfehlungssysteme werden erläutert und die Vor- und Nachteile dieser Ansätze diskutiert. Der Vortrag richtet sich an ein technisch versiertes Publikum und vermittelt ein tieferes Verständnis der Konzepte und Algorithmen hinter Empfehlungssystemen.
 
-Die **Code-Demo** zeigt eine praktische Implementierung eines einfachen Filmempfehlungssystems. Es werden verschiedene Algorithmen und Techniken präsentiert, einschließlich inhaltsbasierter, kollaborativer und hybrider Filter. Durch die Demonstration des Codes wird gezeigt, wie ein Datensatz verarbeitet und Empfehlungen generiert werden, die sowohl auf Inhaltsinformationen als auch auf Benutzerinteraktionen basieren. Der bereitgestellte Code ist frei verfügbar, sodass jeder die Implementierung von Empfehlungssystemen besser verstehen und damit experimentieren kann.
+Die Code-Demo zeigt eine praktische Implementierung eines einfachen Filmempfehlungssystems. Es werden verschiedene Algorithmen und Techniken präsentiert, einschließlich inhaltsbasierter, kollaborativer und hybrider Filter. Durch die Demonstration des Codes wird gezeigt, wie ein Datensatz verarbeitet und Empfehlungen generiert werden, die sowohl auf Inhaltsinformationen als auch auf Benutzerinteraktionen basieren. Der bereitgestellte Code ist frei verfügbar, sodass jeder die Implementierung von Empfehlungssystemen besser verstehen und damit experimentieren kann.
 ## 1 Einleitung / Motivation
 In der heutigen digitalen Welt werden die Empfehlungssysteme fast jeden Tag benutzt. Sie haben einen sehr großen Einfluss auf unsere täglichen Aktivitäten. Von Online-Shopping-Plattformen bis hin zu Streaming-Dienste (wie Spotify oder Netflix) werden die Empfehlungen benutzt, um unsere Entscheidungen zu beeinflussen und unsere Erfahrungen zu personalisieren. Was bedeuten aber diese Empfehlungssysteme und wie funktionieren sie?
 
@@ -20,7 +20,7 @@ Im Folgenden wollen wir einen Blick auf die Welt der Empfehlungssysteme werfen, 
 ## 2 Methoden
 
 ### 2.1 Inhaltsbasierte Filterung
-Die Inhaltsfilterung analysiert die Merkmale der Objekt (z. B. Filme, Produkte, Artikel) und Benutzervorlieben und versucht, auf der Grundlage dieser Merkmalen geeignete Empfehlungen zu generieren.
+Die Inhaltsfilterung analysiert die Merkmale der Objekte (z. B. Filme, Produkte, Artikel) und Benutzervorlieben und versucht, auf der Grundlage dieser Merkmalen geeignete Empfehlungen zu generieren.
 
 Der Prozess der Inhaltsbasierten Filterung beinhaltet in der Regel die folgenden Schritte:
 
@@ -29,6 +29,7 @@ Der Prozess der Inhaltsbasierten Filterung beinhaltet in der Regel die folgenden
 **Benutzer-Profilerstellung:** Für jeden Benutzer wird ein Profil erstellt, das seine Vorlieben basierend auf seinen vergangenen Bewertungen oder Interaktionen widerspiegelt. Das Profil kann durch Gewichtung der Merkmale entsprechend der Wichtigkeit für den Benutzer erstellt werden.
 
 **Übereinstimmungsberechnung:** Die Ähnlichkeit zwischen Objektvektoren kann mit drei Methoden berechnet werden: 
+
 * Euklidischer Abstand
 * Pearson-Korrelation und 
 * Kosinus-Ähnlichkeit, die wir in unserer Arbeit genauer betrachten.
@@ -36,7 +37,7 @@ Der Prozess der Inhaltsbasierten Filterung beinhaltet in der Regel die folgenden
 Kosinus-Ähnlichkeit ist ein Maß dafür, wie ähnlich zwei Vektoren sind. Der Kosinus des Winkels zwischen zwei Vektoren wird bestimmt. 
 
 $$
-Kosinus-Ähnlichkeit(u, i) = cos(u,i)= \frac{u \cdot i}{\|u\| \cdot \|i\|}
+Kosinus&#8209;Ähnlichkeit(u, i) = cos(u,i)= \frac{u \cdot i}{\|u\| \cdot \|i\|}
 $$
 
 Der Nutzervektor $u$ repräsentiert die Präferenzen, Eigenschaften oder Merkmale des Nutzers, während der Objektvektor $i$ die Merkmale oder Eigenschaften des Items oder eines anderen Nutzers darstellt.
