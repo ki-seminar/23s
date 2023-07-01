@@ -46,6 +46,7 @@ Im Fall der Spracherkennung ist beim template matching das Bild zum Beispiel ein
     <figcaption>Fig. 1 Shoebox</figcaption>
 </figure>
 
+
 1966 wurde Linear Predictive Coding (LPC) vorgeschlagen. Linear Predictive Coding ist ein Verfahren zur Reduktion der Datenmenge. Es basiert auf der Annahme, dass Sprachsignale viele wiederholende Muster enthalten, die durch eine Vorhersagemethode erfasst werden können. Der Vorteil von diesem Ansatz ist, dass durch die Reduktion der Datenmenge eine effizientere Verarbeitung und Übertragung von Sprache möglich ist.
 
 1968 wurde Dynamic Time Warping (DTW) erfunden. Mit Dynamic Time Warping kann man die Ähnlichkeit zwischen zwei zeitlichen Signalen, die sich in Geschwindigkeit und / oder Zeitachse unterscheiden messen. Dadurch können zum Beispiel auch langsamer oder schneller ausgesprochene Wörter als in der abgespeicherten Vorlage erkannt werden. 
