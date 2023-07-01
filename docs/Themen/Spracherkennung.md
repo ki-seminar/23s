@@ -201,13 +201,369 @@ Nach den Decoder Blöcken werden die outputs durch eine lineare Projektion und d
 
 ## 5 Anwendung
 
-hier code demo einfügen und stichpunkte ausformulieren
+### Code-Demo
+#### Dataset
+##### Data Ingestion
+In dieser Code-Demo werde ich über das Sammeln von Daten für Spracherkennung, Preprocessing und die Anwendung von zwei verschiedenen Models reden.
+Der hier erwähnte Datensatz wird später nicht zum Training genutzt, sondern dient nur als Beispiel, da das Training zu "computationally expensive" war.
+
+
+Am Anfang eines jeden Machine Learning Projekts steht das Sammeln von Daten.
+Auch in dieser Code-Demo wird mit dem Sammeln von Daten begonnen. 
+Die erste Phase hierfür ist die sogenannte Data Integration.
+Diese Phase umfasst den Prozess des Sammelns und Importierens von Daten aus verschiedenen Quellen in ein System zur weiteren Verarbeitung oder Analyse.
+In diesem Fall wurden mehrere verschiedene Datensätze aus dem Internet heruntergeladen.
+Eine alternative wäre die Daten aus der realen Welt selbst zu machen, was allerdings für eine Privatperson sehr schwierig ist.
+
+Hier werden zwei Beispiele der verwendeten Datensätze gezeigt:
+
+Einerseits der Datensatz von Thorsten Müller, ein Datensatz der von einer Privatperson der Öffentlichkeit zur Verfügung gestellt wurde:
+
+![Datensatz von Thorsten Müller](img/Spracherkennung/sc1.png)
+
+Und andererseits der sehr bekannte Common Voice Datensatz von Mozilla: 
+
+![Datensatz von Mozilla Common Voice](img/Spracherkennung/sc2.png)
+##### Data Transformation
+
+Die nächste Phase ist die der Data Transformation.
+Diese ist der Prozess der Umwandlung von Daten von einem Format oder einer Struktur in ein anderes, um die Datenanalyse zu erleichtern.
+
+Die zuvor heruntergeladenen waren ursprünglich in vielen verschiedenen Formaten/Strukturen vorhanden:
+* Ordnerstruktur + .csv
+* Json
+* .tsv / .csv
+
+Diese verschiedenen Strukturen werden in diesem Schritt in ein einheitliches Format, in diesem Fall ein .csv-file pro Datensatz mit gleicher Struktur, gebracht
+
+Nicht nur die Struktur, sondern auch die enthaltenen Informationen der Datensätze unterscheiden sich.
+Die Hauptinformationen, die wirklich für das Training benötigt werden, sind jedoch immer vorhanden.
+In diesem Fall sind das:
+  * "sentence": Der Satz, der in der Audio-Datei gesprochen wird.
+  * "path": Der Pfad zur Audio-Datei
+
+Allerdings sind in diesen Datensätzen auch andere Informationen, die nicht direkt für das Training erforderlich sind enthalten.
+  * Geschlecht
+  * Akzent
+  * Alter
+  * Sprecher ID
+  * source (original-Dataset)
+
+Obwohl diese Daten weder für das Training notwendig, noch in allen Datensätzen vorhanden sind, sollten diese nicht "weggeworfen" werden, da diese für die Evaluation des Models, Identifikation von Fehlern, oder Analysierung des Aufbaus des Aufbaus des finalen Datensatzes sehr nützlich sein können.
+
+Ausserdem wurde die Größe der Audio-Datei als Spalte hinzugefügt, um die Erstellung von Sub-datasets mit bestimmter Größe zu erleichtern.
+
+
+
+### Beispiel der Umformung eines Datensets
+Hier wird als Beispiel der Code zur Umformung eines Datensatzes vorgeführt.
+
+Die Import-Statements sind:
+* pandas: Arbeit mit Datensätzen
+* numpy: verschiedene optimierte numerische Operationen
+* os/shutil: verschiedene Operationen mit Dateien
+* tqdm: für Progressbars
+  
+``` python
+import pandas as pd
+import numpy as np
+import os
+import shutil
+from tqdm.notebook import tqdm
+```
+
+Hier werden die Ordner definiert, in welche die transformierten Daten kommen:
+
+``` python
+clips_dest_dir = "../presentation_folders/new_dataset/clips/caito"
+df_dest_dir = "../presentation_folders/new_dataset/dfs/caito"
+if not os.path.exists(clips_dest_dir):
+    os.mkdir(clips_dest_dir)
+if not os.path.exists(df_dest_dir):
+    os.mkdir(df_dest_dir)
+```
+
+Dies ist ein Screenshot, wie die Struktur dieses Datensatzes aussieht:
+
+![Datensatz von Mozilla Common Voice](img/Spracherkennung/dir_structure.png)
+
+In diesem Code wird durch die Ordnerstruktur iteriert um die dort enthaltenen Informationen in ein .csv-file zu schreiben:
+
+``` python
+df = pd.DataFrame(columns=["speaker_id", "path", "sentence","gender","age","accents"])
+
+start_dir = "../presentation_folders/datasets/de_DE/by_book"
+
+for gender in os.listdir(start_dir):
+gender_dir = os.path.join(start_dir, gender)
+if not os.path.isdir(gender_dir):
+    continue
+for speaker in os.listdir(gender_dir):
+    speaker_dir = os.path.join(gender_dir, speaker)
+    if not os.path.isdir(speaker_dir):
+        continue
+    for recording_session in os.listdir(speaker_dir):
+        session_dir = os.path.join(speaker_dir, recording_session)
+        if not os.path.isdir(session_dir):
+            continue
+        session_df=pd.read_table(os.path.join(session_dir, "metadata.csv"),sep="|",header=None)
+        session_df=session_df.rename(columns={0:"path",1:"raw_sentence",2:"sentence"})
+        session_df=session_df.drop(columns=["raw_sentence"])
+        session_df.path = session_df.path.astype(str) + ".wav"
+        
+        session_df["speaker_id"] = [speaker for i in range(len(session_df))]
+        session_df["gender"] = [gender for i in range(len(session_df))]
+        session_df["age"] = [np.NaN for i in range(len(session_df))]
+        session_df["accents"] = [np.NaN for i in range(len(session_df))]
+        
+        df = pd.concat([df,session_df]).reset_index(drop=True)
+        
+        print(f"gender: {gender}, speaker: {speaker}, recording session: {recording_session}")
+        
+        
+        for file in tqdm(list(session_df["path"][:int(len(session_df)/10)])):
+            src_path = os.path.join(session_dir, "wavs", file)
+            dest_path = os.path.join(clips_dest_dir, file)
+            shutil.copy(src_path, dest_path)
+                
+
+df.to_csv(os.path.join(df_dest_dir, "caito.csv"))
+```
+#### Data Integration
+
+Der nächste Punkt ist die Data Integration. Hier werden die Daten in einen Datensatz zusammengefasst.
+In diesem Fall ist dies sehr einfach, da wir einfach nur csv-files der selben Struktur zusammenfügen müssen.
+
+Nun werden verschiedene Informationen über den fertigen Datensatz dargestellt und analysiert:
+``` python
+df=pd.read_csv("../complete_dataset/complete_size_df_woindex.csv")
+``` 
+
+Hier wird die NaN-Ratio der verschiedenen Columns angegeben:
+``` python
+df.sample(n=5,random_state=42)
+print("NaN-Ratio\n")
+for col in df.columns:
+    print(f"{col}: {df[col].notna().sum()/len(df)*100:.1f}%")
+```
+
+Hier wird die Anzahl der verschiedenen Sprecher und Akzente gezeigt:
+``` python
+print(df["speaker_id"].nunique())
+print(df["accents"].nunique())
+```
+
+In diesem Code-Snippet wird die Verteilung des Geschlechts im Datensatz gezeigt:
+``` python
+df["gender"].value_counts()
+```
+#### Preprocessing
+
+Um die Audio-Dateien in eine Form zu bringen die für Machine Learning Models verarbeitbar, gibt es viele verschiedene Preprocessing-Methoden. 
+Hier werden zwei dieser Preprocessing-Methoden genauer angeschaut.
+Die erste Methode die wir uns anschauen wollen, ist das Spektogram.
+Dieses ist eine visuelle Darstellung des Spektrums des Signals über die Zeit.
+In dieser Repräsentation gehen fast keine Daten verloren, was einerseits dazu führt, dass diese Methode sehr flexibel ist, wenn es darum geht für welchen Anwendungszweck sie verwendet werden kann, andererseits aber auch das Problem mit sich bringt, dass diese größere Menge von Daten im Vergleich zu anderen Methoden eine längere Trainingszeit mit sich zieht.
+
+Hier kommt zum Beispiel MFCC ins Spiel. Diese Methode hat im Endeffekt eine viel kleinere Datenmenge und ist stark auf Spracherkennung spezialisiert. Ausserdem ahmt diese Methode das menschliche Gehör nach, wodurch diese Aspekte der Datenreduktion aber auch der Spezialisierung auf Spracherkennung entstehen.
+
+
+Um diese Methoden in Python zu nutzen wird hier die library "librosa" verwendet.
+``` python
+import matplotlib.pyplot as plt
+import librosa
+import librosa.display
+import numpy as np
+```
+
+Hier wird die zu verarbeitenden Audiodatei geladen.
+``` python
+audio_file = "aufnahmen/english_audio.wav"
+y, sr = librosa.load(audio_file)
+```
+
+In diesem Code-Snippet wird ein Spektogram der Audio-Datei geplottet.
+``` python
+plt.figure(figsize=(14, 5))
+D = librosa.amplitude_to_db(np.abs(librosa.stft(y)), ref=np.max)
+librosa.display.specshow(D, sr=sr, x_axis='time', y_axis='log')
+plt.colorbar(format='%+2.0f dB')
+plt.title('Spectrogram')
+plt.show()
+```
+
+In diesem Code-Snippet wird das MFCC der Audio-Datei gezeigt.
+``` python
+mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
+plt.figure(figsize=(14, 5))
+librosa.display.specshow(mfccs, sr=sr, x_axis='time')
+plt.colorbar()
+plt.title('MFCC')
+plt.show()
+mfccs
+```
+#### 1.Model: Gaussian HMM 
+
+Kommen wir nun zu den Modellen.
+Das erste Modell über das wir sprechen werden ist GHMM.
+
+Ein HMM ist ein statistisches Modell, das hilft, "unsichtbare" Zustände basierend auf beobachtbaren Daten zu schätzen. (z.B.: Wettervorhersage basierend auf menschlichem Verhalten, Textanalyse basierend auf Wortsequenzen etc.)
+
+Ausserdem nutzt das GHMM die Gausssche Normalverteilung.
+
+
+In dem folgenden Beispiel wird ein HMM auf ein Nummern-Dataset trainiert, da die ursprüngliche Idee, das deutsche Dataset in Wörter aufzuteilen, nicht umgesetzt werden konnte.
+``` python
+import os
+
+import numpy as np
+from hmmlearn import hmm
+
+import librosa
+from python_speech_features import mfcc
+import scipy.io.wavfile as wav
+import random as rd
+```
+
+Hier wird die Klasse HMMTrainer definiert, welche für das trainieren und auswerten der Daten verwantwortlich ist.
+``` python
+class HMMTrainer(object):
+    def __init__(self,model_name, n_components=4, cov_type='diag', n_iter=1000):
+        self.model_name = model_name
+        self.n_components = n_components
+        self.cov_type = cov_type
+        self.n_iter = n_iter
+
+        self.model = hmm.GaussianHMM(n_components=self.n_components, 
+                covariance_type=self.cov_type, n_iter=self.n_iter)
+
+    def train(self, X):
+        np.seterr(all='ignore')
+        self.model.fit(X)
+
+    def get_score(self, input_data):
+        return self.model.score(input_data)
+```
+In diesem Code-Snippet werden die Ordner der verschiedenen Nummern definiert:
+``` python
+input_folder='../models/HMM/digit_recordings'
+word_folders = [f for f in os.listdir(input_folder) if not f.startswith(".")]
+```
+``` python
+word_folders
+```
+
+Hier werden die Audio-Dateien in MFCCs umgewandelt und für weitere Verarbeitung gespeichert:
+``` python
+import warnings
+warnings.filterwarnings("ignore")
+lens = {}
+training_data = {}
+for dirname in word_folders:
+    X = []
+    ltt=[]
+    subfolder = os.path.join(input_folder, dirname)
+    for filename in [x for x in os.listdir(subfolder) if x.endswith('.wav')][:-1]:
+        filepath = os.path.join(subfolder, filename)
+        sampling_freq, audio = librosa.load(filepath)            
+        mfcc_features = mfcc(sampling_freq, audio)[:,:13]
+        X.append(mfcc_features)
+            
+    training_data[dirname] = X
+```
+
+So sehen die Daten aus:
+``` python
+training_data["0"]
+```
+
+
+``` python
+hmm_models = []
+for label in training_data.keys():
+    rd.shuffle(training_data[label])
+    X = np.concatenate(training_data[label][:-5], axis=0)
+    print(X.dtype)
+    print('X.shape =', X.shape)
+    hmm_trainer = HMMTrainer(label)
+    hmm_trainer.train(X)
+    hmm_models.append(hmm_trainer)
+    hmm_trainer = None
+```
+
+Training der Modelle (ein Model pro Wort):
+``` python
+results = []
+for label in training_data.keys():
+  d_results =[]
+  for i in range(5):
+    mfcc_features=training_data[label][-i]
+    
+    scores=[]
+    for model in hmm_models:
+        score = model.get_score(mfcc_features)
+        scores.append(score)
+    index=np.array(scores).argmax()
+    results.append(1 if (label==(hmm_models[index].model_name)) else 0)
+    d_results.append(1 if (label==(hmm_models[index].model_name)) else 0)
+  print(label, sum(d_results)/len(d_results))
+print(sum(results)/len(results))
+```
+
+#### 2.Model: Wav2vec
+
+Das Wav2vec ist ein End-to-End-Model, das von Facebook AI 2019 entwickelt wurde und die Transformer-Architektur, die im vorherigen Teil schon erklärt wurde, nutzt. Es lernt also direkt aus Daten ohne eine manuelle Extraktion von Merkmalen aus der Audio (zB. via MFCC oder Spektogram zu benötigen). Es lernt sogar hauptsächlich aus unmakrkierten Rohdaten, was das ursprüngliche Trainieren, wenn man von der riesigen Datenmenge, die es benötigt, absieht, einfacher macht.
+Es hat eine sehr gute Performance auf dem TIMIT-Datensatz, welcher normalerweise für Evaluationen von Speech-to-Text Systemen genutzt wird.
+
+![Datensatz von Thorsten Müller](img/Spracherkennung/leaderboard.png)
+
+Zuerst müssen die entsprechenden libraries und der Tokenizer und das Model geladen werden.
+``` python
+import torch
+import torchaudio
+from transformers import Wav2Vec2ForCTC, Wav2Vec2Tokenizer
+```
+``` python
+tokenizer = Wav2Vec2Tokenizer.from_pretrained("facebook/wav2vec2-base-960h")
+model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h")
+```
+
+Hier wird eine im vorhinein aufgenommene Audiodatei geladen.
+``` python
+path = "aufnahmen/english_audio.wav"
+speech, rate = torchaudio.load(path)
+```
+
+Diese geladene Audidatei wird wird nun in das richtige Format gebracht.
+``` python
+if speech.shape[0] > 1:
+    speech = speech[0]
+
+if rate != 16000:
+    resampler = torchaudio.transforms.Resample(orig_freq=rate, new_freq=16000)
+    speech = resampler(speech)
+
+speech = speech.squeeze()
+```
+
+Zuletzt wird der Text dieses Audifiles predictet und ausgegeben.
+``` python
+input_values = tokenizer(speech, return_tensors="pt").input_values
+
+with torch.no_grad():
+    logits = model(input_values).logits
+
+predicted_ids = torch.argmax(logits, dim=-1)
+transcription = tokenizer.batch_decode(predicted_ids)[0]
+
+print(transcription)
+```
 
 ## 6 Weiterführendes Material
 
 ### Podcast
 LINK UND BESCHRIFTUNG ANPASSEN
-[Der Campus Talk – Silicon Forest – Folge 4](https://der-campustalk-der-thd.letscast.fm/episode/der-campus-talk-silicon-forest-folge-4)
+[Der Campus Talk – Silicon Forest – Folge XX](https://der-campustalk-der-thd.letscast.fm/episode/der-campus-talk-silicon-forest-folge-4)
 
 ### Podcast Transkript
 
@@ -526,11 +882,6 @@ beim nächsten Mal wieder ein, wenn es heißt "Wie macht denn Technik?". Tschüs
 ### Talk
 Hier einfach Youtube oder THD System embedden.
 
-### Demo
-Link zur Code Demonstration: 
-
-Link zum Repository: <hier https link einfügen>
-
 ## 7 Literaturliste
 [ibm: What is speech recognition](https://www.ibm.com/topics/speech-recognition)
 
@@ -603,362 +954,3 @@ Link zum Repository: <hier https link einfügen>
 [Oliver C. Ibe (2013) Markov Processes for Stochastic Modeling](https://www.sciencedirect.com/topics/mathematics/hidden-markov-models)
 
 [Speech Recognition: History & Fundamentals](https://study.com/academy/lesson/speech-recognition-history-fundamentals.html)
-
-# Code-Demo
-
-# Dataset
-## Data Ingestion
-In dieser Code-Demo werde ich über das Sammeln von Daten für Spracherkennung, Preprocessing und die Anwendung von zwei verschiedenen Models reden.
-Der hier erwähnte Datensatz wird später nicht zum Training genutzt, sondern dient nur als Beispiel, da das Training zu "computationally expensive" war.
-
-
-Am Anfang eines jeden Machine Learning Projekts steht das Sammeln von Daten.
-Auch in dieser Code-Demo wird mit dem Sammeln von Daten begonnen. 
-Die erste Phase hierfür ist die sogenannte Data Integration.
-Diese Phase umfasst den Prozess des Sammelns und Importierens von Daten aus verschiedenen Quellen in ein System zur weiteren Verarbeitung oder Analyse.
-In diesem Fall wurden mehrere verschiedene Datensätze aus dem Internet heruntergeladen.
-Eine alternative wäre die Daten aus der realen Welt selbst zu machen, was allerdings für eine Privatperson sehr schwierig ist.
-
-Hier werden zwei Beispiele der verwendeten Datensätze gezeigt:
-
-Einerseits der Datensatz von Thorsten Müller, ein Datensatz der von einer Privatperson der Öffentlichkeit zur Verfügung gestellt wurde:
-
-![Datensatz von Thorsten Müller](img/Spracherkennung/sc1.png)
-
-Und andererseits der sehr bekannte Common Voice Datensatz von Mozilla: 
-
-![Datensatz von Mozilla Common Voice](img/Spracherkennung/sc2.png)
-## Data Transformation
-
-Die nächste Phase ist die der Data Transformation.
-Diese ist der Prozess der Umwandlung von Daten von einem Format oder einer Struktur in ein anderes, um die Datenanalyse zu erleichtern.
-
-Die zuvor heruntergeladenen waren ursprünglich in vielen verschiedenen Formaten/Strukturen vorhanden:
-* Ordnerstruktur + .csv
-* Json
-* .tsv / .csv
-
-Diese verschiedenen Strukturen werden in diesem Schritt in ein einheitliches Format, in diesem Fall ein .csv-file pro Datensatz mit gleicher Struktur, gebracht
-
-Nicht nur die Struktur, sondern auch die enthaltenen Informationen der Datensätze unterscheiden sich.
-Die Hauptinformationen, die wirklich für das Training benötigt werden, sind jedoch immer vorhanden.
-In diesem Fall sind das:
-  * "sentence": Der Satz, der in der Audio-Datei gesprochen wird.
-  * "path": Der Pfad zur Audio-Datei
-
-Allerdings sind in diesen Datensätzen auch andere Informationen, die nicht direkt für das Training erforderlich sind enthalten.
-  * Geschlecht
-  * Akzent
-  * Alter
-  * Sprecher ID
-  * source (original-Dataset)
-
-Obwohl diese Daten weder für das Training notwendig, noch in allen Datensätzen vorhanden sind, sollten diese nicht "weggeworfen" werden, da diese für die Evaluation des Models, Identifikation von Fehlern, oder Analysierung des Aufbaus des Aufbaus des finalen Datensatzes sehr nützlich sein können.
-
-Ausserdem wurde die Größe der Audio-Datei als Spalte hinzugefügt, um die Erstellung von Sub-datasets mit bestimmter Größe zu erleichtern.
-
-
-
-### Beispiel der Umformung eines Datensets
-Hier wird als Beispiel der Code zur Umformung eines Datensatzes vorgeführt.
-
-Die Import-Statements sind:
-* pandas: Arbeit mit Datensätzen
-* numpy: verschiedene optimierte numerische Operationen
-* os/shutil: verschiedene Operationen mit Dateien
-* tqdm: für Progressbars
-  
-``` python
-import pandas as pd
-import numpy as np
-import os
-import shutil
-from tqdm.notebook import tqdm
-```
-
-Hier werden die Ordner definiert, in welche die transformierten Daten kommen:
-
-``` python
-clips_dest_dir = "../presentation_folders/new_dataset/clips/caito"
-df_dest_dir = "../presentation_folders/new_dataset/dfs/caito"
-if not os.path.exists(clips_dest_dir):
-    os.mkdir(clips_dest_dir)
-if not os.path.exists(df_dest_dir):
-    os.mkdir(df_dest_dir)
-```
-
-Dies ist ein Screenshot, wie die Struktur dieses Datensatzes aussieht:
-
-![Datensatz von Mozilla Common Voice](img/Spracherkennung/dir_structure.png)
-
-In diesem Code wird durch die Ordnerstruktur iteriert um die dort enthaltenen Informationen in ein .csv-file zu schreiben:
-
-``` python
-df = pd.DataFrame(columns=["speaker_id", "path", "sentence","gender","age","accents"])
-
-start_dir = "../presentation_folders/datasets/de_DE/by_book"
-
-for gender in os.listdir(start_dir):
-gender_dir = os.path.join(start_dir, gender)
-if not os.path.isdir(gender_dir):
-    continue
-for speaker in os.listdir(gender_dir):
-    speaker_dir = os.path.join(gender_dir, speaker)
-    if not os.path.isdir(speaker_dir):
-        continue
-    for recording_session in os.listdir(speaker_dir):
-        session_dir = os.path.join(speaker_dir, recording_session)
-        if not os.path.isdir(session_dir):
-            continue
-        session_df=pd.read_table(os.path.join(session_dir, "metadata.csv"),sep="|",header=None)
-        session_df=session_df.rename(columns={0:"path",1:"raw_sentence",2:"sentence"})
-        session_df=session_df.drop(columns=["raw_sentence"])
-        session_df.path = session_df.path.astype(str) + ".wav"
-        
-        session_df["speaker_id"] = [speaker for i in range(len(session_df))]
-        session_df["gender"] = [gender for i in range(len(session_df))]
-        session_df["age"] = [np.NaN for i in range(len(session_df))]
-        session_df["accents"] = [np.NaN for i in range(len(session_df))]
-        
-        df = pd.concat([df,session_df]).reset_index(drop=True)
-        
-        print(f"gender: {gender}, speaker: {speaker}, recording session: {recording_session}")
-        
-        
-        for file in tqdm(list(session_df["path"][:int(len(session_df)/10)])):
-            src_path = os.path.join(session_dir, "wavs", file)
-            dest_path = os.path.join(clips_dest_dir, file)
-            shutil.copy(src_path, dest_path)
-                
-
-df.to_csv(os.path.join(df_dest_dir, "caito.csv"))
-```
-## Data Integration
-
-Der nächste Punkt ist die Data Integration. Hier werden die Daten in einen Datensatz zusammengefasst.
-In diesem Fall ist dies sehr einfach, da wir einfach nur csv-files der selben Struktur zusammenfügen müssen.
-
-Nun werden verschiedene Informationen über den fertigen Datensatz dargestellt und analysiert:
-``` python
-df=pd.read_csv("../complete_dataset/complete_size_df_woindex.csv")
-``` 
-
-Hier wird die NaN-Ratio der verschiedenen Columns angegeben:
-``` python
-df.sample(n=5,random_state=42)
-print("NaN-Ratio\n")
-for col in df.columns:
-    print(f"{col}: {df[col].notna().sum()/len(df)*100:.1f}%")
-```
-
-Hier wird die Anzahl der verschiedenen Sprecher und Akzente gezeigt:
-``` python
-print(df["speaker_id"].nunique())
-print(df["accents"].nunique())
-```
-
-In diesem Code-Snippet wird die Verteilung des Geschlechts im Datensatz gezeigt:
-``` python
-df["gender"].value_counts()
-```
-### Preprocessing
-
-Um die Audio-Dateien in eine Form zu bringen die für Machine Learning Models verarbeitbar, gibt es viele verschiedene Preprocessing-Methoden. 
-Hier werden zwei dieser Preprocessing-Methoden genauer angeschaut.
-Die erste Methode die wir uns anschauen wollen, ist das Spektogram.
-Dieses ist eine visuelle Darstellung des Spektrums des Signals über die Zeit.
-In dieser Repräsentation gehen fast keine Daten verloren, was einerseits dazu führt, dass diese Methode sehr flexibel ist, wenn es darum geht für welchen Anwendungszweck sie verwendet werden kann, andererseits aber auch das Problem mit sich bringt, dass diese größere Menge von Daten im Vergleich zu anderen Methoden eine längere Trainingszeit mit sich zieht.
-
-Hier kommt zum Beispiel MFCC ins Spiel. Diese Methode hat im Endeffekt eine viel kleinere Datenmenge und ist stark auf Spracherkennung spezialisiert. Ausserdem ahmt diese Methode das menschliche Gehör nach, wodurch diese Aspekte der Datenreduktion aber auch der Spezialisierung auf Spracherkennung entstehen.
-
-
-Um diese Methoden in Python zu nutzen wird hier die library "librosa" verwendet.
-``` python
-import matplotlib.pyplot as plt
-import librosa
-import librosa.display
-import numpy as np
-```
-
-Hier wird die zu verarbeitenden Audiodatei geladen.
-``` python
-audio_file = "aufnahmen/english_audio.wav"
-y, sr = librosa.load(audio_file)
-```
-
-In diesem Code-Snippet wird ein Spektogram der Audio-Datei geplottet.
-``` python
-plt.figure(figsize=(14, 5))
-D = librosa.amplitude_to_db(np.abs(librosa.stft(y)), ref=np.max)
-librosa.display.specshow(D, sr=sr, x_axis='time', y_axis='log')
-plt.colorbar(format='%+2.0f dB')
-plt.title('Spectrogram')
-plt.show()
-```
-
-In diesem Code-Snippet wird das MFCC der Audio-Datei gezeigt.
-``` python
-mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
-plt.figure(figsize=(14, 5))
-librosa.display.specshow(mfccs, sr=sr, x_axis='time')
-plt.colorbar()
-plt.title('MFCC')
-plt.show()
-mfccs
-```
-## 1.Model: Gaussian HMM 
-
-Kommen wir nun zu den Modellen.
-Das erste Modell über das wir sprechen werden ist GHMM.
-
-Ein HMM ist ein statistisches Modell, das hilft, "unsichtbare" Zustände basierend auf beobachtbaren Daten zu schätzen. (z.B.: Wettervorhersage basierend auf menschlichem Verhalten, Textanalyse basierend auf Wortsequenzen etc.)
-
-Ausserdem nutzt das GHMM die Gausssche Normalverteilung.
-
-
-In dem folgenden Beispiel wird ein HMM auf ein Nummern-Dataset trainiert, da die ursprüngliche Idee, das deutsche Dataset in Wörter aufzuteilen, nicht umgesetzt werden konnte.
-``` python
-import os
-
-import numpy as np
-from hmmlearn import hmm
-
-import librosa
-from python_speech_features import mfcc
-import scipy.io.wavfile as wav
-import random as rd
-```
-
-Hier wird die Klasse HMMTrainer definiert, welche für das trainieren und auswerten der Daten verwantwortlich ist.
-``` python
-class HMMTrainer(object):
-    def __init__(self,model_name, n_components=4, cov_type='diag', n_iter=1000):
-        self.model_name = model_name
-        self.n_components = n_components
-        self.cov_type = cov_type
-        self.n_iter = n_iter
-
-        self.model = hmm.GaussianHMM(n_components=self.n_components, 
-                covariance_type=self.cov_type, n_iter=self.n_iter)
-
-    def train(self, X):
-        np.seterr(all='ignore')
-        self.model.fit(X)
-
-    def get_score(self, input_data):
-        return self.model.score(input_data)
-```
-In diesem Code-Snippet werden die Ordner der verschiedenen Nummern definiert:
-``` python
-input_folder='../models/HMM/digit_recordings'
-word_folders = [f for f in os.listdir(input_folder) if not f.startswith(".")]
-```
-``` python
-word_folders
-```
-
-Hier werden die Audio-Dateien in MFCCs umgewandelt und für weitere Verarbeitung gespeichert:
-``` python
-import warnings
-warnings.filterwarnings("ignore")
-lens = {}
-training_data = {}
-for dirname in word_folders:
-    X = []
-    ltt=[]
-    subfolder = os.path.join(input_folder, dirname)
-    for filename in [x for x in os.listdir(subfolder) if x.endswith('.wav')][:-1]:
-        filepath = os.path.join(subfolder, filename)
-        sampling_freq, audio = librosa.load(filepath)            
-        mfcc_features = mfcc(sampling_freq, audio)[:,:13]
-        X.append(mfcc_features)
-            
-    training_data[dirname] = X
-```
-
-So sehen die Daten aus:
-``` python
-training_data["0"]
-```
-
-
-``` python
-hmm_models = []
-for label in training_data.keys():
-    rd.shuffle(training_data[label])
-    X = np.concatenate(training_data[label][:-5], axis=0)
-    print(X.dtype)
-    print('X.shape =', X.shape)
-    hmm_trainer = HMMTrainer(label)
-    hmm_trainer.train(X)
-    hmm_models.append(hmm_trainer)
-    hmm_trainer = None
-```
-
-Training der Modelle (ein Model pro Wort):
-``` python
-results = []
-for label in training_data.keys():
-  d_results =[]
-  for i in range(5):
-    mfcc_features=training_data[label][-i]
-    
-    scores=[]
-    for model in hmm_models:
-        score = model.get_score(mfcc_features)
-        scores.append(score)
-    index=np.array(scores).argmax()
-    results.append(1 if (label==(hmm_models[index].model_name)) else 0)
-    d_results.append(1 if (label==(hmm_models[index].model_name)) else 0)
-  print(label, sum(d_results)/len(d_results))
-print(sum(results)/len(results))
-```
-
-## 2.Model: Wav2vec
-
-Das Wav2vec ist ein End-to-End-Model, das von Facebook AI 2019 entwickelt wurde und die Transformer-Architektur, die im vorherigen Teil schon erklärt wurde, nutzt. Es lernt also direkt aus Daten ohne eine manuelle Extraktion von Merkmalen aus der Audio (zB. via MFCC oder Spektogram zu benötigen). Es lernt sogar hauptsächlich aus unmakrkierten Rohdaten, was das ursprüngliche Trainieren, wenn man von der riesigen Datenmenge, die es benötigt, absieht, einfacher macht.
-Es hat eine sehr gute Performance auf dem TIMIT-Datensatz, welcher normalerweise für Evaluationen von Speech-to-Text Systemen genutzt wird.
-
-![Datensatz von Thorsten Müller](img/Spracherkennung/leaderboard.png)
-
-Zuerst müssen die entsprechenden libraries und der Tokenizer und das Model geladen werden.
-``` python
-import torch
-import torchaudio
-from transformers import Wav2Vec2ForCTC, Wav2Vec2Tokenizer
-```
-``` python
-tokenizer = Wav2Vec2Tokenizer.from_pretrained("facebook/wav2vec2-base-960h")
-model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h")
-```
-
-Hier wird eine im vorhinein aufgenommene Audiodatei geladen.
-``` python
-path = "aufnahmen/english_audio.wav"
-speech, rate = torchaudio.load(path)
-```
-
-Diese geladene Audidatei wird wird nun in das richtige Format gebracht.
-``` python
-if speech.shape[0] > 1:
-    speech = speech[0]
-
-if rate != 16000:
-    resampler = torchaudio.transforms.Resample(orig_freq=rate, new_freq=16000)
-    speech = resampler(speech)
-
-speech = speech.squeeze()
-```
-
-Zuletzt wird der Text dieses Audifiles predictet und ausgegeben.
-``` python
-input_values = tokenizer(speech, return_tensors="pt").input_values
-
-with torch.no_grad():
-    logits = model(input_values).logits
-
-predicted_ids = torch.argmax(logits, dim=-1)
-transcription = tokenizer.batch_decode(predicted_ids)[0]
-
-print(transcription)
-```
