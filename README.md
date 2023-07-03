@@ -22,6 +22,12 @@ pip install mkdocs
 ```{.bash, id:"j29ie3c7"}
 pip install mkdocs-material
 ```
+
+* Install plugins:
+```{.bash, id:"j29ie3c7"}
+pip install mkdocs-awesome-pages-plugin
+```
+
 * Look at a copy of the site served locally on your machine:
 ```{.bash, id:"j29ie3c7"}
 mkdocs serve

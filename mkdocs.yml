@@ -4,7 +4,7 @@ nav:
 - ...
 - Impressum: impressum.md
 
-theme: 
+theme:
   name: material
   features:
     - navigation.expand
@@ -17,11 +17,12 @@ markdown_extensions:
   - md_in_html
   - pymdownx.arithmatex:
       generic: true
+  - footnotes
 
 plugins:
   - search
   - awesome-pages:
-      collapse_single_pages: false  
+      collapse_single_pages: false
 
 extra_javascript:
   - javascripts/mathjax.js
