@@ -42,10 +42,9 @@ Im Fall der Spracherkennung ist beim template matching das Bild zum Beispiel ein
 1962 wurde von IBM "Shoebox" vorgestellt. Das System konnte 16 englische Wörter verstehen und darauf antworten. Die Spracherkennung hat funktioniert, indem Merkmale aus dem Input extrahiert und mit abgespeicherten Verglichen wurden. So wurde bestimmt welches Wort gesagt wurde.
 
 <figure markdown>
-    ![Shoebox](./img/Spracherkennung/ibm_shoebox.jpeg){ width="400" }
-    <figcaption>Fig. 1 Shoebox</figcaption>
+  ![Shoebox](./img/Spracherkennung/ibm_shoebox.jpeg)
+  <figcaption>Fig. 1 Shoebox</figcaption>
 </figure>
-
 
 1966 wurde Linear Predictive Coding (LPC) vorgeschlagen. Linear Predictive Coding ist ein Verfahren zur Reduktion der Datenmenge. Es basiert auf der Annahme, dass Sprachsignale viele wiederholende Muster enthalten, die durch eine Vorhersagemethode erfasst werden können. Der Vorteil von diesem Ansatz ist, dass durch die Reduktion der Datenmenge eine effizientere Verarbeitung und Übertragung von Sprache möglich ist.
 
@@ -60,8 +59,8 @@ In den 1970er Jahren wurden Fortschritte in der Spracherkennung vor allem aufgru
 Durch das Program ist unter anderem das "Harpy" System von der Carnegie-Mellon Universität entstanden. Das System konnte über 1000 Wörter verstehen, was ungefähr dem Vokabular eines drei Jährigem gleicht. "Harpy" war der Versuch die besten Merkmale des Hearsy-I Systems, welches ein regelbasiertes System war, und des DRAGON Systems, welches eine Markov Kette verwendete zu kombinieren. Es hatte ein State Transition Network mit 15000 states. In dem State Transition Network sind alle möglichen Pfade durch die endliche Anzahl an states dargestellt, wie zum Beispiel alle möglichen Wörter oder Sätze. Zudem waren Regeln zu Wortgrenzen und Grammatik implementiert. Durch diesen Ansatz konnte "Harpy" die für das SUR vorgesehenen Ziele, nämlich über 90 % eines Satzes aus einem Lexikon mit 1000 Wörtern verstehen zu können, erfüllen.
 
 <figure markdown>
-    ![Harpy](./img/Spracherkennung/Harpy.jpeg){ width="400" }
-    <figcaption>Fig. 2 Harpy</figcaption>
+  ![Harpy](./img/Spracherkennung/Harpy.jpeg){ width="400" }
+  <figcaption>Fig. 2 Harpy</figcaption>
 </figure>
 
 ### 1980er
@@ -95,8 +94,8 @@ Von 2002 bis 2004 gab es ein weiteres Programm der Defense Advanced Research Pro
 2007 wurde erstmals ein Long Short Term Memory (LSTM) mit Connectionist Temporal Classification (CTC) trainiert das angefangen hat klassische Ansätze in manchen Aufgaben zu übertreffen.
 
 <figure markdown>
-    ![CTC](./img/Spracherkennung/CTC.png){ width="400" }
-    <figcaption>Fig. 3 Connectionist Temporal Classification</figcaption>
+  ![CTC](./img/Spracherkennung/CTC.png){ width="400" }
+  <figcaption>Fig. 3 Connectionist Temporal Classification</figcaption>
 </figure>
 
 Connectionist Temporal Classification ist ein System um ein rekurrentes Neuronales Netz zu trainieren. Dabei ist der Output des Neuronalen Netzes eine Wahrscheinlichkeitsmatrix, welche für jeden Zeitpunkt t die Wahrscheinlichkeit für jedes vorher definiertes Zeichen angibt. Anschließend wird durch einen Algorithmus der Pfad berechnet, der am Ende die höchste Wahrscheinlichkeit hat. Die Ausgabesequenz, am Beispiel von Fig. 3, wäre dann "aaa-b". Alle Buchstaben die Mehrmals hintereinander vorkommen werden zusammengefasst zu einem Buchstaben. Dabei ist zu beachten, dass es ein Platzhalter Symbol gibt welches dazu dient auch den selben Buchstaben mehrmals hintereinander zu erkennen, in diesem Beispiel durch ein "-" dargestellt. Somit ist die Ausgabe dann der richtige Output "ab".
@@ -116,8 +115,8 @@ Ein end-to-end ASR System ist ein Spracherkennungssystem, das den gesamten Proze
 2016 wurder das erste Aufmerksamkeitsbasierte automatic speechrecognition Model vorgeschlagen. Das Modell "Listen, Attend und Spell" (LAS) hört die akustischen Signale, achtet auf verschiedene Teile des Signals und gibt das Transkript einen Buchstaben nach dem anderen aus. Es besteht aus zwei Teilen, einem Listener und einem Speller. Der Listener ist ein Encoder recurrent neural network, genauer gesagt ein pyramidal Bidirectional Long Short Term Memory (BLSTM). Der Listener extrahiert Merkmale aus den akustische Signalen. Der Output des Listners dient als Eingabe für den Speller. Der Speller ist Aufmerksamkeitsbasierter Zeichen Decoder, genauer gesagt ein Long Short Term Memory (LSTM) der eine Wahrschenilichkeitsmatrix als Output hat.
 
 <figure markdown>
-    ![LAS](./img/Spracherkennung/LAS.png){ width="400" }
-    <figcaption>Fig. 4 "Listen, Attend, Spell"</figcaption>
+  ![LAS](./img/Spracherkennung/LAS.png){ width="400" }
+  <figcaption>Fig. 4 "Listen, Attend, Spell"</figcaption>
 </figure>
 
 Aufmerksamkeits basierte Modelle können im Gegensatz zu den Ansätzen mit Connectionist Temporal Classification oder Hidden Markov Models alle Teile eines Spracherkennungssystems lernen. Dadurch spart man sich den Speicherplatz für ein großes language model, wodurch dieser Ansatz gut für Anwendungen mit limitiertem Speicherplatz geeignet ist. Ende 2016 haben diese Modelle die Ansätze mit Connectionist Temproal Classification schon übertroffen.
@@ -155,8 +154,8 @@ Als die Probleme nach und nach gelöst worden sind konnte durch Deep Learng gro�
 In diesem Abschnitt wird die Speech Transformer Architektur aus dem Paper Speech-Transformer: A No-Recurrence Sequence-to-Sequence Model for Speech Recognition erklärt. Der Grund, warum genau diese Architektur genauer erklärt wird ist, dass es viele Abänderungen und Verbesserungen gibt die auf dieser Architektur aufbauen. Ziel ist es zu verstehen wie der Speech Transformer aufgebaut ist und funktioniert, um dann Abänderungen die darauf aufbauen leichter und schneller zu verstehen.
 
 <figure markdown>
-    ![Speechtransformer](./img/Spracherkennung/Speech_Transformer.png){ width="400" }
-    <figcaption>Fig. 5 Speechtransformer</figcaption>
+  ![Speechtransformer](./img/Spracherkennung/Speech_Transformer.png){ width="400" }
+  <figcaption>Fig. 5 Speechtransformer</figcaption>
 </figure>
 
 Die Speechtransformer Architektur besteht aus zwei Teilen, einem Encoder und einem Decoder.
@@ -164,8 +163,8 @@ Die Speechtransformer Architektur besteht aus zwei Teilen, einem Encoder und ein
 Der Encoder hat als Input ein Spektogramm. Am Anfang des Encoders sind drei Convolutional Layer mit einem 3x3 Kernel und Stride 2. Anschließend ist hier ein Block frei in dem optional zusätzliche Module eingefügt werden können. In dem Paper werden drei Beispiel genannt, wobei das interessanteste ein 2D Attention Mechanismus ist.
 
 <figure markdown>
-    ![2D Attention Mechanismus](./img/Spracherkennung/2d_att_module.png){ width="400" }
-    <figcaption>Fig. 6 2D Attention Mechanismus</figcaption>
+  ![2D Attention Mechanismus](./img/Spracherkennung/2d_att_module.png){ width="400" }
+  <figcaption>Fig. 6 2D Attention Mechanismus</figcaption>
 </figure>
 
 Bei dem vorgeschlagenen Mechanismus werden zunächst drei convolutional networks auf den Input angewendet um daraus die Repräsentationen für Querries, Keys, und Values zu bekommen. Danach gibt es zwei Arten von Attention. Beides sind Scaled Dot-Product Attentions, jedoch ist die Erste für den zeitlichen Aspekt und die Zweite für den frequency Aspekt zuständig. Am Ende werden die ouputs zusammengefügt und in ein weiteres convolutional network gegeben.
@@ -173,8 +172,8 @@ Bei dem vorgeschlagenen Mechanismus werden zunächst drei convolutional networks
 Nach dem zusätzlichen optionalen Block wird eine linear Transformationen auf den flachgemachten feature map durchgeführt und mit dem positional encoding addiert. Positional Encoding ermöglicht dem Modell auf relative Positionen zu achten.
 
 <figure markdown>
-    ![Formel für das Berechnen des positional encoding](./img/Spracherkennung/positional_encoding.png){ width="400" }
-    <figcaption>Fig. 7 Formel für das Berechnen des positional encoding</figcaption>
+  ![Formel für das Berechnen des positional encoding](./img/Spracherkennung/positional_encoding.png){ width="400" }
+  <figcaption>Fig. 7 Formel für das Berechnen des positional encoding</figcaption>
 </figure>
 
 Das Ergebnis der Summe durchläuft anschließend N Encoder Blöcke. Ein Encoder Block besteht aus einem Multi-Head-Attention Layer gefolgt von einem feedforward neuronal network. Zudem sind nach jedem Layer Layer Normalisationen eingebaut und es gibt residual connections.
@@ -182,15 +181,15 @@ Das Ergebnis der Summe durchläuft anschließend N Encoder Blöcke. Ein Encoder 
 Multi-Head-Attention besteht aus mehreren Scaled Dot-Products.
 
 <figure markdown>
-    ![Multi-Head-Attention](./img/Spracherkennung/Multi_Head_Attention.png){ width="400" }
-    <figcaption>Fig. 8 Multi-Head-Attention</figcaption>
+  ![Multi-Head-Attention](./img/Spracherkennung/Multi_Head_Attention.png){ width="400" }
+  <figcaption>Fig. 8 Multi-Head-Attention</figcaption>
 </figure>
 
 Ein Scaled Dot-Product wird wie folgt berechnet:
 
 <figure markdown>
-    ![Scaled Dot-Product](./img/Spracherkennung/Scaled_Dot_Product.png){ width="400" }
-    <figcaption>Fig. 8 Scaled Dot-Product</figcaption>
+  ![Scaled Dot-Product](./img/Spracherkennung/Scaled_Dot_Product.png){ width="300" }
+  <figcaption>Fig. 8 Scaled Dot-Product</figcaption>
 </figure>
 
 Der Decoder hat die bisher generierte Ziel Sequenz als input. Als Erstes wird ein Zeichen Embedding angewandt um Wörter, Buchstaben oder Zeichen im Vektorraum darzustellen. Das Ergebnis wird zu einem positional encoding addiert, das genau wie bei dem Encoder berechnet wird. Das Ergebnis der Summe durläuft dann N Decoder Blöcke.
@@ -562,8 +561,7 @@ print(transcription)
 ## 6 Weiterführendes Material
 
 ### Podcast
-LINK UND BESCHRIFTUNG ANPASSEN
-[Der Campus Talk – Silicon Forest – Folge XX](https://der-campustalk-der-thd.letscast.fm/episode/der-campus-talk-silicon-forest-folge-4)
+[Der Campus Talk – Silicon Forest – Folge XX]()
 
 ### Podcast Transkript
 
@@ -881,6 +879,13 @@ beim nächsten Mal wieder ein, wenn es heißt "Wie macht denn Technik?". Tschüs
 
 ### Talk
 Hier einfach Youtube oder THD System embedden.
+
+
+### Demo
+
+Link zur Code Demonstration:
+
+Link zum Repository: <https://mygit.th-deg.de/sh28544/spracherkennung_codedemo>
 
 ## 7 Literaturliste
 [ibm: What is speech recognition](https://www.ibm.com/topics/speech-recognition)
