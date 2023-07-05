@@ -31,6 +31,18 @@ Die Besonderheit von Tacotron 2 liegt in der natürlich klingenden Sprache. Viel
 Durch die Anwendung von vielschichtigen Deep Learning Algorithmen kann das System komplexe Muster in der Sprache erfassen und so eine möglichst natürliche Sprache erzeugen.
 Bei einer Bewertung menschlicher Zuhörer erzielte das System einen MOS (mean opinion score) von 4.53 verglichen mit 4.58 für professionell aufgenommene Audios. MOS bedeutet, dass eine bestimmte Anzahl von Menschen bewertet, wie gut sich die Audio anhört.
 
+Hier sind zwei Audio Beispiele. Eins davon ist von einem echten Menschen, das andere erzeugt von Tacotron 2.
+
+<audio controls>
+  <source src="https://google.github.io/tacotron/publications/tacotron2/demos/lipstick_gt.wav" type="audio/mpeg">
+   Your browser does not support the audio element.
+</audio>
+
+<audio controls>
+  <source src="https://google.github.io/tacotron/publications/tacotron2/demos/lipstick_gen.wav" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
 **Funktionsweise von Tacotron 2:**
 Tacotron 2 besteht aus zwei Hauptkomponenten, nämlich einem Encoder und einem Decoder. Der Encoder wandelt eine Textsequenz in eine Hidden Feature Repräsentation um, während der Decoder basierend auf der enkodierten Sequenz Frame für Frame ein Mel Spektrogramm erstellt. Im Blockdiagramm unten ist der Encoder in blau dargestellt und der Decoder in orange.
 
@@ -131,3 +143,9 @@ Hier Link zum Demo Video + Link zum GIT Repository mit dem Demo Code.
 
 3. https://www.researchgate.net/profile/Hazem-El-Bakry/publication/228673642_An_overview_of_text-to-speech_synthesis_techniques/links/553fa8270cf2320416eb23ed/An-overview-of-text-to-speech-synthesis-techniques.pdf
    M. Rashad, H. El-Bakry, R. Isma, und N. Mastorakis, „An overview of text-to-speech synthesis techniques“, International Conference on Communications and Information Technology - Proceedings, Juli 2010.
+
+4. J. Shen u. a., „Natural TTS Synthesis by Conditioning WaveNet on Mel Spectrogram Predictions“. arXiv, 15. Februar 2018. doi: 10.48550/arXiv.1712.05884.
+
+5. „Audio samples from ‚Natural TTS Synthesis by Conditioning WaveNet on Mel Spectrogram Predictions‘“. https://google.github.io/tacotron/publications/tacotron2/ (zugegriffen 4. Juli 2023).
+
+6. „EnCodec: High Fidelity Neural Audio Compression“. Meta Research, 5. Juli 2023. Zugegriffen: 5. Juli 2023. [Online]. Verfügbar unter: https://github.com/facebookresearch/encodec
