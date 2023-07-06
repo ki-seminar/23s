@@ -35,6 +35,7 @@ Bei einer Bewertung menschlicher Zuhörer erzielte das System einen MOS (mean op
 Tacotron 2 besteht aus zwei Hauptkomponenten, nämlich einem Encoder und einem Decoder. Der Encoder wandelt eine Textsequenz in eine Hidden Feature Repräsentation um, während der Decoder basierend auf der enkodierten Sequenz Frame für Frame ein Mel Spektrogramm erstellt. Im Blockdiagramm unten ist der Encoder in blau dargestellt und der Decoder in orange.
 
 ![Online Image](https://pytorch.org/assets/images/tacotron2_diagram.png) 
+*Abb. 1 https://pytorch.org/assets/images/tacotron2_diagram.png*
 
 Als Input erhält das System einen beliebigen Text. Daraus werden Character Embeddings generiert. Hier wurde zuvor ein Modell trainiert, welches jedem Buchstaben einen Vektor zuweist. In diesem Fall hat ein Vektor 512 Dimensionen, in dem die sprachlichen Eigenschaften dieses Buchstabens festgehalten werden. Diese Vektoren werden anschließend in einer Matrix zusammengefasst und an ein 3-schichtiges Convolutional Neural Network übergeben. Dieses CNN ist darauf ausgelegt, n-grams mit längerfristigem Kontext zu modellieren. Dieser Output geht dann weiter an ein bi-directional LSTM. In einem normalen LSTM wird ein Zustand zum Zeitpunkt t berechnet auf dem Input und auf dem Zustand des vorherigen Zeitpunktes t-1. In diesem LSTM werden die Daten vorwärts und rückwärts verarbeitet, wobei kontextuelle Informationen sehr gut erfasst werden können. Die Ausgabe dieses LSTM stellt die Encoder Ausgabe dar, welche jetzt high-level Informationen über die Textsequenz enthält.
 Das (location sensitive) Attention Network nimmt den Output des LSTM und einen Output des Decoder Teils zum Zeitpunkt t-1, um relevante Informationen zu erhalten, mit welchen dann die Vorhersage zum Zeitpunkt t erstellt wird. Diese wird an ein 2-schichtiges LSTM übergeben. Für jeden Zeitschritt dieses LSTM wird ein Mel-Spektrogramm-Vektor vorhergesagt. Diese Ausgabe geht an eine lineare Projektion. Diese wird einmal verwendet für den Stop Token. Hier wird die Wahrscheinlichkeit berechnet, dass die Output Sequenz fertig generiert wurde. So kann das Modell dynamisch bestimmen, wann die Generierung beendet wird und ist nicht an eine feste Vorgabe von Iterationen gebunden.
@@ -55,16 +56,19 @@ Die Besonderheit des VALL-E Systems ist der extrem kurze benötigte Audio Input.
 Ähnlich wie Tacotron 2, nutzt VALL-E eine Encoder-Decoder-Architektur.
 
 ![Online Image](https://www.chip.de/ii/1/2/6/7/6/9/4/0/3/3b6003cc590f29a5.jpg)
+*Abb. 2 https://www.chip.de/ii/1/2/6/7/6/9/4/0/3/3b6003cc590f29a5.jpg*
 
 Es gibt zwei Inputs, den Text Prompt und den Acoustic Prompt. Der Text Prompt wird zunächst in Phoneme und dann in entsprechende Embeddings umgewandelt. Der Audio Prompt geht an den Encoder. Hierbei handelt es sich um den Audio Codec Encoder von Facebook Research. Dieser stellt das “Arbeitstier” hinter VALL-E dar und hat nochmal einen eigenen Encoder und Decoder, wie man im Blockdiagramm erkennen kann.
 
 ![Online Image](https://github.com/facebookresearch/encodec/raw/main/architecture.png)
+*Abb. 3 https://github.com/facebookresearch/encodec/raw/main/architecture.png*
 
 Der Encoder nimmt die Wellenform und führt eine Convolution durch für Downsampling. Darauffolgend wird ein LSTM genutzt für die Sequenz Modellierung. Das Ergebnis dieses Encoders ist eine kompaktere Repräsentation mit 75 beziehungsweise 100 latenten Zeitschritten im Vergleich zu 24.000 beziehungsweise 48.000 im Input. Der Decoder ist eine gespiegelte Form des Encoders, welcher wieder ein Upsampling durchführt und daraus eine Wellenform erzeugt. Dazwischen befindet sich der Quantizer. 
 Für diesen gibt es 8 sogenannte Codebooks. Codebooks sind Dictionaries gefüllt mit Vektoren, woraus sich 1024 Einträge ergeben. Der Input Vektor wird repräsentiert, indem er auf den ähnlichsten Vektor im Codebook gemapt wird. Diese Ähnlichkeit wird gemessen mit dem euklidischen Abstand. Dadurch gehen Informationen verloren, welche man aber gerne erhalten möchte. Mit Hilfe der Residual Vector Quantization (RVQ) wird der Restwert berechnet. Dieser wird dann auf einen weiteren Vektor im Codebook gemapt. Die finale Repräsentation ist eine Liste der Indexe, auf die die Vektoren gemapt wurden. 
 Sobald der Audio Codec Encoder seine Arbeit erledigt hat, wird die Repräsentation an den Decoder von VALL-E übergeben.
 
 ![Online Image](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*zZmUzjNyvSa3a-b-c7bdXQ.png)
+*Abb. 4 https://miro.medium.com/v2/resize:fit:1400/format:webp/1*zZmUzjNyvSa3a-b-c7bdXQ.png*
 
 Dieser besteht aus einem Non-Auto-Regressive (NAR) und aus einem Auto-Regressive (AR) Decoder. Der AR Decoder ist dafür verantwortlich, die Input Daten des ersten Codebooks zu verarbeiten. Der NAR Decoder ist für die restlichen Codebooks verwendet. Hier wird aus diesen Repräsentationen der Codebooks die Wellenform generiert, aus der die Output Sprache entsteht. 
 
@@ -78,7 +82,7 @@ Trotz ihrer Unterschiede in den Systemen und Anwendungsbereichen teilen Vall-E u
 
 
 ## **Methoden**
-In diesem Abschnitt geben wir einen Kurzen Überblick über weitere Methoden für Text-to-Speech Systeme.
+In diesem Abschnitt geben wir einen kurzen Überblick über weitere Methoden für Text-to-Speech Systeme.
 
 **Hidden Markov Modele:**<br>
 Hidden Markov Modelle (HMMs) sind eine der grundlegendsten Methoden in der Sprachverarbeitung und waren auch bei TTS-Systemen maßgeblich an der Entwicklung beteiligt. Es handelt sich um eine Methode, die statistische Eigenschaften von Sprache modelliert und die Beziehungen zwischen Text und Sprachesignal erfasst.
