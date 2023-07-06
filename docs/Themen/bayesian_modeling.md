@@ -32,43 +32,39 @@ Das Bayes-Theorem bietet eine Möglichkeit, die Wahrscheinlichkeit von Ereignis 
 K = Person ist krank  
 T = Test fällt positiv aus
 
-\[
-P(T|K) = 0.995
-\]
+$$P(T|K) = 0.995$$
 
-\[
-P(T|\overline{K}) = 0.01
-\]
 
-\[
-P(K) = 0.25
-\]
+$$P(T|\overline{K}) = 0.01$$
+
+
+
+$$P(K) = 0.25$$
+
 
 ### Gesucht wird die Wahrscheinlichkeit
 
-\[
-P(K|\overline{T})
-\`
+
+$$P(K|\overline{T})$$
+
 
 ## Anwendungsbeispiel Bayes Theorem
 
 ### Bayes Theorem
 
-\[
-P(A|B) = \frac{P(B|A)P(A)}{P(B)}
-\`
 
-\[
-P(K|\overline{T}) = \frac{P(\overline{T}|K)P(K)}{P(\overline{T}|K)P(K) + P(\overline{T}|\overline{K})P(\overline{K})}
-\`
+$$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$
 
-\[
-= \frac{(1-0.995)\cdot 0.25}{(1-0.995)\cdot 0.25 + (1-0.01)\cdot 0.75}
-\`
 
-\[
+
+$$P(K|\overline{T}) = \frac{P(\overline{T}|K)P(K)}{P(\overline{T}|K)P(K) + P(\overline{T}|\overline{K})P(\overline{K})}$$
+
+
+$$ = \frac{(1-0.995)\cdot 0.25}{(1-0.995)\cdot 0.25 + (1-0.01)\cdot 0.75}$$
+
+$$
 = 0.00185
-\`
+$$
 
 
 
@@ -179,7 +175,7 @@ Wir erkennen, dass die Posteriori-Verteilung eine Beta-Verteilung ist. Dies ist 
 
 In dieser Abbildung ist die Priori-Verteilung rot, die Likelihood-Verteilung grün und die Posteriori-Verteilung blau dargestellt. In diesem Beispiel entspricht die Likelihood bzw. Binomialverteilung $Binomial(10,7)$. Das bedeutet, bei $y=10$ Würfen ergab sich $n=7$ Mal "Kopf". Die Beta-Verteilung ist als $Beta(30,30)$ mit $\alpha=30$ und $\beta=30$ definiert und ähnelt einer Normalverteilung. Dies drückt aus, dass die Wahrscheinlichkeit für $\theta$ bei 0,5 bzw. 50% am höchsten ist. Die Posteriori-Verteilung ist leicht nach rechts verschoben, da das Ergebnis häufiger "Kopf" als "Zahl" war. Daraus lässt sich ableiten, dass die Wahrscheinlichkeit, beim nächsten Wurf "Kopf" zu erhalten, minimal gestiegen ist.
 
-### Interpretation the Posterioriverteilung
+### Interpretation der Posterioriverteilung
 
 ![Example Image](img/posterior_plot.png)
 
