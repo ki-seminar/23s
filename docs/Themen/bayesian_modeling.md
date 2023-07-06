@@ -400,6 +400,7 @@ Das war unsere kurze Einführung in das bayesianische Modellieren. Es ist wichti
 
 - [LMU Kurs](http://bayeskurs.volkerschmid.de/)
 - [PyMC3](https://www.pymc.io/projects/docs/en/v3/index.html) 
+- [Visualizierungen](https://seeing-theory.brown.edu/bayesian-inference/index.html#section1)
 ### Podcast
 Hier Link zum Podcast.
 
