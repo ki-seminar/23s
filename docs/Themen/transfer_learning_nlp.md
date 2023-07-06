@@ -774,7 +774,7 @@ on Inductive Logic Programming, 2007.](https://lirias.kuleuven.be/retrieve/23910
 
 [L. Torrey, J. Shavlik, T. Walker, and R. Maclin. "Relational skill transfer via
 advice taking." In ICML Workshop on Structural Knowledge Transfer for Machine
-Learning, 2006.](ftp://ftp.cs.wisc.edu/machine-learning/shavlik-group/torrey.icml-wkshp06.pdf)
+Learning, 2006.](https://ftp.cs.wisc.edu/machine-learning/shavlik-group/torrey.icml-wkshp06.pdf)
 
 [L. Torrey, T. Walker, J. Shavlik, and R. Maclin. "Using advice to transfer knowledge
 acquired in one reinforcement learning task to another." In European Conference
