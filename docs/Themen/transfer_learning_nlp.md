@@ -71,7 +71,90 @@ Durch den Einsatz von vortrainierten Sprachmodellen wie ChatGPT, kombiniert mit 
 können Spracherkennungssysteme effizienter, präziser und anpassungsfähiger trainiert werden.
 
 ## Methoden
-Fachpräsentation hier vorstellen
+
+### Definition
+Die Motivation für Transfer Learning basiert auf der Idee des "Lernens zu lernen", die besagt, dass das Lernen von Grund auf oft begrenzt ist und daher so viel wie möglich aus früheren Erfahrungen genutzt werden sollte.
+
+| ![DEFINITION](img/TransferLearningNLP/definition.png) |
+|:--:|
+| Abbildung 1: Visualisierung von Transfer Learning:
+Die linke Seite stellt das Quellsystem dar, die rechte Seite das Zielsystem. X1 und X2 sind die Featureräume, Y1 und Y2 die Labelräume der jeweiligen Modelle M1 und M2. P1(X) und P2(X) sind die jeweiligen Wahrscheinlichkeitsverteilungen der Features. |
+
+Es gibt verschiedene Methoden und Kategorien des Transfer Learnings, die je nach Beziehung zwischen dem bereits Gelernten (Quelle) und dem Neuen (Ziel) entwickelt wurden. Auf einige davon wird im späteren Verlauf im Kapitel "Kategorisierung" noch besonders eingegangen. Es ist allerdings zu Erwähnen, dass die Einteilung in diese Kategorien nicht immer eindeutig ist. Des Weiteren ist die Zugehörigkeit dieser zum Gebiet des Transfer Learnings teilweise umstritten.
+
+### Herausforderungen
+
+Die mit Abstand größte Herausforderung von Transfer Learning besteht im simplen Konzept: 
+	**Positiven Transfer erzeugen, negativen Transfer vermeiden.**
+
+Die Vorhersagefähigkeit von Transfermethoden hängt von der semantischen Ähnlicheit zwischen den Aufgabenstellungen im Quell- und Zielsystem ab. Bei einer starken Beziehung und einer geeigneten Ausnutzung durch die Transfermethode kann die Vorhersagekraft in der Zielaufgabe deutlich verbessert werden. Ist die Beziehung zwischen den Aufgaben jedoch unzureichend oder wird sie von der Transfermethode nicht optimal genutzt, kann die Leistung abnehmen.
+
+Um negativen Transfer zu vermeiden, müssen Transfermethoden vorsichtig sein und die Beziehung zwischen Quell- und Zielaufgabe berücksichtigen. Vorsichtige Ansätze führen möglicherweise zu geringerem positivem Transfer, bieten jedoch Schutz vor negativem Transfer. Aggressive Ansätze erzielen möglicherweise größere Leistungssteigerungen, bergen jedoch auch das Risiko von negativem Transfer, wenn die Quellaufgabe nicht gut zur Zielaufgabe passt.
+
+#### Ablehnung schlechter Informationen
+
+Eine Möglichkeit negativen Transfer zu vermeiden besteht darin, dass schädliche Informationen der Quellaufgabe während des Lernens der Zielaufgabe erkannt und abgelehnt werden. Eine Methode, um dies zu erreichen, ist das optionenbasierte Transferlernen im Bereich des Reinforcement Learning, bei dem der Agent basierend auf der Leistung bestimmte Optionen auswählt oder ablehnt. Ein weiterer Ansatz ist der KBKR-Ratschlagalgorithmus, der die Ratschläge der Quellaufgabe als weiche Einschränkung berücksichtigt. Zusätzlich wurden Methoden zur Erkennung von negativem Transfer entwickelt, z.B. durch die Verwendung eines Hyperpriors, dessen Varianz mit der Unähnlichkeit der Aufgaben korreliert. Dadurch kann entschieden werden, ob überhaupt ein Transfer stattfinden sollte.
+
+#### Auswahl der Quellaufgabe
+
+Um negativen Transfer zu vermeiden, können mehrere Quellaufgaben zur Auswahl stehen. Eine Möglichkeit besteht darin, die Aufgaben nach Schwierigkeitsgrad zu ordnen und eine Quellaufgabe auszuwählen, die nur moderat schwieriger ist als die Zielaufgabe. Eine andere Methode ist die Suche nach ähnlichen Aufgaben mithilfe von Graphenrepräsentationen. Zudem kann auch die Auswahl aus Kandidatenlösungen einer Quellaufgabe anstelle von Quellaufgaben selbst in Betracht gezogen werden. Dieser Ansatz ermöglicht die Berücksichtigung der Komplexität der Modelle und die Auswahl einer geeigneten Auflösung für den Transfer.
+
+| ![CHOOSING_SOURCE_TASK](img/TransferLearningNLP/herausforderung_choosing_source_task.png) |
+|:--:|
+| Abbildung 2: Visualisierung der Auswahl der Quellaufgabe:
+Eine Möglichkeit, negativen Transfer zu vermeiden, besteht darin, eine geeignete Quellaufgabe auszuwählen, von der der Transfer erfolgen soll. In diesem Beispiel wird Task 2 als am Relevantesten ausgewählt. |
+
+#### Modellierung von Aufgabenähnlichkeit
+
+Bei der Auswahl von Quellaufgaben kann es vorteilhaft sein, mehrere Aufgaben zu berücksichtigen, anstatt nur eine auszuwählen. Einige Ansätze modellieren explizit die Beziehungen zwischen den Aufgaben und integrieren diese Informationen in die Transfermethode. Dies ermöglicht eine bessere Nutzung des Wissens aus den Quellaufgaben und verringert das Risiko von negativem Transfer. Beispiele für solche Ansätze sind die Entwicklung von Ähnlichkeitsmaßen für Aufgaben im Bereich des Reinforcement Learning, die Konstruktion eines Graphen zur Darstellung der Aufgaben und die Verwendung von Kernel-Methoden zur Berechnung eines Ähnlichkeitskerns für die Zielaufgabe.
+
+| ![MODELING_TASK_SIMULARITY](img/TransferLearningNLP/Modeling_task_similarity.png) |
+|:--:|
+| Abbildung 3: Modellierung von Aufgabenähnlichkeit:
+Eine andere Möglichkeit, negativen Transfer zu vermeiden, besteht darin, das Verhältnis zwischen den Quellaufgaben und der Zielaufgabe zu modellieren und das Wissen unter Berücksichtigung dieser Beziehungen zu kombinieren. |
+
+
+### Kategorisierung
+
+Die folgende Tabelle gibt einen Überblick über die Gebiete des Transferlernens.
+
+| ![TABLE_CATEGORIES](img/TransferLearningNLP/table_categories.png) | 
+|:--:| 
+| Abbildung 4: Überblickstabelle über die Kategorien von Transfer Learning:|
+
+
+
+| Variable      | Beschreibung                                                   |
+| :---          |  :---                                                          |
+|X:             | feature space	(Audio-, Text-, Bilddaten, …)                    |
+|y:             | label space		(Phoneme, Kategorien, …)                     |
+|M(X):          | Model                                                          |
+|P(X):          | Verteilung der Features                                        |
+|+:             | Daten und Tasks sind gleich für Quell- und Zieldomäne          |
+|-:             | Daten und Tasks sind unterschiedlich für Quell- und Zieldomäne |
+
+#### Modelladaption und inkrementelles Lernen 
+
+Die einfachste Art des Transfer Learnings ist die Modelladaption. Hier bleiben das Model und die Label- und Featureräume gleich, wobei das vorhandene Modell an die veränderte Datenverteilung angepasst wird. Es gibt verschiedene Ansätze für die Modellanpassung, wie die Maximum-a-posteriori-Schätzung (MAP) und den Maximum-Likelihood-Lineare-Regression (MLLR) Algorithmus. Falls sich die Verteilung stetig ändert, spricht man von inkrementellem Lernen. Die Anpassung kann supervised oder unsupervised erfolgen. Falls das Quellmodell allerdings erst die Label generieren muss, spricht man von semi-supervised Learning. Eine alternative Herangehensweise mit ungelabelten Daten umzugehen, besteht darin, neue Merkmale zu extrahieren, indem Daten aus Quell- und Ziel- Domänen linear abgeleitet werden. Dies kann mit Hilfe von Techniken wie der transfer component analysis (TCA) erreicht werden. In einigen Fällen können ungelabelte Daten verwendet werden, um robustere Merkmale abzuleiten. Dieser Ansatz wird als self-taught learning bezeichnet und ähnelt dem Konzept des tiefen Repräsentationslernens.
+
+
+| ![DISTRIBUTIONS](img/TransferLearningNLP/Distributions.png) |
+|:--:|
+| Abbildung 5: Beispiel für die A-priori-Verteilung, die Likelihood-Funktion der Daten sowie die A-posteriori-Verteilung. |
+
+
+#### Heterogenes Transferlernen
+
+Heterogenes Transferlernen bezieht sich auf den Fall, in dem sich die Merkmale der Quell- und Ziel-Domänen unterscheiden, während die Labels und das Modell unverändert bleiben. Das Ziel besteht darin, die vorhandene Entsprechung zwischen den Domänen zu nutzen, um Wissen von einer Domäne auf die andere zu übertragen. Frühe Ansätze konzentrierten sich auf die Definition und Nutzung der Entsprechung auf Instanzebene. Aktuellere Ansätze zielen darauf ab, gemeinsame Repräsentationen der Quell- und Ziel-Domänen zu finden, entweder durch Matrixfaktorisierung, RBM-basiertes latentes Faktorlernen oder durch die Kombination von Deep Learning und Transferlernen. Eine besondere Herausforderung besteht darin, aus sehr unterschiedlichen Aufgaben zu lernen, bei denen sich der Labelraum von der Ziel-Domäne unterscheidet. Das Lernen von Korrespondenzen zwischen solchen unabhängigen, aber analogen Domänen ist für Maschinen schwierig, obwohl Menschen dazu neigen, Analogien leichter zu erkennen. Aktuelle Fortschritte im Bereich des Deep Learning bieten jedoch neue Möglichkeiten durch ein einheitliches Rahmenwerk für Repräsentationslernen und Multitask-Lernen.
+
+
+#### Multitask-Lernen
+
+
+### Deep Transfer Learning
+
+### Modelltransfer
+
 
 ## Anwendungen
 Im Folgenden wird anhand eines Beispiels die Vorgehensweise bei der Implementierung von Transfer Learning in der Sprachverarbeitung erläutert.
@@ -106,7 +189,7 @@ data['label'] = pd.get_dummies(data.Target)['Fake']
 ```
 
 Als Nächstes wurde die Verteilung der Daten visualisiert, um sicherzustellen, dass ein ausbalancierter Datensatz vorliegt. Mit einer Verteilung von 
-52,3 % Fake- und 47,7 % Echt-Daten, ist dies der Fall. Die Länge der Schlagzeilen wurde ebenfalls visualisiert. Diese wird später beim Tokenisieren noch 
+52,3 % Fake- und 47,7 % Echt-Daten, ist dies der Fall. Die Länge der Schlagzeilen wurde ebenfalls visualisiert. Diese wird später beim Tokenisieren noch 
 eine Rolle spielen.
 
 | ![STEPS](./img/TransferLearningNLP/length_headers.png) |
@@ -205,8 +288,9 @@ Das bekannte Large Language Model _Bert (Bidirectional Encoder Representations f
 Google veröffentlicht und wurde mittlerweile für eine Vielzahl von NLP-Aufgaben eingesetzt. Ursprünglich wurde das Modell auf einem großen Textkorpus trainiert, 
 welcher beispielsweise die gesamte Wikipedia (2.5 Billionen Wörter) und den sogenannten BookCorpus (985 Millionen Wörter) enthält.
 Das Training wurde hierfür in zwei Phasen aufgeteilt:
-- _Masked Language Modeling:_ In dieser Phase wurden 15 % der Wörter zufällig maskiert. Die Aufgabe bestand nun darin, die maskierten Wörter basierend auf dem Kontext vorherzusagen. 
+- _Masked Language Modeling:_ In dieser Phase wurden 15 % der Wörter zufällig maskiert. Die Aufgabe bestand nun darin, die maskierten Wörter basierend auf dem Kontext vorherzusagen. 
 Dabei lernte das Modell die Beziehungen zwischen Wörtern innerhalb von Sätzen. Im folgenden in ein Codebeispiel im welchem die beschriebene Funktion ausgeführt werden kann.
+
 
 ```python
 unmasker = pipeline('fill-mask', model='bert-base-uncased')
@@ -388,14 +472,21 @@ for idx, pred in enumerate(preds):
 ## Weiterführendes Material
 
 ### Podcast
-[Der Campus Talk - Silicon Forest]()
+- [Der Campus Talk - Silicon Forest]()
 
 ### Talk
-[Video Fachvortrag]()
+- [Video Fachvortrag]()
 
 ### Demo
-[Video Code Demonstration]()
-[Source Code](https://github.com/StaudTim/NLP-TransferLearning)
+- [Video Code Demonstration]()
+- [Source Code](https://github.com/StaudTim/NLP-TransferLearning)
 
 ### Literaturliste
-[Matthew E. Taylor, Peter Stone. (2009). Transfer Learning for Reinforcement Learning Domains: A Survey. Journal of Machine Learning Research 10](https://www.jmlr.org/papers/volume10/taylor09a/taylor09a.pdf?ref=https://codemonkey.link)
+- [Matthew E. Taylor, Peter Stone. (2009). Transfer Learning for Reinforcement Learning Domains: A Survey. Journal of Machine Learning Research 10](https://www.jmlr.org/papers/volume10/taylor09a/taylor09a.pdf?ref=https://codemonkey.link)
+- Quellen hier einfügen ....
+
+
+- [Preprocess data for Natural Language Processing](https://huggingface.co/docs/transformers/preprocessing)
+- [An Explanatory Guide to BERT Tokenizer](https://www.analyticsvidhya.com/blog/2021/09/an-explanatory-guide-to-bert-tokenizer/)
+- [BERT base model (uncased)](https://huggingface.co/bert-base-uncased)
+- [Transfer Learning Guide: A Practical Tutorial With Examples for Images and Text in Keras](https://neptune.ai/blog/transfer-learning-guide-examples-for-images-and-text-in-keras)
