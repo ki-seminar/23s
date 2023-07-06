@@ -4,14 +4,14 @@ von *Lea Wagner und Michael Schmidbauer*
 ## **Abstract**
 In diesem Blogbeitrag widmen wir uns dem Thema Text-to-Speech (TTS). Bei Text-to-Speech handelt es sich um eine vielseitig einsetzbare und faszinierende Technologie zur computergestützten Generierung von natürlicher und menschenähnlicher Sprache.
 
-In dem Beitrag betrachten wir Einerseits die vielfältigen Einsatzmöglichkeiten von TTS wie beispielsweise die Unterstützung von sehbehinderten Personen. Andererseits beleuchten wir den Aufbau und die Funktionsweise dieser Technologie genauer. Für die Erklärung betrachten wir die beiden Modelle Tacotron 2 und Vall-E.
+In dem Beitrag betrachten wir einerseits die vielfältigen Einsatzmöglichkeiten von TTS wie beispielsweise die Unterstützung von sehbehinderten Personen. Andererseits beleuchten wir den Aufbau und die Funktionsweise dieser Technologie genauer. Für die Erklärung betrachten wir die beiden Modelle Tacotron 2 und Vall-E.
 
 ## **Einleitung / Motivation**
 Die Text-to-Speech-Technologie hat, wie viele Anwendungen der Künstlichen Intelligenz, in den letzten Jahren erhebliche Fortschritte gemacht. Ihr Einfluss auf verschiedene Bereiche unseres täglichen Lebens ist beachtlich. Prominente Beispiele für ihre Anwendung wären Sprachassistenten wie beispielsweise Siri oder Alexa, aber sie waren längst nicht die ersten. Schon lange wird die TTS-Technologie beispielweise in Navigationsgeräten verwendet.
 
-Mit Hilfe dieser Technologie wird es Maschinen ermöglicht Text in natürliche Sprache umzuwandeln. Dabei wurde erst mit Einsatz von Künstlicher Intelligenz ein nahezu menschlicher Klang ermöglicht. Doch gibt es noch immer Stolpersteine wie beispielsweise Dialekte, die von den Systemen heute noch nicht perfekt erzeugt werden können.
+Mit Hilfe dieser Technologie wird es Maschinen ermöglicht, Text in natürliche Sprache umzuwandeln. Dabei wurde erst mit Einsatz von Künstlicher Intelligenz ein nahezu menschlicher Klang ermöglicht. Doch gibt es noch immer Stolpersteine wie beispielsweise Dialekte, die von den Systemen heute noch nicht perfekt erzeugt werden können.
 
-Nichtsdestotrotz ist es unbestreitbar, dass die Text-to-Speech-Technologie ein wesentlicher Bestandteil der heutigen Mensch-Computer-Interaktion geworden ist. Sie erhöht die Sicherheit im Straßenverkehr oder ermöglicht es seebehinderten Personen besser an der zunehmend digitalen Welt teilzunehmen.
+Nichtsdestotrotz ist es unbestreitbar, dass die Text-to-Speech-Technologie ein wesentlicher Bestandteil der heutigen Mensch-Computer-Interaktion geworden ist. Sie erhöht die Sicherheit im Straßenverkehr oder ermöglicht es, sehbehinderten Personen besser an der zunehmend digitalen Welt teilzunehmen.
 
 Gerade für diese Personengruppe kann die TTS-Technologie einen deutlich besseren Zugang zu digitalen Informationen ermöglichen. Mit TTS können ihnen digitale Inhalte vorgelesen werden und damit der Zugang zum digitalen Leben erleichtert werden.
 
@@ -43,7 +43,7 @@ Die Ausgabe der linearen Projektion geht außerdem an ein Pre-Net, welches seine
 **Limitationen von Tacotron 2:**<br>
 Obwohl Sprachmodelle wie Tacotron 2 erstaunliche Fortschritte im Bereich der Aussprache gemacht haben, zeigen sich hier immer wieder Probleme auf. Schwierigkeiten bei der Aussprache von Wörtern mit komplexer Phonologie oder ungewöhnlicher Betonung bleiben auch bei modernen Text-to-Speech Systemen wie Tacotron 2 bestehen. 
 Ein weiterer Punkt ist die Generierung von Audios in Echtzeit. Da die Text-to-Speech Synthese des Systemns auf einer komplexen Architektur mit vielen Schichten beruht, ist eine Generierung in Echtzeit derzeit noch nicht möglich. Deshalb wird dieses System momentan auch nicht für die Sprachsynthese in Google Translate und Google Home benutzt.
-Darüber hinaus ist es bisher nicht möglich, die Emotionen der generierten Sprache gezielt zu steuern. Obwohl Tacotron 2 in der Lage ist, natürliche Sprachausgauben zu erzeugen, fehlt die Fähigkeit, die emotionale Ausrucksweise bewusst und gezielt zu beeinflussen. Dies stellt jedoch einen eigenen Bereich der Text-to-Speech Forschung dar. 
+Darüber hinaus ist es bisher nicht möglich, die Emotionen der generierten Sprache gezielt zu steuern. Obwohl Tacotron 2 in der Lage ist, natürliche Sprachausgauben zu erzeugen, fehlt die Fähigkeit, die emotionale Ausrucksweise bewusst und gezielt zu beeinflussen. Dies stellt jedoch einen eigenen Bereich der Text-to-Speech Forschung dar.
 
 
 **VALL-E:**<br>
@@ -92,7 +92,7 @@ Bei der TTS-Synthese wird das HMM-Modell verwendet, um akustische Modelle zu erz
 Obwohl HMMs eine bewährte Methode in der Sprachverarbeitung sind, haben sie auch ihre Einschränkungen. Insbesondere können sie Schwierigkeiten haben, komplexe linguistische Phänomene und Variabilität in den Sprachsignalen genau zu modellieren.
 
 **Deep Learning und NNs:**<br>
-Deep Learning und neuronale Netzwerke verwenden mehrschichtige neuronale Netzwerke, um komplexe Funktionen zu erlernen und hochdimensionale Daten zu verarbeiten. Im Bereich der TTS-Synthese können diese verwendet werden, um direkt Text zu Sprachsignalen abbilden zu können, ohne den Umweg über diskrete Zustände wie es bei Hidden Markov Modellen der Fall ist.
+Deep Learning und neuronale Netzwerke verwenden mehrschichtige neuronale Netzwerke, um komplexe Funktionen zu erlernen und hochdimensionale Daten zu verarbeiten. Im Bereich der TTS-Synthese können diese verwendet werden, um direkt Text auf Sprachsignale abbilden zu können, ohne den Umweg über diskrete Zustände wie es bei Hidden Markov Modellen der Fall ist.
 
 Eine häufig verwendete Architektur sind Recurrent Neural Networks (RNNs). Diese Modelle haben die Fähigkeit, Sequenzdaten effektiv zu modellieren und können auf den TTS-Kontext angepasst werden, um Text in akustische Merkmale zu übersetzen.
 
@@ -101,16 +101,16 @@ Eine Weiterentwicklung des RNN sind die sogenannten Long-Short-Term-Memory (LSTM
 Für die Generierung des Sprachmodels wird häufig ein Convolutional Neural Network (CNN) verwendet. Diese Architektur ist besonders geeignet, um Muster in der gesprochenen Sprache zu erkennen und diese auch zu modellieren.
 
 **Transformer-basierte Modelle:**<br>
-Die Transformer Technologie ist eine der modernen Architekturen im Bereich der Natürlichen Sprachverarbeitung. Dabei finden sie ihre Anwendungen sowohl bei Large-Language-Modellen wie ChatGPT oder GitHubCopilot, als auch bei Text-to-Speech Systemen. So sind Transformer beispielsweise Bestandteil des oben Vorgestellten Vall-E Systems.
+Die Transformer Technologie ist eine der modernen Architekturen im Bereich der natürlichen Sprachverarbeitung. Dabei finden sie ihre Anwendungen sowohl bei Large-Language-Modellen wie ChatGPT oder GitHubCopilot, als auch bei Text-to-Speech Systemen. So sind Transformer beispielsweise Bestandteil des oben Vorgestellten Vall-E Systems.
 
-Im Gegensatz zu herkömmlichen end-to-end Methoden wie dem oben vorgestellten Tacotron 2 sind Transformer-basierte Ansätze effizienter und besser darin Langzeitabhängigkeiten zu modellieren. Ebenfalls ist es möglich mit Transformer-basierten Modellen deutlich größere Datenmengen zu verarbeiten, wie vorhergehenden Ansätzen.
+Im Gegensatz zu herkömmlichen end-to-end Methoden wie dem oben vorgestellten Tacotron 2 sind Transformer-basierte Ansätze effizienter und besser darin, Langzeitabhängigkeiten zu modellieren. Ebenfalls ist es möglich mit Transformer-basierten Modellen deutlich größere Datenmengen zu verarbeiten, als bei den vorhergehenden Ansätzen.
 
-Im vergleich zu herkömmlichen RNN-basierten Modellen haben Tranformer-basierte Modelle noch weitere Vorteile. Durch den Wegfall der rekurrenten Verbindungen ist es möglich das Training zu parallelisieren und durch die Self-Attention der Transformer kann ein Globaler Kontext einer Sequenz jedem Ausschnitt hinzugefügt werden. Dadurch ist es möglich Langzeitabhängigkeiten zu modellieren.
+Im Vergleich zu herkömmlichen RNN-basierten Modellen haben Tranformer-basierte Modelle noch weitere Vorteile. Durch den Wegfall der rekurrenten Verbindungen ist es möglich das Training zu parallelisieren und durch die Self-Attention der Transformer kann ein globaler Kontext einer Sequenz zu jedem Ausschnitt hinzugefügt werden. Dadurch ist es möglich, längerfristigen Kontext zu modellieren.
 
-Für eine ausführlichere Erklärung dieser Technologie verweisen wir auf den Blogbeitrag zu Large-Language-Modells.
+Für eine ausführlichere Erklärung dieser Technologie verweisen wir auf den Blogbeitrag zu Large-Language-Models.
 
 **Transfer Learning:**<br>
-Bei der Methode des Transfer Learnings werden Modelle auf großen allgemeinen Datensätzen trainiert, um später auf den spezifischen Anwendungsfall abgestimmt zu werden. In unserem Fall wird ein Modell beispielsweise mit Englischsprachigen Audiodateien trainiert und später auf die Gewünschte Stimme angepasst.
+Bei der Methode des Transfer Learnings werden Modelle auf großen allgemeinen Datensätzen trainiert, um später auf den spezifischen Anwendungsfall abgestimmt zu werden. In unserem Fall wird ein Modell beispielsweise mit Englischsprachigen Audiodateien trainiert und später auf die gewünschte Stimme angepasst.
 
 Mit dieser Methode kann die Trainingszeit des Modells erheblich reduziert werden. Allerdings verschlechtern sich die Ergebnisse, je größer die Unterschiede zwischen den Trainingsdaten des vortrainierten Modells und des Anwendungsfalls werden.
 
