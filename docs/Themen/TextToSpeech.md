@@ -36,7 +36,7 @@ Bei einer Bewertung menschlicher Zuhörer erzielte das System einen MOS (mean op
 **Funktionsweise von Tacotron 2:**<br>
 Tacotron 2 besteht aus zwei Hauptkomponenten, nämlich einem Encoder und einem Decoder. Der Encoder wandelt eine Textsequenz in eine Hidden Feature Repräsentation um, während der Decoder basierend auf der enkodierten Sequenz Frame für Frame ein Mel Spektrogramm erstellt. Im Blockdiagramm unten ist der Encoder in blau dargestellt und der Decoder in orange.
 
-![Online Image](https://pytorch.org/assets/images/tacotron2_diagram.png) 
+![Online Image](https://pytorch.org/assets/images/tacotron2_diagram.png)<br>
 *Abb. 1 https://pytorch.org/assets/images/tacotron2_diagram.png*
 
 Als Input erhält das System einen beliebigen Text. Daraus werden Character Embeddings generiert. Hier wurde zuvor ein Modell trainiert, welches jedem Buchstaben einen Vektor zuweist. In diesem Fall hat ein Vektor 512 Dimensionen, in dem die sprachlichen Eigenschaften dieses Buchstabens festgehalten werden. Diese Vektoren werden anschließend in einer Matrix zusammengefasst und an ein 3-schichtiges Convolutional Neural Network übergeben. Dieses CNN ist darauf ausgelegt, n-grams mit längerfristigem Kontext zu modellieren. Dieser Output geht dann weiter an ein bi-directional LSTM. In einem normalen LSTM wird ein Zustand zum Zeitpunkt t berechnet auf dem Input und auf dem Zustand des vorherigen Zeitpunktes t-1. In diesem LSTM werden die Daten vorwärts und rückwärts verarbeitet, wobei kontextuelle Informationen sehr gut erfasst werden können. Die Ausgabe dieses LSTM stellt die Encoder Ausgabe dar, welche jetzt high-level Informationen über die Textsequenz enthält.
@@ -62,12 +62,12 @@ Die Besonderheit des VALL-E Systems ist der extrem kurze benötigte Audio Input.
 **Funktionsweise von VALL-E:**<br>
 Ähnlich wie Tacotron 2, nutzt VALL-E eine Encoder-Decoder-Architektur.
 
-![Online Image](https://www.chip.de/ii/1/2/6/7/6/9/4/0/3/3b6003cc590f29a5.jpg)
+![Online Image](https://www.chip.de/ii/1/2/6/7/6/9/4/0/3/3b6003cc590f29a5.jpg)<br>
 *Abb. 2 https://www.chip.de/ii/1/2/6/7/6/9/4/0/3/3b6003cc590f29a5.jpg*
 
 Es gibt zwei Inputs, den Text Prompt und den Acoustic Prompt. Der Text Prompt wird zunächst in Phoneme und dann in entsprechende Embeddings umgewandelt. Der Audio Prompt geht an den Encoder. Hierbei handelt es sich um den Audio Codec Encoder von Facebook Research. Dieser stellt das “Arbeitstier” hinter VALL-E dar und hat nochmal einen eigenen Encoder und Decoder, wie man im Blockdiagramm erkennen kann.
 
-![Online Image](https://github.com/facebookresearch/encodec/raw/main/architecture.png)
+![Online Image](https://github.com/facebookresearch/encodec/raw/main/architecture.png)<br>
 *Abb. 3 https://github.com/facebookresearch/encodec/raw/main/architecture.png*
 
 Der Encoder nimmt die Wellenform und führt eine Convolution durch für Downsampling. Darauffolgend wird ein LSTM genutzt für die Sequenz Modellierung. Das Ergebnis dieses Encoders ist eine kompaktere Repräsentation mit 75 beziehungsweise 100 latenten Zeitschritten im Vergleich zu 24.000 beziehungsweise 48.000 im Input. Der Decoder ist eine gespiegelte Form des Encoders, welcher wieder ein Upsampling durchführt und daraus eine Wellenform erzeugt. Dazwischen befindet sich der Quantizer.
@@ -76,7 +76,7 @@ Für diesen gibt es 8 sogenannte Codebooks. Codebooks sind Dictionaries gefüllt
 
 Sobald der Audio Codec Encoder seine Arbeit erledigt hat, wird die Repräsentation an den Decoder von VALL-E übergeben.
 
-![Online Image](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*zZmUzjNyvSa3a-b-c7bdXQ.png)
+![Online Image](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*zZmUzjNyvSa3a-b-c7bdXQ.png)<br>
 *Abb. 4 https://miro.medium.com/v2/resize:fit:1400/format:webp/1*zZmUzjNyvSa3a-b-c7bdXQ.png*
 
 Dieser besteht aus einem Non-Auto-Regressive (NAR) und aus einem Auto-Regressive (AR) Decoder. Der AR Decoder ist dafür verantwortlich, die Input Daten des ersten Codebooks zu verarbeiten. Der NAR Decoder ist für die restlichen Codebooks verwendet. Hier wird aus diesen Repräsentationen der Codebooks die Wellenform generiert, aus der die Output Sprache entsteht. 
