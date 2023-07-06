@@ -4,7 +4,6 @@ von Serife-Nur Özdemir, Sanamjeet Meyer und Anna Postnikova
 Die bayesianische Modellierung basiert auf der bayesianischen Statistik. Im Vergleich zum frequentistischen Ansatz spiegelt der bayesianische Ansatz eher die menschliche Denkweise wider. Der bayesianische Ansatz berücksichtigt das Vorwissen bei der Inferenz, was besonders hilfreich ist, wenn bereits Expertenwissen oder Vorkenntnisse in einem Bereich vorhanden sind. Nahezu alle klassischen Modelle des maschinellen Lernens können in bayesianische Modelle umgewandelt werden. In dieser Arbeit gehen wir darauf ein, was bayesianische Modellierung ist, wie sie funktioniert und welche Vor- und Nachteile sie hat.
 
 ## Einführung in die Bayes Statistik
-Beispiel: Medezinischer test
 
 ### Bayes-Theorem
 
@@ -17,7 +16,63 @@ Das Bayes-Theorem ist ein grundlegendes Konzept der Wahrscheinlichkeitstheorie, 
 
 $$ P(A|B) = \frac{P(B|A)P(A)}{P(B)} $$
 
+$$ P(A|B) = \frac{P(B|A)P(A)}{P(B)} $$
+
 Das Bayes-Theorem bietet eine Möglichkeit, die Wahrscheinlichkeit von Ereignis A unter Berücksichtigung vorhandener Kenntnisse und neuer Beweise zu berechnen. Es wird in verschiedenen Bereichen eingesetzt, darunter Statistik, maschinelles Lernen und Datenanalyse.
+
+### Anwendungsbeispiel Medizinischer Test
+
+- In 99,5% der Fälle fällt der Test positiv aus.
+- Sollte die Krankheit nicht vorliegen, beträgt die Wahrscheinlichkeit für einen positiven Test 1%.
+- Laut einer Studie leidet eine von vier Personen an der betreffenden Krankheit.
+- Wie groß ist die Wahrscheinlichkeit, dass jemand an der Krankheit leidet, obwohl der Test ein negatives Ergebnis zeigt?
+
+### Modell-Annahmen
+
+K = Person ist krank  
+T = Test fällt positiv aus
+
+\[
+P(T|K) = 0.995
+\]
+
+\[
+P(T|\overline{K}) = 0.01
+\]
+
+\[
+P(K) = 0.25
+\]
+
+### Gesucht wird die Wahrscheinlichkeit
+
+\[
+P(K|\overline{T})
+\`
+
+## Anwendungsbeispiel Bayes Theorem
+
+### Bayes Theorem
+
+\[
+P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+\`
+
+\[
+P(K|\overline{T}) = \frac{P(\overline{T}|K)P(K)}{P(\overline{T}|K)P(K) + P(\overline{T}|\overline{K})P(\overline{K})}
+\`
+
+\[
+= \frac{(1-0.995)\cdot 0.25}{(1-0.995)\cdot 0.25 + (1-0.01)\cdot 0.75}
+\`
+
+\[
+= 0.00185
+\`
+
+
+
+
 
 
 ### Diagnostik seltener Ereignisse
