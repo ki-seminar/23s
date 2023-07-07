@@ -8,6 +8,7 @@ Diese Methoden der Feature Extraction finden in verschiedenen Anwendungsbereiche
 
 ## Vorwort
 Bei der Extraktion von Merkmalen ist es wichtig, zwischen Feature extraction und feature selection zu unterscheiden. Während Feature extraction den Prozess der Umwandlung von Daten in neue repräsentative Merkmale beschreibt, bezieht sich feature selection auf die Auswahl der relevantesten vorhandenen Merkmale.
+![Online Image](./img/feature_extraction/img1.png)
 In diesem Artikel werden drei Methoden der Feature Extraction betrachtet: PCA (Principal Component Analysis), CNN (Convolutional Neural Networks) und Autoencoder.
 
 ## Methoden
@@ -90,3 +91,4 @@ Hier Link zum Demo Video
 #### Hesami, Mohsen & Jones, A.. (2020). Application of artificial intelligence models and optimization algorithms in plant cell and tissue culture. Applied Microbiology and Biotechnology. 10.1007/s00253-020-10888-2. 
 #### https://www.opensourceagenda.com/projects/saliency-detection-convolutional-autoencoder
 #### Khoshdeli, Mina & Cong, Richard & Parvin, Bahram. (2017). Detection of Nuclei in H&E Stained Sections Using Convolutional Neural Networks. 
+#### https://towardsdatascience.com/autoencoders-vs-pca-when-to-use-which-73de063f5d7
