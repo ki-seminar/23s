@@ -211,7 +211,7 @@ Die Loss Funktion des Schülermodells wird wie folgt errechnet:
 |y:             | wahres Label                                                   |
 
 
-## 4 Anwendungen
+## 4. Anwendungen
 Im Folgenden wird anhand eines Beispiels die Vorgehensweise bei der Implementierung von Transfer Learning in der Sprachverarbeitung erläutert.
 Konkret geht es hierbei um die Implementierung einer Fake-News-Erkennung. 
 
