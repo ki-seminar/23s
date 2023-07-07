@@ -66,4 +66,6 @@ Hier Link zum Demo Video
 
 
 ## Literaturliste
-Hier können Sie auf weiterführende Literatur verlinken. 
+#### Hesami, Mohsen & Jones, A.. (2020). Application of artificial intelligence models and optimization algorithms in plant cell and tissue culture. Applied Microbiology and Biotechnology. 10.1007/s00253-020-10888-2. 
+#### https://www.opensourceagenda.com/projects/saliency-detection-convolutional-autoencoder
+#### Khoshdeli, Mina & Cong, Richard & Parvin, Bahram. (2017). Detection of Nuclei in H&E Stained Sections Using Convolutional Neural Networks. 
