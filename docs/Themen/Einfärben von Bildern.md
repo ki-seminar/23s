@@ -69,8 +69,18 @@ $$
 $$
 
 Hier die beiden Teile der Lossfunktion erklärt: <br>
-$ \displaystyle \mathbb{E}_{x \sim p_{\text{data}}(x)}[\log D(x|y)] $: Der Erwartungswert des Diskriminators, dass ein echtes Bild mit Label y als solches klassifiziert wird: D(x|y) soll gegen 1 gehen.<br>
-$ \displaystyle \mathbb{E}_{z \sim p_z(z)}[\log(1 - D(G(z|y)))] $: Der Erwartungswert des Diskriminators, dass ein generiertes Bild mit Label y als solches klassifiziert wird: D(G(z)) soll gegen 0 gehen.<br>
+
+$$
+\displaystyle \mathbb{E}_{x \sim p_{\text{data}}(x)}[\log D(x|y)]
+$$
+
+⟶ Der Erwartungswert des Diskriminators, dass ein echtes Bild mit Label y als solches klassifiziert wird: D(x|y) soll gegen 1 gehen.<br>
+
+$$
+\displaystyle \mathbb{E}_{z \sim p_z(z)}[\log(1 - D(G(z|y)))]
+$$ 
+
+⟶ Der Erwartungswert des Diskriminators, dass ein generiertes Bild mit Label y als solches klassifiziert wird: D(G(z)) soll gegen 0 gehen.<br>
 
 Man betrachtet also die Wahrscheinlichkeit, dass der Diskriminator ein echtes Bild mit dem Label y von einem generierten Bild mit dem Label y unterscheiden kann. Der Generator versucht, diese Wahrscheinlichkeit zu minimieren, während der Diskriminator versucht, sie zu maximieren. Darüber hinaus wird der Generator trainiert, Bilder abhängig von einem Label zu erzeugen, daher der Begriff **conditional**.
 
@@ -103,6 +113,7 @@ Der Generator wird mit dem generierten Bild getestet. Dabei wird der L1 Loss ver
 $$
 \displaystyle \text{L1}(x, y) = \frac{1}{N} \sum_{i=1}^N |x_i - y_i|
 $$
+
 
 N ist in unserem Beispiel die Anzahl der Pixel im Bild. x ist der Output des Diskriminators, y ist das Originalbild. 
 Zusätzlich wird der geupdatete Diskriminator verwendet, um zu sehen, wie gut der Generator die beiden Bilder unterscheiden kann. Dabei wird der Binary Cross Entropy Loss mit folgenden Einstellungen verwendet:
