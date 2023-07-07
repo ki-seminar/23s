@@ -96,3 +96,4 @@ Hier Link zum Demo Video
 #### https://arxiv.org/pdf/2103.04874.pdf
 #### Paul, S., Symons, D. D., Altmanninger, M., & Ertel, W. (2020). Autoencoder Based Feature Learning for Human Activity Recognition.
 #### https://www.researchgate.net/publication/301632899_An_overview_of_Convolutional_and_AutoEncoder_Deep_Learning_Algorithm
+#### Sainath, T. N., Kingsbury, B., Saon, G., Soltau, H., Mohamed, A. R., Dahl, G., & Ramabhadran, B. (2013). Deep Convolutional Neural Networks for Large-scale Speech Tasks.
