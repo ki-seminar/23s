@@ -92,3 +92,7 @@ Hier Link zum Demo Video
 #### https://www.opensourceagenda.com/projects/saliency-detection-convolutional-autoencoder
 #### Khoshdeli, Mina & Cong, Richard & Parvin, Bahram. (2017). Detection of Nuclei in H&E Stained Sections Using Convolutional Neural Networks. 
 #### https://towardsdatascience.com/autoencoders-vs-pca-when-to-use-which-73de063f5d7
+#### https://www.kaggle.com/competitions/vsb-power-line-fault-detection/data
+#### https://arxiv.org/pdf/2103.04874.pdf
+#### Paul, S., Symons, D. D., Altmanninger, M., & Ertel, W. (2020). Autoencoder Based Feature Learning for Human Activity Recognition.
+#### https://www.researchgate.net/publication/301632899_An_overview_of_Convolutional_and_AutoEncoder_Deep_Learning_Algorithm
