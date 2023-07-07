@@ -32,11 +32,11 @@ Statistische Ansätze zur Bildkolorierung verwenden mathematische Modelle, um Fa
 
 - **Mean StD Transfer:** In dieser Methode wird das Helligkeits-und Farbniveau des Referenzbildes auf eine normalisierte Version des Schwarz-Weiß-Bildes übertragen. Dies wird mit der folgenden mathematischen Formel erreicht:
   
-  $$
-  \text{Output} = \frac{\text{Input - mean(Input)}}{\text{std(Input)}} \times \text{std(Reference) + mean(Reference)}
-  $$
+$$
+\text{Output} = \frac{\text{Input - mean(Input)}}{\text{std(Input)}} \times \text{std(Reference) + mean(Reference)}
+$$
   
-    Dieser Ansatz ist zwar schnell und funktioniert einigermaßen okay, wenn man farbige Bilder umfärben möchte, jedoch wird bei Schwarz-Weiß-Bildern nur die Durchschnittsfarbe des Referenzbildes projeziert.
+- Dieser Ansatz ist zwar schnell und funktioniert einigermaßen okay, wenn man farbige Bilder umfärben möchte, jedoch wird bei Schwarz-Weiß-Bildern nur die Durchschnittsfarbe des Referenzbildes projeziert.
 
 - **Lab Mean Transfer:** Diese Methode funktioniert gleich wie der Mean StD Transfer, allerdings wird zuvor der Farbraum von RGB in Lab übertragen. Dadurch werden schon etwas bessere Ergebnisse erzeugt, allerdings sind auch diese bei Schwarz-Weiß-Bildern genau so schlecht. 
 
