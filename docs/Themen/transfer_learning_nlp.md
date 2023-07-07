@@ -1,56 +1,47 @@
 
+
 # Transfer Learning in der Sprachverarbeitung
 von *Simon Wolf, Tim Staudinger und Miguel Meindl*
 ## Abstract
-Die Sprachverarbeitung ist ein grundlegender Aspekt der künstlichen Intelligenz (KI) und hat in den letzten Jahren beträchtliche Fortschritte erzielt. 
-Eine vielversprechende Methode zur Verbesserung der Leistung von Sprachmodellen ist Transfer Learning. Transfer Learning ermöglicht es, 
-vortrainierte Modelle auf eine neue Aufgabe anzuwenden, indem das Wissen, das in einem Modell für eine bestimmte Aufgabe erlernt wurde, 
-auf eine andere, verwandte Aufgabe übertragen wird.
+Die Sprachverarbeitung ist ein grundlegender Aspekt der künstlichen Intelligenz (KI) und hat in den letzten Jahren beträchtliche Fortschritte erzielt.
+Eine vielversprechende Methode zur Verbesserung der Leistung von Sprachmodellen ist Transfer Learning. Dies ermöglicht es,
+vortrainierte Modelle auf eine neue Aufgabe anzuwenden, indem das bereits erlernte Wissen auf eine verwandte Aufgabe angewendet wird.
 
-Der Podcast bietet eine oberflächliche Einführung in das Thema Transfer Learning in der Sprachverarbeitung, 
-um fachfremde Zuhörer mit den grundlegenden Konzepten vertraut zu machen. Er erklärt, wie Transfer Learning funktioniert 
-und genutzt werden kann, um vortrainierte Modelle auf neue sprachverarbeitende Aufgaben anzuwenden. Außerdem gibt er einen Überblick über 
-verschiedene Anwendungsfälle und beleuchtet die Herausforderungen von Transfer Learning. Zudem werden die Auswirkungen der Datenmenge und Qualität diskutiert.
+Der Podcast bietet eine oberflächliche Einführung in das Thema, um fachfremde Zuhörer mit den grundlegenden Konzepten vertraut zu machen. Es wird erklärt, wie Transfer Learning funktioniert und genutzt werden kann. Außerdem wird ein Überblick über verschiedene Anwendungsfälle gegeben und die Herausforderungen von Transfer Learning beleuchtet. Zudem wird der Einfluss der Datenmenge und Qualität auf das Ergebnis diskutiert.
 
-Der Fachvortrag liefert einen tieferen Einblick in das Thema. Hier wird zunächst versucht die verschiedenen Aspekte von Transfer Learning einzuordnen. Die Herausforderungen von herausgearbeitet und potentielle Lösungen gezeigt. Anschließend werden die verschiedenen Kategorien elaboriert und beschrieben, um einen Überblick zu geben. Modernere Ansätze mit Hilfe von Deep Learning werden vorgestellt und deren Vorteile aufgezeigt. Anschließend wird der Ansatz des Modelltransfers näher erläutert dessen Technik und Funktionsweise erörtert.
+Der Fachvortrag liefert einen tieferen Einblick in das Thema. Hier wird zunächst versucht, die verschiedenen Aspekte von Transfer Learning einzuordnen. Die Herausforderungen zur Vermeidung von negativem Transfer werden herausgearbeitet und potenzielle Lösungen aufgezeigt. Anschließend werden die verschiedenen Kategorien elaboriert, um einen Überblick zu geben. Modernere Ansätze mit Hilfe von Deep Learning werden vorgestellt und deren Vorteile aufgezeigt. Anschließend wird der Ansatz des Modelltransfers näher erläutert.
 
-Im Schlussteil der Arbeit wird anhand eines konkreten Beispiels gezeigt, wie Transfer Learning angewandt werden kann. 
+Im Schlussteil der Arbeit wird anhand eines konkreten Beispiels gezeigt, wie Transfer Learning angewandt werden kann.
 Hierfür wird das Sprachmodell _BERT_ auf den Anwendungsfall der Fake-News-Erkennung trainiert. Die einzelnen Phasen dieses Prozesses
-werden im Detail erläutert und mit Codebeispielen versehen.
+werden im Detail erläutert und mit Codebeispielen veranschaulicht.
 
 ## 1. Einleitung und Motivation
-In der heutigen digitalen Zeit hat die Spracherkennung einen enormen Einfluss auf unser tägliches Leben. Von virtuellen Assistenten 
-über Sprachbefehle in mobilen Geräten bis hin zu automatisierten Kundenservice-Systemen - die Fähigkeit, menschliche Sprache zu verstehen 
+In der heutigen digitalen Zeit hat die Spracherkennung einen enormen Einfluss auf unser tägliches Leben. Von virtuellen Assistenten
+über Sprachbefehle in mobilen Geräten bis hin zu automatisierten Kundenservice-Systemen – die Fähigkeit, menschliche Sprache zu verstehen
 und zu verarbeiten, hat zahlreiche Anwendungen revolutioniert. Doch die Entwicklung präziser und effizienter Spracherkennungssysteme 
 stellt nach wie vor eine Herausforderung dar.
-
-Transfer Learning bietet in der Spracherkennung eine Reihe von Vorteilen. Anstatt jedes Mal von Grund auf ein neues Modell für 
-jede spezifische Aufgabe zu trainieren, kann Transfer Learning genutzt werden, um auf bereits existierende Modelle zurückzugreifen, 
-die auf ähnlichen Sprachdaten trainiert wurden. Dadurch wird nicht nur die Trainingszeit erheblich verkürzt, sondern auch der 
-Bedarf an umfangreichen Datenmengen reduziert.
-
-Des Weiteren ermöglicht Transfer Learning die Nutzung von vortrainiertem Wissen, das bereits in einem anderen Kontext erworben wurde. 
-Dieses Wissen kann auf die Spracherkennung angewendet werden, um eine bessere Anpassung an spezifische Aufgaben zu erreichen. 
-Dadurch wird die Genauigkeit der Spracherkennungssysteme verbessert, selbst wenn die verfügbaren Daten begrenzt sind.
 
 Die Anwendungsmöglichkeiten von Transfer Learning in der Spracherkennung sind vielfältig. Egal ob es darum geht, 
 Sprachbefehle in Smart-Home-Geräten zu erkennen, Transkriptionen von Audioaufnahmen zu erstellen oder Sprachanrufe automatisch zu analysieren, 
 Transfer Learning bietet eine effektive Methode, um maßgeschneiderte Modelle für spezifische Aufgaben zu entwickeln.
 
+Transfer Learning bietet in der Spracherkennung eine Reihe von Vorteilen. Anstatt Modelle von Grund auf neu zu trainieren kann auf bereits existierende 
+Modelle zurückgegriffen werden. Dadurch wird nicht nur die Trainingszeit erheblich verkürzt, sondern auch der Bedarf an umfangreichen Datenmengen reduziert.
+
+Des Weiteren ermöglicht es die Nutzung von vortrainiertem Wissen, das bereits in einem anderen Kontext erworben wurde. 
+Dieses Wissen kann auf die Spracherkennung angewendet werden, um eine bessere Anpassung an spezifische Aufgaben zu erreichen. 
+Dadurch wird die Genauigkeit der Spracherkennungssysteme verbessert, selbst wenn die verfügbare Datenmenge begrenzt ist.
+
 Die Idee von Transfer Learning hat ihre Wurzeln in der Künstlichen Intelligenz und dem maschinellen Lernen. In den letzten Jahrzehnten wurden 
 verschiedene Ansätze und Techniken entwickelt, um Transfer Learning zu ermöglichen. Diese Fortschritte haben die Spracherkennung maßgeblich beeinflusst.
 
 ## 2. Stand der Forschung
-Doch wie sieht der aktuelle Stand der Forschung im Bereich Transfer Learning in der Spracherkennung aus? 
-Welche neuen Ansätze und Techniken wurden entwickelt, um die Effizienz und Genauigkeit von Spracherkennungssystemen weiter zu verbessern? 
-Im nachfolgenden Abschnitt wird genauer auf diese Themen eingegangen.
+Doch wie sieht der aktuelle Stand der Forschung aus? Welche neuen Ansätze und Techniken wurden entwickelt, um die Effizienz und Genauigkeit von Spracherkennungssystemen weiter zu verbessern? Im nachfolgenden Abschnitt wird genauer auf diese Themen eingegangen.
 
 In den letzten Jahren hat die Forschung intensiv daran gearbeitet, Transfer Learning in der Spracherkennung voranzutreiben. 
-Ein herausragendes Beispiel für ein erfolgreiches vortrainiertes Sprachmodell ist ChatGPT. Ursprünglich entwickelt für 
-die Generierung von Texten, hat ChatGPT das Potenzial gezeigt, auch für die Spracherkennung genutzt zu werden.
-
-Durch den Einsatz von ChatGPT als Ausgangspunkt für Transfer Learning können Spracherkennungsmodelle von dem breiten Wissen profitieren, 
-das im Modell von ChatGPT vorhanden ist. Dies ermöglicht eine verbesserte Sprachverarbeitung. Durch die Übertragung des vortrainierten Wissens
+Ein herausragendes Beispiel für ein erfolgreiches vortrainiertes Sprachmodell ist ChatGPT. Durch den Einsatz von vortrainierten Modellen
+als Ausgangspunkt können Spracherkennungsmodelle von dem breiten Wissen profitieren, das in Modellen wie beispielsweise ChatGPT vorhanden ist. 
+Dies ermöglicht eine verbesserte Sprachverarbeitung. Durch die Übertragung des vortrainierten Wissens
 auf spezifische Spracherkennungsaufgaben können Modelle schneller und genauer lernen, wodurch die Genauigkeit der Spracherkennungssysteme erhöht wird.
 
 Ein weiterer vielversprechender Ansatz ist die Kombination von Transfer Learning mit Active Learning. 
@@ -58,9 +49,8 @@ Active Learning ermöglicht es, gezielt unsichere Beispiele auszuwählen, um das
 in Kombination mit Active Learning können Spracherkennungsmodelle schneller und effizienter lernen. Das Modell kann von bereits gelernten Aufgaben 
 profitieren und sich schneller an neue Spracherkennungsaufgaben anpassen.
 
-Darüber hinaus wird als weiterer Ansatz Transfer Learning mit weiteren Techniken wie Reinforcement Learning und Generative Adversarial Networks (GANs) kombiniert. 
-Diese Kombination eröffnet neue Möglichkeiten, die Leistungsfähigkeit von Spracherkennungssystemen zu steigern. 
-Beispielsweise können Reinforcement Learning-Algorithmen eingesetzt werden, um die Interaktion mit dem Spracherkennungssystem zu verbessern und es an spezifische Nutzerpräferenzen anzupassen.
+Darüber hinaus wird als weiterer Ansatz Transfer Learning mit anderen Techniken wie beispielsweise Reinforcement Learning kombiniert. 
+Reinforcement Learning-Algorithmen können eingesetzt werden, um die Interaktion mit dem Spracherkennungssystem zu verbessern und es an spezifische Nutzerpräferenzen anzupassen. Eine weitere Möglichkeit stellt die Kombination mit Generative Adversarial Networks (GANs) dar. Ziel dieses Ansatzes ist es, die Datenmenge durch künstlich generierte Texte zu erhöhen. Diese Kombinationen eröffnen neue Möglichkeiten, die Leistungsfähigkeit von Spracherkennungssystemen zu steigern.
 
 Ein weiterer vielversprechender Aspekt ist die Erweiterung von Transfer Learning auf mehrsprachige Szenarien. 
 Indem Modelle auf verschiedenen Sprachen trainiert und dann auf neue Sprachen übertragen werden, kann die Effizienz und Genauigkeit 
@@ -74,28 +64,28 @@ können Spracherkennungssysteme effizienter, präziser und anpassungsfähiger tr
 ## 3. Methoden
 
 ### 3.1 Definition
-Die Motivation für Transfer Learning basiert auf der Idee des "Lernens zu lernen", die besagt, dass das Lernen von Grund auf oft begrenzt ist und daher so viel wie möglich aus früheren Erfahrungen genutzt werden sollte.
+Die Motivation für Transfer Learning basiert auf der Idee des "Lernens zu lernen", die besagt, dass die Fähigkeit zu Lernen von Grund auf oft begrenzt ist und daher so viel wie möglich aus früheren Erfahrungen genutzt werden sollte.
 
 | ![DEFINITION](img/TransferLearningNLP/definition.png) |
 |:--:|
 | Abbildung 1: Visualisierung von Transfer Learning:
 Die linke Seite stellt das Quellsystem dar, die rechte Seite das Zielsystem. X1 und X2 sind die Featureräume, Y1 und Y2 die Labelräume der jeweiligen Modelle M1 und M2. P1(X) und P2(X) sind die jeweiligen Wahrscheinlichkeitsverteilungen der Features. |
 
-Es gibt verschiedene Methoden und Kategorien des Transfer Learnings, die je nach Beziehung zwischen dem bereits Gelernten (Quelle) und dem Neuen (Ziel) entwickelt wurden. Auf einige davon wird im späteren Verlauf im Kapitel "Kategorisierung" noch besonders eingegangen. Es ist allerdings zu Erwähnen, dass die Einteilung in diese Kategorien nicht immer eindeutig ist. Des Weiteren ist die Zugehörigkeit dieser zum Gebiet des Transfer Learnings teilweise umstritten.
+Es gibt verschiedene Kategorien des Transfer Learnings, die je nach Beziehung zwischen dem bereits Gelernten (Quelle) und dem Neuen (Ziel) entwickelt wurden. Auf einige davon wird im späteren Verlauf im Kapitel "Kategorisierung" noch eingegangen. Es ist allerdings zu Erwähnen, dass die Einteilung in diese Kategorien nicht immer eindeutig ist. Des Weiteren ist die Zugehörigkeit dieser zum Transfer Learning teilweise umstritten.
 
 ### 3.2 Herausforderungen
 Die mit Abstand größte Herausforderung von Transfer Learning besteht im simplen Konzept: 
 	**Positiven Transfer erzeugen, negativen Transfer vermeiden.**
 
-Die Vorhersagefähigkeit von Transfermethoden hängt von der semantischen Ähnlicheit zwischen den Aufgabenstellungen im Quell- und Zielsystem ab. Bei einer starken Beziehung und einer geeigneten Ausnutzung durch die Transfermethode kann die Vorhersagekraft in der Zielaufgabe deutlich verbessert werden. Ist die Beziehung zwischen den Aufgaben jedoch unzureichend oder wird sie von der Transfermethode nicht optimal genutzt, kann die Leistung abnehmen.
+Die Vorhersagefähigkeit von Transfermethoden hängt von der semantischen Ähnlichkeit zwischen den Aufgabenstellungen im Quell- und Zielsystem ab. Bei einer starken Beziehung und einer geeigneten Ausnutzung durch die Transfermethode kann die Vorhersagekraft in der Zielaufgabe deutlich verbessert werden. Ist die Beziehung zwischen den Aufgaben jedoch unzureichend oder wird sie von der Transfermethode nicht optimal genutzt, kann die Leistung abnehmen.
 
 Um negativen Transfer zu vermeiden, müssen Transfermethoden vorsichtig sein und die Beziehung zwischen Quell- und Zielaufgabe berücksichtigen. Vorsichtige Ansätze führen möglicherweise zu geringerem positivem Transfer, bieten jedoch Schutz vor negativem Transfer. Aggressive Ansätze erzielen möglicherweise größere Leistungssteigerungen, bergen jedoch auch das Risiko von negativem Transfer, wenn die Quellaufgabe nicht gut zur Zielaufgabe passt.
 
 #### 3.2.1 Ablehnung schlechter Informationen
-Eine Möglichkeit negativen Transfer zu vermeiden besteht darin, dass schädliche Informationen der Quellaufgabe während des Lernens der Zielaufgabe erkannt und abgelehnt werden. Eine Methode, um dies zu erreichen, ist das optionenbasierte Transferlernen im Bereich des Reinforcement Learning, bei dem der Agent basierend auf der Leistung bestimmte Optionen auswählt oder ablehnt. Ein weiterer Ansatz ist der KBKR-Ratschlagalgorithmus, der die Ratschläge der Quellaufgabe als weiche Einschränkung berücksichtigt. Zusätzlich wurden Methoden zur Erkennung von negativem Transfer entwickelt, z.B. durch die Verwendung eines Hyperpriors, dessen Varianz mit der Unähnlichkeit der Aufgaben korreliert. Dadurch kann entschieden werden, ob überhaupt ein Transfer stattfinden sollte.
+Eine Möglichkeit negativen Transfer zu vermeiden besteht darin, dass schädliche Informationen der Quellaufgabe während des Lernens der Zielaufgabe erkannt und abgelehnt werden. Eine Methode, um dies zu erreichen, ist das optionenbasierte Transfer Learning im Bereich des Reinforcement Learning, bei dem der Agent basierend auf der Leistung bestimmte Optionen auswählt oder ablehnt. Ein weiterer Ansatz ist der KBKR-Ratschlag-Algorithmus (Advice-Taking Algorithm), der die Ratschläge der Quellaufgabe als weiche Einschränkung berücksichtigt. Zusätzlich wurden Methoden zur Erkennung von negativem Transfer entwickelt, z.B. durch die Verwendung eines Hyperpriors, dessen Varianz mit der Unähnlichkeit der Aufgaben korreliert. Dadurch kann entschieden werden, ob überhaupt ein Transfer stattfinden sollte.
 
 #### 3.2.2 Auswahl der Quellaufgabe
-Um negativen Transfer zu vermeiden, können mehrere Quellaufgaben zur Auswahl stehen. Eine Möglichkeit besteht darin, die Aufgaben nach Schwierigkeitsgrad zu ordnen und eine Quellaufgabe auszuwählen, die nur moderat schwieriger ist als die Zielaufgabe. Eine andere Methode ist die Suche nach ähnlichen Aufgaben mithilfe von Graphenrepräsentationen. Zudem kann auch die Auswahl aus Kandidatenlösungen einer Quellaufgabe anstelle von Quellaufgaben selbst in Betracht gezogen werden. Dieser Ansatz ermöglicht die Berücksichtigung der Komplexität der Modelle und die Auswahl einer geeigneten Auflösung für den Transfer.
+Um negativen Transfer zu vermeiden, können mehrere Quellaufgaben zur Auswahl stehen. Eine Möglichkeit besteht darin, die Aufgaben nach Schwierigkeitsgrad zu ordnen und eine Quellaufgabe auszuwählen, die nur moderat schwieriger ist als die Zielaufgabe. Eine andere Methode ist die Suche nach ähnlichen Aufgaben mit Hilfe von Graphenrepräsentationen. Zudem kann auch die Auswahl aus Kandidatenlösungen einer Quellaufgabe anstelle von Quellaufgaben selbst in Betracht gezogen werden. Dieser Ansatz ermöglicht die Berücksichtigung der Komplexität der Modelle und die Auswahl einer geeigneten Auflösung für den Transfer.
 
 | ![CHOOSING_SOURCE_TASK](img/TransferLearningNLP/herausforderung_choosing_source_task.png) |
 |:--:|
@@ -122,8 +112,8 @@ Die folgende Tabelle gibt einen Überblick über die Gebiete des Transferlernens
 
 | Variable      | Beschreibung                                                   |
 | :---          |  :---                                                          |
-|X:             | feature space	(Audio-, Text-, Bilddaten, …)                    |
-|y:             | label space		(Phoneme, Kategorien, …)                     |
+|X:             | Feature space	(Audio-, Text-, Bilddaten, …)                    |
+|y:             | Label space (Phoneme, Kategorien, …)                     |
 |M(X):          | Model                                                          |
 |P(X):          | Verteilung der Features                                        |
 |+:             | Daten und Tasks sind **gleich** für Quell- und Zieldomäne          |
@@ -138,45 +128,45 @@ Die einfachste Art des Transfer Learnings ist die Modelladaption. Hier bleiben d
 | Abbildung 5: Beispiel für die A-priori-Verteilung, die Likelihood-Funktion der Daten sowie die A-posteriori-Verteilung. |
 
 
-#### 3.3.2 Heterogenes Transferlernen
-Heterogenes Transferlernen bezieht sich auf den Fall, in dem sich die Merkmale der Quell- und Ziel-Domänen unterscheiden, während die Labels und das Modell unverändert bleiben. Das Ziel besteht darin, die vorhandene Entsprechung zwischen den Domänen zu nutzen, um Wissen von einer Domäne auf die andere zu übertragen. Frühe Ansätze konzentrierten sich auf die Definition und Nutzung der Entsprechung auf Instanzebene. Aktuellere Ansätze zielen darauf ab, gemeinsame Repräsentationen der Quell- und Ziel-Domänen zu finden, entweder durch Matrixfaktorisierung, RBM-basiertes latentes Faktorlernen oder durch die Kombination von Deep Learning und Transferlernen. Eine besondere Herausforderung besteht darin, aus sehr unterschiedlichen Aufgaben zu lernen, bei denen sich der Labelraum von der Ziel-Domäne unterscheidet. Das Lernen von Korrespondenzen zwischen solchen unabhängigen, aber analogen Domänen ist für Maschinen schwierig, obwohl Menschen dazu neigen, Analogien leichter zu erkennen. Aktuelle Fortschritte im Bereich des Deep Learning bieten jedoch neue Möglichkeiten durch ein einheitliches Rahmenwerk für Repräsentationslernen und Multitask-Lernen.
+#### 3.3.2 Heterogenes Transfer Learning
+Heterogenes Transfer Learning bezieht sich auf den Fall, in dem sich die Merkmale der Quell- und Ziel-Domänen unterscheiden, während die Labels und das Modell unverändert bleiben. Das Ziel besteht darin, die vorhandene Entsprechung zwischen den Domänen zu nutzen, um Wissen von einer Domäne auf die andere zu übertragen. Frühere Ansätze konzentrierten sich auf die Definition und Nutzung der Entsprechung auf Instanzebene. Aktuellere Ansätze zielen darauf ab, gemeinsame Repräsentationen der Quell- und Ziel-Domänen zu finden, entweder durch Matrixfaktorisierung, RBM-basiertes latentes Faktorlernen oder durch die Kombination von Deep Learning und Transfer Learning. Eine besondere Herausforderung besteht darin, aus sehr unterschiedlichen Aufgaben zu lernen, bei denen sich der Labelraum von der Ziel-Domäne unterscheidet. Das Lernen von Korrespondenzen zwischen solchen unabhängigen, aber analogen Domänen ist für Maschinen schwierig, obwohl Menschen dazu neigen, Analogien leichter zu erkennen. Aktuelle Fortschritte im Bereich des Deep Learning bieten jedoch neue Möglichkeiten durch ein einheitliches Framework für Representation Learning und Multitask Learning.
 
 
-#### Multitask-Lernen
+#### Multitask-Learning
 | ![MULTITASK_LEARNING](img/TransferLearningNLP/multitask_learning.png) |
 |:--:|
 | Abbildung 6: Grafische Darstellung von Multitask Learning |
 
-Multitask Learning bezieht sich auf den Fall, in dem die Merkmalsräume der Quell- und Ziel-Domänen identisch sind, jedoch die Aufgabenlabels signifikant unterschiedlich sind. Bei diesem Ansatz wird angenommen, dass die Quell- und Ziel-Aufgaben eng miteinander verbunden sind und das Lernen einer Aufgabe das Lernen der anderen Aufgabe in Form einer gegenseitigen Regularisierung unterstützt. Multitask Learning ist ein allgemeiner Ansatz, der auf verschiedene Modelle angewendet werden kann, einschließlich Kernel-Regression und k-nearest neighbor. Die Bewertung der Relevanz von zwei Aufgaben ist eine Herausforderung, und es gibt interessante Ansätze, die die Überlappung verschiedener Aufgaben im selben semantischen Raum zur Schätzung der Relevanz verwenden.
+Multitask Learning bezieht sich auf den Fall, in dem die Merkmalsräume der Quell- und Ziel-Domänen identisch, jedoch die Aufgabenlabels signifikant unterschiedlich sind. Bei diesem Ansatz wird angenommen, dass die Quell- und Ziel-Aufgaben eng miteinander verbunden sind und das Lernen einer Aufgabe das Lernen der anderen Aufgabe in Form einer gegenseitigen Regularisierung unterstützt. Multitask Learning ist ein allgemeiner Ansatz, der auf verschiedene Modelle angewendet werden kann, einschließlich Kernel-Regression und k-nearest neighbor. Die Bewertung der Relevanz von zwei Aufgaben ist eine Herausforderung, und es gibt interessante Ansätze, die die Überlappung verschiedener Aufgaben im selben semantischen Raum zur Schätzung der Relevanz verwenden.
 
 Eine Möglichkeit eine solche Schätzung durchzuführen ist es einen Score für die Überlappung der semantischen Räume zu definieren:
 
 | ![MULTITASK_SIMULARITY_SCORE](img/TransferLearningNLP/Multitask_simularity_score.png) |
 |:--:|
-| Abbildung 7: Definition eines Überlappungsscores der semantischen Räume bei Multitask-Lernen |
+| Abbildung 7: Definition eines Überlappungsscores der semantischen Räume bei Multitask-Learning|
 
 Der hier definierte Score weist einen Wert zwischen 0 und 1 auf. Eine starke Überlappung weist einen Wert nahe 1 auf.
 
 ### 3.4 Deep Transfer Learning
-Deep Learning hat einen starken Einfluss auf das Transferlernen, insbesondere in den Bereichen der Sprach- und Sprachverarbeitung. Es umfasst verschiedene Modelle wie Deep Belief Networks, Deep Boltzmann Machines, Deep Autoencoders, Deep Neural Networks und Deep Recurrent Neural Networks. Diese Modelle sind in der Lage, mehrschichtige Repräsentationen zu lernen, die eine hierarchische Verarbeitung von Informationen nachahmen. Das mehrschichtige Feature-Lernen bietet mehrere Vorteile, wie Robustheit gegenüber Datenvariationen, hierarchische Parameterverteilung, die Möglichkeit des supervised learnings und die Anpassungsfähigkeit an spezifische Aufgaben durch feinabstimmendes Training. Dadurch bietet Deep Learning einen geeigneten Rahmen für das Transferlernen, bei dem robuste Features gelernt werden, die von mehreren Merkmalen und Aufgaben gemeinsam genutzt werden.
+Deep Learning hat einen starken Einfluss auf Transfer Learning, insbesondere in den Bereichen der gesprochenen und geschriebenen Sprache. Es umfasst verschiedene Modelle wie Deep Belief Networks, Deep Boltzmann Machines, Deep Autoencoders, Deep Neural Networks und Deep Recurrent Neural Networks. Diese Modelle sind in der Lage, mehrschichtige Repräsentationen zu lernen, die eine hierarchische Verarbeitung von Informationen nachahmen. Das mehrschichtige Feature-Lernen bietet mehrere Vorteile, wie Robustheit gegenüber Datenvariationen, hierarchische Parameterverteilung, die Möglichkeit des Supervised Learnings und die Anpassungsfähigkeit an spezifische Aufgaben durch feinabstimmendes Training. Dadurch bietet Deep Learning einen geeigneten Rahmen für das Transfer Learning, bei dem robuste Features gelernt werden, die von mehreren Merkmalen und Aufgaben gemeinsam genutzt werden.
 
-In einer beispielhaften Umsetzung von deep transfer learning werden bei einem großen Modell die meisten layer bis zu einem gewissen Punkt eingefroren. Die letzten layer werden anschließend neu trainiert. In folgender Visualisierung wird dies illustriert:
+In einer beispielhaften Umsetzung von Deep Transfer Learning werden bei einem großen Modell die meisten Schichten bis zu einem gewissen Punkt eingefroren. Die Restlichen werden anschließend neu trainiert. In folgender Visualisierung wird dies illustriert:
 
 | ![VISUALIZED_DEEP_TRANSFER_LEARNING](img/TransferLearningNLP/visualized_deep_transfer_learning.png) |
 |:--:|
-| Abbildung 8: Visualisierung von Deep Transfer Learning mit gefrorenen layern. |
+| Abbildung 8: Visualisierung von Deep Transfer Learning mit gefrorenen Schichten. |
 
-Folgende Abbildung zeigt eine Transferlernen-Architektur, die auf tiefer Repräsentation basiert. Im linken Teil der Abbildung findet das gemeinsame Training statt, bei dem unterschiedliche Eingabemerkmale durch Vorverarbeitungsnetzwerke in einen gemeinsamen semantischen Raum projiziert werden. Die gemeinsamen Merkmale umfassen aussagekräftige Faktoren, die für mehrere Aufgaben verwendet werden können. Aleinstehend handelt es sich bei der linken Seite der Abbildung im Wesentlichen um ein Multitask-Lernen.
+Folgende Abbildung zeigt eine Transfer Learning Architektur, die auf tiefer Repräsentation basiert. Im linken Teil der Abbildung findet das gemeinsame Training statt, bei dem unterschiedliche Eingabemerkmale durch Vorverarbeitungsnetzwerke in einen gemeinsamen semantischen Raum projiziert werden. Die gemeinsamen Merkmale umfassen aussagekräftige Faktoren, die für mehrere Aufgaben verwendet werden können. Alleinstehend handelt es sich bei der linken Seite der Abbildung im Wesentlichen um ein Multitask-Learning.
 
-Im rechten Teil der Abbildung wird die Anpassungsphase dargestellt, in der neue Daten für die Zielaufgabe bereitgestellt werden, entweder mit oder ohne Labels. Das Modell wird mit den neuen Daten aktualisiert, die einer anderen Verteilung folgen als in der gemeinsamen Trainingphase.
+Im rechten Teil der Abbildung wird die Anpassungsphase dargestellt, in der neue Daten für die Zielaufgabe bereitgestellt werden, entweder mit oder ohne Labels. Das Modell wird mit den neuen Daten aktualisiert, die einer anderen Verteilung folgen als in der gemeinsamen Trainingsphase.
 
 | ![DEEP_TRANSFER_LEARNING](img/TransferLearningNLP/deep_transfer_learning.png) |
 |:--:|
 | Abbildung 9: Visualisierung von Deep Transfer Learning |
 
-Ein großer Vorteil des unsupervised Trainings ist die Fähigkeit, den Merkmalsextraktor ohne gelabelte Daten zu trainieren und somit den Bedarf an gelabelten Daten zu reduzieren. Durch unsupervised Learning kann die überwachte Lernphase verbessert werden, indem Konvergenzgeschwindigkeit, Datenmenge und Modellqualität beeinflusst werden.
+Ein großer Vorteil des Unsupervised Trainings ist die Fähigkeit, den Merkmalsextraktor ohne gelabelte Daten zu trainieren und somit den Bedarf an gelabelten Daten zu reduzieren. Durch Unsupervised Learning kann die überwachte Lernphase verbessert werden, indem Konvergenzgeschwindigkeit, Datenmenge und Modellqualität beeinflusst werden.
 
-In der Studie "Domain adaptation for large-scale sentiment classiﬁcation: A deep learning approach" von X. Glorot et al. wurden hochrangige Merkmale mittels unsupervised Learning extrahiert. Die Ergebnisse zeigten, dass diese abstrakten Merkmale domänenunabhängig sind und erfolgreich auf neue Domänen übertragen werden können, ohne Anpassungen vorzunehmen. Ähnliche Ergebnisse wurden auch in anderen Studien erzielt, z.B. bei der Übertragung von CNN-basierten Merkmalen auf Bilderkennungsaufgaben. Es wurde gezeigt, dass nur wenige gelabelte Daten ausreichen, um Modelle anzupassen und unbekannte Objekte zu erkennen. In einigen Fällen kann sogar die Beziehung zwischen Eingangsdaten, Aufgabenvektor und Aufgabenlabels in einem Deep-Netzwerk erlernt werden, was zu Zero-Data Learning und Zero-Shot Learning führt.
+In der Studie "Domain adaptation for large-scale sentiment classiﬁcation: A deep learning approach" von X. Glorot et al. wurden hochrangige Merkmale mittels Unsupervised Learning extrahiert. Die Ergebnisse zeigten, dass diese abstrakten Merkmale domänenunabhängig sind und erfolgreich auf neue Domänen übertragen werden können, ohne Anpassungen vorzunehmen. Ähnliche Ergebnisse wurden auch in anderen Studien erzielt, z.B. bei der Übertragung von CNN-basierten Merkmalen auf Bilderkennungsaufgaben. Es wurde gezeigt, dass nur wenige gelabelte Daten ausreichen, um Modelle anzupassen und unbekannte Objekte zu erkennen. In einigen Fällen kann sogar die Beziehung zwischen Eingangsdaten, Aufgabenvektor und Aufgabenlabels in einem Deep-Network erlernt werden, was zu Zero-Data Learning und Zero-Shot Learning führt.
 
 
 
@@ -200,7 +190,7 @@ Die Loss Funktion des Schülermodells wird wie folgt errechnet:
 
 | Variable      | Beschreibung                                                   |
 | :---          |  :---                                                          |
-|L:             | loss function errechnet aus Schüler- und Lehrer- loss function |
+|L:             | Loss function wird errechnet aus Schüler- und Lehrer- loss function |
 |T:             | “Temperatur Parameter” Wenn T=1: Softmax-Funktion, mit zunehmendem T wird die Wahrscheinlichkeitsverteilung, die von der Softmax-Funktion generiert wird, weicher und liefert mehr Informationen darüber, welche Klassen das Lehrermodell als ähnlicher zur vorhergesagten Klasse betrachtet hat.                     |
 |H:             | Cross Entropy loss function                                    |
 |W:             | Child model Parameter                                          |
@@ -208,7 +198,7 @@ Die Loss Funktion des Schülermodells wird wie folgt errechnet:
 |τ, α und β:    | Hyperparameter                                                 |
 |σ:             | Softmax Funktion                                               |
 |x:             | Input                                                          |
-|y:             | wahres Label                                                   |
+|y:             | Wahres Label                                                   |
 
 
 ## 4. Anwendungen
@@ -244,8 +234,7 @@ data['label'] = pd.get_dummies(data.Target)['Fake']
 ```
 
 Als Nächstes wurde die Verteilung der Daten visualisiert, um sicherzustellen, dass ein ausbalancierter Datensatz vorliegt. Mit einer Verteilung von 
-52,3 % Fake- und 47,7 % Echt-Daten, ist dies der Fall. Die Länge der Schlagzeilen wurde ebenfalls visualisiert. Diese wird später beim Tokenisieren noch 
-eine Rolle spielen.
+52,3 % Fake- und 47,7 % Echt-Daten, ist dies der Fall. Die Länge der Schlagzeilen wurde ebenfalls visualisiert. Diese wird später beim Tokenisieren noch eine Rolle spielen.
 
 | ![STEPS](./img/TransferLearningNLP/length_headers.png) |
 |:--:|
@@ -254,8 +243,7 @@ eine Rolle spielen.
 
 ### 4.2 Daten - Vorbereitung
 Wie bei jedem maschinellen Lernverfahren müssen die Daten in Trainings-, Validierungs- und Testdaten aufgeteilt werden. 
-Da ein Modell mit Textdaten nicht arbeiten kann, müssen diese zunächst tokenisiert werden. Damit ist gemeint, dass die Wörter in sogenannte Tokens umgewandelt 
-werden, welche wiederum numerische Repräsentationen darstellen. 
+Da ein Modell mit Textdaten nicht arbeiten kann, müssen diese zunächst tokenisiert werden. Damit ist gemeint, dass die Wörter in sogenannte Tokens umgewandelt werden, welche wiederum numerische Repräsentationen darstellen. 
 
 Da wir das Sprachmodell BERT verwenden wollen, nehmen wir hierfür _BertTokenizerFast_, welcher speziell für das Modell entwickelt wurde. Dieser verwendet den WordPiece-Algorithmus, 
 welcher auf der Idee basiert, häufig vorkommende Zeichenfolgen in einem Textkorpus zu identifizieren und sie zu einem neuen Wort zusammenzufügen. 
@@ -299,10 +287,8 @@ Betrachten wir nun die Ausgabe des Tokenizers anhand eines Beispiels. Als Rückg
 mit 102 enden. Das hat den Grund, dass diese Tokens keine Wörter darstellen, sondern dem Algorithmus den Anfang und das Ende einer 
 Sequenz signalisieren. Des Weiteren kann der zuvor beschriebene Effekt des _padding_ bei der zweiten Sequenz beobachtet werden. Hier wurden 
 zwei Nullen an das Ende angefügt, damit Sequenz 1 und 2 die gleiche Länge haben.
-- _token_type_ids:_ Wird beim Umgang mit Sequenzpaaren verwendet und gibt an welcher Token zu welchem Satz gehört. Für unseren 
-Anwendungsfall jedoch nicht relevant.
-- _attention_mask:_ Binäre Sequenz, die angibt, welche Token vom Modell berücksichtigt bzw. ignoriert werden sollen. Beispielsweise sollen 
-die Einträge welche bei Sequenz 2 durch _padding_ hinzugefügt wurden, nicht beachtet werden.
+- _token_type_ids:_ Wird beim Umgang mit Sequenzpaaren verwendet und gibt an welcher Token zu welchem Satz gehört. Dies ist für unseren Anwendungsfall jedoch nicht relevant.
+- _attention_mask:_ Binäre Sequenz, die angibt, welche Token vom Modell berücksichtigt bzw. ignoriert werden sollen. Beispielsweise sollen die Einträge welche bei Sequenz 2 durch _padding_ hinzugefügt wurden, nicht beachtet werden.
 
 ```python
 sample_data = ["Build a fake news detection model.",
@@ -319,9 +305,7 @@ print(tokenized_sample_data)
  }
 ```
 
-Da wir nun wissen, welche Daten wir an das Modell übergeben müssen und wie diese aussehen, werden die Daten im nächsten Schritt zu Tensoren 
-konvertiert. Dies ist notwendig, da wir mit der PyTorch-Bibliothek arbeiten wollen und diese auf Tensoren als grundlegende Datenstruktur für 
-Berechnungen aufbaut. Des Weiteren verwenden wir einen sogenannten _data loader_, welcher uns beim Laden und Verwalten der Daten behilflich ist und uns diese in Batches aufteilt.
+Da wir nun wissen, welche Daten wir an das Modell übergeben müssen und wie diese aussehen, werden die Daten im nächsten Schritt zu Tensoren konvertiert. Dies ist notwendig, da wir mit der PyTorch-Bibliothek arbeiten wollen und diese auf Tensoren als grundlegende Datenstruktur für Berechnungen aufbaut. Des Weiteren verwenden wir einen sogenannten _data loader_, welcher uns beim Laden und Verwalten der Daten behilflich ist und uns diese in Batches aufteilt.
 
 ```python
 # Convert lists to tensors
@@ -339,13 +323,11 @@ train_dataloader = DataLoader(train_data, sampler=train_sampler, batch_size=batc
 
 
 ### 4.3 BERT (Bidirectional Encoder Representations from Transformers)
-Das bekannte Large Language Model _Bert (Bidirectional Encoder Representations from Transformers)_ wird als Ausgangspunkt verwendet. Das Modell wurde 2018 von 
-Google veröffentlicht und wurde mittlerweile für eine Vielzahl von NLP-Aufgaben eingesetzt. Ursprünglich wurde das Modell auf einem großen Textkorpus trainiert, 
-welcher beispielsweise die gesamte Wikipedia (2.5 Billionen Wörter) und den sogenannten BookCorpus (985 Millionen Wörter) enthält.
+Das bekannte Large Language Model _Bert (Bidirectional Encoder Representations from Transformers)_ wird als Ausgangspunkt verwendet. Das Modell wurde 2018 von Google veröffentlicht und wurde mittlerweile für eine Vielzahl von NLP-Aufgaben eingesetzt. Ursprünglich wurde das Modell auf einem großen Textkorpus trainiert, 
+welcher beispielsweise die gesamte Wikipedia (2.5 Milliarden Wörter) und den sogenannten BookCorpus (985 Millionen Wörter) enthält.
 Das Training wurde hierfür in zwei Phasen aufgeteilt:
 - _Masked Language Modeling:_ In dieser Phase wurden 15 % der Wörter zufällig maskiert. Die Aufgabe bestand nun darin, die maskierten Wörter basierend auf dem Kontext vorherzusagen. 
-Dabei lernte das Modell die Beziehungen zwischen Wörtern innerhalb von Sätzen. Im folgenden in ein Codebeispiel im welchem die beschriebene Funktion ausgeführt werden kann.
-
+Dabei lernte das Modell die Beziehungen zwischen Wörtern innerhalb von Sätzen. Nachfolgend befindet sich die beschriebene Funktion als ein ausführbares Codebeispiel. 
 
 ```python
 unmasker = pipeline('fill-mask', model='bert-base-uncased')
@@ -378,9 +360,7 @@ for i in range(2):
 
 
 ### 4.4 Model
-In Phase 3 erstellen wir ein Modell, welches die Architektur des BERT Modells als Grundlage verwendet. Um das Modell auf unseren Anwendungsfall anzupassen, 
-fügen wir weitere Schichten hinzu. So werden beispielsweise zwei Linear-Layers hinzugefügt, um die Anzahl der Ausgänge auf zwei (Fake/Wahr) zu reduzieren. Ebenfalls wird die 
-Regularisierungstechnik _Dropout_ angewandt, um Overfitting vorzubeugen.
+In Phase 3 erstellen wir ein Modell, welches die Architektur des BERT Modells als Grundlage verwendet. Um das Modell auf unseren Anwendungsfall anzupassen, fügen wir weitere Schichten hinzu. So werden beispielsweise zwei Linear-Layers hinzugefügt, um die Anzahl der Ausgänge auf zwei (Fake/Wahr) zu reduzieren. Ebenfalls wird die Regularisierungstechnik _Dropout_ angewandt, um Overfitting vorzubeugen.
 
 In der _forward_ Funktion wird definiert, wie die Eingabe durch das Modell fließt und die Ausgabe berechnet wird.
 
@@ -407,34 +387,29 @@ class BERT_Arch(nn.Module):
 
 
 ### 4.5 Einfrieren der Schichten
-Beim Transfer Learning werden oft bestimmte Schichten des vortrainierten Modells eingefroren, um die Gewichte während des Trainings nicht
-zu aktualisieren. Dies wird aus folgenden Gründen gemacht:
+Beim Transfer Learning werden oft bestimmte Schichten des vortrainierten Modells eingefroren, um die Gewichte während des Trainings nicht zu aktualisieren. Dies wird aus folgenden Gründen gemacht:
 - Schutz des bereits gelernten Wissens
 - Reduzieren der Trainingszeit
 - Prävention vor Overfitting
 
-Besonders nützlich ist dies, wenn die ursprüngliche Aufgabe Ähnlichkeiten mit der neuen Aufgabe aufweist. Es gibt drei verschiedene Ansätze welche verfolgt
-werden können. Im Folgenden werden diese stichpunktartig beschrieben.
+Besonders nützlich ist dies, wenn die ursprüngliche Aufgabe Ähnlichkeiten mit der neuen Aufgabe aufweist. Es gibt drei verschiedene Ansätze welche verfolgt werden können. Im Folgenden werden diese stichpunktartig beschrieben.
 1. _Keine Schichten einfrieren:_ 
    1. Es wird das gesamte Modell trainiert
    2. Großer Datensatz benötigt
    3. Die ursprüngliche Aufgabe unterscheidet sich stark von der neuen Aufgabe
    
-
 2. _Teilweises einfrieren der Schichten:_
    1. Es werden nur die unteren Schichten eingefroren
    2. Die oberen Schichten werden trainiert
    3. Mittelgroßer Datensatz notwendig
-   
 
 3. _Alle Schichten einfrieren:_
-   1. Alle Schichte des vortrainierten Modell werden eingefroren
+   1. Alle Schichte des vortrainierten Modells werden eingefroren
    2. Nur die aufgabenspezifische Schichten werden trainiert
    3. Kleiner Datensatz
    4. Ähnlichkeiten zwischen ursprünglicher und neuer Aufgabe sind vorhanden
 
-Für unseren Anwendungsfall wählen wir Methode 3. Hierfür iterieren wir über die einzelnen Schichten des BERT Modells und setzten den Parameter
-_requires_grad_ jeweils auf den Wert _false_. Dadurch wird verhindert, dass der Gradient während des Trainings berechnet und die Gewichte aktualisiert werden.
+Für unseren Anwendungsfall wählen wir Methode 3. Hierfür iterieren wir über die einzelnen Schichten des BERT Modells und setzten den Parameter _requires_grad_ jeweils auf den Wert _false_. Dadurch wird verhindert, dass der Gradient während des Trainings berechnet und die Gewichte aktualisiert werden.
 
 ```python
 for param in bert.parameters():
@@ -442,13 +417,11 @@ for param in bert.parameters():
 ```
 
 ### 4.6 Fine-Tuning
-Wie es für Pytorch üblich ist, müssen nun die Trainings- und Evaluierungsschleife implementiert werden. In der Trainingsschleife 
-erfolgt pro Iteration der gleiche Ablauf:
+Wie es für Pytorch üblich ist, müssen nun die Trainings- und Evaluierungsschleife implementiert werden. In der Trainingsschleife erfolgt pro Iteration der gleiche Ablauf:
 1. _Datenbereitstellung:_ Die Eingabedaten und die Labels werden aus den aktuellen Batch extrahiert.
 2. _Vorwärtsdurchlauf:_ Die Eingabedaten werden in das Modell gegeben, welches Vorhersagen generiert.
 3. _Fehlerberechnung:_ Es folgt ein Abgleich der vorhergesagten Werte mit den tatsächlichen Werten.
-4. _Rückwärtsdurchlauf und Gewichtsaktualisierung:_ Der Backpropagation-Algorithmus wird verwendet, um die Gradienten der Gewichte 
-des Modells zu berechnen. Der Optimizer nutzt diese Gradienten, um die Gewichte entsprechend anzupassen und das Modell zu optimieren.
+4. _Rückwärtsdurchlauf und Gewichtsaktualisierung:_ Der Backpropagation-Algorithmus wird verwendet, um die Gradienten der Gewichte des Modells zu berechnen. Der Optimizer nutzt diese Gradienten, um die Gewichte entsprechend anzupassen und das Modell zu optimieren.
 
 Ähnlich verhält sich die Evaluierungsschleife, mit dem Unterschied, dass der Rückwärtsdurchlauf nicht durchgeführt wird.
 
@@ -474,8 +447,7 @@ def train():
     return avg_loss
 ```
 
-Nachdem das Modell trainiert wurde, ist es an der Zeit die Performance des Modells auf den Testdaten zu überprüfen. Die folgende 
-Tabelle zeigt die erhaltenen Metriken:
+Nachdem das Modell trainiert wurde, ist es an der Zeit die Performance des Modells auf den Testdaten zu überprüfen. Die folgende Tabelle zeigt die erhaltenen Metriken:
 
 
 |        | precision | recall | f1-score | support |
@@ -526,11 +498,11 @@ Transfer Learning in der Sprachverarbeitung hat sich als eine vielversprechende 
 
 Die Anwendung von Transfer Learning bietet eine Reihe von Vorteilen. Es verkürzt nicht nur die Trainingszeit erheblich, sondern reduziert auch den Bedarf an umfangreichen Datenmengen. Durch die Nutzung vortrainierten Wissens, das in einem anderen Kontext erworben wurde, kann die Genauigkeit von Spracherkennungssystemen verbessert werden, selbst wenn nur begrenzte Daten zur Verfügung stehen. Transfer Learning ermöglicht die Entwicklung maßgeschneiderter Modelle für spezifische sprachverarbeitende Aufgaben und findet Anwendung in verschiedenen Bereichen wie der Sprachbefehlserkennung, der Transkription von Audioaufnahmen und der automatisierten Analyse von Sprachanrufen.
 
-Der aktuelle Stand der Forschung im Bereich Transfer Learning in der Sprachverarbeitung zeigt das Potenzial dieser Technik. Forscher haben verschiedene Ansätze und Techniken entwickelt, um die Effizienz und Genauigkeit von Spracherkennungssystemen weiter zu verbessern. Die Kombination von Transfer Learning mit Active Learning, Reinforcement Learning und Generative Adversarial Networks eröffnet neue Möglichkeiten, um die Leistungsfähigkeit der Systeme zu steigern. Die Erweiterung des Transfer Learning auf mehrsprachige Szenarien ermöglicht eine verbesserte Spracherkennung in verschiedenen Sprachen.
+Der aktuelle Stand der Forschung zeigt das Potenzial dieser Technik. Forscher haben verschiedene Ansätze und Techniken entwickelt, um die Effizienz und Genauigkeit von Spracherkennungssystemen weiter zu verbessern. Die Kombination von Transfer Learning mit Active Learning, Reinforcement Learning und Generative Adversarial Networks eröffnet neue Möglichkeiten, um die Leistungsfähigkeit der Systeme zu steigern. Die Erweiterung des Transfer Learning auf mehrsprachige Szenarien ermöglicht eine verbesserte Spracherkennung in verschiedenen Sprachen.
 
-Die Implementierung von Transfer Learning in der Sprachverarbeitung erfordert eine sorgfältige Vorbereitung der Daten, die Auswahl geeigneter vortrainierter Modelle wie BERT und die Anpassung des Modells an die spezifische Aufgabe. Das Einfrieren bestimmter Schichten des vortrainierten Modells während des Trainings kann den Schutz des bereits gelernten Wissens gewährleisten und die Trainingszeit reduzieren. Durch das Fine-Tuning des Modells und die Verwendung von Trainings- und Evaluierungsschleifen können optimale Ergebnisse erzielt werden.
+Die Implementierung erfordert eine sorgfältige Vorbereitung der Daten, die Auswahl geeigneter vortrainierter Modelle und die Anpassung des Modells an die spezifische Aufgabe. Das Einfrieren bestimmter Schichten des vortrainierten Modells während des Trainings kann den Schutz des bereits gelernten Wissens gewährleisten und die Trainingszeit reduzieren. Durch das Fine-Tuning des Modells können optimale Ergebnisse erzielt werden.
 
-Insgesamt ist Transfer Learning in der Sprachverarbeitung ein vielversprechender Ansatz, um präzisere und effizientere Spracherkennungssysteme zu entwickeln. Mit weiteren Fortschritten in der Forschung und der Anwendung von Deep Learning-Modellen wird Transfer Learning eine immer wichtigere Rolle in der künstlichen Intelligenz und im maschinellen Lernen spielen. Es eröffnet neue Möglichkeiten für die Verbesserung von Spracherkennungssystemen und hat das Potenzial, unsere tägliche Interaktion mit sprachbasierten Technologien weiter zu verbessern.
+Insgesamt ist Transfer Learning ein vielversprechender Ansatz, um präzisere und effizientere Spracherkennungssysteme zu entwickeln. Mit weiteren Fortschritten in der Forschung und der Anwendung von Deep Learning-Modellen wird Transfer Learning eine immer wichtigere Rolle in der künstlichen Intelligenz und im maschinellen Lernen spielen. Es eröffnet neue Möglichkeiten für die Verbesserung von Spracherkennungssystemen und hat das Potenzial, unsere tägliche Interaktion mit sprachbasierten Technologien weiter zu verbessern.
 
 ## 6. Weiterführendes Material
 
