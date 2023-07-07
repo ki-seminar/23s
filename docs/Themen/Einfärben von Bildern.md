@@ -32,9 +32,9 @@ Statistische Ansätze zur Bildkolorierung verwenden mathematische Modelle, um Fa
 
 - **Mean StD Transfer:** In dieser Methode wird das Helligkeits-und Farbniveau des Referenzbildes auf eine normalisierte Version des Schwarz-Weiß-Bildes übertragen. Dies wird mit der folgenden mathematischen Formel erreicht:
   
-  $$
+  ```math
   \text{Output} = \frac{\text{Input - mean(Input)}}{\text{std(Input)}} \times \text{std(Reference) + mean(Reference)}
-  $$
+  ```
   
     Dieser Ansatz ist zwar schnell und funktioniert einigermaßen okay, wenn man farbige Bilder umfärben möchte, jedoch wird bei Schwarz-Weiß-Bildern nur die Durchschnittsfarbe des Referenzbildes projeziert.
 
@@ -56,21 +56,29 @@ Statistische Ansätze zur Bildkolorierung verwenden mathematische Modelle, um Fa
 
 Conditional Adversarial Networks (cGAN) sind eine Art von generativen Modellen, die auf dem Konzept der generativen adversariellen Netzwerke (GAN) basieren. GANs bestehen aus zwei neuronalen Netzen, die gegeneinander trainiert werden. Der Generator G versucht, Bilder zu erzeugen, die von einem menschlichen Betrachter nicht von echten Bildern unterschieden werden können. Der Diskriminator D versucht, die vom Generator erzeugten Bilder von echten Bildern zu unterscheiden. Sie teilen sich eine Lossfunktion, die den Generator dazu zwingt, bessere Bilder zu erzeugen, und den Diskriminator dazu zwingt, bessere Entscheidungen zu treffen. Sie sieht wie folgt aus:
 
-$$
+```math
 \displaystyle \min_G \max_D \text{V(D, G)} = \mathbb{E}_{x \sim p_{\text{data}}(x)}[\log D(x)] + \mathbb{E}_{z \sim p_z(z)}[\log(1 - D(G(z)))]
-$$
+```
 
 Dabei hat der Generator die Aufgabe, den zweiten Teil der Lossfunktion zu minimieren, während der Diskriminator versucht, die vollständige Funktion zu maximieren.
 
 Bei conditional Adversarial Networks wird der Generator und/oder Discriminator zusätzlich mit einem Konditionierungsterm erweitert. Dieser Term wird dem Generator als zusätzlicher Input übergeben und kann beispielsweise ein Label, ein Bild oder eine Zahl bzw Vektor sein. Dadurch kann der Generator Bilder erzeugen, die zu einem bestimmten Label passen. Die Lossfunktion sieht dann wie folgt aus:
 
-$$
+```math
 \displaystyle \min_G \max_D \text{V(D, G)} = \mathbb{E}_{x \sim p_{\text{data}}(x)}[\log D(x|y)] + \mathbb{E}_{z \sim p_z(z)}[\log(1 - D(G(z|y)))]
-$$
+```
 
 Hier die beiden Teile der Lossfunktion erklärt: <br>
-$ \displaystyle \mathbb{E}_{x \sim p_{\text{data}}(x)}[\log D(x|y)] $: Der Erwartungswert des Diskriminators, dass ein echtes Bild mit Label y als solches klassifiziert wird: D(x|y) soll gegen 1 gehen.<br>
-$ \displaystyle \mathbb{E}_{z \sim p_z(z)}[\log(1 - D(G(z|y)))] $: Der Erwartungswert des Diskriminators, dass ein generiertes Bild mit Label y als solches klassifiziert wird: D(G(z)) soll gegen 0 gehen.<br>
+
+```math
+\displaystyle \mathbb{E}_{x \sim p_{\text{data}}(x)}[\log D(x|y)]
+```
+
+⟶ Der Erwartungswert des Diskriminators, dass ein echtes Bild mit Label y als solches klassifiziert wird: D(x|y) soll gegen 1 gehen.<br>
+```math
+\displaystyle \mathbb{E}_{z \sim p_z(z)}[\log(1 - D(G(z|y)))]
+``` 
+⟶ Der Erwartungswert des Diskriminators, dass ein generiertes Bild mit Label y als solches klassifiziert wird: D(G(z)) soll gegen 0 gehen.<br>
 
 Man betrachtet also die Wahrscheinlichkeit, dass der Diskriminator ein echtes Bild mit dem Label y von einem generierten Bild mit dem Label y unterscheiden kann. Der Generator versucht, diese Wahrscheinlichkeit zu minimieren, während der Diskriminator versucht, sie zu maximieren. Darüber hinaus wird der Generator trainiert, Bilder abhängig von einem Label zu erzeugen, daher der Begriff **conditional**.
 
@@ -92,17 +100,17 @@ In dieser cGAN Archtiktur bekommt nur der Diskriminator ein Label, das Schwarz-W
 
 Der Diskriminator wird sowohl mit dem generierten Bild als auch mit dem Originalbild getestet, um zu sehen, wie gut er die beiden unterscheiden kann. Dabei wird der Binary Cross Entropy Loss verwendet. Dieser ist definiert als:
 
-$$
+```math
 \displaystyle \text{BCE}(x, y) = -\frac{1}{N} \sum_{i=1}^N y_i \log(x_i) + (1 - y_i) \log(1 - x_i)
-$$
+```
 
 N ist in unserem Beispiel die Anzahl der Pixel im Bild. x ist der Output des Diskriminators, y ist die tatsächliche Wahrheit. 0 steht für ein generiertes Bild, 1 für ein echtes Bild. Der Loss wird dann für beide Bilder berechnet und anschließend der Durchschnitt gebildet.
 
 Der Generator wird mit dem generierten Bild getestet. Dabei wird der L1 Loss verwendet. Dieser ist definiert als:
 
-$$
+```math
 \displaystyle \text{L1}(x, y) = \frac{1}{N} \sum_{i=1}^N |x_i - y_i|
-$$
+```
 
 N ist in unserem Beispiel die Anzahl der Pixel im Bild. x ist der Output des Diskriminators, y ist das Originalbild. 
 Zusätzlich wird der geupdatete Diskriminator verwendet, um zu sehen, wie gut der Generator die beiden Bilder unterscheiden kann. Dabei wird der Binary Cross Entropy Loss mit folgenden Einstellungen verwendet:
