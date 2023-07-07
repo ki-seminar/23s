@@ -31,9 +31,11 @@ In der Bildkolorierung werden verschiedene Methoden eingesetzt, die auf statisti
 Statistische Ansätze zur Bildkolorierung verwenden mathematische Modelle, um Farben zu Schwarz-Weiß-Bildern hinzuzufügen. Einfärben mit Hilfe von statistischen Modellen ist nicht möglich, jedoch wird die Farbübertragung eines Referenzbildes auf ein Schwarz-Weiß-Bild oft mit Einfärben betitlelt. Drei solcher statistischen Methoden sind:
 
 - **Mean StD Transfer:** In dieser Methode wird das Helligkeits-und Farbniveau des Referenzbildes auf eine normalisierte Version des Schwarz-Weiß-Bildes übertragen. Dies wird mit der folgenden mathematischen Formel erreicht:
-    $$
-    \text{Output} = \frac{\text{Input - mean(Input)}}{\text{std(Input)}} \times \text{std(Reference) + mean(Reference)}
-    $$
+  
+  $$
+  \text{Output} = \frac{\text{Input - mean(Input)}}{\text{std(Input)}} \times \text{std(Reference) + mean(Reference)}
+  $$
+  
     Dieser Ansatz ist zwar schnell und funktioniert einigermaßen okay, wenn man farbige Bilder umfärben möchte, jedoch wird bei Schwarz-Weiß-Bildern nur die Durchschnittsfarbe des Referenzbildes projeziert.
 
 - **Lab Mean Transfer:** Diese Methode funktioniert gleich wie der Mean StD Transfer, allerdings wird zuvor der Farbraum von RGB in Lab übertragen. Dadurch werden schon etwas bessere Ergebnisse erzeugt, allerdings sind auch diese bei Schwarz-Weiß-Bildern genau so schlecht. 
@@ -41,10 +43,11 @@ Statistische Ansätze zur Bildkolorierung verwenden mathematische Modelle, um Fa
 - **Probability Density Function (PDF) Transfer:** In diesem komplexen mathematischen Verfahren werden für beide Bilder ein normalisiertes Histrogramm erstellt, welche dann genutzt werden um die Wahrscheinlichkeitsverteilung von der Farbpalette des Schwarz-Weiß-Bildes (unterschiedliche Grautöne) auf die Farbpalette des Referenzbildes zu übertragen. Dieser Ansatz liefert die besten Ergebnisse der drei verschiedenen statistischen Ansätze, ist jedoch auch der komplexeste und rechenintensivste. Die Ergebnisse sind zwar besser als bei den anderen beiden Ansätzen, jedoch sind sie immer noch nicht zufriedenstellend.
 
 ### Ergebnisse:
-| Schwarz-Weiß-Bild | Referenzbild | Mean StD Transfer | Lab Mean Transfer | PDF Transfer |
-| :---: | :---: | :---: | :---: | :---: |
-<img src= "https://img001.prntscr.com/file/img001/bpifaRK_QAa5NZccf-l6ZA.png" width=500 height = 80> | <img src= "https://img001.prntscr.com/file/img001/6mWrlSL4TyC2HmBasU5xYg.png" width=300 height = 80> | <img src= "https://img001.prntscr.com/file/img001/SgFzlCspQMigPxO4I72zYA.png" width=500 height = 80> | <img src= "https://img001.prntscr.com/file/img001/G2ehKIU6SFuzcRXqfIXP9Q.png" width=500 height = 80> | <img src= "https://img001.prntscr.com/file/img001/evwhpM87QJ-T3t8MVUj4fw.png" width=500 height = 80> |
-    
+
+| Schwarz-Weiß-Bild                                                                                    | Referenzbild                                                                                         | Mean StD Transfer                                                                                    | Lab Mean Transfer                                                                                    | PDF Transfer                                                                                         |
+|:----------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------:|
+| <img src= "https://img001.prntscr.com/file/img001/bpifaRK_QAa5NZccf-l6ZA.png" width=500 height = 80> | <img src= "https://img001.prntscr.com/file/img001/6mWrlSL4TyC2HmBasU5xYg.png" width=300 height = 80> | <img src= "https://img001.prntscr.com/file/img001/SgFzlCspQMigPxO4I72zYA.png" width=500 height = 80> | <img src= "https://img001.prntscr.com/file/img001/G2ehKIU6SFuzcRXqfIXP9Q.png" width=500 height = 80> | <img src= "https://img001.prntscr.com/file/img001/evwhpM87QJ-T3t8MVUj4fw.png" width=500 height = 80> |
+
 <br>
 
 ### KI-Systeme
@@ -52,15 +55,19 @@ Statistische Ansätze zur Bildkolorierung verwenden mathematische Modelle, um Fa
 #### Conditional Adversarial Networks (cGAN)
 
 Conditional Adversarial Networks (cGAN) sind eine Art von generativen Modellen, die auf dem Konzept der generativen adversariellen Netzwerke (GAN) basieren. GANs bestehen aus zwei neuronalen Netzen, die gegeneinander trainiert werden. Der Generator G versucht, Bilder zu erzeugen, die von einem menschlichen Betrachter nicht von echten Bildern unterschieden werden können. Der Diskriminator D versucht, die vom Generator erzeugten Bilder von echten Bildern zu unterscheiden. Sie teilen sich eine Lossfunktion, die den Generator dazu zwingt, bessere Bilder zu erzeugen, und den Diskriminator dazu zwingt, bessere Entscheidungen zu treffen. Sie sieht wie folgt aus:
+
 $$
 \displaystyle \min_G \max_D \text{V(D, G)} = \mathbb{E}_{x \sim p_{\text{data}}(x)}[\log D(x)] + \mathbb{E}_{z \sim p_z(z)}[\log(1 - D(G(z)))]
 $$
+
 Dabei hat der Generator die Aufgabe, den zweiten Teil der Lossfunktion zu minimieren, während der Diskriminator versucht, die vollständige Funktion zu maximieren.
 
 Bei conditional Adversarial Networks wird der Generator und/oder Discriminator zusätzlich mit einem Konditionierungsterm erweitert. Dieser Term wird dem Generator als zusätzlicher Input übergeben und kann beispielsweise ein Label, ein Bild oder eine Zahl bzw Vektor sein. Dadurch kann der Generator Bilder erzeugen, die zu einem bestimmten Label passen. Die Lossfunktion sieht dann wie folgt aus:
+
 $$
 \displaystyle \min_G \max_D \text{V(D, G)} = \mathbb{E}_{x \sim p_{\text{data}}(x)}[\log D(x|y)] + \mathbb{E}_{z \sim p_z(z)}[\log(1 - D(G(z|y)))]
 $$
+
 Hier die beiden Teile der Lossfunktion erklärt: <br>
 $ \displaystyle \mathbb{E}_{x \sim p_{\text{data}}(x)}[\log D(x|y)] $: Der Erwartungswert des Diskriminators, dass ein echtes Bild mit Label y als solches klassifiziert wird: D(x|y) soll gegen 1 gehen.<br>
 $ \displaystyle \mathbb{E}_{z \sim p_z(z)}[\log(1 - D(G(z|y)))] $: Der Erwartungswert des Diskriminators, dass ein generiertes Bild mit Label y als solches klassifiziert wird: D(G(z)) soll gegen 0 gehen.<br>
@@ -84,21 +91,25 @@ Das Pix2Pix Model basiert auf einem GAN Ansatz, wobei sowohl Generator als auch 
 In dieser cGAN Archtiktur bekommt nur der Diskriminator ein Label, das Schwarz-Weiß-Bild. Der Generator bekommt jediglich das Schwarz-Weiß-Bild als Input und soll ein Bild erzeugen, das zu diesem passt.
 
 Der Diskriminator wird sowohl mit dem generierten Bild als auch mit dem Originalbild getestet, um zu sehen, wie gut er die beiden unterscheiden kann. Dabei wird der Binary Cross Entropy Loss verwendet. Dieser ist definiert als:
+
 $$
 \displaystyle \text{BCE}(x, y) = -\frac{1}{N} \sum_{i=1}^N y_i \log(x_i) + (1 - y_i) \log(1 - x_i)
 $$
+
 N ist in unserem Beispiel die Anzahl der Pixel im Bild. x ist der Output des Diskriminators, y ist die tatsächliche Wahrheit. 0 steht für ein generiertes Bild, 1 für ein echtes Bild. Der Loss wird dann für beide Bilder berechnet und anschließend der Durchschnitt gebildet.
 
 Der Generator wird mit dem generierten Bild getestet. Dabei wird der L1 Loss verwendet. Dieser ist definiert als:
+
 $$
 \displaystyle \text{L1}(x, y) = \frac{1}{N} \sum_{i=1}^N |x_i - y_i|
 $$
+
 N ist in unserem Beispiel die Anzahl der Pixel im Bild. x ist der Output des Diskriminators, y ist das Originalbild. 
 Zusätzlich wird der geupdatete Diskriminator verwendet, um zu sehen, wie gut der Generator die beiden Bilder unterscheiden kann. Dabei wird der Binary Cross Entropy Loss mit folgenden Einstellungen verwendet:
+
 - x ist der Output des Diskriminators auf Fake Bild mit Schwarz-Weiß-Bild als Label
 - y ist das Originalbild
-Dadurch sagt die Lossfunktion aus, wie sehr der Diskrimator glaubt, dass das generierte Bild zu dem Schwarz-Weiß-Bild **nicht** passt.
-
+  Dadurch sagt die Lossfunktion aus, wie sehr der Diskrimator glaubt, dass das generierte Bild zu dem Schwarz-Weiß-Bild **nicht** passt.
 
 <div>
 <img src="https://machinelearningmastery.com/wp-content/uploads/2019/05/Architecture-of-the-U-Net-Generator-Model.png" height=200/>
@@ -125,16 +136,16 @@ def backward_D(self):
     fake_image = torch.cat([self.L, self.fake_color], dim=1)
     fake_preds = self.net_D(fake_image.detach())
     self.loss_D_fake = self.GANcriterion(fake_preds, False)
-    
+
     real_image = torch.cat([self.L, self.ab], dim=1)
     real_preds = self.net_D(real_image)
     self.loss_D_real = self.GANcriterion(real_preds, True)
-    
+
     self.loss_D = (self.loss_D_fake + self.loss_D_real) * 0.5
     self.loss_D.backward()
 ```
 
-```python	
+```python
 def backward_G(self):
     """
     Backward pass for the generator.
@@ -142,9 +153,9 @@ def backward_G(self):
     fake_image = torch.cat([self.L, self.fake_color], dim=1)
     fake_preds = self.net_D(fake_image)
     self.loss_G_GAN = self.GANcriterion(fake_preds, True)
-    
+
     self.loss_G_L1 = self.L1criterion(self.fake_color, self.ab) * self.lambda_L1
-    
+
     self.loss_G = self.loss_G_GAN + self.loss_G_L1
     self.loss_G.backward()
 ```
