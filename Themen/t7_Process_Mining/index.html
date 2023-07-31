@@ -1,0 +1,845 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../bayesian_modeling/">
+      
+      
+        <link rel="next" href="../transfer_learning_nlp/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.1, mkdocs-material-9.1.21">
+    
+    
+      
+        <title>Process Mining - Seminar Aktuelle Themen der künstlichen Intelligenz</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.eebd395e.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+      <link rel="stylesheet" href="../../javascripts/mathjax.js">
+    
+      <link rel="stylesheet" href="https://polyfill.io/v3/polyfill.min.js?features=es6">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#process-mining" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Seminar Aktuelle Themen der künstlichen Intelligenz" class="md-header__button md-logo" aria-label="Seminar Aktuelle Themen der künstlichen Intelligenz" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Seminar Aktuelle Themen der künstlichen Intelligenz
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Process Mining
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Seminar Aktuelle Themen der künstlichen Intelligenz" class="md-nav__button md-logo" aria-label="Seminar Aktuelle Themen der künstlichen Intelligenz" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Seminar Aktuelle Themen der künstlichen Intelligenz
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Aktuelles
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Themen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Themen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Einf%C3%A4rben%20von%20Bildern/" class="md-nav__link">
+        Einfärben von Bildern - Zwei Ansätze
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Empfehlungssysteme/" class="md-nav__link">
+        Empfehlungssysteme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Face_Aging/" class="md-nav__link">
+        Face Aging
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LLMs/" class="md-nav__link">
+        Large Language Models
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Spracherkennung/" class="md-nav__link">
+        Spracherkennung
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T09_Dialekte_Spracherkennung/" class="md-nav__link">
+        T09 - Dialekte in der Spracherkennung
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T12_feature-extraction/" class="md-nav__link">
+        Feature Extraction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TextToSpeech/" class="md-nav__link">
+        Text-to-Speech
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Zeitserienanalyse/" class="md-nav__link">
+        Zeitserienanalyse
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bayesian_modeling/" class="md-nav__link">
+        Bayesian Modeling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Process Mining
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../transfer_learning_nlp/" class="md-nav__link">
+        Transfer Learning in der Sprachverarbeitung
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../impressum/" class="md-nav__link">
+        Impressum
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="process-mining">Process Mining</h1>
+<p>von <em>Amelie Kammerer, Joshua Groszeibl und Tabea Haas</em></p>
+<h1 id="abstract">Abstract</h1>
+<h3 id="von-tabea-haas">von Tabea Haas</h3>
+<p>In der heutigen digitalen Ära ist die Fähigkeit, Daten in wertvolle Erkenntnisse umzuwandeln, entscheidend für den Erfolg eines Unternehmens. Prozessanalyse, insbesondere durch Process Mining, ist zu einem zentralen Ansatz geworden, um Effizienz, Transparenz und Qualität in Organisationen zu verbessern. Nahfolgendes soll einen umfassenden Einblick in das Feld des Process Minings gewähren, und die verschiedenen Aspekte beleuchten, die diese aufstrebende Technologie so erfolgreich machen.</p>
+<h2 id="einleitung">Einleitung</h2>
+<p>Heute werden wir uns mit einem faszinierenden Thema beschäftigen - Process Mining. Vielleicht haben Sie schon davon gehört, aber falls nicht, keine Sorge! Process Mining ist eine Technologie mit enormem Potenzial, die vielen noch unbekannt ist. Dabei handelt es sich um eine Methode, um Abläufe und Prozesse in Unternehmen mithilfe von Daten zu analysieren und zu visualisieren.</p>
+<p>Stellen Sie sich vor, Sie könnten wie mit einer Röntgenaufnahme in die Abläufe eines Unternehmens blicken. Das ist genau das, was Process Mining ermöglicht. Indem es Daten aus verschiedenen Quellen wie Datenbanken oder Anwendungsprotokollen sammelt, können wir einen detaillierten Einblick in die Prozesse erhalten. Basierend auf diesen Daten wird ein Prozessmodell erstellt, das uns zeigt, wie Aktivitäten miteinander verbunden sind, wie lange sie dauern und welche Ressourcen dafür benötigt werden.</p>
+<p>Process Mining hat eine breite Anwendungspalette und findet in verschiedenen Bereichen wie Logistik, Fertigung, Gesundheitswesen, Finanzen und Forensik Anwendung. Sogar große Unternehmen wie BMW und Siemens nutzen Process Mining, um ihre Prozessqualität zu verbessern und effizienter zu arbeiten.</p>
+<p>Die Vorteile von Process Mining liegen auf der Hand. Durch die objektive und datenbasierte Analyse erhalten Unternehmen ein umfassendes Bild ihrer tatsächlichen Abläufe. Dadurch können Fehlerquellen, Ineffizienzen und Verbesserungspotenziale identifiziert werden. Prozesse können transparenter gestaltet und die Effizienz gesteigert werden, was letztendlich zu Kosteneinsparungen und einer höheren Kundenzufriedenheit führt.</p>
+<p>Es gibt jedoch auch Grenzen und Herausforderungen beim Einsatz von Process Mining. Es erfordert ausreichend Daten, um aussagekräftige Analysen durchführen zu können. Zudem besteht die Gefahr, dass Unternehmen sich zu sehr in die Analyse vertiefen und zu wenig Zeit in die Umsetzung von Verbesserungsmaßnahmen investieren, was als "Analyse-Paralyse" bezeichnet wird.</p>
+<p>In diesem Artikel werden wir Process Mining genauer betrachten, die Funktionsweise anhand einer Code Demonstration erklären, und über die Vor- und Nachteile dieser Technologie diskutieren.</p>
+<h1 id="wisschenschaftlicher-blogartikel">Wisschenschaftlicher Blogartikel</h1>
+<h3 id="von-amelie-kammerer">von Amelie Kammerer</h3>
+<h2 id="einfuhrung">Einführung</h2>
+<p>Process-Mining wird generell als die Brücke zwischen traditioneller Prozess-Analyse und datenzentrierter Analysetechniken, wie Maschinellem Lernen und Data Mining bezeichnet. Das Ziel ist, auf Basis von Event Daten Einblicke in Prozess zu bekommen und dadurch Prozesse positiv zu verändern. Auf diese Weise bekommt man Informationen über die Prozesse, wie mehr Perspektiven für beispielsweise den zeitlichen Kontext, für die Interpretation der Daten und für das Verstehen des Prozesses.<br>
+Process-Mining kann dabei für alle möglichen Bereiche hergenommen werden, sei es Gesundheitswesen, Finanzen, Logistik oder auch bei Informations- und Kommunikationstechnologien. Bei allen Prozessen, die Event Daten liefern (s. Kapitel Event Daten).<br>
+Da heutzutage immer mehr IT-System in die Prozesse, die sie unterstützen integriert werden, entstehen auch immer mehr Daten. Die Unternehmen haben aber Probleme, mit dieser Menge an Daten umzugehen und einen tatsächlich Wert daraus zu ziehen. Hier kommt Process-Mining ins Spiel, das mithilfe der folgenden drei Phasen die Daten praktisch verwertet. Im Gegensatz zu normalem Prozess Management liegt der Fokus nicht nur auf dem Modellieren der Prozesse, sondern in der Nutzung der Daten.</p>
+<h2 id="die-3-phasen-im-process-mining">Die 3 Phasen im Process Mining</h2>
+<p><strong><strong>Prozesserkennung | <em>process discovery</em>:</strong></strong><br>
+Auf Basis der gegebenen Daten wird ein Modell erstellt, das das tatsächliche Modell eines Prozesses widerspiegelt. Anfangs ging das nur mit sequentiellen Modellen, wobei mit dem Alpha Algorithmus als ersten Algorithmus das Problem der Nebenläufigkeit gelöst wurde (s. Kapitel Algorithmen).<br><br>
+<strong><strong>Konformitätsprüfung | <em>conformance checking</em>:</strong></strong><br>
+Man versucht Unterschiede zwischen Prozess-Modell und tatsächlichem Ablauf des Prozesses zu finden. Ein existierendes Prozess Modell, sei es durch Process Discovery, oder manuell erstellt, wird also mit Event Logs des gleichen Prozesses verglichen. Gibt es zum Beispiel Regeln, an die sich in einem Prozess gehalten werden muss, kann gecheckt werden, ob das auch tatsächlich der Fall ist. Hier kann auch festgestellt werden, ob das Modell noch verbessert werden muss. Es werden also Abweichungen erkannt, lokalisiert und erklärt.<br><br>
+<strong><strong>Prozessverbesserung | <em>process enhancement</em>:</strong></strong><br>
+Hier ist das Ziel, ein bereits existierendes Modell zu erweitern oder zu verbessern, anhand von Informationen, die bereits über einen Prozess gesammelt wurden.<br>
+<strong>Verbessern:</strong> Eine Art davon wäre das Reparieren eines Prozess Modells, das heißt, dass das Modell so angepasst wird, dass es die Realität besser widerspiegelt. Beispielsweise, wenn zwei Aktionen hintereinander im Modell dargestellt werden, in Realität aber in beliebiger Order geschehen können. Auf diese Weise wird die Fitness des Modells gesteigert.<br>
+<strong>Erweitern:</strong> Eine andere Art wäre eine Erweiterung des Prozess Modells. Man kann beispielweise mit neuen Daten, neue Ansichten auf ein Modell erstellen. Mit Performance Daten in Form von Zeitstempeln zum Beispiel können dann Engpässe identifiziert oder Durchlauf-Zeiten analysiert werden.<br>
+<strong>Simulationen:</strong> <em>Try-and-error</em>, ohne dass die Konsequenzen der Fehler tatsächlich getragen werden müssen. Das ist zum Beispiel sehr praktisch, wenn entschieden werden soll, worauf die Prioritäten gesetzt werden und wie limitierte Ressourcen benutzt werden sollen.<br><br>
+<img alt="Abbildung-1" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/iY2YWJxca6QzmcA?x=1920&amp;y=522&amp;a=true&amp;file=Abbildung_1.PNG&amp;scalingup=0" /><br>
+Diese drei Phasen von Process Mining sind in der realen Welt zyklisch (s. Abb. 1) Die Real-Welt wird von IT-Systemen unterstützt und kontrolliert wird. Durch Einbindung der IT-System in der Real-Welt werden die Event Daten gewonnen. Anhand derer wird schließlich das Prozess Modell erstellt, das wiederum direkt Einfluss auf die IT-Systeme hat. Conformance checking steht zwischen dem Prozess Modell und den Event Daten und gleicht ständig ab. Auf Basis des Prozess Modells und der Event Daten läuft Process Enhancement, welches das Prozess Modell und darüber auch die Real-Welt beeinflusst.
+Mithilfe der datenbasierten Einsichten, kann ein Unternehmen Verbesserungen schnell übernehmen und auch Automatisierungsmöglichkeiten für repetitive Aufgaben können gefunden werden.</p>
+<h2 id="perspektiven">Perspektiven</h2>
+<p>Man muss auch außerdem beachten, dass es für diese Modelle auch unterschiedliche Perspektiven gibt:<br>
+- <strong>Kontrollfluss-Perspektive:</strong> Hier handelt es sich um die Anordnungen der Aktivitäten, die durchgeführt werden. Alle möglichen Pfade, die in einem Prozess ablaufen können, werden hier festgehalten. Für andere Perspektiven gibt es andere Notationen, in die umgeschrieben werden kann.
+- <strong>Organisationaufbau-Perspektive:</strong> Hier werden die Modelle mit Informationen über Ressourcen, wie Personen, die involviert sind angereichert. Ein Unternehmen kann soziale Netzwerke zwischen den Personen aufstellen, verschieden Mitarbeiter gruppieren und sogar einzelne Personen analysieren. Bei dieser Perspektive muss allerdings stark auf Datenschutz geachtet werden.
+- <strong>Case-Perspektive:</strong> Ein Case repräsentiert einen kompletten Durchlauf in einem Prozess Modell (s. Kapitel Event Daten). Hier können die Attribute von den Cases betrachtet werden. Man würde dabei beispielsweise sehen, wenn es Zusammenhänge zwischen Störungen und Lieferanten gibt.
+- <strong>Performance-Perspektive:</strong> Diese Perspektive befasst sich mit allem, das mit Zeitstempeln zu tun hat. Es geht dabei oft um das Finden von Engpässen oder das Berechnen von Durchlauf Zeiten.</p>
+<p>Generell können diese unterschiedlichen Perspektiven aber natürlich auch überlappend sein.</p>
+<h2 id="moglichkeiten-und-vorteile-bei-process-mining">Möglichkeiten und Vorteile bei Process Mining</h2>
+<p>Nachteile bei einem manuell erstellten Prozess Modell:
+- Designer konzentriert sich nur auf normales und gewünschtes Verhalten, obwohl das meist nur 80% der Fälle abdeckt. Die Anderen 20% verursachen aber üblicherweise 80% der Fehler.
+- Modell wird oft davon beeinflusst, welche Rolle der Designer im Unternehmen spielt
+- Es mag bei einem Bandarbeiter, der den ganzen Tag das gleiche macht, vielleicht leicht sein, den Prozess darzustellen, aber sobald Menschen, die in verschiedenen Prozessen gleichzeitig arbeiten, betrachtet werden, wird es schwieriger. Es ist unmöglich einen Prozess in Isolation zu betrachten, wenn die Mitarbeiten ihre Aufmerksamkeit aufteilen müssen und unterschiedlichste Prioritäten haben.
+- Das Abstraktionslevel festzulegen ist sehr schwierig und sobald man sich auf ein Abstraktionslevel festgelegt hat, ist es extrem aufwändig, das wieder zu ändern. Außerdem ändern sich die Abstraktionslevel mit der Zeit meistens.
+- Modell stellt oft eher die idealisierte Version eines Prozess Modells dar und nicht die tatsächliche.</p>
+<p>Deshalb wird Process Mining benötigt, hier wird auf Basis von vorhandenen tatsächlichen Daten mit dem <em>Bottom-up</em> Prinzip das Prozess Modell konstruiert. Auf diese Weise wird nicht der Soll-, sondern der Ist Prozess dargestellt und man bekommt einen objektiven Einblick in die Prozessstruktur.<br>
+Außerdem gibt es dadurch nicht nur ein Modell, sondern unterschiedliche Modelle auf Basis derselben Fakten. Der Benutzer kann entscheiden, welches Abstraktionslevel er gerne sehen möchte. Ein weiterer Punkt ist, dass das Modell den Mitarbeiter mit all seinen Facetten sieht, die ineffizienten Tätigkeiten, aber auch, wenn einzelne Personen flexibel mit Problemen und mit sich verändernden Workloads umgehen.</p>
+<h2 id="event-logs">Event Logs</h2>
+<p><img alt="Abbildung-2" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/eNZckre2Fb5n6dK?x=1920&amp;y=522&amp;a=true&amp;file=Abbildung_2.PNG&amp;scalingup=0" /><br>
+In der Abbildung 2 sieht man einen sogenannten Event Log. Jede Zeile repräsentiert ein Event, jedes Event hat eine eindeutige ID, die Events sind gruppiert in einzelne Cases, die die einzelnen Prozessabläufe repräsentieren.<br>
+Außerdem haben die Events noch beliebig viele Attribute, wie beispielsweise den Zeitstempel. Diese Attribute können beliebig detailliert festgehalten werden und in jeglichen Bereich gehen, wie beispielsweise Ressourcen oder Kosten. Es müssen auch nicht alle Events die gleichen Attribute haben, wobei es typisch ist, dass Events, die die gleiche Aktivität repräsentieren, den gleichen Satz an Attributen haben.<br>
+Wichtig ist jedoch: um für Process-Mining nutzbar zu sein muss ein Event zu einem Case und zu einer Aktivität zugeordnet sein. Das ist das Minimum. Außerdem müssen die Events innerhalb eines Case geordnet sein. Ohne die Information, in welcher Reihenfolge die Events abliefen, ist es unmöglich Abhängigkeiten herauszufinden.<br>
+Um allerdings schließlich mehr Informationen zu bekommen, beispielweise in Richtung Performance, braucht es Attribute, wie den Zeitstempel.</p>
+<h2 id="petri-netz">Petri-Netz</h2>
+<p>Petri-Netze können eine visuelle Repräsentation für ein Prozess-Modell sein. Es gibt wie oben beschrieben unterschiedliche Perspektiven aus denen man ein Prozess-Modell analysieren kann, weshalb es auch unterschiedliche Darstellungsformen gibt.<br>
+Um es einfacher zu halten, wird ein Beispiel in der Kontrollflussperspektive gegeben und nicht auf alle einzelnen Perspektiven eingegangen.</p>
+<h3 id="warum-petri-netze">Warum Petri-Netze</h3>
+<p>Petri-Netz ist die älteste und am besten erforschte Modellierungssprache, die das Modellieren von Nebenläufigkeit erlaubt. Im Gegensatz zu einfacheren Darstellungsformen, lassen sich hier parallele Aktivitäten gut darstellen. Die grafische Notation ist intuitiv und simple und trotzdem sind die Netze ausführbar und mit bestimmten Techniken analysierbar. Für die unterschiedlichen Perspektiven und Nutzungsarten gibt es aber bereits erweiterte Petri Nets, die auch den Daten und Zeit Bezug mit abbilden können.<br>
+<img alt="Abbildung-3" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/jKCYEsGw7JfdfRB?x=1920&amp;y=522&amp;a=true&amp;file=Abbildung_3.PNG&amp;scalingup=0" /><br>
+Das Petri Netz in der Abbildung 3 beschreibt die Abfertigung einer Anfrage für Entschädigung in einer Airline. Man kann einen Start und ein Ende sehen. Es gibt außerdem Übergänge, die mit Quadraten gekennzeichnet sind und Orte, die mit einem Kreis gekennzeichnet sind. Diese Orte repräsentieren die Zustände in denen sich das System befinden kann. Die Übergänge sind durch die Orte verbunden. Das Netz an sich ist statisch, allerdings gibt es zusätzliche Tokens, die gefeuert werden, in Form von Punkten, wie hier in Start. Der Zustand des Netzes wird durch die Verteilung ebendieser Tokens über die verschiedenen Orte beschrieben und diese Verteilung wird als <em>"Marking"</em> bezeichnet. In dem Netz das Sie jetzt sehen, ist nur der Ort "Start" markiert.</p>
+<h3 id="funktion-petri-netz">Funktion Petri-Netz</h3>
+<p>In einem Petri Netz ist ein Übergang freigegeben, das heißt die dazugehörige Aktivität kann geschehen, wenn alle Eingabe-Orte einen Token haben, also markiert sind. In dem Beispiel aus der Abbildung hat <em>"register request"</em> nur einen Eingabe-Ort und dieser Ort ist markiert. Das heißt <em>"register request"</em> kann durchgeführt werden. Wenn <em>"register request"</em> durchgeführt wird, versteh man das als Feuern. Der Übergang nimmt von jedem Eingabe-Ort einen Token auf und feuert dann an jeden Ausgabe-Ort einen Token ab. Hier konsumiert <em>"register request"</em> also einen Token und produziert zwei neue Tokens für c1 und c2. Nun sind drei neue Übergänge freigegeben: <em>"examine throughly"</em>, <em>"examine casually"</em> und <em>"check ticket"</em>. Es kann nun entweder <em>"examine throughly"</em> oder <em>"examine casually"</em> durchgeführt werden, da es nur einen Token gibt. Wenn einer von den zwei Übergängen durchgeführt wird, wird der Token von c1 konsumiert und der andere Übergang ist nicht mehr freigegeben. <em>"check ticket"</em> hat jedoch einen eigenen Eingabe-Ort mit einem eigenen Token. Das heißt dieser Übergang kann parallel durchgeführt werden. Oben wird dann entweder <em>"examine throughly"</em> oder <em>"examine carefully"</em> durchgeführt, wodurch der Token in c1 konsumiert wird und ein Token zu c3 gefeuert wird und unten konsumiert und feuert <em>"check ticket"</em>, sodass nun Token bei c3 und c4 sind. Dadurch wird <em>"decide"</em> freigegeben, da alle Eingabe-Orte von dem Übergang <em>"decide"</em> einen Token haben. Auf diese Weise kann das Netz weiter ausgeführt werden. Ein solches Netz kann auch zyklisch sein, wie sich an <em>"reinitiate request"</em> erkennen lässt.<br><br>
+Der Prozess endet nachdem entweder die Entschädigung gezahlt wurde, oder die Anfrage zurückgewiesen wurde. In einem Petri Netz können auch gleichzeitig mehrere Tokens an den unterschiedlichen Orten sein, die dann unterschiedliche Cases aus dem Event Log repräsentieren.<br>
+Mithilfe dieses Token basierten Ansatzes, kann auch conformance checking sehr einfach durchgeführt werden. Vor allem zu Beginn von Process Mining, war das sehr verbreitet. Inzwischen gibt es aber auch schon neue Ansätze, die noch besser funktionieren., oft aber trotzdem auf ähnlichen Prinzipien basieren.</p>
+<h2 id="algorithmen-fur-process-mining">Algorithmen für Process Mining</h2>
+<p>Es gibt jede Menge Algorithmen, die innerhalb des Process Mining genutzt werden, insbesondere auch, um das Prozess Modell zu erstellen.</p>
+<h3 id="ubersicht-algorithmen-und-herausforderungen">Übersicht Algorithmen und Herausforderungen</h3>
+<p>Die ersten drei Process Miner überhaupt waren allesamt basierend auf Rückgekoppelten Neuronalen Netzen.
+Dann wurde der Alpha Miner entwickelt, der Arbeitsflussmodelle konstruieren konnte und automatisch Petri Netze erstellt, die dann weiter analysiert werden konnten.<br>
+Generell gibt es relativ viele Probleme mit denen die Algorithmen klarkommen müssen. Die Algorithmen werden auch heute immer noch auf Basis dieser Probleme weiterentwickelt:
+- Die Korrelation finden: Teilweise ist es schwierig zu Events die zugehörigen Cases zu finden. Die Korrelation zwischen Case und Event kann also zum Problem werden.
+- Timestamps: die Events müssen in einer Reihenfolge geordnet sein, natürlich braucht es eigentlich keine Timestamps, aber um diese Ordnung innerhalb der Cases herauszufinden in vielen Fällen schon. Timestamps sind aber oft fehlerhaft, sei es wegen falschen Zeiten im System, oder einfach, weil der Abschluss nicht direkt aufgezeichnet wird, wenn ein Event erfolgt ist. Ein Problem kann auch sein, dass nur der Tag des Eventabschlusses angegeben wird, an diesem Tag aber mehrere Events stattgefunden haben.
+- Umfang: Zu determinieren, wie groß der Umfang sein soll ist schwierig und hierfür wird häufig Expertenwissen benötigt. In vielen Unternehmen gibt es Unmengen an Daten und es ist unklar, welche Daten überhaupt benötigt werden.
+- Granularität: Es ist schwierig zu sagen, wie genau die Event Logs sein müssen, es kann sein, dass es Unmengen an Informationen zu einzelnen Events gibt, das Ziel aber nur eine Übersicht des Arbeitsablaufs ist, das dem Stakeholder präsentiert werden soll.
+- Und ein großer Punkt ist auch noch die Datenqualität bei falschem Logging: 
+    - <em>Missing in log</em>: Etwas ist in der Realität passiert, wurde aber nicht aufgezeichnet
+    - <em>Missing in reality</em>: Ein Event wurde aufgezeichnet, ist aber in der Realität gar nicht passiert
+    - <em>missing attribute</em>: Ein Attribut eines Events fehlt
+    - <em>Incorrect attribute</em>: Ein Attribut eines Events ist falsch aufgezeichnet
+    - <em>Imprecise attribute</em>: Das Attribut eines Events wurde zu ungenau aufgezeichnet
+    - Noise: Der Algorithmus muss mit Noise umgehen können. Für den Algorithmus ist es eigentlich unmöglich zwischen besonderen Events und falschem Logging zu unterscheiden, hier braucht es oft menschliche Beurteilung.
+    - Vollständigkeit: Ein weiterer Grund wären zu wenig Daten, um daraus ein repräsentatives Modell zu erstellen ⇒ Es kann also bei Noise zu viele Daten geben oder bei der Vollständigkeit zu wenige Daten geben. Es ist schwierig zu sagen, ob man alle möglichen Abläufe schon in den Trainingsdaten gesehen hat oder vielleicht ein Trace eigentlich möglich aber bisher einfach noch nicht aufgetreten ist.
+Die Probleme in Datenqualität kommen oft daher, dass Event Daten oft einfach nur als Nebenprodukt gesehen werden und deshalb kein großer Wert auf die Qualität gelegt wird</p>
+<h3 id="alpha-algorithmus">Alpha Algorithmus</h3>
+<p>Da der Alpha Miner der erste Prozesserkennungs-Algorithmus war, der Nebenläufigkeit von Events verarbeiten konnte und viele der darauffolgenden Algorithmen auf Basis dessen entstanden sind, wird im Folgenden genauer darauf eingegangen.
+Der Alpha Miner verarbeitet Event Logs und erstellt darauf basierend ein Petri Netz, das die Logs widerspiegelt.<br>
+Dafür basiert der Alpha Miner auf 3 Regeln:
+- Temporal dependency: b folgt a aber a folgt niemals b ⇒ b ist abhängig von a; geschrieben a → b<br>
+<img alt="Abbildung-4" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/AcxZE6br5kq2Mp3?x=1920&amp;y=522&amp;a=true&amp;file=Abbildung_4.PNG&amp;scalingup=0" /><br>
+- Temporal independency: es gibt Aufzeichnungen bei denen a auf b folgt, aber auch welche, bei denen b auf a folgt ⇒ a und b können parallel durchgeführt werden; geschrieben a || b<br>
+<img alt="Abbildung-5" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/DWSLY69xaLbNgii?x=1920&amp;y=522&amp;a=true&amp;file=Abbildung_5.PNG&amp;scalingup=0" /><br>
+- Independency: Es gibt keine Aufzeichnung bei der a auf b folgt oder b auf a folgt ⇒ die beiden Events sind unabhängig voneinander; geschrieben a # b</p>
+<h3 id="ablauf-algorithmus">Ablauf Algorithmus</h3>
+<p><img alt="Abbildung-6" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/YqGSswRzad9YKWS?x=1920&amp;y=522&amp;a=true&amp;file=Abbildung_6.PNG&amp;scalingup=0" /><br>
+Dann wird der Algorithmus wie in Abbildung 6 zu sehen durchgeführt. Für ein besseres Verständnis direkt an einem Beispiellog L.<br> L = [<A,B,C,D>, <A,C,B,D>, <A,E,D>]
+1.  Alle möglichen Events werden definiert: [A,B,C,D,E]
+2.  Alle möglichen Start Events werden definiert [A]
+3.  Alle möglichen end Events werden definiert [D]
+4.  Alle möglichen Sets A und B werden definiert, wobei alle Events innerhalb von A und innerhalb von B unabhängig voneinander sein müssen. Außerdem müssen alle Events in A gleichzeitig mit den Events in B verbunden sein. 
+    - Footprint Matrix als Unterstützung<br>
+     <img alt="Abbildung-7" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/ACbEtTc2G5Mf8tK?x=1920&amp;y=522&amp;a=true&amp;file=Abbildung_7.PNG&amp;scalingup=0" /><br>
+    - ({a},{b}), ({a},{c}), ({a},{e}), ({b},{d}), ({e},{d}), ({c},{d}) unabhängig von sich selbst aber „temporal dependency“ zwischen A und B
+    - ({a},{b,e}), ({a},{c,e}), ({b,e},{d}), ({c,e},{d}) “temporal dependency” zwischen allen Events in A und allen Events in B, die Events in A sind alle unabhängig voneinander und die Events in B sind unabhängig voneinander
+5.  Alle Non-Maximum Sets werden gelöscht =&gt; unnötige Duplikate löschen 
+    - ({a},{b}) ist beispielsweise bereits in ({a},{b,e}) repräsentiert und kann deswegen gelöscht werden. Das Gleiche gilt für mehrere Sets weshalb folgende Sets übrigbleiben:<br>
+    ({a},{b,e}), ({a},{c,e}), ({b,e},{d}), ({c,e},{d})
+6.  Es werden Orte für alle Sets erstellt und ein Start- und Endpunkt festgelegt
+7.  Verbindungen werden aufgezeichnet …
+8.  …und das Petri Netz wird zurückgegeben<br>
+<img alt="Abbildung-8" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/gX9qDdpZRnnjiyW?x=1920&amp;y=522&amp;a=true&amp;file=Abbildung_8.PNG&amp;scalingup=0" /></p>
+<h2 id="daten-fur-process-mining">Daten für Process Mining</h2>
+<p>Abbildung 9 <br>
+Natürlich braucht man für Process Mining als Erstes die Daten, also ist es wichtig zu verstehen, wie man zu den Daten kommt.
+Die Anforderungen an die Daten kommen auf die Process Mining Technik an, die verwendet werden soll, damit auch das Ziel, das verfolgt wird ⇒ Welche Frage soll beantwortet werden mit dem Modell? Welche Sichtweisen sind essentiell bei den vorhandenen Daten? Natürlich muss außerdem mit Qualitäts Problemen in den Daten umgegangen werden. <br>
+Die Sichtweise ist für das Auswählen der Daten sehr entscheidend. Schaut man sich beispielsweise ein Krankenhaus an, sind die manche daran interessiert, welche Schritte der Patient während des Krankenhausbesuches durchläuft und andere daran, wie man den Arbeitsablauf innerhalb einer bestimmten Abteilung verbessern kann.<br>
+Es kann erst einmal eine Vielzahl an Datenquellen geben, seien es Datenbanken, Nachrichtenprotokolle, Transaktionsprotokolle oder ERP-Systeme. Schließlich wird im Zusammenhang mit Data Mining oft von ETL = extract, transform and load geredet. Wobei man bei transform vor allem auf Syntax und Semantik achten muss. Dadurch werden die gesammelten Daten verarbeitet in ein Zielsystem geladen.<br>
+Teilweise gibt es schon ein Data Warehouse, teilweise noch nicht. Die Daten müssen in jedem Fall extrahiert werden und in Event Logs umgewandelt werden. Wie in Event Logs schon betrachtet braucht es dafür eine Reihenfolge innerhalb der Cases, einen Namen für die Aktivität der Events und die dazugehörige Case.<br>
+Dann werden die unterschiedlichen Techniken <em>process discovery</em>, <em>conformance checking</em> und <em>process enhancement</em> angewendet.
+Allerdings ist das ganze iterativ. Sobald ein Prozess Modell erstellt wurde kommen höchstwahrscheinlich neue Fragen auf, wofür neue Daten gesammelt werden müssen und so läuft der Prozess immer wieder durch. Wie auch schon bei den Algorithmen besprochen gibt bei den Daten einige Herausforderungen, neben dem Expertenwissen, dass man in Bezug auf Datenschutz und Datenqualität bezüglich Inhalt braucht, muss auch auf Noise, falsches Logging und die Vollständigkeit der Daten geachtet werden.</p>
+<h2 id="qualitatsmessung">Qualitätsmessung</h2>
+<p>Meistens wird die Qualität anhand folgender vier Kriterien bestimmt.<br>
+<strong>Fitness:</strong> Ein Modell ist hier perfekt, wenn alle Abläufe aus dem Log von Anfang bis Ende durchlaufen können.<br>
+<strong>Einfachheit:</strong> Das einfachste Modell, das das Verhalten aus dem log widerspiegeln kann, ist das beste Modell. Man versucht also ein Modell zu erstellen, das das Verhalten mit möglichst wenigen Informationen widerspiegeln kann.<br>
+<strong>Präzision:</strong> Ein Modell ist präzise wenn es nicht zu viel Verhalten erlaubt. Ein Modell, das nicht präzise ist underfitted. Schlechte Präzision würde Verhalten erlauben, das nicht im Event Log repräsentiert war.<br>
+<strong>Generalisierung:</strong> Ein Modell sollte generalisieren und sich nicht genau auf die Beispiele im Event Log begrenzen. Ein Modell, dass nicht generalisiert overfitted. Bei wenig Generalisierung würde das Modell nur genau das Verhalten aus dem Log repräsentieren.</p>
+<h2 id="anwendungen">Anwendungen</h2>
+<p>Anhand der Menge der Paper, die zu den einzelnen Themen veröffentlicht wurden, kristallisieren sich einige Anwendungsgebiete heraus, die besonders vertreten sind:<br>
+- Das Gesundheitswesen mit beispielsweise klinischen Pfaden, Patientenbehandlungen, oder der Analyse der primären Prozesse eines Krankenhauses. Ein exaktes Beispiel wäre die Analyse der Chancen einer bestimmten Behandlung oder Korrelationen zwischen verschiedenen angewandten Behandlungen. Eine Quelle sagt sogar, dass Process Mining eine von den Anwendungen ist, die die größten Vorteile aus den vorhandenen Daten im Gesundheitswesen ziehen kann.
+- Informations- und Kommunikationstechnologien: bei Software Developement, in IT-Betriebsdienstleistungen und Telekommunikationsunternehmen, wenn zum Beispiel Engpässe identifiziert werden sollen.
+- In der Fertigung: Bei industriellen Aktivitäten, die von Fabriken durchgeführt werden und Produkte liefern, v.a. vertreten im Automobilsegment
+- In der Bildung: Beim E-Learning, bei wissenschaftliche Anwendungen und in Forschungszentren mit Innovationsprozessmanagement. Zum Beispiel beim Entwickeln produktiver Lernpfade, basierend auf bestimmten Nutzergruppen.
+- In den Finanzen: in Prozessen wie Bezahlung, Investitionen, Einlagen oder bei Risikoanalyse und -minderung
+- In der Logistik: Bei Transport, Lagerung und Bestandsmanagement</p>
+<h2 id="trends-ki">Trends – KI</h2>
+<p><img alt="Abbildung-9" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/NT7BiqoP8PgT5LW?x=1920&amp;y=522&amp;a=true&amp;file=Abbildung_9.PNG&amp;scalingup=0" /><br>
+Process Mining allein hat nichts mit Künstlicher Intelligenz zu tun, denn KI ist für die angestrebten Resultate – Transparenz, Auswertungen zur Prozessleistung und Identifikation von Abweichungen – eigentlich nicht notwendig.<br>
+Im Bereich der analytischen Methodik unterscheidet man vier aufeinander aufbauenden Ebenen (s. Abb. 9). In der deskriptiven Analytik ist Process Mining alleine aktiv, aber für die darauffolgenden Ebenen hat der Einsatz von KI großes Potential. Um zu erklären, warum etwas passiert ist ⇒ diagnostisch; was passieren wird, also Vorhersagen ⇒ Prädiktive Analytik; Und schlussendlich sogar um Handlungsempfehlungen auszusprechen, also wie muss gehandelt werden, damit ein zukünftiges Ereignis eintritt oder eben nicht eintritt ⇒ Präskriptive Analytik.<br>
+Anhand der identifizierten Problemursachen können Entscheider gezielte und effektive Verbesserungsmaßnahmen umsetzen. Künstliche Intelligenz ist also kein zwingend notwendiges Kriterium, kann aber das Potential vergrößern. KI wird also zunehmend eingesetzt um die Potentiale der Process Mining Anwendungen zu erweitern. KI wird zum Beispiel integriert, um einzelne Teilbereiche und Arbeitsschritte des Process Mining zu unterstützen und bessere Ergebnisse zu erzielen. <br>
+Ein Beispiel wäre eine auf KI basierte Technologie, die in der Lage ist Arbeitsabläufe zu verstehen und daraus folgend Schlussfolgerungen abzuleiten. Auf diese Weise erweitern die Anwendungen der KI das klassische Process Mining von einem explorativen Ansatz hin zu zunehmend intelligenter und vollständig automatisierter Prozessanalyse. Der entscheidende Unterschied zum klassischen Process Mining besteht darin, dass sich das System kontinuierlich mithilfe von KI automatisch optimiert und sich den ständig ändernden Rahmenbedingungen anpasst.<br>
+Ein anderes Beispiel wäre Maschinelles Lernen zur Verbesserung der Datenqualität, sowie zur Gruppierung und Strukturierung der Daten. Es würde also im Bereich transform von ETL eingesetzt werden, den wir zuvor schon bei dem Sammeln der Daten gesehen haben. KI hilft also mit den ganzen Problemen umzugehen, die in dem Kapitel Algorithmen ausführlich angesprochen wurden. Da die Qualität der Daten sehr ausschlaggebend für das Endergebnis ist, würde eine Verbesserung der Daten die Qualität des Prozess Modells sehr steigern.<br>
+Maschinelles Lernen kann hierbei auch eingesetzt werden, um die Dateneingabe zu automatisieren, Duplikate zu erkennen und zu entfernen und um unstrukturierte Daten in Formate umzuwandeln, die von Process-Mining Anwendungen gelesen werden können.</p>
+<h1 id="code-demo-process-mining">Code Demo Process Mining</h1>
+<h3 id="von-quirin-joshua-groszeibl">von Quirin Joshua Groszeibl</h3>
+<div class="highlight"><pre><span></span><code>import os
+import pandas as pd
+import networkx as nx
+import matplotlib.pyplot as plt
+</code></pre></div>
+<h2 id="daten-laden">Daten laden</h2>
+<p>Zuerst brauchen wir Daten, die wir verwerten können. In diesem Fall laden wir dazu eine CSV-Datei hoch. Das Beispiel hierbei ist ein Datensatz von Kaggle mit über 27k Reihen Eventlogs einer Autoversicherungsfirma, diese begrenzen wir für diese Demo auf 200 Reihen, damit das Kompilieren nicht allzu lange dauert.
+<div class="highlight"><pre><span></span><code># Load the event log as a DataFrame
+event_log = pd.read_csv(&#39;/home/qsh1ne/CODE_DEMO_SEM_KI_23/Insurance_claims_event_log.csv&#39;,
+                        nrows=200, usecols=[&#39;case_id&#39;, &#39;activity_name&#39;, &#39;timestamp&#39;])
+</code></pre></div></p>
+<h2 id="process-discovery-daten-verstehen">Process Discovery - Daten verstehen</h2>
+<p>Damit wir eine Fehlerfreie Analyse durchführen können, benötigen wir zuerst ein Verständnis für unsere Daten. Eine Frequenzanalyse hilft uns direkte Zusammenhänge zwischen den Variablen besser zu verstehen. Für die spätere Visualisierung erstellen wir anschließend einen gerichteten Graph, dessen Knoten wir mit den Subprozessen der Case ID bestücken.
+<div class="highlight"><pre><span></span><code># Perform frequency analysis to get the directly-follows relations
+dfg = event_log.groupby([&#39;case_id&#39;, event_log[&#39;activity_name&#39;].shift(-1)]).size().reset_index(name=&#39;count&#39;)
+
+# Create a directed graph
+graph = nx.DiGraph()
+
+# Add nodes and edges to the graph
+for _, row in dfg.iterrows():
+    graph.add_edge(row[&#39;activity_name&#39;], row[&#39;activity_name&#39;], weight=row[&#39;count&#39;])
+
+# Visualize the graph
+pos = nx.spring_layout(graph, seed=42)
+labels = nx.get_edge_attributes(graph, &#39;weight&#39;)
+weights = [graph[u][v][&#39;weight&#39;] / 10 for u, v in graph.edges()]
+nx.draw_networkx(graph, pos, with_labels=True, node_size=500, node_color=&#39;lightblue&#39;,
+                 edge_color=&#39;gray&#39;, width=weights, font_size=8)
+nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels, font_size=6)
+
+Anschließend lassen wir uns den Graphen als Bild ausgeben.
+
+# Save the process graph as an image file
+output_dir = &#39;/home/qsh1ne/PM_Code_Demo/output&#39;
+os.makedirs(output_dir, exist_ok=True)
+process_graph_file = os.path.join(output_dir, &#39;process_graph.png&#39;)
+plt.savefig(process_graph_file)
+
+print(f&quot;Process graph saved as {process_graph_file}&quot;)
+</code></pre></div>
+<strong>Beispiel</strong>: Die Event Logs der Versicherungsfirma beziehen sich auf Cases, welche jeweils in 6 Schritten aufgespalten werden, wie auf der Abbildung unten zu sehen. Anhand der gleichmäßigen Größe aller Subprozesse, lässt sich darauf schließen, dass diese alle in etwa gleich oft vorkommen.</p>
+<h2 id="conformance-checking-prozess-spektrum-errechnen">Conformance Checking - Prozess Spektrum errechnen</h2>
+<p>Das Errechnen des Prozess Spektrums ganz einfach über das Zählen der einzelnen Aktivitäten in der Anzahl. Jeder Subprozess muss einen sehr ähnlichen Ablauf haben, um mit dem PSM gute Vorhersagen treffen zu können. Beispielsweise eignen sich Maschinendaten oder Bürokratische Abläufe sehr gut, während Daten von Sportwettkämpfen hierbei weniger gute Ergebnisse liefern.</p>
+<p>Es gilt: <strong>Je ähnlicher die Prozesse, desto einfach die Auswertung.</strong> </p>
+<p>Auch hier visualisieren wir die Ergebnisse zuerst und speichern diese anschließend als Bild ab.
+<div class="highlight"><pre><span></span><code># Calculate process spectrum
+spectrum = event_log[&#39;activity_name&#39;].value_counts().sort_values(ascending=False)
+
+# Plot the process spectrum
+plt.figure()
+spectrum.plot(kind=&#39;bar&#39;, color=&#39;lightblue&#39;)
+plt.xlabel(&#39;Activity&#39;)
+plt.ylabel(&#39;Frequency&#39;)
+plt.title(&#39;Process Spectrum&#39;)
+
+# Save the process spectrum plot as an image file
+spectrum_plot_file = os.path.join(output_dir, &#39;process_spectrum.png&#39;)
+plt.savefig(spectrum_plot_file)
+
+print(f&quot;Process spectrum saved as {spectrum_plot_file}&quot;)
+</code></pre></div></p>
+<p><strong>Beispiel:</strong> Hierbei fällt auch schon der erste Fehler auf, die ersten 200 Reihen anstelle der gesamten 27k Reihen, verfälscht in diesen Fall aus 2 Gründen die Ergebnisse. Zum einen ist 200%6 =! 0, dementsprechend fehlen Subprozesse des letzten eigentlichen Prozesses, aber auch betrachten wir weniger als 0,007% der Datenmenge. So können unmöglich schlagkräftige Ergebnisse erzielt werden, aber für den Zweck dieser kleinen Demonstration ist es genügend.</p>
+<h2 id="process-enchancement-performance-spektrum-errechnen">Process Enchancement - Performance Spektrum errechnen</h2>
+<p>Die ersten komplexeren Berechnungen nimmt uns hierbei die Pandas Libary ab, in dem diese die Eventlogs in zuerst in eine einheitliches und auswertbares Zeitformat umformt. Wir setzen die Startzeiten auf die geringste Dauer, und die Endzeiten auf die höchste der jeweiligen Cases. Anschließend subtrahieren wir Startzeit von der Endzeit, und uns bleibt eine durchschnittliche Zeit für die Dauer der jeweiligen Aktivitäten.</p>
+<p>Anschließend visualisieren wir unsere Ergebnisse wieder, und geben diese als Bild aus.
+<div class="highlight"><pre><span></span><code># Calculate case durations
+event_log[&#39;timestamp&#39;] = pd.to_datetime(event_log[&#39;timestamp&#39;])
+start_times = event_log.groupby(&#39;case_id&#39;)[&#39;timestamp&#39;].min()
+end_times = event_log.groupby(&#39;case_id&#39;)[&#39;timestamp&#39;].max()
+case_durations = end_times - start_times
+
+# Plot the performance spectrum
+plt.figure()
+case_durations.dt.total_seconds().plot(kind=&#39;bar&#39;, color=&#39;lightblue&#39;)
+plt.xlabel(&#39;Case ID&#39;)
+plt.ylabel(&#39;Duration (seconds)&#39;)
+plt.title(&#39;Performance Spectrum&#39;)
+
+# Save the performance spectrum plot as an image file
+performance_spectrum_file = os.path.join(output_dir, &#39;performance_spectrum.png&#39;)
+plt.savefig(performance_spectrum_file)
+
+print(f&quot;Performance spectrum saved as {performance_spectrum_file}&quot;)
+</code></pre></div>
+Auch hierbei ist die Verfälschung deutlich zu erkennen, die einzelnen Subprozesse der Prozesse wurden unter der gemeinsamen Case ID zusammengefasst. Da die Dauer dieser Prozesse stark variiert, und der kürzeste Teil des Prozesse nur wenige Sekunden dauert, ist auch mit dem Ergebnisse wenig anzufangen.</p>
+<p>Neben den hier verwendeten Libarys sind folgende erwähnenswert, allerdings dauert die Implementation wesentlich länger und diese Demo ist zeitlich sehr beschränkt.</p>
+<ul>
+<li>pm4py</li>
+<li>pmi</li>
+</ul>
+<h2 id="prom-69">ProM 6.9</h2>
+<p><img alt="alt text" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/FQ9TEZRMXJBzxPn?x=1920&amp;y=579&amp;a=true&amp;file=ProMmMm.png&amp;scalingup=0" /></p>
+<p>Die ProM Plattform ist ein plugin-basierendes Framework speziell für Process Mining. Zentriert auf drei Basiskonzepten. </p>
+<ul>
+<li>Data Objects (1) im Workspace Tab (2)</li>
+<li>Plugins (3)</li>
+<li>Visualisierung (4)</li>
+</ul>
+<p><img alt="alt text" src="https://promtools.org/wp-content/uploads/2022/12/prom_tabs-1024x346.png" /></p>
+<h2 id="workspace">Workspace</h2>
+<p>Ansicht (5) von allen Objekten, den Favorisierten Objekten und Importierten Objekten.</p>
+<p>Objekte importierbar über den Import Button (6) oder via drag&amp;drop.</p>
+<p>Im Workspace kann außerdem:
+- (7) favorisiert (Stern), angeschaut (Auge), Plugin gestartet (Play) oder gelöscht (Kreuz),
+- (8) umbenannt,
+- (9) exportiert werden.</p>
+<p><img alt="alt text" src="https://promtools.org/wp-content/uploads/2022/12/prom_workspace-1024x576.png" /></p>
+<h2 id="praktische-anwendung">Praktische Anwendung</h2>
+<p>Die Code Demo ist ein wenig kurz an tatsächlichen Code gekommen, aber mir war es wichtiger einen sinnvollen Einblick in die praktische Arbeit mit Prozess Mining zu geben.</p>
+<p>Fangen wir nun mit der Umwandlung der CSV-Datei an. Zuallererst schauen wir uns dazu wie vorab beschrieben den Inhalt an für ein Verständnis der Daten, und klassifizieren die Eingabevariablen.</p>
+<p><img alt="alt text" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/qCd95sMpQoNxCe4?x=952&amp;y=561&amp;a=true&amp;file=CSV_Klassifizieren.png&amp;scalingup=0" /></p>
+<h2 id="umwandlung-in-xes-format">Umwandlung in XES-Format</h2>
+<p>Anschließend übertrage wir die Variabel Klassifizierung und alle Spalten und Reihen der CSV-Datei in ein XES Format, dies machen wir mit dem zugehörigen Standard-Plugin von ProM 6.9.</p>
+<p><img alt="alt text" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/X8f8M2TLHABX8zg?x=1920&amp;y=579&amp;a=true&amp;file=CSV_Convert.png&amp;scalingup=0" /></p>
+<h2 id="analyse">Analyse</h2>
+<p>Die XES-Datei können wir problemlos in das Performance Spektrum Plugin einfüttern. </p>
+<p><img alt="alt text" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/WTBF39MAef4GaGN?x=1920&amp;y=579&amp;a=true&amp;file=PSM_PM_START.png&amp;scalingup=0" /></p>
+<p>Das Feintuning der Parameter und das Setzen eines eigenen Classifier ist optimal, kann aber je nach dem Ziel des Anwenders stark die Ergebnisse berichtigen und verfälschen. Die ersten zwei Ausgabebilder werten die Versicherungsdaten in Quantilen aus:</p>
+<p><img alt="alt text" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/dH9959osKBkyGXk?x=1920&amp;y=579&amp;a=true&amp;file=PSM_Quartile_1.png&amp;scalingup=0" />
+<img alt="alt text" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/PLenw6S3zF3CxtE?x=1920&amp;y=579&amp;a=true&amp;file=PSM_UANTILE_2.png&amp;scalingup=0" /></p>
+<p>hier die mediale Auswertung:</p>
+<p><img alt="alt text" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/bg9y3t9gdikANSq?x=1920&amp;y=579&amp;a=true&amp;file=PSM_Medianbased1.png&amp;scalingup=0" />
+<img alt="alt text" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/cLfPWsQ4mLgGyYK?x=1920&amp;y=579&amp;a=true&amp;file=PSM_MEDIAN_3.png&amp;scalingup=0" /></p>
+<h2 id="auswertung">Auswertung</h2>
+<p>Zur Auswertung nehme ich den medialen Ansatz her, da er hierbei mehr Sinn ergibt. Man kann deutlich erkennen bei der 2. Abbildung, dass die ersten Prozesse die erste Benachrichtigung über den Verlust sind, und die letzte das Abschließen durch abgeschlossene Bezahlung oder durch Entscheidung keine Zahlung zu senden ist. Ebenfalls zu sehen ist, dass die meisten sehr (Dunkelblau) und langsamen (Orange) sich innerhalb sehr spezieller Prozesse befinden, während die häufigsten Prozesse (First Notification) schon sehr gut optimiert sind und komplett normal im Durschnitt ablaufen.
+In der ersten Abbildung ist ebenfalls zu sehen, wie verschiedene Prozesse sich überschneiden. Die Linien stellen jeweils einen Prozess von Beginn bis Ende da. Dies ist bei den oft vorkommenden Prozessen leider sehr unübersichtlich, während es bei den weniger Häufigen Prozessen zu wesentlich besser sichtbaren Resultaten führt.</p>
+<h2 id="verwendeter-datensatz">Verwendeter Datensatz</h2>
+<ul>
+<li>https://www.kaggle.com/datasets/carlosalvite/car-insurance-claims-event-log-for-process-mining?resource=download</li>
+</ul>
+<h2 id="ergebnisse-berechnungen-via-python-code">Ergebnisse Berechnungen via Python Code</h2>
+<ul>
+<li><img alt="alt text" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/Ep2op8c4Gd9Fx6q?x=1920&amp;y=579&amp;a=true&amp;file=process_graph.png&amp;scalingup=0" /></li>
+<li><img alt="alt text" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/GDCeE2JQW6m2rZz?x=1920&amp;y=579&amp;a=true&amp;file=process_spectrum.png&amp;scalingup=0" /></li>
+<li><img alt="alt text" src="https://nextcloud.th-deg.de/apps/files_sharing/publicpreview/MgAa2KbbPTRTwsE?x=1920&amp;y=579&amp;a=true&amp;file=performance_spectrum.png&amp;scalingup=0" /></li>
+</ul>
+<h2 id="weiterfuhrendes-material">Weiterführendes Material</h2>
+<h3 id="podcast">Podcast</h3>
+<p>Hier Link zum Podcast.</p>
+<h3 id="talk">Talk</h3>
+<p>Hier einfach Youtube oder THD System embedden.</p>
+<h3 id="demo">Demo</h3>
+<ul>
+<li>https://github.com/qsh1ne/CODE_DEMO_SEM_KI_23</li>
+</ul>
+<h2 id="literaturverzeichnis">Literaturverzeichnis</h2>
+<ol>
+<li>van der Aalst, Wil (2016): Process Mining - Data Science in Action, 2.Aufl., Berlin, Deutschland: Springer</li>
+<li>Macak, Martin/Daubner, Lukas/Fani Sani, Mohammadreza/Buhnova, Barbora (2022): Process mining usage in cybersecurity and software reliability analysis: A systematic literature review, in: Array, Volume 13</li>
+<li>dos Santos Garcia, Cleiton/ Meincheim, Alex/Ribeiro Faria Junior, Elio/ Rosano Dallagassa, Marcelo/Maria Vecino Sato, Denise/ Ribeiro Carvalho, Deborah/ Alves Portela Santos, Eduardo/Emilio Scalabrin/Edson (2019): Process mining techniques and applications - A systematic mapping study, in: Expert Systems with Applications, Volume 133, S. 260-295</li>
+<li>IBM Technology (2023): What is Process Mining? [YoutTube],  https://www.youtube.com/watch?v=5thuFbUQ7Qg</li>
+<li>Study Conquest (2018): Alpha Algorithm (Process Discovery Method)[YouTube], https://www.youtube.com/watch?v=nOTehxTiFFU</li>
+<li>Dager, Shirin (2020): Process Mining hat nichts mit KI zu tun! Erstmal..., der-prozessmanager, [online] https://der-prozessmanager.de/aktuell/news/zusammenhang-von-process-mining-und-ki [abgerufen am 27.05.2023]</li>
+<li>Zaharia, Silvia, Korth, Alexander (2022): Datennutzung im E-Commerce, in: Marketing Analytics, S. 215-228</li>
+<li>Barenkamp, Marco (2022): Künstliche Intelligenz als Unterstützungsfunktion der Vorhersage und Prozessexzellenz im Process Mining, in: Wirtschaftsinformatik&amp;Management, Nr. 14, S. 160-170</li>
+</ol>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../../javascripts/katex.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        
+      
+    
+  </body>
+</html>

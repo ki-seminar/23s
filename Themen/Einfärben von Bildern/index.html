@@ -1,0 +1,1082 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../Empfehlungssysteme/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.1, mkdocs-material-9.1.21">
+    
+    
+      
+        <title>Einfärben von Bildern - Zwei Ansätze - Seminar Aktuelle Themen der künstlichen Intelligenz</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.eebd395e.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+      <link rel="stylesheet" href="../../javascripts/mathjax.js">
+    
+      <link rel="stylesheet" href="https://polyfill.io/v3/polyfill.min.js?features=es6">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#einfarben-von-bildern-zwei-ansatze" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Seminar Aktuelle Themen der künstlichen Intelligenz" class="md-header__button md-logo" aria-label="Seminar Aktuelle Themen der künstlichen Intelligenz" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Seminar Aktuelle Themen der künstlichen Intelligenz
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Einfärben von Bildern - Zwei Ansätze
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Seminar Aktuelle Themen der künstlichen Intelligenz" class="md-nav__button md-logo" aria-label="Seminar Aktuelle Themen der künstlichen Intelligenz" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Seminar Aktuelle Themen der künstlichen Intelligenz
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Aktuelles
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Themen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Themen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Einfärben von Bildern - Zwei Ansätze
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Einfärben von Bildern - Zwei Ansätze
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    Abstract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    Motivation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methoden" class="md-nav__link">
+    Methoden
+  </a>
+  
+    <nav class="md-nav" aria-label="Methoden">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#statistische-ansatze" class="md-nav__link">
+    Statistische Ansätze
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ergebnisse" class="md-nav__link">
+    Ergebnisse:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ki-systeme" class="md-nav__link">
+    KI-Systeme
+  </a>
+  
+    <nav class="md-nav" aria-label="KI-Systeme">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conditional-adversarial-networks-cgan" class="md-nav__link">
+    Conditional Adversarial Networks (cGAN)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convolutional-neural-networks-cnn" class="md-nav__link">
+    Convolutional Neural Networks (CNN)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anwendungen" class="md-nav__link">
+    Anwendungen
+  </a>
+  
+    <nav class="md-nav" aria-label="Anwendungen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pix2pix" class="md-nav__link">
+    Pix2Pix
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deoldify" class="md-nav__link">
+    DeOldify
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fazit" class="md-nav__link">
+    Fazit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#materialien" class="md-nav__link">
+    Materialien
+  </a>
+  
+    <nav class="md-nav" aria-label="Materialien">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#podcast" class="md-nav__link">
+    Podcast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#talk" class="md-nav__link">
+    Talk
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demo" class="md-nav__link">
+    Demo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#literaturliste" class="md-nav__link">
+    Literaturliste
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autoren" class="md-nav__link">
+    Autoren
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Empfehlungssysteme/" class="md-nav__link">
+        Empfehlungssysteme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Face_Aging/" class="md-nav__link">
+        Face Aging
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LLMs/" class="md-nav__link">
+        Large Language Models
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Spracherkennung/" class="md-nav__link">
+        Spracherkennung
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T09_Dialekte_Spracherkennung/" class="md-nav__link">
+        T09 - Dialekte in der Spracherkennung
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T12_feature-extraction/" class="md-nav__link">
+        Feature Extraction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TextToSpeech/" class="md-nav__link">
+        Text-to-Speech
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Zeitserienanalyse/" class="md-nav__link">
+        Zeitserienanalyse
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bayesian_modeling/" class="md-nav__link">
+        Bayesian Modeling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../t7_Process_Mining/" class="md-nav__link">
+        Process Mining
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../transfer_learning_nlp/" class="md-nav__link">
+        Transfer Learning in der Sprachverarbeitung
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../impressum/" class="md-nav__link">
+        Impressum
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    Abstract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    Motivation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methoden" class="md-nav__link">
+    Methoden
+  </a>
+  
+    <nav class="md-nav" aria-label="Methoden">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#statistische-ansatze" class="md-nav__link">
+    Statistische Ansätze
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ergebnisse" class="md-nav__link">
+    Ergebnisse:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ki-systeme" class="md-nav__link">
+    KI-Systeme
+  </a>
+  
+    <nav class="md-nav" aria-label="KI-Systeme">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conditional-adversarial-networks-cgan" class="md-nav__link">
+    Conditional Adversarial Networks (cGAN)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convolutional-neural-networks-cnn" class="md-nav__link">
+    Convolutional Neural Networks (CNN)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anwendungen" class="md-nav__link">
+    Anwendungen
+  </a>
+  
+    <nav class="md-nav" aria-label="Anwendungen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pix2pix" class="md-nav__link">
+    Pix2Pix
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deoldify" class="md-nav__link">
+    DeOldify
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fazit" class="md-nav__link">
+    Fazit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#materialien" class="md-nav__link">
+    Materialien
+  </a>
+  
+    <nav class="md-nav" aria-label="Materialien">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#podcast" class="md-nav__link">
+    Podcast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#talk" class="md-nav__link">
+    Talk
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demo" class="md-nav__link">
+    Demo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#literaturliste" class="md-nav__link">
+    Literaturliste
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autoren" class="md-nav__link">
+    Autoren
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="einfarben-von-bildern-zwei-ansatze">Einfärben von Bildern - Zwei Ansätze</h1>
+<p>von Simon Drasch, Florian Eder &amp; Moritz Enderle</p>
+<h2 id="abstract">Abstract</h2>
+<p>In der heutigen Zeit, in welcher große Mengen an Bildern leicht zugänglich sind, gewinnen die Nutzung und Verarbeitung dieser Daten mit Hilfe von KI an Bedeutung. Wir stellen zwei Methoden vor um das zu erreichen, pix2pix und Deoldify. Wir gliedern unsere Arbeit in drei Bereiche: Podcast, Präsentation mit Code-Demonstration und dieser schriftlichen Ausarbeitung.</p>
+<p>In unserem Podcast bieten wir einen oberflächlichen Überblick über die verschiedenen Methoden und Anwendungsgebiete der Bildkolorierung. Dabei erklären wir die Mechaniken so einfach und verständlich wie möglich, um auch Zuhörer ohne Vorkenntnisse im Bereich der künstlichen Intelligenz anzusprechen.</p>
+<p>In der Präsentation bieten wir tiefgehende Einblicke in den Aufbau und die Merkmale von Bildern. Zuerst stellen wir statistische Ansätze wie den Mean StD Transfer und Lab Mean Transfer kurz vor. Darüber hinaus gehen wir intensiv auf die KI-Systeme Pix2pix und DeOldify ein. Dabei werden die mathematischen Grundlagen hinter den Algorithmen erklärt. Der Fachvortrag richtet sich an ein Fachpublikum mit fortgeschrittenen Kenntnissen im Bereich der künstlichen Intelligenz und liefert detaillierte Informationen über die verschiedenen Ansätze zur Bildkolorierung. </p>
+<p>Anschließend wird in der Code Demonstration anhand eines Beispieldatensatzes gezeigt, wie verschiedene Methoden zur Bildkolorierung angewendet werden Dabei wird der Einsatz von Pix2pix und DeOldify demonstriert, die Qualität der Ergebnisse miteinander verglichen und anschließend eine Einschätzung der Effektivität und Genauigkeit der verschiedenen Ansätze dargestellt.</p>
+<h2 id="motivation">Motivation</h2>
+<p>Unter Bildkolorierung versteht man die Methode, Schwarz-Weiß-Bildern Farben hinzuzufügen. Dadurch kann man ihnen neues Leben einzuhauchen und alte Bilder vollautomatisch und realistisch restaurieren. Sie ermöglicht es uns, visuelle Informationen und Details zu erfassen, die in Schwarz-Weiß-Bildern verborgen sind, vorallem da die Einbeziehung von Farben die Art und Weise, wie wir Bilder wahrnehmen und interpretieren, erheblich verändert. Das Hinzufügen von Farbe auf Schwarz-Weiß-Bildern ermöglicht somit eine Vielzahl von Anwendungen, von der Restaurierung alter Fotografien bis hin zur Verbesserung der visuellen Datenanalyse.</p>
+<p>Ein Beispiel für den Einsatz von KI-Systemen in der Bildrestaurierung ist die Website <a href="https://www.myheritage.de/incolor">Myheritage</a>, welche Ahnenforschung, Stammbaumerstellung und genetische Genealogie betreibt. Darüber hinaus bieten sie zusätzlich an, alte Familienbilder einzufärben und diese mit anderen zu teilen, damit die Familiengeschichte nicht in Vergessenheit gerät. </p>
+<p>Herausforderungen bei der Bildkolorierung liegen vor allem in der genauen Reproduktion von Farben und der Beibehaltung des ursprünglichen Bildcharakters. Neben technische Fähigkeiten muss auch ästhetisches Verständnis vorhanden sein, um qualitativ hochwertige Ergebnisse garantieren zu können.</p>
+<p>Um solche Ergebnisse selbst erzeugen zu können, werden in den folgenden Abschnitten verschiedene Ansätze zur Bildkolorierung vorgestellt, darunter sowohl klassische Methoden als auch moderne KI-Systeme.</p>
+<h2 id="methoden">Methoden</h2>
+<p>In der Bildkolorierung werden verschiedene Methoden eingesetzt, die auf statistischen Ansätzen und KI-Systemen basieren.</p>
+<h3 id="statistische-ansatze">Statistische Ansätze</h3>
+<p>Statistische Ansätze zur Bildkolorierung verwenden mathematische Modelle, um Farben zu Schwarz-Weiß-Bildern hinzuzufügen. Einfärben mit Hilfe von statistischen Modellen ist nicht möglich, jedoch wird die Farbübertragung eines Referenzbildes auf ein Schwarz-Weiß-Bild oft mit Einfärben betitlelt. Drei solcher statistischen Methoden sind:</p>
+<ul>
+<li><strong>Mean StD Transfer:</strong> In dieser Methode wird das Helligkeits-und Farbniveau des Referenzbildes auf eine normalisierte Version des Schwarz-Weiß-Bildes übertragen. Dies wird mit der folgenden mathematischen Formel erreicht:</li>
+</ul>
+<div class="arithmatex">\[
+\text{Output} = \frac{\text{Input - mean(Input)}}{\text{std(Input)}} \times \text{std(Reference) + mean(Reference)}
+\]</div>
+<ul>
+<li>
+<p>Dieser Ansatz ist zwar schnell und funktioniert einigermaßen okay, wenn man farbige Bilder umfärben möchte, jedoch wird bei Schwarz-Weiß-Bildern nur die Durchschnittsfarbe des Referenzbildes projeziert.</p>
+</li>
+<li>
+<p><strong>Lab Mean Transfer:</strong> Diese Methode funktioniert gleich wie der Mean StD Transfer, allerdings wird zuvor der Farbraum von RGB in Lab übertragen. Dadurch werden schon etwas bessere Ergebnisse erzeugt, allerdings sind auch diese bei Schwarz-Weiß-Bildern genau so schlecht. </p>
+</li>
+<li>
+<p><strong>Probability Density Function (PDF) Transfer:</strong> In diesem komplexen mathematischen Verfahren werden für beide Bilder ein normalisiertes Histrogramm erstellt, welche dann genutzt werden um die Wahrscheinlichkeitsverteilung von der Farbpalette des Schwarz-Weiß-Bildes (unterschiedliche Grautöne) auf die Farbpalette des Referenzbildes zu übertragen. Dieser Ansatz liefert die besten Ergebnisse der drei verschiedenen statistischen Ansätze, ist jedoch auch der komplexeste und rechenintensivste. Die Ergebnisse sind zwar besser als bei den anderen beiden Ansätzen, jedoch sind sie immer noch nicht zufriedenstellend.</p>
+</li>
+</ul>
+<h3 id="ergebnisse">Ergebnisse:</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Schwarz-Weiß-Bild</th>
+<th style="text-align: center;">Referenzbild</th>
+<th style="text-align: center;">Mean StD Transfer</th>
+<th style="text-align: center;">Lab Mean Transfer</th>
+<th style="text-align: center;">PDF Transfer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><img src= "https://img001.prntscr.com/file/img001/bpifaRK_QAa5NZccf-l6ZA.png" width=120 height = 80></td>
+<td style="text-align: center;"><img src= "https://img001.prntscr.com/file/img001/6mWrlSL4TyC2HmBasU5xYg.png" width=120 height = 80></td>
+<td style="text-align: center;"><img src= "https://img001.prntscr.com/file/img001/SgFzlCspQMigPxO4I72zYA.png" width=120 height = 80></td>
+<td style="text-align: center;"><img src= "https://img001.prntscr.com/file/img001/G2ehKIU6SFuzcRXqfIXP9Q.png" width=120 height = 80></td>
+<td style="text-align: center;"><img src= "https://img001.prntscr.com/file/img001/evwhpM87QJ-T3t8MVUj4fw.png" width=120 height = 80></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<h3 id="ki-systeme">KI-Systeme</h3>
+<h4 id="conditional-adversarial-networks-cgan">Conditional Adversarial Networks (cGAN)</h4>
+<p>Conditional Adversarial Networks (cGAN) sind eine Art von generativen Modellen, die auf dem Konzept der generativen adversariellen Netzwerke (GAN) basieren. GANs bestehen aus zwei neuronalen Netzen, die gegeneinander trainiert werden. Der Generator G versucht, Bilder zu erzeugen, die von einem menschlichen Betrachter nicht von echten Bildern unterschieden werden können. Der Diskriminator D versucht, die vom Generator erzeugten Bilder von echten Bildern zu unterscheiden. Sie teilen sich eine Lossfunktion, die den Generator dazu zwingt, bessere Bilder zu erzeugen, und den Diskriminator dazu zwingt, bessere Entscheidungen zu treffen. Sie sieht wie folgt aus:</p>
+<div class="arithmatex">\[
+\displaystyle \min_G \max_D \text{V(D, G)} = \mathbb{E}_{x \sim p_{\text{data}}(x)}[\log D(x)] + \mathbb{E}_{z \sim p_z(z)}[\log(1 - D(G(z)))]
+\]</div>
+<p>Dabei hat der Generator die Aufgabe, den zweiten Teil der Lossfunktion zu minimieren, während der Diskriminator versucht, die vollständige Funktion zu maximieren.</p>
+<p>Bei conditional Adversarial Networks wird der Generator und/oder Discriminator zusätzlich mit einem Konditionierungsterm erweitert. Dieser Term wird dem Generator als zusätzlicher Input übergeben und kann beispielsweise ein Label, ein Bild oder eine Zahl bzw Vektor sein. Dadurch kann der Generator Bilder erzeugen, die zu einem bestimmten Label passen. Die Lossfunktion sieht dann wie folgt aus:</p>
+<div class="arithmatex">\[
+\displaystyle \min_G \max_D \text{V(D, G)} = \mathbb{E}_{x \sim p_{\text{data}}(x)}[\log D(x|y)] + \mathbb{E}_{z \sim p_z(z)}[\log(1 - D(G(z|y)))]
+\]</div>
+<p>Hier die beiden Teile der Lossfunktion erklärt: <br></p>
+<div class="arithmatex">\[
+\displaystyle \mathbb{E}_{x \sim p_{\text{data}}(x)}[\log D(x|y)]
+\]</div>
+<p>⟶ Der Erwartungswert des Diskriminators, dass ein echtes Bild mit Label y als solches klassifiziert wird: D(x|y) soll gegen 1 gehen.<br></p>
+<div class="arithmatex">\[
+\displaystyle \mathbb{E}_{z \sim p_z(z)}[\log(1 - D(G(z|y)))]
+\]</div>
+<p>⟶ Der Erwartungswert des Diskriminators, dass ein generiertes Bild mit Label y als solches klassifiziert wird: D(G(z)) soll gegen 0 gehen.<br></p>
+<p>Man betrachtet also die Wahrscheinlichkeit, dass der Diskriminator ein echtes Bild mit dem Label y von einem generierten Bild mit dem Label y unterscheiden kann. Der Generator versucht, diese Wahrscheinlichkeit zu minimieren, während der Diskriminator versucht, sie zu maximieren. Darüber hinaus wird der Generator trainiert, Bilder abhängig von einem Label zu erzeugen, daher der Begriff <strong>conditional</strong>.</p>
+<h4 id="convolutional-neural-networks-cnn">Convolutional Neural Networks (CNN)</h4>
+<p>CNNs sind darauf spezialisiert, matrixartige Topologien, wie zum Beispiel Bilder, zu verarbeiten. Sie bestehen hauptsächlich aus Convolutional Layern, die jeweils aus mehreren Convolutional Filtern bestehen. Diese Filter sind kleine Matrizen, die über das Bild geschoben werden und dabei jeweils einen Teil des Bildes betrachten. Die Werte der Filter werden dabei trainiert, um bestimmte Muster zu erkennen. Die Filter werden dann auf das gesamte Bild angewendet und erzeugen eine neue Matrix, die sogenannte Feature Map. Diese Feature Map enthält Informationen über die Muster, die der Filter erkannt hat. Die Feature Map wird dann an den nächsten Convolutional Layer weitergegeben, der wiederum neue Muster erkennt. Auf diese Weise können CNNs komplexe Muster erkennen und klassifizieren. Weiterhin sind Pooling Layer, welche die Feature Maps verkleinern und somit genauere Muster erkennen können, und Fully Connected Layer, welche die Feature Maps in einen Vektor umwandeln um sie z.B. für eine Klassifizierung zu nutzen. </p>
+<p>Das U-Net CNN ist ein Beispiel von CNNs, welches auf einem vortrainierten Residual Neural Network aufbaut. Der Input wird zuerst auf 256x256 Pixel reshaped und normalisiert. Danach wird das vortrainierte Residual Neural Network geladen und die ersten 18 Layer werden eingefroren. Die restlichen Layer werden dann durch Convolutional Layer ersetzt, die die Feature Maps erweitern. Die Feature Maps werden dann durch Upsampling Layer vergrößert und mit den Feature Maps der vorherigen Layer konkateniert. Dadurch werden die Feature Maps verfeinert und die Auflösung erhöht. Am Ende wird ein Convolutional Layer mit einem Filter der Größe 1x1 angewendet, um die Feature Maps auf die Anzahl der Klassen zu reduzieren. Die Feature Maps werden dann durch einen Softmax Layer klassifiziert.</p>
+<h2 id="anwendungen">Anwendungen</h2>
+<h3 id="pix2pix">Pix2Pix</h3>
+<p>Das Pix2Pix Modell haben wir für die Code demo in PyTorch implementiert. PyTorch ist ein Open-Source-Deep-Learning-Framework, das von Facebook AI Research entwickelt wurde. Es bietet eine umfassende Plattform zur Entwicklung und Umsetzung von neuronalen Netzen in Python. </p>
+<p>Das Pix2Pix Model basiert auf einem GAN Ansatz, wobei sowohl Generator als auch Diskriminator auf einer U-Net Struktur basieren. Ein U-Net ist ein tiefes neuronales Netzwerk mit einer U-förmigen Architektur. Es nutzt Skip Connections, um globale und lokale Informationen zu kombinieren und genaue Farbinformationen zu erzeugen. Diese werden durch Anhängen der letzten Conv2D Schicht des Encoders an die erste Conv2D Schicht des Decoders erzeugt. Dadurch soll der Diskriminator nicht nur Abnormalitäten erkennen, sondern auch die genaue Position der Abnormalität im Bild bestimmen können. Darüber hinaus basiert der Decoder auf dem PatchGAN Diskriminator, welcher das Bild in (hier: 70x70 Pixel) Patches aufteilt und für jedes Patch eine Wahrscheinlichkeit ausgibt, ob es sich um ein echtes oder generiertes Bild handelt. Dadurch erhält man schärfere Features und eine höhere Genauigkeit. Zudem hat diese Diskriminator Architektur weniger Parameter als ein normaler Diskriminator, was das Training beschleunigt.</p>
+<p>In dieser cGAN Archtiktur bekommt nur der Diskriminator ein Label, das Schwarz-Weiß-Bild. Der Generator bekommt jediglich das Schwarz-Weiß-Bild als Input und soll ein Bild erzeugen, das zu diesem passt.</p>
+<p>Der Diskriminator wird sowohl mit dem generierten Bild als auch mit dem Originalbild getestet, um zu sehen, wie gut er die beiden unterscheiden kann. Dabei wird der Binary Cross Entropy Loss verwendet. Dieser ist definiert als:</p>
+<div class="arithmatex">\[
+\displaystyle \text{BCE}(x, y) = -\frac{1}{N} \sum_{i=1}^N y_i \log(x_i) + (1 - y_i) \log(1 - x_i)
+\]</div>
+<p>N ist in unserem Beispiel die Anzahl der Pixel im Bild. x ist der Output des Diskriminators, y ist die tatsächliche Wahrheit. 0 steht für ein generiertes Bild, 1 für ein echtes Bild. Der Loss wird dann für beide Bilder berechnet und anschließend der Durchschnitt gebildet.</p>
+<p>Der Generator wird mit dem generierten Bild getestet. Dabei wird der L1 Loss verwendet. Dieser ist definiert als:</p>
+<div class="arithmatex">\[
+\displaystyle \text{L1}(x, y) = \frac{1}{N} \sum_{i=1}^N |x_i - y_i|
+\]</div>
+<p>N ist in unserem Beispiel die Anzahl der Pixel im Bild. x ist der Output des Diskriminators, y ist das Originalbild. 
+Zusätzlich wird der geupdatete Diskriminator verwendet, um zu sehen, wie gut der Generator die beiden Bilder unterscheiden kann. Dabei wird der Binary Cross Entropy Loss mit folgenden Einstellungen verwendet:</p>
+<ul>
+<li>x ist der Output des Diskriminators auf Fake Bild mit Schwarz-Weiß-Bild als Label</li>
+<li>y ist das Originalbild
+  Dadurch sagt die Lossfunktion aus, wie sehr der Diskrimator glaubt, dass das generierte Bild zu dem Schwarz-Weiß-Bild <strong>nicht</strong> passt.</li>
+</ul>
+<div>
+<img src="https://machinelearningmastery.com/wp-content/uploads/2019/05/Architecture-of-the-U-Net-Generator-Model.png" height=200/>
+<img src="https://1.bp.blogspot.com/-8UaqrtcCHPs/X5o0El8e5fI/AAAAAAAAKhs/znYutxTddAsMtR8Gw5Ke-e6B_SVBH21UgCLcBGAsYHQ/s806/Google%2BChromeScreenSnapz096.jpg" height=200 />
+</div>
+<p><br></p>
+<p>Zum Trainieren des Modells haben wir den <a href="https://cocodataset.org/#home">COCO-Datensatz</a> verwendet, der 123.287 Bilder enthält. Aufgrund unserer begrenzten Trainingsressourcen haben wir nur 10k zufällig ausgewählte Bilder verwendet. </p>
+<p>Die Bilder wurden auf 256x256 Pixel skaliert und in den Lab-Farbraum konvertiert. Der L-Kanal wurde als Eingabe für den Generator und die Ab-Kanäle als Ziel verwendet. Der Diskriminator wurde mit dem L-Kanal des Eingangsbildes und den Ab-Kanälen des Zielbildes trainiert. </p>
+<p><img src="https://www.acttr.com/images/articles/2019/cielab-color.jpg" height=200/>
+<br><br></p>
+<p>Das Modell wurde für 70 Epochen mit einer Stapelgröße von 32 trainiert. Die Verlustfunktion war eine Kombination aus dem L1-Verlust und dem kontradiktorischen Verlust. Der L1-Verlust ist ein einfacher mittlerer absoluter Fehler zwischen dem vorhergesagten und dem Zielbild. Der gegnerische Verlust ist der binäre Kreuzentropieverlust zwischen dem vorhergesagten und dem Zielbild. Der adversarial loss wird zum Trainieren des Diskriminators und des Generators verwendet. Der L1-Verlust wird nur für das Training des Generators verwendet. </p>
+<p>Zum optimieren des Modells brauchen wie die jeweilige Backward Funktion für den Generator und den Diskriminator:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">backward_D</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Backward pass for the discriminator.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fake_image</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fake_color</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">fake_preds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">net_D</span><span class="p">(</span><span class="n">fake_image</span><span class="o">.</span><span class="n">detach</span><span class="p">())</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">loss_D_fake</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GANcriterion</span><span class="p">(</span><span class="n">fake_preds</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">real_image</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ab</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">real_preds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">net_D</span><span class="p">(</span><span class="n">real_image</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">loss_D_real</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GANcriterion</span><span class="p">(</span><span class="n">real_preds</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">loss_D</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loss_D_fake</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_D_real</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">loss_D</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">backward_G</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Backward pass for the generator.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fake_image</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fake_color</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">fake_preds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">net_D</span><span class="p">(</span><span class="n">fake_image</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">loss_G_GAN</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GANcriterion</span><span class="p">(</span><span class="n">fake_preds</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">loss_G_L1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">L1criterion</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fake_color</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ab</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">lambda_L1</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">loss_G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_G_GAN</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_G_L1</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">loss_G</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+</code></pre></div>
+<p>Während des Training Vorgangs werden nun diese beiden Funktionen hergenommen um in der <code>optimize()</code> Funktion die Gewichte zu trainieren:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Optimize the model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">net_D</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">set_requires_grad</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">net_D</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">opt_D</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">backward_D</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">opt_D</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">net_G</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">set_requires_grad</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">net_D</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">opt_G</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">backward_G</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">opt_G</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+</code></pre></div>
+<p>Um das trainierte Modell für eine Prediction zu nutzen, können wir Bilder in den L-Space konvertieren und den Generator nutzen um eine Farbvorhersage zu treffen:</p>
+<div class="highlight"><pre><span></span><code><span class="n">batch_prp</span> <span class="o">=</span> <span class="n">preprocess</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+<span class="n">fake_imgs</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">batch_prp</span><span class="p">)</span>
+<span class="n">fake_imgs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">((</span><span class="n">img</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">))</span> <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">fake_imgs</span><span class="p">]</span>
+</code></pre></div>
+<p>Da unser Modell nur sehr begrenzt trainiert wurde, sind die Ergebnisse nicht mit dem aktuellen Stand der Technik vergleichbar. Dennoch sind die Ergebnisse für ein so einfaches Modell sehr gut.</p>
+<p><img src="https://i.ibb.co/y6mPbG1/download-5.png" height=300 /></p>
+<h3 id="deoldify">DeOldify</h3>
+<p>DeOldify ist im Gegensatz zu unserem selbst-trainierten Modell ein bereits kommerziell etablierted Modell und bietet daher auch schon vortrainierte Gewichte an. Diese können wir nutzen um unsere Bilder zu färben. </p>
+<p>Was DeOldify besonders macht ist unter Anderem der NoGAN Ansatz. Das bedeutet in diesem Fall, dass wir Generator und Diskriminator seperat voneinander trainieren und erst nachdem beide vollständig trainiert wurden, zusammenführen. Der Diskriminator wird dabei nur für das Training des Generators verwendet und überträgt sein Wissen sehr schnell an den Generator. </p>
+<p>Die Lossfunktion des Models besteht aus zwei Teilen, den Farbloss und dem Kontentloss. Beim Farbloss wird der L1-Unterschied zwischen den RGB-Werten des Originalbildes und des gefärbten Bildes berechnet. Das Kontentloss ist ein Featureloss, das die Unterschiede zwischen den Featuremaps des VGG16-Netzwerks berechnet.</p>
+<p>Möchte man das ganze selber ausprobieren, muss man folgenden Code ausführen:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">images_real_bw</span><span class="p">:</span>
+    <span class="n">deoldify_colorized</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="n">colorizer</span><span class="o">.</span><span class="n">filter</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+            <span class="n">image</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">render_factor</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span> <span class="n">post_process</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+</code></pre></div>
+<div>
+<img src="https://i.ibb.co/FwR8btW/download-6-p1.png" height=500/>
+<img src="https://i.ibb.co/vDkBSbJ/download-6-p2.png" height=500/>
+</div>
+<p><br></p>
+<p>Eine Stärke, die sich durch den NoGAN Ansatz herauskristallisiert, ist die Fähigkeit, Videos einzufärben. Diese sind deutlich Farbintensiver und beinhalten weniger Farbflickern als mit herkömmlichen GANs.</p>
+<p><img alt="Moving Scene Example" src="https://thumbs.gfycat.com/FamiliarJubilantAsp-size_restricted.gif" /></p>
+<h2 id="fazit">Fazit</h2>
+<p>Die Bildkolorierung ist ein aktives Forschungsgebiet, das sowohl statistische Ansätze als auch KI-Systeme umfasst. Statistische Methoden wie der Mean StD Transfer und der Lab Mean Transfer bieten schnelle und effiziente Lösungen, haben aber ihre Grenzen, insbesondere bei der Verarbeitung von Schwarz-Weiß-Bildern. Auf der anderen Seite bieten KI-Systeme wie Pix2pix und DeOldify neue Möglichkeiten zur Verbesserung der Bildkolorierung. Diese Systeme verwenden lernfähige Modelle, die sich an verschiedene Arten von Bildern anpassen können, und bieten daher das Potenzial für verbesserte Genauigkeit und Vielseitigkeit. Trotz der Fortschritte in diesem Bereich gibt es immer noch Herausforderungen und Raum für Verbesserungen.</p>
+<h2 id="materialien">Materialien</h2>
+<h3 id="podcast">Podcast</h3>
+<p><a href="https://der-campustalk-der-thd.letscast.fm/episode/der-campus-talk-silicon-forest-folge-5">Der Campus Talk – Silicon Forest – Folge 5</a></p>
+<h3 id="talk">Talk</h3>
+<p>Hier einfach Youtube oder THD System embedden.</p>
+<h3 id="demo">Demo</h3>
+<p>Link zum Repository: 
+https://mygit.th-deg.de/me04536/recolor</p>
+<h2 id="literaturliste">Literaturliste</h2>
+<ul>
+<li><a href="https://www.ipol.im/pub/art/2022/403/article_lr.pdf">DeOldify Paper</a><br></li>
+<li><a href="https://arxiv.org/abs/1611.07004">Pix2Pix Paper</a></li>
+</ul>
+<h2 id="autoren">Autoren</h2>
+<ul>
+<li>Florian Eder</li>
+<li>Moritz Enderle</li>
+<li>Simon Drasch</li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../../javascripts/katex.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        
+      
+    
+  </body>
+</html>

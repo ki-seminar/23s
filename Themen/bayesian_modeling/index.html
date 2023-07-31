@@ -1,0 +1,1421 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Zeitserienanalyse/">
+      
+      
+        <link rel="next" href="../t7_Process_Mining/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.1, mkdocs-material-9.1.21">
+    
+    
+      
+        <title>Bayesian Modeling - Seminar Aktuelle Themen der künstlichen Intelligenz</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.eebd395e.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+      <link rel="stylesheet" href="../../javascripts/mathjax.js">
+    
+      <link rel="stylesheet" href="https://polyfill.io/v3/polyfill.min.js?features=es6">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#bayesian-modeling" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Seminar Aktuelle Themen der künstlichen Intelligenz" class="md-header__button md-logo" aria-label="Seminar Aktuelle Themen der künstlichen Intelligenz" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Seminar Aktuelle Themen der künstlichen Intelligenz
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Bayesian Modeling
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Seminar Aktuelle Themen der künstlichen Intelligenz" class="md-nav__button md-logo" aria-label="Seminar Aktuelle Themen der künstlichen Intelligenz" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Seminar Aktuelle Themen der künstlichen Intelligenz
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Aktuelles
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Themen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Themen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Einf%C3%A4rben%20von%20Bildern/" class="md-nav__link">
+        Einfärben von Bildern - Zwei Ansätze
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Empfehlungssysteme/" class="md-nav__link">
+        Empfehlungssysteme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Face_Aging/" class="md-nav__link">
+        Face Aging
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LLMs/" class="md-nav__link">
+        Large Language Models
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Spracherkennung/" class="md-nav__link">
+        Spracherkennung
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T09_Dialekte_Spracherkennung/" class="md-nav__link">
+        T09 - Dialekte in der Spracherkennung
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T12_feature-extraction/" class="md-nav__link">
+        Feature Extraction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TextToSpeech/" class="md-nav__link">
+        Text-to-Speech
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Zeitserienanalyse/" class="md-nav__link">
+        Zeitserienanalyse
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Bayesian Modeling
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Bayesian Modeling
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#einfuhrung-in-die-bayes-statistik" class="md-nav__link">
+    Einführung in die Bayes Statistik
+  </a>
+  
+    <nav class="md-nav" aria-label="Einführung in die Bayes Statistik">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bayes-theorem" class="md-nav__link">
+    Bayes-Theorem
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anwendungsbeispiel-medizinischer-test" class="md-nav__link">
+    Anwendungsbeispiel Medizinischer Test
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modell-annahmen" class="md-nav__link">
+    Modell-Annahmen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gesucht-wird-die-wahrscheinlichkeit" class="md-nav__link">
+    Gesucht wird die Wahrscheinlichkeit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anwendungsbeispiel-bayes-theorem" class="md-nav__link">
+    Anwendungsbeispiel Bayes Theorem
+  </a>
+  
+    <nav class="md-nav" aria-label="Anwendungsbeispiel Bayes Theorem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bayes-theorem_1" class="md-nav__link">
+    Bayes Theorem
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagnostik-seltener-ereignisse" class="md-nav__link">
+    Diagnostik seltener Ereignisse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anwendung-bayes-theorem" class="md-nav__link">
+    Anwendung Bayes Theorem:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rechnen-mit-wahrscheinlichkeitsverteilungen" class="md-nav__link">
+    Rechnen mit Wahrscheinlichkeitsverteilungen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternative-form-der-darstellung" class="md-nav__link">
+    Alternative Form der Darstellung:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fairer-munzwurf" class="md-nav__link">
+    Fairer Münzwurf
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#konjugiertheit" class="md-nav__link">
+    Konjugiertheit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priori" class="md-nav__link">
+    Priori
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#likelihood" class="md-nav__link">
+    Likelihood
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalisierungskonstante" class="md-nav__link">
+    Normalisierungskonstante
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#posteriori" class="md-nav__link">
+    Posteriori
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualizierung" class="md-nav__link">
+    Visualizierung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretation-der-posterioriverteilung" class="md-nav__link">
+    Interpretation der Posterioriverteilung
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcmc" class="md-nav__link">
+    MCMC
+  </a>
+  
+    <nav class="md-nav" aria-label="MCMC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#monte-carlo" class="md-nav__link">
+    Monte Carlo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#markov-chain" class="md-nav__link">
+    Markov Chain
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metropolis-hastings" class="md-nav__link">
+    Metropolis Hastings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bayesian-modeling_1" class="md-nav__link">
+    Bayesian Modeling
+  </a>
+  
+    <nav class="md-nav" aria-label="Bayesian Modeling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pymc3" class="md-nav__link">
+    PyMC3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erzeugen-von-daten" class="md-nav__link">
+    Erzeugen von Daten
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bayes-lineare-regression" class="md-nav__link">
+    Bayes Lineare Regression
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modell-erstellen" class="md-nav__link">
+    Modell erstellen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mcmc_1" class="md-nav__link">
+    MCMC
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vor-und-nachteile" class="md-nav__link">
+    Vor und Nachteile
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#weiterfuhrendes-material" class="md-nav__link">
+    Weiterführendes Material
+  </a>
+  
+    <nav class="md-nav" aria-label="Weiterführendes Material">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#podcast" class="md-nav__link">
+    Podcast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#talk" class="md-nav__link">
+    Talk
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demo" class="md-nav__link">
+    Demo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#literaturliste" class="md-nav__link">
+    Literaturliste
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../t7_Process_Mining/" class="md-nav__link">
+        Process Mining
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../transfer_learning_nlp/" class="md-nav__link">
+        Transfer Learning in der Sprachverarbeitung
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../impressum/" class="md-nav__link">
+        Impressum
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#einfuhrung-in-die-bayes-statistik" class="md-nav__link">
+    Einführung in die Bayes Statistik
+  </a>
+  
+    <nav class="md-nav" aria-label="Einführung in die Bayes Statistik">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bayes-theorem" class="md-nav__link">
+    Bayes-Theorem
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anwendungsbeispiel-medizinischer-test" class="md-nav__link">
+    Anwendungsbeispiel Medizinischer Test
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modell-annahmen" class="md-nav__link">
+    Modell-Annahmen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gesucht-wird-die-wahrscheinlichkeit" class="md-nav__link">
+    Gesucht wird die Wahrscheinlichkeit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anwendungsbeispiel-bayes-theorem" class="md-nav__link">
+    Anwendungsbeispiel Bayes Theorem
+  </a>
+  
+    <nav class="md-nav" aria-label="Anwendungsbeispiel Bayes Theorem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bayes-theorem_1" class="md-nav__link">
+    Bayes Theorem
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagnostik-seltener-ereignisse" class="md-nav__link">
+    Diagnostik seltener Ereignisse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anwendung-bayes-theorem" class="md-nav__link">
+    Anwendung Bayes Theorem:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rechnen-mit-wahrscheinlichkeitsverteilungen" class="md-nav__link">
+    Rechnen mit Wahrscheinlichkeitsverteilungen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternative-form-der-darstellung" class="md-nav__link">
+    Alternative Form der Darstellung:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fairer-munzwurf" class="md-nav__link">
+    Fairer Münzwurf
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#konjugiertheit" class="md-nav__link">
+    Konjugiertheit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priori" class="md-nav__link">
+    Priori
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#likelihood" class="md-nav__link">
+    Likelihood
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalisierungskonstante" class="md-nav__link">
+    Normalisierungskonstante
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#posteriori" class="md-nav__link">
+    Posteriori
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualizierung" class="md-nav__link">
+    Visualizierung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretation-der-posterioriverteilung" class="md-nav__link">
+    Interpretation der Posterioriverteilung
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcmc" class="md-nav__link">
+    MCMC
+  </a>
+  
+    <nav class="md-nav" aria-label="MCMC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#monte-carlo" class="md-nav__link">
+    Monte Carlo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#markov-chain" class="md-nav__link">
+    Markov Chain
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metropolis-hastings" class="md-nav__link">
+    Metropolis Hastings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bayesian-modeling_1" class="md-nav__link">
+    Bayesian Modeling
+  </a>
+  
+    <nav class="md-nav" aria-label="Bayesian Modeling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pymc3" class="md-nav__link">
+    PyMC3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erzeugen-von-daten" class="md-nav__link">
+    Erzeugen von Daten
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bayes-lineare-regression" class="md-nav__link">
+    Bayes Lineare Regression
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modell-erstellen" class="md-nav__link">
+    Modell erstellen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mcmc_1" class="md-nav__link">
+    MCMC
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vor-und-nachteile" class="md-nav__link">
+    Vor und Nachteile
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#weiterfuhrendes-material" class="md-nav__link">
+    Weiterführendes Material
+  </a>
+  
+    <nav class="md-nav" aria-label="Weiterführendes Material">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#podcast" class="md-nav__link">
+    Podcast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#talk" class="md-nav__link">
+    Talk
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demo" class="md-nav__link">
+    Demo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#literaturliste" class="md-nav__link">
+    Literaturliste
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="bayesian-modeling">Bayesian Modeling</h1>
+<p>von Serife-Nur Özdemir, Sanamjeet Meyer und Anna Postnikova</p>
+<p>Die bayesianische Modellierung basiert auf der bayesianischen Statistik. Im Vergleich zum frequentistischen Ansatz spiegelt der bayesianische Ansatz eher die menschliche Denkweise wider. Der bayesianische Ansatz berücksichtigt das Vorwissen bei der Inferenz, was besonders hilfreich ist, wenn bereits Expertenwissen oder Vorkenntnisse in einem Bereich vorhanden sind. Nahezu alle klassischen Modelle des maschinellen Lernens können in bayesianische Modelle umgewandelt werden. In dieser Arbeit gehen wir darauf ein, was bayesianische Modellierung ist, wie sie funktioniert und welche Vor- und Nachteile sie hat.</p>
+<h2 id="einfuhrung-in-die-bayes-statistik">Einführung in die Bayes Statistik</h2>
+<h3 id="bayes-theorem">Bayes-Theorem</h3>
+<p>Das Bayes-Theorem ist ein grundlegendes Konzept der Wahrscheinlichkeitstheorie, das es uns ermöglicht, unsere Überzeugungen über ein Ereignis basierend auf neuen Beweisen zu aktualisieren. Es kann wie folgt formuliert werden:</p>
+<ul>
+<li>P(A|B) repräsentiert die Wahrscheinlichkeit, dass Ereignis A eintritt, unter der Bedingung, dass Ereignis B eingetreten ist.</li>
+<li>P(B|A) ist die Wahrscheinlichkeit, dass Ereignis B eintritt, unter der Bedingung, dass Ereignis A eingetreten ist.</li>
+<li>P(A) ist die Wahrscheinlichkeit, dass Ereignis A eintritt.</li>
+<li>P(B) bezeichnet die Wahrscheinlichkeit, dass Ereignis B eintritt.</li>
+</ul>
+<div class="arithmatex">\[ P(A|B) = \frac{P(B|A)P(A)}{P(B)} \]</div>
+<div class="arithmatex">\[ P(A|B) = \frac{P(B|A)P(A)}{P(B)} \]</div>
+<p>Das Bayes-Theorem bietet eine Möglichkeit, die Wahrscheinlichkeit von Ereignis A unter Berücksichtigung vorhandener Kenntnisse und neuer Beweise zu berechnen. Es wird in verschiedenen Bereichen eingesetzt, darunter Statistik, maschinelles Lernen und Datenanalyse.</p>
+<h3 id="anwendungsbeispiel-medizinischer-test">Anwendungsbeispiel Medizinischer Test</h3>
+<ul>
+<li>In 99,5% der Fälle fällt der Test positiv aus.</li>
+<li>Sollte die Krankheit nicht vorliegen, beträgt die Wahrscheinlichkeit für einen positiven Test 1%.</li>
+<li>Laut einer Studie leidet eine von vier Personen an der betreffenden Krankheit.</li>
+<li>Wie groß ist die Wahrscheinlichkeit, dass jemand an der Krankheit leidet, obwohl der Test ein negatives Ergebnis zeigt?</li>
+</ul>
+<h3 id="modell-annahmen">Modell-Annahmen</h3>
+<p>K = Person ist krank<br />
+T = Test fällt positiv aus</p>
+<div class="arithmatex">\[P(T|K) = 0.995\]</div>
+<div class="arithmatex">\[P(T|\overline{K}) = 0.01\]</div>
+<div class="arithmatex">\[P(K) = 0.25\]</div>
+<h3 id="gesucht-wird-die-wahrscheinlichkeit">Gesucht wird die Wahrscheinlichkeit</h3>
+<div class="arithmatex">\[P(K|\overline{T})\]</div>
+<h2 id="anwendungsbeispiel-bayes-theorem">Anwendungsbeispiel Bayes Theorem</h2>
+<h3 id="bayes-theorem_1">Bayes Theorem</h3>
+<div class="arithmatex">\[P(A|B) = \frac{P(B|A)P(A)}{P(B)}\]</div>
+<div class="arithmatex">\[P(K|\overline{T}) = \frac{P(\overline{T}|K)P(K)}{P(\overline{T}|K)P(K) + P(\overline{T}|\overline{K})P(\overline{K})}\]</div>
+<div class="arithmatex">\[ = \frac{(1-0.995)\cdot 0.25}{(1-0.995)\cdot 0.25 + (1-0.01)\cdot 0.75}\]</div>
+<div class="arithmatex">\[
+= 0.00185
+\]</div>
+<h3 id="diagnostik-seltener-ereignisse">Diagnostik seltener Ereignisse</h3>
+<p>Vorsorgliche Untersuchung auf einer Krankheit</p>
+<p>Bekannte Informationne:</p>
+<ul>
+<li><span class="arithmatex">\(0,1\%\)</span> der männlichen Bevölkerung ist mit der Krankheit infiziert</li>
+<li><span class="arithmatex">\(95\%\)</span> Wahrscheinlichkeit für korrekte Diagnose bei erkrankter Person</li>
+<li><span class="arithmatex">\(98\%\)</span> Wahrscheinlichkeit für negatives Ergebnis bei gesunder Person</li>
+</ul>
+<p>Fragestellung:</p>
+<ul>
+<li>Wie groß ist die Wahrscheinlichkeit, dass der Mann tatsächlich krank
+ist?</li>
+<li>Intuitive Antwort von <span class="arithmatex">\(95\%\)</span> ist falsch, da Ursache und Ereignis
+vertauscht werden</li>
+</ul>
+<p>Modell-Annahmen:</p>
+<p>Gegebene Informationen:</p>
+<ul>
+<li>
+<p>Hypothesen: <span class="arithmatex">\(K\)</span> = "Der Mann ist krank", <span class="arithmatex">\(\overline{K}\)</span> = "Der Mann ist gesund"</p>
+</li>
+<li>
+<p>A-priori-Wahrscheinlichkeiten: <span class="arithmatex">\(P(K) = 0,001\)</span>, <span class="arithmatex">\(P(\overline{K}) = 0,999\)</span></p>
+</li>
+<li>
+<p>Likelihoods: <span class="arithmatex">\(P(P|K) = 0,95\)</span>, <span class="arithmatex">\(P(P|\overline{K}) = 0,02\)</span></p>
+</li>
+</ul>
+<p>Gesucht: </p>
+<ul>
+<li>A-posteriori-Wahrscheinlichkeit <span class="arithmatex">\(P(K|P)\)</span></li>
+</ul>
+<h3 id="anwendung-bayes-theorem">Anwendung Bayes Theorem:</h3>
+<p>\[P(K|P) = \frac{{P(K) \cdot P(P|K)}}{{P(K) \cdot P(P|K) + P(\overline{K}) \cdot P(P|\overline{K})}}\]
+\[P(K|P) = \frac{{0.001 \cdot 0.95}}{{0.001 \cdot 0.95 + 0.999 \cdot 0.02}}\]
+\[P(K|P) \approx 0.05 \]</p>
+<p>Hier ist ein konkretes Beispiel, das verdeutlicht, wie stark sich die berechnete Wahrscheinlichkeit von unserer intuitiven Annahme unterscheiden kann. In diesem Beispiel verwenden wir relative Häufigkeiten anstelle von Wahrscheinlichkeiten, um das überraschend kleine Ergebnis verständlicher zu machen. In der Regel arbeiten wir jedoch mit Wahrscheinlichkeiten, was im folgenden Abschnitt genauer erläutert wird.</p>
+<h3 id="rechnen-mit-wahrscheinlichkeitsverteilungen">Rechnen mit Wahrscheinlichkeitsverteilungen</h3>
+<h3 id="alternative-form-der-darstellung">Alternative Form der Darstellung:</h3>
+<div class="arithmatex">\[ P(\theta|data) = \frac{P(data|\theta) \cdot P(\theta)}{P(data)} \]</div>
+<div class="arithmatex">\[ Posteriori = \frac{Likelihood \cdot Priori}{Normalisierungskonstante} \]</div>
+<h3 id="fairer-munzwurf">Fairer Münzwurf</h3>
+<p>Am besten lassen sich die Begriffe Likelihood, Priori und Posteriori am Beispiel eines fairen Münzwurfs erklären. Wir möchten herausfinden, ob eine Münze "fair" ist, d.h., ob Kopf oder Zahl beim Münzwurf bevorzugt wird. In diesem Beispiel konzentrieren wir uns auf die Kopfseite. Unser Vorwissen (Priori) besagt, dass die Wahrscheinlichkeit für Kopf 50% beträgt. Als Priori-Verteilung wählen wir die Beta-Verteilung. Um zu verstehen, warum gerade die Beta-Verteilung gewählt wurde und keine andere, betrachten wir das Konzept der Konjugiertheit.</p>
+<h3 id="konjugiertheit">Konjugiertheit</h3>
+<p>Eine konjugierte Priori-Verteilung gehört zur gleichen Verteilungsfamilie wie die Posteriori-Verteilung. Wenn Priori-Verteilung und Likelihood-Verteilung konjugiert sind, kann die Posteriori-Verteilung analytisch bestimmt werden.</p>
+<p>Hier sind einige Beispiele für konjugierte Priori-Verteilungen und die zugehörige Likelihood-Verteilung:</p>
+<table>
+<thead>
+<tr>
+<th>Likelihood-Verteilung</th>
+<th>Konjugierte Priorverteilung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Binomial</td>
+<td>Beta</td>
+</tr>
+<tr>
+<td>Normal (bekannte Varianz)</td>
+<td>Normal</td>
+</tr>
+<tr>
+<td>Normal (unbekannte Varianz)</td>
+<td>Normal-Gamma</td>
+</tr>
+<tr>
+<td>Exponential</td>
+<td>Gamma</td>
+</tr>
+<tr>
+<td>Poisson</td>
+<td>Gamma</td>
+</tr>
+</tbody>
+</table>
+<p>Wenn wir wieder auf das Münzwurf-Beispiel zurückkommen, können wir die Binomial-Verteilung als Likelihood-Verteilung verwenden. Die Binomial-Verteilung eignet sich besonders gut, da unsere Daten nur aus Nullen (Zahl) und Einsen (Kopf) bestehen. </p>
+<p>Folgende informationen liegen uns vor:</p>
+<h3 id="priori">Priori</h3>
+<p>\[P(\theta) = \frac{\theta^{\alpha-1}(1-\theta)^{\beta - 1}}{B(\alpha, \beta)}\]</p>
+<ul>
+<li><span class="arithmatex">\(B(\alpha, \beta)\)</span> ist die Betafunktion (Normalisierungkonstante)</li>
+<li><span class="arithmatex">\(B(\alpha, \beta) = \int_{0}^{1} \theta^{\alpha-1} \cdot (1-\theta)^{\beta-1} dt\)</span></li>
+</ul>
+<h3 id="likelihood">Likelihood</h3>
+<p>\[ P(y \mid \theta) \propto \underbrace{\theta^y (1-\theta)^{n-y}}_{\text Binomialverteilung} \]</p>
+<h3 id="normalisierungskonstante">Normalisierungskonstante</h3>
+<p>Die Normalisierungskonstante in diesem Beispiel, <span class="arithmatex">\(B(\alpha, \beta)\)</span>, stellt sicher, dass es sich um eine valide Wahrscheinlichkeitsverteilung handelt und hat keinen direkten Einfluss auf <span class="arithmatex">\(\theta\)</span>. In diesem Fall können wir das <span class="arithmatex">\(\propto\)</span>-Zeichen (sprich: "proportional zu") verwenden. Es bedeutet, dass die linke und rechte Seite bis auf eine Konstante übereinstimmen.</p>
+<div class="arithmatex">\[ P(\theta) \propto \theta^{\alpha-1}(1-\theta)^{\beta - 1} \]</div>
+<h3 id="posteriori">Posteriori</h3>
+<p>\[P(\theta \mid y) \propto \theta^{\textcolor{blue}{y}} (1-\theta)^{\textcolor{black}{\textcolor{red}{n-y}}} \cdot \theta^{\textcolor{blue}{\alpha-1}}(1-\theta)^{\textcolor{red}{\beta - 1}}\]</p>
+<p>\[P(\theta \mid y) \propto \theta^{\textcolor{blue}{y+\alpha-1}} (1-\theta)^{\textcolor{red}{n-y+\beta-1}}\]</p>
+<p>\[P(\theta \mid y) \propto \theta^{\textcolor{blue}{\alpha_n}-1} (1-\theta)^{\textcolor{red}{\beta_n}-1}\]</p>
+<p>\[P(\theta \mid y) = \frac{\theta^{\textcolor{blue}{\alpha_n}-1} (1-\theta)^{\textcolor{red}{\beta_n}-1}}{B(\textcolor{blue}{\alpha_n},\textcolor{red}{\beta_n})}\]</p>
+<p>*<span class="arithmatex">\(\textcolor{blue}{\alpha_n} = y + \alpha , \textcolor{red}{\beta_n} = n-y+\beta\)</span></p>
+<p>Wir erkennen, dass die Posteriori-Verteilung eine Beta-Verteilung ist. Dies ist ein Beweis dafür, dass die Beta-Verteilung konjugiert zur Binomialverteilung ist.</p>
+<h3 id="visualizierung">Visualizierung</h3>
+<p><img alt="Example Image" src="../img/bayes_plot.png" /></p>
+<p>In dieser Abbildung ist die Priori-Verteilung rot, die Likelihood-Verteilung grün und die Posteriori-Verteilung blau dargestellt. In diesem Beispiel entspricht die Likelihood bzw. Binomialverteilung <span class="arithmatex">\(Binomial(10,7)\)</span>. Das bedeutet, bei <span class="arithmatex">\(y=10\)</span> Würfen ergab sich <span class="arithmatex">\(n=7\)</span> Mal "Kopf". Die Beta-Verteilung ist als <span class="arithmatex">\(Beta(30,30)\)</span> mit <span class="arithmatex">\(\alpha=30\)</span> und <span class="arithmatex">\(\beta=30\)</span> definiert und ähnelt einer Normalverteilung. Dies drückt aus, dass die Wahrscheinlichkeit für <span class="arithmatex">\(\theta\)</span> bei 0,5 bzw. 50% am höchsten ist. Die Posteriori-Verteilung ist leicht nach rechts verschoben, da das Ergebnis häufiger "Kopf" als "Zahl" war. Daraus lässt sich ableiten, dass die Wahrscheinlichkeit, beim nächsten Wurf "Kopf" zu erhalten, minimal gestiegen ist.</p>
+<h3 id="interpretation-der-posterioriverteilung">Interpretation der Posterioriverteilung</h3>
+<p><img alt="Example Image" src="../img/posterior_plot.png" /></p>
+<p>Die Posteriori-Verteilung ermöglicht Schätzungen wie den Mittelwert oder Durchschnitt sowie die Bildung eines Glaubwürdigkeitsintervalls für den Wert <span class="arithmatex">\(\theta\)</span>. Die Entscheidung für eine dieser Möglichkeiten hängt vom Ziel und der vorliegenden Posteriori-Verteilung ab. In der obigen Abbildung sehen wir die Posteriori-Verteilung für unser Münzwurf-Beispiel. Die Linien für den Mittelwert und den Durchschnitt überlappen sich, und das 95%-Glaubwürdigkeitsintervall deckt nur einen relativ schmalen Bereich ab. Wenn wir uns also für eine Punkt- oder Schätzungsgröße wie den Mittelwert oder den Durchschnitt entscheiden, haben wir eine hohe Sicherheit, dass dieser Wert korrekt ist. Im folgenden Beispiel sehen wir jedoch, dass eine Posteriori-Verteilung auch anders aussehen kann.</p>
+<p><img alt="Example Image" src="../img/beta-verteilung.jpg" /></p>
+<p>In diesem Beispiel sehen wir, dass der Mittelwert und der Durchschnitt nicht übereinstimmen, sondern etwas voneinander entfernt sind. Wenn man sich für einen dieser Werte entscheidet, muss man jedoch berücksichtigen, dass dieser Wert nicht unbedingt dem tatsächlichen Wert für <span class="arithmatex">\(\theta\)</span> entspricht, da das <span class="arithmatex">\(95%\)</span> HDI einen großen Bereich der Verteilung abdeckt. Die Quantifizierung von Unsicherheiten ist einer der großen Vorteile des Bayesianischen Modellierens.</p>
+<h2 id="mcmc">MCMC</h2>
+<p>In dem obigen Beispiel war es möglich, die Posteriori-Verteilung analytisch zu bestimmen, da die Beta-Verteilung (Priori) konjugiert zur Binomialverteilung (Likelihood) ist. In der Praxis ist dies jedoch selten der Fall, da man mit verschiedenen Verteilungen arbeiten muss. In solchen Fällen muss die Posteriori-Verteilung numerisch oder approximativ bestimmt werden. Eine der bekanntesten Methoden dafür ist MCMC (Monte Carlo Markov Chain). MCMC ist eine Gruppe von verschiedenen Algorithmen, wobei eines der einfachsten Methoden Metropolis-Hastings ist. Schauen wir uns anhand des Münzwurf-Beispiels an, wie Metropolis-Hastings funktioniert.</p>
+<h3 id="monte-carlo">Monte Carlo</h3>
+<p>Die Monte Carlo Methode erzeugt Pseudozufallszahlen (im Folgenden als Zufallszahlen bezeichnet).</p>
+<p><img alt="monte carlo" src="../img/monte_carlo.png" /></p>
+<p>In der Abbildung sehen wir die Proposal Distribution, den Trace-Plot und das Dichte-Diagramm. Die Proposal Distribution ist eine Normalverteilung mit dem Median <span class="arithmatex">\(\mu = 0,5\)</span> und einer beliebigen Varianz <span class="arithmatex">\(\sigma\)</span>. Aus der Proposal Distribution werden Zufallszahlen für <span class="arithmatex">\(\theta\)</span> generiert. Im Trace-Plot sieht man die Zufallszahlen in der Reihenfolge, in der sie erzeugt wurden. Das Dichte-Diagramm ist ein Histogramm der Stichprobe, das um 90 Grad gedreht ist. Der grüne Punkt im Dichte-Diagramm zeigt den aktuellen Wert von <span class="arithmatex">\(\theta\)</span> an.</p>
+<p>Wenn wir 10.000 zufällige Werte für <span class="arithmatex">\(\theta\)</span> ziehen, sieht der Prozess so aus.</p>
+<p><img alt="monte carlo gif" src="../img/monte_calro_gif.gif" /></p>
+<p>Diese Animation veranschaulicht mehrere wichtige Merkmale. Die Proposal Distribution ändert sich von einer Iteration zur nächsten nicht. Die Dichtekurve ähnelt mit zunehmendem Stichprobenumfang immer mehr der Proposal Distribution. Das Muster der Variation sieht in allen Iterationen gleich aus, was bedeutet, dass die Kurvendarstellung stationär ist.</p>
+<p>In diesem Fall hat die Monte-Carlo-Simulation eine Stichprobe generiert, die der Proposal distribution ähnelt.</p>
+<h3 id="markov-chain">Markov Chain</h3>
+<p>Die Markov Chain ist eine Folge von Zahlen, bei der jede Zahl von der vorherigen Zahl in der Folge abhängt. Ein Beispiel dafür ist das Ziehen der Werte von <span class="arithmatex">\(\theta\)</span> aus einer Normalverteilung, deren Median dem vorherigen Wert von <span class="arithmatex">\(\mu = \theta_{t-1}\)</span> entspricht.</p>
+<p>Die Abbildung unten zeigt einen Trace-Plot und ein Density-Diagramm, bei dem der aktuelle Wert von <span class="arithmatex">\(\theta_t = 0,530\)</span> aus der Proposal Distribution mit einem Mittelwert, der dem vorherigen Wert von <span class="arithmatex">\(\theta_{t-1} = 0,712\)</span> entspricht.</p>
+<p><img alt="markov chain" src="../img/markov_chain.png" /></p>
+<p>Schauen wir uns die nächste Iteration genauer an. Der Wert von <span class="arithmatex">\(\theta_t\)</span> beträgt nun 0,4111, und der Mittelwert der Normalverteilung <span class="arithmatex">\(\theta_{t-1}\)</span> ist <span class="arithmatex">\(0,530\)</span>.</p>
+<p><img alt="markov chain" src="../img/markov_chain_2.png" /></p>
+<p>Wenn wir erneut 10.000 zufällige Werte für <span class="arithmatex">\(\theta\)</span> ziehen, sieht der Prozess wie folgt aus.</p>
+<p><img alt="markov chain" src="../img/makrov_chain.gif" /></p>
+<p>Diese Animation zeigt die Unterschiede zwischen Monte Carlo und Markov Chain. Im Vergleich zur Monte Carlo Methode ändert sich die Proposal Distribution mit jeder Iteration. Dadurch entsteht eine Kurve mit einem "Random-Walk"-Muster. Die resultierende Dichtekurve ähnelt weder der Proposal Distribution noch einer anderen nützlichen Verteilung. </p>
+<p>Der Grund dafür, dass MCMC allein keine Stichprobe aus der Posterior-Verteilung erzeugen konnte, liegt darin, dass wir keine Informationen über die Posterior-Verteilung in den Prozess der Stichprobenbildung einbezogen haben. Wir könnten unsere Stichprobe verbessern, indem wir die vorgeschlagenen Werte von <span class="arithmatex">\(\theta\)</span>, die gemäß der Posterior-Verteilung wahrscheinlicher sind, beibehalten und die weniger wahrscheinlichen Werte verwerfen.</p>
+<p>Die offensichtliche Schwierigkeit bei der Annahme und Ablehnung vorgeschlagener Werte von <span class="arithmatex">\(\theta\)</span> basierend auf der Posterior-Verteilung besteht jedoch darin, dass wir die funktionale Form der Posterior-Verteilung in der Regel nicht kennen. Wenn wir die funktionale Form kennen würden, könnten wir die Wahrscheinlichkeiten direkt berechnen, ohne eine Zufallsstichprobe zu erzeugen. Wie können wir also vorgeschlagene Werte von <span class="arithmatex">\(\theta\)</span> akzeptieren oder ablehnen, ohne die funktionale Form zu kennen? Die Antwort lautet: der Metropolis-Hastings-Algorithmus!</p>
+<h3 id="metropolis-hastings">Metropolis Hastings</h3>
+<p>Der Metropolis-Hastings-Algorithmus kann verwendet werden, um zu entscheiden, welche vorgeschlagenen Werte von <span class="arithmatex">\(\theta\)</span> akzeptiert oder abgelehnt werden sollen, auch wenn wir die funktionale Form der posterioren Verteilung nicht kennen. Schauen wir uns den Algorithmus genauer an. </p>
+<p><img alt="mh" src="../img/mh1.png" /></p>
+<p>Diese Abbildung zeigt einen Trace-Plot und ein Dichtediagramm für eine Proposal Distribution mit einem Mittelwert von <span class="arithmatex">\(\theta_{t-1} = 0,517\)</span>. Der gezogene Wert <span class="arithmatex">\(\theta_{new} = 0,380\)</span> wird als "new" bezeichnet, da noch nicht entschieden wurde, ob dieser Wert akzeptiert oder abgelehnt wird.</p>
+<p>Im ersten Schritt des Metropolis-Hastings-Algorithmus berechnen wir das Verhältnis <span class="arithmatex">\(r(\theta_{new}, \theta_{t-1})\)</span>:</p>
+<div class="arithmatex">\[r(\theta_{new}, \theta_{t-1}) = \frac{Posteriori(\theta_{new})}{Posteriori(\theta_{t-1})}\]</div>
+<p>In der Abbildung beträgt dieser Wert für <span class="arithmatex">\(\theta_{new} = 0,380\)</span> und <span class="arithmatex">\(\theta_{t-1} = 0,517\)</span> 1,307. </p>
+<p>Im zweiten Schritt wird die Akzeptanzwahrscheinlichkeit <span class="arithmatex">\(\alpha(\theta_{new},\theta_{t-1})\)</span> berechnet. Diese ergibt sich als Minimum von <span class="arithmatex">\(r(\theta_{new}, \theta_{t-1})\)</span> und 1. Dieser Schritt is wichtig, damit die Wahrscheinlichkeiten zwischen 0 und 1 liegt. </p>
+<div class="arithmatex">\[alpha(\theta_{new},\theta_{t-1}) = \text{min}\\{r(\theta_{new}, \theta_{t-1}), 1\\}\]</div>
+<p>In der Abbildung ist dieser Wert 1,00. Das bedeutet, dass wir <span class="arithmatex">\(\theta_{new} = 0,380\)</span> akzeptieren und diesen Wert als Mittelwert für die Proposal Distribution in der nächsten Iteration verwenden.</p>
+<p><img alt="mh" src="../img/mh2.png" /></p>
+<p>Diese Abbildung zeigt die nächste Iteration, bei der <span class="arithmatex">\(\theta_{new} = 0,286\)</span> aus der Proposal Distribution mit dem Mittelwert <span class="arithmatex">\(\theta_{t-1} = 0,380\)</span> gezogen wurde. Das zuvor berechnete Verhältnis <span class="arithmatex">\(r(\theta_{new}, \theta_{t-1})\)</span> beträgt 0,747, also weniger als 1. Die berechnete Akzeptanzwahrscheinlichkeit <span class="arithmatex">\(\alpha(\theta_{new},\theta_{t-1})\)</span> beträgt 0,747.</p>
+<p>Wir lehnen <span class="arithmatex">\(\theta_{new}\)</span> nicht automatisch ab, nur weil die Akzeptanzwahrscheinlichkeit kleiner als 1 ist. Stattdessen ziehen wir in Schritt 3 eine Zufallszahl <span class="arithmatex">\(u\)</span> aus einer uniformen Verteilung zwischen 0 und 1. Wenn <span class="arithmatex">\(u\)</span> kleiner als die Akzeptanzwahrscheinlichkeit ist, akzeptieren wir den vorgeschlagenen Wert von <span class="arithmatex">\(\theta_{new}\)</span>. Andernfalls lehnen wir <span class="arithmatex">\(\theta_{new}\)</span> ab und behalten <span class="arithmatex">\(\theta_{t-1}\)</span> bei.</p>
+<p>Hier ist <span class="arithmatex">\(u = 0,094\)</span> kleiner als die Akzeptanzwahrscheinlichkeit (<span class="arithmatex">\(0,747\)</span>), also akzeptieren wir <span class="arithmatex">\(\theta_{new} = 0,286\)</span>. <span class="arithmatex">\(\theta_{new}\)</span> und <span class="arithmatex">\(0,286\)</span> sind grün dargestellt, um anzuzeigen, dass sie akzeptiert wurden. Im Folgenden betrachten wir eine Iteration, in der <span class="arithmatex">\(\theta_{new}\)</span> abgelehnt wird.</p>
+<p><img alt="mh" src="../img/mh3.png" /></p>
+<p>Diese Abbildung zeigt die nächste Iteration, bei der <span class="arithmatex">\(\theta_{new} = 0,088\)</span> aus unserer Proposal Distribution mit dem Mittelwert <span class="arithmatex">\(\theta_{t-1} = 0,286\)</span> gezogen wurde. Das zuvor berechnete Verhältnis <span class="arithmatex">\(r(\theta_{new}, \theta_{t-1})\)</span> beträgt 0,039, also kleiner als 1. Die berechnete Akzeptanzwahrscheinlichkeit <span class="arithmatex">\(\alpha(\theta_{new},\theta_{t-1})\)</span> beträgt 0,039.</p>
+<p>Der berechnete Wert von <span class="arithmatex">\(u\)</span> in Schritt 3 beträgt <span class="arithmatex">\(0,247\)</span> und ist somit größer als die Akzeptanzwahrscheinlichkeit. Daher verwerfen wir <span class="arithmatex">\(\theta_{new} = 0,088\)</span> und behalten <span class="arithmatex">\(\theta_{t-1} = 0,286\)</span> in Schritt 4 bei.</p>
+<p>Schauen wir uns nun diesen Prozess für 10.000 Zufallszahlen für <span class="arithmatex">\(\theta\)</span> an. </p>
+<p><img alt="mh" src="../img/mh.gif" /></p>
+<p>Diese Animation veranschaulicht mehrere Aspekte. Die Proposal Distribution ändert sich in den meisten Iterationen. Der Trace-Plot zeigt kein "Random-Walk"-Muster. Das Dichte-Diagramm ähnelt einer nützlichen Verteilung.</p>
+<p>Betrachten wir nun das Dichte-Diagramm genauer.</p>
+<p><img alt="mh" src="../img/post_hm.png" /></p>
+<p>Wir sehen ein Histogramm der Stichprobe, die wir mit MCMC und dem Metropolis-Hastings-Algorithmus erstellt haben. In diesem Beispiel wissen wir, dass die Posterior-Verteilung eine Beta-Verteilung mit den Parametern 5 und 7 ist. Die rote Linie zeigt die analytische Posterior-Verteilung, und die blaue Linie ist ein Kernel-Dichte-Diagramm für unsere Stichprobe. Die Kernel-Dichte-Darstellung ähnelt der Beta(5,7)-Verteilung, was darauf hindeutet, dass unsere Stichprobe eine gute Annäherung an die theoretische Posterior-Verteilung ist.</p>
+<p>Mit dieser Stichprobe könnten wir den Mittelwert oder Median der Posterior-Verteilung, ein 95%-Glaubwürdigkeitsintervall oder die Wahrscheinlichkeit berechnen, dass <span class="arithmatex">\(\theta\)</span> in ein beliebiges Intervall fällt.</p>
+<h2 id="bayesian-modeling_1">Bayesian Modeling</h2>
+<p>In diesem Abschnitt betrachten wir, wie ein Bayes'sches Modell in Python implementiert werden kann. Dazu verwenden wir PyMC3 und vergleichen klassische lineare Regression mit Bayes'scher linearer Regression.</p>
+<h3 id="pymc3">PyMC3</h3>
+<p>PyMC3 ist eine Python-Bibliothek für probabilistische Programmierung, die bei der bayesianischen Statistik hilft. Mit PyMC3 können komplexe Modelle erstellt und analysiert werden, um bayesianische Inferenz und Schätzungen durchzuführen.</p>
+<p><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pymc3</span> <span class="k">as</span> <span class="nn">pm</span>
+</code></pre></div>
+Zunächst erzeugen wir 10 zufällige Werte 'x_vals' zwischen 0 und 1 und berechnen die entsprechenden wahren y-Werte (true_y_vals). Schließlich werden zu den wahren y-Werten Zufallszahlen aus einer Normalverteilung mit einer Standardabweichung (sigma) addiert, um die beobachteten y-Werte (y_vals) zu erhalten.</p>
+<h3 id="erzeugen-von-daten">Erzeugen von Daten</h3>
+<div class="arithmatex">\[y_{true}=mx+b$$
+$$y=y_{true} + N(0,\sigma)\]</div>
+<div class="highlight"><pre><span></span><code><span class="n">true_slope</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">true_intercept</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">true_sigma</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">true_params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;slope&#39;</span><span class="p">:</span> <span class="n">true_slope</span><span class="p">,</span> <span class="s1">&#39;intercept&#39;</span><span class="p">:</span> <span class="n">true_intercept</span><span class="p">,</span> <span class="s1">&#39;sigma&#39;</span><span class="p">:</span> <span class="n">true_sigma</span><span class="p">}</span>
+<span class="n">num_points</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">x_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num_points</span><span class="p">)</span>
+<span class="n">true_y_vals</span> <span class="o">=</span> <span class="n">true_slope</span> <span class="o">*</span> <span class="n">x_vals</span> <span class="o">+</span> <span class="n">true_intercept</span>
+<span class="n">y_vals</span> <span class="o">=</span> <span class="n">true_y_vals</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">true_sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_points</span><span class="p">)</span>
+</code></pre></div>
+<p>In der folgenden Abbildung sehen wir die erzeugten y-Werte (y_vals) und x-Werte (x_vals) sowie die berechnete Gerade. Unser Ziel ist es, eine Gerade zu finden, die die x_vals am besten beschreibt.</p>
+<p><img alt="lr" src="../img/cd1.png" /></p>
+<p>Nun führen wir die klassiche Lineare Regression aus.</p>
+<div class="highlight"><pre><span></span><code><span class="n">clf</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_vals</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">y_vals</span><span class="p">)</span>
+<span class="n">preds</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_vals</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">resids</span> <span class="o">=</span> <span class="n">preds</span> <span class="o">-</span> <span class="n">y_vals</span>
+
+<span class="n">Output</span><span class="p">:</span>
+
+<span class="kc">True</span> <span class="n">Model</span><span class="p">:</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">10</span>
+<span class="kc">True</span> <span class="n">sigma</span><span class="p">:</span> <span class="mi">1</span>
+
+<span class="n">Estimated</span> <span class="n">Model</span><span class="p">:</span>
+<span class="n">y_hat</span> <span class="o">=</span> <span class="mf">6.602808064975681</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mf">9.703400820259425</span>
+<span class="n">Sd</span> <span class="n">Residuals</span><span class="p">:</span> <span class="mf">0.4703668242377374</span>
+</code></pre></div>
+<h3 id="bayes-lineare-regression">Bayes Lineare Regression</h3>
+<p>Im folgenden Abschnitt gehen wir auf die Bayes'sche lineare Regression ein und vergleichen abschließend die Ergebnisse mit der klassischen linearen Regression.</p>
+<p>Piori:
+<span class="arithmatex">\(<span class="arithmatex">\(m \sim N(0,20)\)</span>\)</span>
+<span class="arithmatex">\(<span class="arithmatex">\(b \sim N(0,20)\)</span>\)</span>
+<span class="arithmatex">\(<span class="arithmatex">\(\sigma \sim Exp(1)\)</span>\)</span></p>
+<p>Likelihood:
+<span class="arithmatex">\(<span class="arithmatex">\(y|m,b,\sigma \sim N(mx+b, \sigma)\)</span>\)</span></p>
+<p>Posterori:
+<span class="arithmatex">\(<span class="arithmatex">\(m,b,\sigma | y \sim ?\)</span>\)</span>
+<span class="arithmatex">\(<span class="arithmatex">\(P(m,b,\sigma|y) \propto P(y|m,b,\sigma) \times P(m) \times P(b) \times P(\sigma)\)</span>\)</span></p>
+<h3 id="modell-erstellen">Modell erstellen</h3>
+<p>Mit Hilfe von PyMC3 lässt sich das Modell sehr einfach und schnell definieren.</p>
+<div class="highlight"><pre><span></span><code>basic_model = pm.Model()
+
+with basic_model:
+    #priors
+    sigma = pm.Exponential(&quot;sigma&quot;, lam=1.0)
+    intercept = pm.Normal(&quot;intercept&quot;, mu=0, sigma=20)
+    slope = pm.Normal(&quot;slope&quot;, mu=0, sigma=20)
+
+    # Expected value of outcome
+    mu = slope*x_vals + intercept
+
+    # Likelihood (sampling distribution) of observations
+    likelihood = pm.Normal(&quot;Y_obs&quot;, mu=mu, sigma=sigma, observed=y_vals)
+</code></pre></div>
+<h3 id="mcmc_1">MCMC</h3>
+<p>Da es sich hier nicht um konjugierte Prioriverteilungen handelt, müssen wir die Posterioriverteilung approximativ bestimmen. </p>
+<p><div class="highlight"><pre><span></span><code>with basic_model:
+    trace = pm.sample(1000, cores = 4)
+</code></pre></div>
+Wir führen hier 1000 Iterationen mit 4 Kernen durch. Die Proposal-Distributions sind in diesem Fall die Prioriverteilungen.</p>
+<p>PyMC3 entscheidet automatisch, welche der MCMC-Methoden für das vorliegende Problem am besten geeignet ist. In diesem Fall wird der Hamilton-Monte-Carlo-NUTS-Algorithmus verwendet, um die Posterioriverteilungen zu approximieren.
+<img alt="cd" src="../img/cd2.png" /></p>
+<p>Dies ist das Ergebnis. Auf der linken Seite sehen wir die entstandenen Dichteverteilungen, und auf der rechten Seite den entsprechenden Trace-Plot. Wir sehen, dass die Ergebnisse für slope, intercept und sigma identisch mit den Ergebnissen der klassischen linearen Regression sind.</p>
+<p>Ein bayesianischer Ansatz wie in diesem Beispiel liefert also nicht unbedingt andere oder bessere Ergebnisse, sondern eine bessere Interpretation des Ergebnisses. Nur in sehr bestimmten Fällen lohnt sich der bayesianische Ansatz.</p>
+<h2 id="vor-und-nachteile">Vor und Nachteile</h2>
+<p>In folgenden Fällen lohnt sich ein bayesianischer Ansatz:</p>
+<ul>
+<li>Quantifizierbare vorherige Erkenntnisse</li>
+<li>Wenige Daten</li>
+<li>Quantifizierung von Unsicherheit</li>
+<li>Hierarchische Modellierung</li>
+</ul>
+<p>Nachteile eines bayesianischen Ansatzes:</p>
+<ul>
+<li>Auswahl der Priori</li>
+<li>Hoher Rechenaufwand</li>
+<li>Erfordert mehr statistisches Fachwissen als einige andere Methoden</li>
+</ul>
+<p>Das war unsere kurze Einführung in das bayesianische Modellieren. Es ist wichtig, dass man die Bayes-Statistik beherrscht, um bayesianische Methoden effektiv einsetzen zu können. Weiterführende Materialien, einschließlich eines entsprechenden Kurses der LMU und weiteren relevanten Quellen, finden Sie unter "Weiterführende Materialien". Für viele klassische Machine Learning Modelle gibt es auch entsprechende bayesianische Modelle wie z.B. bayesianische logistische Regression und bayesianische neuronale Netze. Allerdings würde die Behandlung dieser Modelle den Rahmen dieser Ausarbeitung sprengen. </p>
+<h2 id="weiterfuhrendes-material">Weiterführendes Material</h2>
+<ul>
+<li><a href="http://bayeskurs.volkerschmid.de/">LMU Kurs</a></li>
+<li><a href="https://www.pymc.io/projects/docs/en/v3/index.html">PyMC3</a> </li>
+<li><a href="https://seeing-theory.brown.edu/bayesian-inference/index.html#section1">Visualizierungen</a></li>
+</ul>
+<h3 id="podcast">Podcast</h3>
+<p>Hier Link zum Podcast.</p>
+<h3 id="talk">Talk</h3>
+<p>Hier einfach Youtube oder THD System embedden.</p>
+<h3 id="demo">Demo</h3>
+<p><a href="https://mygit.th-deg.de/so22245/bayesian-modeling">Link zur Code Demo</a></p>
+<h2 id="literaturliste">Literaturliste</h2>
+<ul>
+<li><a href="https://blog.stata.com/2016/11/15/introduction-to-bayesian-statistics-part-2-mcmc-and-the-metropolis-hastings-algorithm/">MCMC Metroplis Hastings</a></li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../../javascripts/katex.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        
+      
+    
+  </body>
+</html>

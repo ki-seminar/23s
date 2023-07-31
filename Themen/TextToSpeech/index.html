@@ -1,0 +1,883 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../T12_feature-extraction/">
+      
+      
+        <link rel="next" href="../Zeitserienanalyse/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.1, mkdocs-material-9.1.21">
+    
+    
+      
+        <title>Text-to-Speech - Seminar Aktuelle Themen der künstlichen Intelligenz</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.eebd395e.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+      <link rel="stylesheet" href="../../javascripts/mathjax.js">
+    
+      <link rel="stylesheet" href="https://polyfill.io/v3/polyfill.min.js?features=es6">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#text-to-speech" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Seminar Aktuelle Themen der künstlichen Intelligenz" class="md-header__button md-logo" aria-label="Seminar Aktuelle Themen der künstlichen Intelligenz" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Seminar Aktuelle Themen der künstlichen Intelligenz
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Text-to-Speech
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Seminar Aktuelle Themen der künstlichen Intelligenz" class="md-nav__button md-logo" aria-label="Seminar Aktuelle Themen der künstlichen Intelligenz" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Seminar Aktuelle Themen der künstlichen Intelligenz
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Aktuelles
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Themen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Themen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Einf%C3%A4rben%20von%20Bildern/" class="md-nav__link">
+        Einfärben von Bildern - Zwei Ansätze
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Empfehlungssysteme/" class="md-nav__link">
+        Empfehlungssysteme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Face_Aging/" class="md-nav__link">
+        Face Aging
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LLMs/" class="md-nav__link">
+        Large Language Models
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Spracherkennung/" class="md-nav__link">
+        Spracherkennung
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T09_Dialekte_Spracherkennung/" class="md-nav__link">
+        T09 - Dialekte in der Spracherkennung
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T12_feature-extraction/" class="md-nav__link">
+        Feature Extraction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Text-to-Speech
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Text-to-Speech
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    Abstract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#einleitung-motivation" class="md-nav__link">
+    Einleitung / Motivation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stand-der-forschung" class="md-nav__link">
+    Stand der Forschung
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methoden" class="md-nav__link">
+    Methoden
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anwendungen" class="md-nav__link">
+    Anwendungen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fazit" class="md-nav__link">
+    Fazit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#weiterfuhrendes-material" class="md-nav__link">
+    Weiterführendes Material
+  </a>
+  
+    <nav class="md-nav" aria-label="Weiterführendes Material">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#podcast" class="md-nav__link">
+    Podcast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#talk" class="md-nav__link">
+    Talk
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demo" class="md-nav__link">
+    Demo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#literaturliste" class="md-nav__link">
+    Literaturliste
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Zeitserienanalyse/" class="md-nav__link">
+        Zeitserienanalyse
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bayesian_modeling/" class="md-nav__link">
+        Bayesian Modeling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../t7_Process_Mining/" class="md-nav__link">
+        Process Mining
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../transfer_learning_nlp/" class="md-nav__link">
+        Transfer Learning in der Sprachverarbeitung
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../impressum/" class="md-nav__link">
+        Impressum
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    Abstract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#einleitung-motivation" class="md-nav__link">
+    Einleitung / Motivation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stand-der-forschung" class="md-nav__link">
+    Stand der Forschung
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methoden" class="md-nav__link">
+    Methoden
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anwendungen" class="md-nav__link">
+    Anwendungen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fazit" class="md-nav__link">
+    Fazit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#weiterfuhrendes-material" class="md-nav__link">
+    Weiterführendes Material
+  </a>
+  
+    <nav class="md-nav" aria-label="Weiterführendes Material">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#podcast" class="md-nav__link">
+    Podcast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#talk" class="md-nav__link">
+    Talk
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demo" class="md-nav__link">
+    Demo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#literaturliste" class="md-nav__link">
+    Literaturliste
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="text-to-speech"><strong>Text-to-Speech</strong></h1>
+<p>von <em>Lea Wagner und Michael Schmidbauer</em></p>
+<h2 id="abstract"><strong>Abstract</strong></h2>
+<p>In diesem Blogbeitrag widmen wir uns dem Thema Text-to-Speech (TTS). Bei Text-to-Speech handelt es sich um eine vielseitig einsetzbare und faszinierende Technologie zur computergestützten Generierung von natürlicher und menschenähnlicher Sprache.</p>
+<p>In dem Beitrag betrachten wir einerseits die vielfältigen Einsatzmöglichkeiten von TTS wie beispielsweise die Unterstützung von sehbehinderten Personen. Andererseits beleuchten wir den Aufbau und die Funktionsweise dieser Technologie genauer. Für die Erklärung betrachten wir die beiden Modelle Tacotron 2 und Vall-E.</p>
+<h2 id="einleitung-motivation"><strong>Einleitung / Motivation</strong></h2>
+<p>Die Text-to-Speech-Technologie hat, wie viele Anwendungen der Künstlichen Intelligenz, in den letzten Jahren erhebliche Fortschritte gemacht. Ihr Einfluss auf verschiedene Bereiche unseres täglichen Lebens ist beachtlich. Prominente Beispiele für ihre Anwendung wären Sprachassistenten wie beispielsweise Siri oder Alexa, aber sie waren längst nicht die ersten. Schon lange wird die TTS-Technologie beispielweise in Navigationsgeräten verwendet.</p>
+<p>Mit Hilfe dieser Technologie wird es Maschinen ermöglicht, Text in natürliche Sprache umzuwandeln. Dabei wurde erst mit Einsatz von Künstlicher Intelligenz ein nahezu menschlicher Klang ermöglicht. Doch gibt es noch immer Stolpersteine wie beispielsweise Dialekte, die von den Systemen heute noch nicht perfekt erzeugt werden können.</p>
+<p>Nichtsdestotrotz ist es unbestreitbar, dass die Text-to-Speech-Technologie ein wesentlicher Bestandteil der heutigen Mensch-Computer-Interaktion geworden ist. Sie erhöht die Sicherheit im Straßenverkehr oder ermöglicht es, sehbehinderten Personen besser an der zunehmend digitalen Welt teilzunehmen.</p>
+<p>Gerade für diese Personengruppe kann die TTS-Technologie einen deutlich besseren Zugang zu digitalen Informationen ermöglichen. Mit TTS können ihnen digitale Inhalte vorgelesen werden und damit der Zugang zum digitalen Leben erleichtert werden.</p>
+<p>Darüber hinaus bietet die Integration der Text-to-Speech-Technologie für die Unterhaltungsindustrie viele neue Möglichkeiten. Hörbücher, Podcasts, Videospiele, Filme und Serien sind einige der Einsatzgebiete, bei denen TTS-Systeme heute oder in naher Zukunft eine große Rolle spielen können. So wäre es möglich ein deutlich immersiveres Spieleerlebnis zu erzeugen oder eine Sprachfassung eines Films für eine Sprache zu generieren, bei der heutzutage der Markt zu klein wäre, um die Kosten zu rechtfertigen.</p>
+<p>Durch die ganzen Möglichkeiten sollte man allerdings nicht außeracht lassen, welche potenziellen Gefahren diese Technologie mit sich bringen kann. Gerade mit dem Fortschreiten von Zero-Shot-Systemen, die mit nur wenigen Sekunden Audio eine Stimme nachahmen können, entsteht auch ein großes Gefährdungspotential, dass von Identitätsdiebstahl bis hin zu politischer Einflussnahme reicht.</p>
+<p>In diesem Block werden wir und mit den technischen Grundlagen von Text-to-Speech-Systemen befassen. Außerdem werden wir zwei moderne Systeme genauer betrachten.</p>
+<h2 id="stand-der-forschung"><strong>Stand der Forschung</strong></h2>
+<p>In diesem Abschnitt möchten wir ein end-to-end TTS System und ein Zero-Shot TTS System vorstellen.</p>
+<p><strong>Tacotron 2:</strong><br>
+Tacotron ist ein end-to-end neurales Text-to-Speech System, welches 2018 im Auftrag von Google entwickelt wurde. Es handelt sich dabei um eine Technologie, die einen Text in Sprache umwandeln kann. Systeme wie Tacotron 2 sind entscheidend für Anwendungen wie sprachgesteuerte Systeme und assistive Technologien. Tacotron 2 sollte beispielsweise in der Zukunft für die Sprachsynthese in Google Translate und Google Home verwendet werden. Aber auch für die barrierefreiheit für Sehbehinderte Menschen stellen solche Systeme eine Hilfestellung und Bereicherung der Lebensqualität dar.</p>
+<p>Die Besonderheit von Tacotron 2 liegt in der natürlich klingenden Sprache. Viele TTS Systeme weisen Probleme bei der Betonung, Prosodie und Semantik auf. Die Beispiele von Tacotron 2 weisen eine nahezu menschlich klingende Sprachausgabe auf.</p>
+<p>Durch die Anwendung von vielschichtigen Deep Learning Algorithmen kann das System komplexe Muster in der Sprache erfassen und so eine möglichst natürliche Sprache erzeugen.<br>
+Bei einer Bewertung menschlicher Zuhörer erzielte das System einen MOS (mean opinion score) von 4.53 verglichen mit 4.58 für professionell aufgenommene Audios. MOS bedeutet, dass eine bestimmte Anzahl von Menschen bewertet, wie gut sich die Audio anhört.</p>
+<p><strong>Funktionsweise von Tacotron 2:</strong><br>
+Tacotron 2 besteht aus zwei Hauptkomponenten, nämlich einem Encoder und einem Decoder. Der Encoder wandelt eine Textsequenz in eine Hidden Feature Repräsentation um, während der Decoder basierend auf der enkodierten Sequenz Frame für Frame ein Mel Spektrogramm erstellt. Im Blockdiagramm unten ist der Encoder in blau dargestellt und der Decoder in orange.</p>
+<p><img alt="Online Image" src="https://pytorch.org/assets/images/tacotron2_diagram.png" /><br>
+<em>Abb. 1 https://pytorch.org/assets/images/tacotron2_diagram.png</em></p>
+<p>Als Input erhält das System einen beliebigen Text. Daraus werden Character Embeddings generiert. Hier wurde zuvor ein Modell trainiert, welches jedem Buchstaben einen Vektor zuweist. In diesem Fall hat ein Vektor 512 Dimensionen, in dem die sprachlichen Eigenschaften dieses Buchstabens festgehalten werden. Diese Vektoren werden anschließend in einer Matrix zusammengefasst und an ein 3-schichtiges Convolutional Neural Network übergeben. Dieses CNN ist darauf ausgelegt, n-grams mit längerfristigem Kontext zu modellieren. Dieser Output geht dann weiter an ein bi-directional LSTM. In einem normalen LSTM wird ein Zustand zum Zeitpunkt t berechnet auf dem Input und auf dem Zustand des vorherigen Zeitpunktes t-1. In diesem LSTM werden die Daten vorwärts und rückwärts verarbeitet, wobei kontextuelle Informationen sehr gut erfasst werden können. Die Ausgabe dieses LSTM stellt die Encoder Ausgabe dar, welche jetzt high-level Informationen über die Textsequenz enthält.</p>
+<p>Das (location sensitive) Attention Network nimmt den Output des LSTM und einen Output des Decoder Teils zum Zeitpunkt t-1, um relevante Informationen zu erhalten, mit welchen dann die Vorhersage zum Zeitpunkt t erstellt wird. Diese wird an ein 2-schichtiges LSTM übergeben. Für jeden Zeitschritt dieses LSTM wird ein Mel-Spektrogramm-Vektor vorhergesagt. Diese Ausgabe geht an eine lineare Projektion. Diese wird einmal verwendet für den Stop Token. Hier wird die Wahrscheinlichkeit berechnet, dass die Output Sequenz fertig generiert wurde. So kann das Modell dynamisch bestimmen, wann die Generierung beendet wird und ist nicht an eine feste Vorgabe von Iterationen gebunden.</p>
+<p>Die Ausgabe der linearen Projektion geht außerdem an ein Pre-Net, welches seinen Output wieder an das 2-schichtige LSTM übergibt, um den nächsten Frame vorherzusagen. Das 5-schichtige Post-Net am Schluss berechnet einen bestimmten Restwert, welcher für ein glattes Mel Spektrogramm verantwortlich ist. Sobald alle Frames durchlaufen wurden, enthält man dann ein komplettes Mel Spektrogramm. Das Mel Spektrogramm wird dann an das WaveNet gegeben, welches als Vocoder agiert und eine Wellenform synthetisiert.</p>
+<p><strong>Limitationen von Tacotron 2:</strong><br>
+Obwohl Sprachmodelle wie Tacotron 2 erstaunliche Fortschritte im Bereich der Aussprache gemacht haben, zeigen sich hier immer wieder Probleme auf. Schwierigkeiten bei der Aussprache von Wörtern mit komplexer Phonologie oder ungewöhnlicher Betonung bleiben auch bei modernen Text-to-Speech Systemen wie Tacotron 2 bestehen.</p>
+<p>Ein weiterer Punkt ist die Generierung von Audios in Echtzeit. Da die Text-to-Speech Synthese des Systemns auf einer komplexen Architektur mit vielen Schichten beruht, ist eine Generierung in Echtzeit derzeit noch nicht möglich. Deshalb wird dieses System momentan auch nicht für die Sprachsynthese in Google Translate und Google Home benutzt.</p>
+<p>Darüber hinaus ist es bisher nicht möglich, die Emotionen der generierten Sprache gezielt zu steuern. Obwohl Tacotron 2 in der Lage ist, natürliche Sprachausgauben zu erzeugen, fehlt die Fähigkeit, die emotionale Ausrucksweise bewusst und gezielt zu beeinflussen. Dies stellt jedoch einen eigenen Bereich der Text-to-Speech Forschung dar.</p>
+<p><strong>VALL-E:</strong><br>
+VALL-E ist ein Zero-Shot TTS System, welches 2023 von Microsoft vorgestellt wurde. Das System kann basierend auf einem Text Prompt und einem Audio Prompt einen Text in Sprache mit der Stimme des Audio Prompts umwandeln. Das bedeutet, VALL-E kann Stimmen imitieren, welche nicht in den Trainingsdaten vorkommen. Auch die akustische Umgebung kann berücksichtigt werden. Wenn der Audio Prompt sich beispielsweise anhört, als würde die Stimme aus einem Telefon kommen, kann VALL-E auch das imitiere. Die Trainingsdaten stammen aus dem LibriLight Datensatz von Meta und enthalten insgesamt 60K Stunden Audio Material, welches größtenteils aus Hörbüchern stammt. Dadurch kann ein System wie VALL-E in Zukunft Anwendung in der Welt der Podcasts und Hörbücher finden.<br>
+Die Bewertung der von VALL-E generierten Audios erzielte sogar leicht bessere Ergebnisse als die Ground Truths.</p>
+<p>Die Besonderheit des VALL-E Systems ist der extrem kurze benötigte Audio Input. Während das Vorgänger System noch einen Input von 30 Minuten benötigte, benötigt VALL-E lediglich 3 Sekunden. Durch diese erhebliche Verbesserung entsteht nicht nur eine vereinfachte Anwendung, sondern auch ein vergrößertes Missbrauchspotzenzial. Darauf wird im Abschnitt Limitationen/Ethik nochmal genauer eingegangen.</p>
+<p><strong>Funktionsweise von VALL-E:</strong><br>
+Ähnlich wie Tacotron 2, nutzt VALL-E eine Encoder-Decoder-Architektur.</p>
+<p><img alt="Online Image" src="https://www.chip.de/ii/1/2/6/7/6/9/4/0/3/3b6003cc590f29a5.jpg" /><br>
+<em>Abb. 2 https://www.chip.de/ii/1/2/6/7/6/9/4/0/3/3b6003cc590f29a5.jpg</em></p>
+<p>Es gibt zwei Inputs, den Text Prompt und den Acoustic Prompt. Der Text Prompt wird zunächst in Phoneme und dann in entsprechende Embeddings umgewandelt. Der Audio Prompt geht an den Encoder. Hierbei handelt es sich um den Audio Codec Encoder von Facebook Research. Dieser stellt das “Arbeitstier” hinter VALL-E dar und hat nochmal einen eigenen Encoder und Decoder, wie man im Blockdiagramm erkennen kann.</p>
+<p><img alt="Online Image" src="https://github.com/facebookresearch/encodec/raw/main/architecture.png" /><br>
+<em>Abb. 3 https://github.com/facebookresearch/encodec/raw/main/architecture.png</em></p>
+<p>Der Encoder nimmt die Wellenform und führt eine Convolution durch für Downsampling. Darauffolgend wird ein LSTM genutzt für die Sequenz Modellierung. Das Ergebnis dieses Encoders ist eine kompaktere Repräsentation mit 75 beziehungsweise 100 latenten Zeitschritten im Vergleich zu 24.000 beziehungsweise 48.000 im Input. Der Decoder ist eine gespiegelte Form des Encoders, welcher wieder ein Upsampling durchführt und daraus eine Wellenform erzeugt. Dazwischen befindet sich der Quantizer.</p>
+<p>Für diesen gibt es 8 sogenannte Codebooks. Codebooks sind Dictionaries gefüllt mit Vektoren, woraus sich 1024 Einträge ergeben. Der Input Vektor wird repräsentiert, indem er auf den ähnlichsten Vektor im Codebook gemapt wird. Diese Ähnlichkeit wird gemessen mit dem euklidischen Abstand. Dadurch gehen Informationen verloren, welche man aber gerne erhalten möchte. Mit Hilfe der Residual Vector Quantization (RVQ) wird der Restwert berechnet. Dieser wird dann auf einen weiteren Vektor im Codebook gemapt. Die finale Repräsentation ist eine Liste der Indexe, auf die die Vektoren gemapt wurden.</p>
+<p>Sobald der Audio Codec Encoder seine Arbeit erledigt hat, wird die Repräsentation an den Decoder von VALL-E übergeben.</p>
+<p><img alt="Online Image" src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*zZmUzjNyvSa3a-b-c7bdXQ.png" /><br>
+<em>Abb. 4 https://miro.medium.com/v2/resize:fit:1400/format:webp/1</em>zZmUzjNyvSa3a-b-c7bdXQ.png*</p>
+<p>Dieser besteht aus einem Non-Auto-Regressive (NAR) und aus einem Auto-Regressive (AR) Decoder. Der AR Decoder ist dafür verantwortlich, die Input Daten des ersten Codebooks zu verarbeiten. Der NAR Decoder ist für die restlichen Codebooks verwendet. Hier wird aus diesen Repräsentationen der Codebooks die Wellenform generiert, aus der die Output Sprache entsteht. </p>
+<p><strong>Limitationen und Ethik von VALL-E:</strong><br>
+Trotz der herausragenden Ergebnisse von VALL-E gibt es dennoch einige Einschränkungen, die es zu beachten gibt. Einerseits können manche Wörter unklar oder schwer verständlich sein. Darüber hinaus ist die Leistung des Systems bei Sprechern mit Akzent schlechter im Vergleich zu den Sprechern ohne Akzent. Dies liegt an den Trainingsdaten, die zu einem sehr großen Teil aus Hörbuchmaterial bestehen. Auch kann VALL-E die Emotionen der Sprache noch nicht gezielt beeinflussen. Abschließend bestehen ethische Risiken, beispielsweise im Zusammenhang mit Impersonation und Spoofing. Im Zusammenhang mit Deep Fake Videos könnten mit Hilfe von VALL-E falsche Informationen verbreitet werden. Auch könnte VALL-E genutzt werden, um beispielsweise über Telefon an sensible Daten zu gelangen.</p>
+<p>Microsoft äußert sich zu diesen möglichen negativen Folgen in ihrem Paper. Es wird eine Möglichkeit genannt, ein System zu erstellen, welches klassifizieren kann, ob eine Audio von VALL-E generiert wurde oder nicht. Ein Solches System gibt es zum jetzigen Stand aber noch nicht. </p>
+<p><strong>Fazit: Tacotron 2 und VALL-E:</strong><br>
+Trotz ihrer Unterschiede in den Systemen und Anwendungsbereichen teilen Vall-E und Tacotron 2 Gemeinsamkeiten in ihrer Architektur und Technologie. Zum einen ist das wie Verwendung einer Encoder-Decoder-Architektur, welche es ermöglicht, den Input zunächst in eine diskrete Repräsentation umzuwandeln um daraus anschließend die Sprachausgabe zu generieren. Eine weitere Gemeinsamkeit ist die Verwendung von Mel-Spektrogrammen. In Tacotron 2 wird dieses jedoch direkt als intermediäre Repräsentation verwendet, bei VALL-E aber nur im Encodec Teil. Zuletzt nutzen beide Systeme autoregressive Technologien, um die Sprachausgabe schrittweise zu generieren und so eine natürliche und flüssige Sprache zu erzuegen. </p>
+<h2 id="methoden"><strong>Methoden</strong></h2>
+<p>In diesem Abschnitt geben wir einen kurzen Überblick über weitere Methoden für Text-to-Speech Systeme.</p>
+<p><strong>Hidden Markov Modele:</strong><br>
+Hidden Markov Modelle (HMMs) sind eine der grundlegendsten Methoden in der Sprachverarbeitung und waren auch bei TTS-Systemen maßgeblich an der Entwicklung beteiligt. Es handelt sich um eine Methode, die statistische Eigenschaften von Sprache modelliert und die Beziehungen zwischen Text und Sprachesignal erfasst.</p>
+<p>Das zugrunde liegende mathematische Modell eines HMMs besteht aus einer Menge von Zuständen, Übergängen zwischen den Zuständen und Emissionen, die mit den Zuständen verknüpft sind. Für die Anwendung von HMMs im Bereich der TTS-Synthese werden typischerweise drei Arten von Zuständen definiert. Die Zustände des Emissionsmodells repräsentieren die Klänge oder Phoneme, die in der Sprache vorhanden sind. Jeder Zustand ist mit einer Wahrscheinlichkeitsverteilung über die möglichen akustischen Merkmale verbunden, die für das jeweilige Phonem charakteristisch sind. Die Zustände des Übergangsmodells repräsentieren die linguistische Struktur des Textes. Sie können Worte, Silben oder andere linguistische Einheiten sein. Die Übergänge zwischen den Zuständen des Übergangsmodells modellieren die statistische Wahrscheinlichkeit, mit der eine bestimmte linguistische Einheit auf eine andere folgt. Der Anfangszustand repräsentiert den Beginn des Textes oder der Sprachsequenz. Er gibt an, welche linguistische Einheit zuerst erzeugt wird.</p>
+<p>Die grundlegende Idee hinter HMMs besteht darin, dass der Übergang von einem Zustand zum nächsten stochastisch erfolgt, basierend auf den Übergangswahrscheinlichkeiten zwischen den Zuständen. Zusätzlich zu den Zustandsübergängen emittiert jeder Zustand eine bestimmte Wahrscheinlichkeitsverteilung über die akustischen Merkmale.</p>
+<p>Bei der TTS-Synthese wird das HMM-Modell verwendet, um akustische Modelle zu erzeugen, die die Beziehung zwischen Text und Sprachsignalen erfassen. Der Text wird in eine Sequenz von Zuständen des Emissionsmodells übersetzt, und die HMM-Übergangswahrscheinlichkeiten werden verwendet, um die Reihenfolge und Dauer der Zustände zu bestimmen. Anhand der Wahrscheinlichkeitsverteilungen der akustischen Merkmale können dann Sprachsignale erzeugt werden, die dem Text entsprechen.</p>
+<p>Obwohl HMMs eine bewährte Methode in der Sprachverarbeitung sind, haben sie auch ihre Einschränkungen. Insbesondere können sie Schwierigkeiten haben, komplexe linguistische Phänomene und Variabilität in den Sprachsignalen genau zu modellieren.</p>
+<p><strong>Deep Learning und NNs:</strong><br>
+Deep Learning und neuronale Netzwerke verwenden mehrschichtige neuronale Netzwerke, um komplexe Funktionen zu erlernen und hochdimensionale Daten zu verarbeiten. Im Bereich der TTS-Synthese können diese verwendet werden, um direkt Text auf Sprachsignale abbilden zu können, ohne den Umweg über diskrete Zustände wie es bei Hidden Markov Modellen der Fall ist.</p>
+<p>Eine häufig verwendete Architektur sind Recurrent Neural Networks (RNNs). Diese Modelle haben die Fähigkeit, Sequenzdaten effektiv zu modellieren und können auf den TTS-Kontext angepasst werden, um Text in akustische Merkmale zu übersetzen.</p>
+<p>Eine Weiterentwicklung des RNN sind die sogenannten Long-Short-Term-Memory (LSTM) Architekturen. Hierbei wird das Modell mit einem Speicher ausgestattet, der es ihm ermöglicht auch über längere Abschnitte Zusammenhänge zu erkennen.</p>
+<p>Für die Generierung des Sprachmodels wird häufig ein Convolutional Neural Network (CNN) verwendet. Diese Architektur ist besonders geeignet, um Muster in der gesprochenen Sprache zu erkennen und diese auch zu modellieren.</p>
+<p><strong>Transformer-basierte Modelle:</strong><br>
+Die Transformer Technologie ist eine der modernen Architekturen im Bereich der natürlichen Sprachverarbeitung. Dabei finden sie ihre Anwendungen sowohl bei Large-Language-Modellen wie ChatGPT oder GitHubCopilot, als auch bei Text-to-Speech Systemen. So sind Transformer beispielsweise Bestandteil des oben Vorgestellten Vall-E Systems.</p>
+<p>Im Gegensatz zu herkömmlichen end-to-end Methoden wie dem oben vorgestellten Tacotron 2 sind Transformer-basierte Ansätze effizienter und besser darin, Langzeitabhängigkeiten zu modellieren. Ebenfalls ist es möglich mit Transformer-basierten Modellen deutlich größere Datenmengen zu verarbeiten, als bei den vorhergehenden Ansätzen.</p>
+<p>Im Vergleich zu herkömmlichen RNN-basierten Modellen haben Tranformer-basierte Modelle noch weitere Vorteile. Durch den Wegfall der rekurrenten Verbindungen ist es möglich das Training zu parallelisieren und durch die Self-Attention der Transformer kann ein globaler Kontext einer Sequenz zu jedem Ausschnitt hinzugefügt werden. Dadurch ist es möglich, längerfristigen Kontext zu modellieren.</p>
+<p>Für eine ausführlichere Erklärung dieser Technologie verweisen wir auf den Blogbeitrag zu Large-Language-Models.</p>
+<p><strong>Transfer Learning:</strong><br>
+Bei der Methode des Transfer Learnings werden Modelle auf großen allgemeinen Datensätzen trainiert, um später auf den spezifischen Anwendungsfall abgestimmt zu werden. In unserem Fall wird ein Modell beispielsweise mit Englischsprachigen Audiodateien trainiert und später auf die gewünschte Stimme angepasst.</p>
+<p>Mit dieser Methode kann die Trainingszeit des Modells erheblich reduziert werden. Allerdings verschlechtern sich die Ergebnisse, je größer die Unterschiede zwischen den Trainingsdaten des vortrainierten Modells und des Anwendungsfalls werden.</p>
+<p>Für genauere und umfangreichere Informationen zu diesem Thema verweisen wir auf den Blogbeitrag zu Transfer Learning.</p>
+<h2 id="anwendungen"><strong>Anwendungen</strong></h2>
+<p>Die Anwendungsmöglichkeiten für Text-to-Speech Systeme sind vielseitig. Sie haben schon lange ihren Weg in unseren Alltag gefunden.
+Zu häufigen Anwendungen derartiger Systeme gehören unter anderen:</p>
+<ul>
+<li>Navigationsgeräte</li>
+<li>Automatische ansagen in Zügen oder an Bahnhöfen</li>
+<li>Sprachassistenten wie beispielsweise Siri oder Alexa</li>
+<li>Barrierefreiheitsfunktionen wie beispielsweise das Vorlesen dessen, was auf dem Bildschirm angezeigt wird.</li>
+<li>Vorlesen der Text Ein- oder Ausgabe bei Übersetzungssoftware</li>
+</ul>
+
+<p>Beispiele für Anwendungen bei denen Text-to-Speech bereits eingesetzt wird oder ein zukünftiger Einsatz denkbar wäre:</p>
+<ul>
+<li>Nachbearbeitung von Podcasts, um einzelne Wörter zu ändern</li>
+<li>Aufnahme von Podcasts oder Hörbüchern</li>
+<li>Erstellen von Tonaufnahmen in unterschiedlichen Sprachen für Videospiele, Filme und Serien</li>
+</ul>
+
+<p>Gerade mit dem Blick auf Zero-Shot-Systeme sollte man die Einsatzgebiete nicht außer Acht lassen, die nicht dem Wohle des Großteils der Bevölkerung dienen. Dabei werden Tonspuren oder Videos erstellt, um gezielt Personen, Unternehmen oder Ländern zu schaden. Beispielsweise, um Berichte oder Aussagen zu erstellen, die Wahlen oder den Aktienkurs in eine bestimmte Richtung drängen sollen.</p>
+<h2 id="fazit"><strong>Fazit</strong></h2>
+<p>Text-to-Speech ist eine faszinierende und vielversprechende Technologie, mit großem Potential und vielseitigen Anwendungsmöglichkeiten. Die Entwicklung der letzten Jahre hat inzwischen Systeme zur Generierung nahezu natürlicher menschlicher Sprache hervorgebracht.</p>
+<p>Die Einsatzgebiete sind dabei sehr vielseitig. Von dem Vorlesen von Texten auf dem Bildschirm für Sehbehinderte Personen, über die Unterstützung zum lernen von Sprachen, bis hin zur sicheren Verwendung von Navigationsgeräten. Darüber hinaus sind die Anwendungsmöglichkeiten in der Werbebranche, dem Kundenservice oder der Unterhaltungsindustrie nahezu grenzenlos.</p>
+<p>Allerdings gibt es auch einige Herausforderungen im Zusammenhang mit TTS. Die Generierung von natürlichen Stimmen erfordert eine komplexe Verarbeitung von Sprache, Intonation und Betonung. Obwohl TTS-Systeme bereits erstaunlich realistische Ergebnisse erzielen können, gibt es immer noch Raum für Verbesserungen, insbesondere in Bezug auf die emotionale Ausdrucksstärke und die Anpassungsfähigkeit an unterschiedliche Textarten.</p>
+<p>Darüber hinaus sollten ethische Aspekte bei der Entwicklung und Anwendung von TTS-Technologien berücksichtigt werden. Insbesondere der potenzielle Missbrauch von TTS für Fälschungen oder Manipulationen von Audioinhalten ist ein ernstzunehmendes Risiko. Es ist wichtig, Richtlinien und Standards zu entwickeln, um die Verbreitung von gefälschten oder irreführenden Stimmen zu verhindern und die Integrität von Audioquellen zu gewährleisten. Dabei sollte nicht außer Acht gelassen werden, dass die Risiken sowohl auf gesellschaftlicher als auch privater Ebene bestehen. Besonderes Augenmerk sollte man dabei auch auf die Zero-Shot Systeme legen.</p>
+<p>Insgesamt bietet TTS enorme Vorteile und Chancen, aber auch Herausforderungen und ethische Überlegungen. Die weitere Forschung und Entwicklung auf diesem Gebiet sind von großer Bedeutung, um die Qualität der generierten Stimmen zu verbessern, neue Anwendungsbereiche zu erschließen und sicherzustellen, dass TTS-Technologien verantwortungsbewusst eingesetzt werden. Mit den richtigen Anstrengungen und Maßnahmen kann Text-to-Speech dazu beitragen, die Kommunikation und den Zugang zu Informationen für Menschen weltweit zu verbessern.</p>
+<h2 id="weiterfuhrendes-material"><strong>Weiterführendes Material</strong></h2>
+<h3 id="podcast"><strong>Podcast</strong></h3>
+<p>Hier Link zum Podcast.</p>
+<h3 id="talk"><strong>Talk</strong></h3>
+<p>Hier einfach Youtube oder THD System embedden.</p>
+<h3 id="demo"><strong>Demo</strong></h3>
+<p>Hier Link zum Demo Video + Link zum GIT Repository mit dem Demo Code.</p>
+<h2 id="literaturliste"><strong>Literaturliste</strong></h2>
+<ol>
+<li>
+<p>https://ieeexplore.ieee.org/abstract/document/10057419
+   T. Yanagita, S. Sakti, und S. Nakamura, „Japanese Neural Incremental Text-to-Speech Synthesis Framework With an Accent Phrase Input“, IEEE Access, Bd. 11, S. 22355–22363, 2023, doi: 10.1109/ACCESS.2023.3251657.</p>
+</li>
+<li>
+<p>https://vall-e.io/
+   C. Wang u. a., „Neural Codec Language Models are Zero-Shot Text to Speech Synthesizers“. arXiv, 5. Januar 2023. Zugegriffen: 1. Mai 2023. [Online]. Verfügbar unter: http://arxiv.org/abs/2301.02111</p>
+</li>
+<li>
+<p>https://www.researchgate.net/profile/Hazem-El-Bakry/publication/228673642_An_overview_of_text-to-speech_synthesis_techniques/links/553fa8270cf2320416eb23ed/An-overview-of-text-to-speech-synthesis-techniques.pdf
+   M. Rashad, H. El-Bakry, R. Isma, und N. Mastorakis, „An overview of text-to-speech synthesis techniques“, International Conference on Communications and Information Technology - Proceedings, Juli 2010.</p>
+</li>
+<li>
+<p>J. Shen u. a., „Natural TTS Synthesis by Conditioning WaveNet on Mel Spectrogram Predictions“. arXiv, 15. Februar 2018. doi: 10.48550/arXiv.1712.05884.</p>
+</li>
+<li>
+<p>„Audio samples from ‚Natural TTS Synthesis by Conditioning WaveNet on Mel Spectrogram Predictions‘“. https://google.github.io/tacotron/publications/tacotron2/ (zugegriffen 4. Juli 2023).</p>
+</li>
+<li>
+<p>„EnCodec: High Fidelity Neural Audio Compression“. Meta Research, 5. Juli 2023. Zugegriffen: 5. Juli 2023. [Online]. Verfügbar unter: https://github.com/facebookresearch/encodec</p>
+</li>
+<li>
+<p>N. Li, S. Liu, Y. Liu, S. Zhao, M. Liu, und M. Zhou, „Neural Speech Synthesis with Transformer Network“. arXiv, 30. Januar 2019. Zugegriffen: 6. Juli 2023. [Online]. Verfügbar unter: http://arxiv.org/abs/1809.08895</p>
+</li>
+<li>
+<p>Y. Jia u. a., „Transfer Learning from Speaker Verification to Multispeaker Text-To-Speech Synthesis“. arXiv, 2. Januar 2019. Zugegriffen: 6. Juli 2023. [Online]. Verfügbar unter: http://arxiv.org/abs/1806.04558</p>
+</li>
+<li>
+<p>K. Tokuda, Y. Nankaku, T. Toda, H. Zen, J. Yamagishi, und K. Oura, „Speech Synthesis Based on Hidden Markov Models“, Proc. IEEE, Bd. 101, Nr. 5, S. 1234–1252, Mai 2013, doi: 10.1109/JPROC.2013.2251852.</p>
+</li>
+</ol>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../../javascripts/katex.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        
+      
+    
+  </body>
+</html>

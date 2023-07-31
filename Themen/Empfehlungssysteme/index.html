@@ -1,0 +1,1031 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Einf%C3%A4rben%20von%20Bildern/">
+      
+      
+        <link rel="next" href="../Face_Aging/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.1, mkdocs-material-9.1.21">
+    
+    
+      
+        <title>Empfehlungssysteme - Seminar Aktuelle Themen der künstlichen Intelligenz</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.eebd395e.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+      <link rel="stylesheet" href="../../javascripts/mathjax.js">
+    
+      <link rel="stylesheet" href="https://polyfill.io/v3/polyfill.min.js?features=es6">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#empfehlungssysteme" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Seminar Aktuelle Themen der künstlichen Intelligenz" class="md-header__button md-logo" aria-label="Seminar Aktuelle Themen der künstlichen Intelligenz" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Seminar Aktuelle Themen der künstlichen Intelligenz
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Empfehlungssysteme
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Seminar Aktuelle Themen der künstlichen Intelligenz" class="md-nav__button md-logo" aria-label="Seminar Aktuelle Themen der künstlichen Intelligenz" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Seminar Aktuelle Themen der künstlichen Intelligenz
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Aktuelles
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Themen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Themen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Einf%C3%A4rben%20von%20Bildern/" class="md-nav__link">
+        Einfärben von Bildern - Zwei Ansätze
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Empfehlungssysteme
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Empfehlungssysteme
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    Abstract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-einleitung-motivation" class="md-nav__link">
+    1 Einleitung / Motivation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-methoden" class="md-nav__link">
+    2 Methoden
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Methoden">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-inhaltsbasierte-filterung" class="md-nav__link">
+    2.1 Inhaltsbasierte Filterung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-kollaborative-filterung" class="md-nav__link">
+    2.2 Kollaborative Filterung
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Kollaborative Filterung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-memory-basierte-kollaborative-filterung" class="md-nav__link">
+    2.2.1 Memory-basierte kollaborative Filterung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benutzer-basierte-methode" class="md-nav__link">
+    Benutzer-basierte Methode:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objekt-basierte-methode" class="md-nav__link">
+    Objekt-basierte Methode:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-modellbasierte-kollaborative-filterung" class="md-nav__link">
+    2.2.2 Modellbasierte kollaborative Filterung
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-hybride-empfehlungssysteme" class="md-nav__link">
+    2.3 Hybride Empfehlungssysteme
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-anwendungen" class="md-nav__link">
+    3 Anwendungen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-fazit" class="md-nav__link">
+    4 Fazit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-weiterfuhrendes-material" class="md-nav__link">
+    5 Weiterführendes Material
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Weiterführendes Material">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-podcast" class="md-nav__link">
+    5.1 Podcast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-talk" class="md-nav__link">
+    5.2 Talk
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-demo" class="md-nav__link">
+    5.3 Demo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-literaturliste" class="md-nav__link">
+    6 Literaturliste
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Face_Aging/" class="md-nav__link">
+        Face Aging
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LLMs/" class="md-nav__link">
+        Large Language Models
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Spracherkennung/" class="md-nav__link">
+        Spracherkennung
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T09_Dialekte_Spracherkennung/" class="md-nav__link">
+        T09 - Dialekte in der Spracherkennung
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T12_feature-extraction/" class="md-nav__link">
+        Feature Extraction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TextToSpeech/" class="md-nav__link">
+        Text-to-Speech
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Zeitserienanalyse/" class="md-nav__link">
+        Zeitserienanalyse
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bayesian_modeling/" class="md-nav__link">
+        Bayesian Modeling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../t7_Process_Mining/" class="md-nav__link">
+        Process Mining
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../transfer_learning_nlp/" class="md-nav__link">
+        Transfer Learning in der Sprachverarbeitung
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../impressum/" class="md-nav__link">
+        Impressum
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    Abstract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-einleitung-motivation" class="md-nav__link">
+    1 Einleitung / Motivation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-methoden" class="md-nav__link">
+    2 Methoden
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Methoden">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-inhaltsbasierte-filterung" class="md-nav__link">
+    2.1 Inhaltsbasierte Filterung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-kollaborative-filterung" class="md-nav__link">
+    2.2 Kollaborative Filterung
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Kollaborative Filterung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-memory-basierte-kollaborative-filterung" class="md-nav__link">
+    2.2.1 Memory-basierte kollaborative Filterung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benutzer-basierte-methode" class="md-nav__link">
+    Benutzer-basierte Methode:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objekt-basierte-methode" class="md-nav__link">
+    Objekt-basierte Methode:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-modellbasierte-kollaborative-filterung" class="md-nav__link">
+    2.2.2 Modellbasierte kollaborative Filterung
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-hybride-empfehlungssysteme" class="md-nav__link">
+    2.3 Hybride Empfehlungssysteme
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-anwendungen" class="md-nav__link">
+    3 Anwendungen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-fazit" class="md-nav__link">
+    4 Fazit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-weiterfuhrendes-material" class="md-nav__link">
+    5 Weiterführendes Material
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Weiterführendes Material">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-podcast" class="md-nav__link">
+    5.1 Podcast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-talk" class="md-nav__link">
+    5.2 Talk
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-demo" class="md-nav__link">
+    5.3 Demo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-literaturliste" class="md-nav__link">
+    6 Literaturliste
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="empfehlungssysteme">Empfehlungssysteme</h1>
+<p>von <em>Olha Solodovnyk, Daria Likhacheva und Zi Xun Tan</em></p>
+<h2 id="abstract">Abstract</h2>
+<p>Diese Arbeit behandelt das Thema Empfehlungssysteme und präsentiert es in verschiedenen Formaten, darunter einem Podcast, einem Vortrag und einer Code-Demo.</p>
+<p>Der Podcast bietet eine einfache und unkomplizierte Einführung in Empfehlungssysteme. Es werden verschiedene Arten von Empfehlungssystemen behandelt, darunter inhaltsbasierte, kollaborative, kontext-basierte und hybride Ansätze. Der Podcast richtet sich an ein allgemeines Publikum und soll Zuhörer einbeziehen und ihnen einen Überblick über die Funktionsweise von Empfehlungssystemen und -anwendungen geben.</p>
+<p>In dem Vortrag wird hingegen näher auf Empfehlungssysteme eingegangen. Die Grundlagen und Funktionsweise inhaltsbasierter, kollaborativer und hybrider Empfehlungssysteme werden erläutert und die Vor- und Nachteile dieser Ansätze diskutiert. Der Vortrag richtet sich an ein technisch versiertes Publikum und vermittelt ein tieferes Verständnis der Konzepte und Algorithmen hinter Empfehlungssystemen.</p>
+<p>Die Code-Demo zeigt eine praktische Implementierung eines einfachen Filmempfehlungssystems. Es werden verschiedene Algorithmen und Techniken präsentiert, einschließlich inhaltsbasierter, kollaborativer und hybrider Filter. Durch die Demonstration des Codes wird gezeigt, wie ein Datensatz verarbeitet und Empfehlungen generiert werden, die sowohl auf Inhaltsinformationen als auch auf Benutzerinteraktionen basieren. Der bereitgestellte Code ist frei verfügbar, sodass jeder die Implementierung von Empfehlungssystemen besser verstehen und damit experimentieren kann.</p>
+<h2 id="1-einleitung-motivation">1 Einleitung / Motivation</h2>
+<p>In der heutigen digitalen Welt werden die Empfehlungssysteme fast jeden Tag benutzt. Sie haben einen sehr großen Einfluss auf unsere täglichen Aktivitäten. Von Online-Shopping-Plattformen bis hin zu Streaming-Dienste (wie Spotify oder Netflix) werden die Empfehlungen benutzt, um unsere Entscheidungen zu beeinflussen und unsere Erfahrungen zu personalisieren. Was bedeuten aber diese Empfehlungssysteme und wie funktionieren sie?</p>
+<p>Wir werden immer mit relevanten Informationen, Produkten und Dienstleistungen versorgt, da die Empfehlungssysteme dafür verantwortlich sind. Für die Empfehlungssysteme zu funktionieren, brauchen wir sehr viele Daten, die aus unseren Vorlieben, Nutzerverhalten und Aktivitäten im Netz gesammelt und analysiert werden. Mit ständigen Empfehlungen von neuen Filmen, Bücher, Musik, Produkte und Dienstleistungen haben die Empfehlungssysteme das Potenzial, unser Leben immer mehr einfacher und bequemer zu gestalten. Sie verbessern aber nicht nur das Leben von Nutzern, sondern auch den Unternehmen und Künstlern. Indem sie ihnen eine Möglichkeit bieten, ihre Werke einem breiteren Publikum zu präsentieren oder über ihre Dienstleistungen zu informieren, können sie dazu beitragen, die Sichtbarkeit von Künstlern, Autoren, Filmemachern, Dienstleistungsanbieter und Unternehmen zu erhöhen.</p>
+<p>Dennoch begegnen uns in der modernen Welt auch spezifische Herausforderungen im Zusammenhang mit Empfehlungssystemen. Unter den ethischen Fragen, die berücksichtigt werden müssen, sind die Privatsphäre von Kunden, Manipulation und Voreingenommenheit der Empfehlungsalgorithmen. </p>
+<p>Im Folgenden wollen wir einen Blick auf die Welt der Empfehlungssysteme werfen, die verschiedenen Arten der Empfehlungssysteme uns anschauen, ihre Funktionsweise verstehen, ihre Vor- und Nachteile beleuchten und die Auswirkungen auf unsere Gesellschaft sowie individuellen Entscheidungsprozesse untersuchen. Wenn wir und das Thema genauer anschauen, können wir besser verstehen, wie Empfehlungssysteme unseren Alltag verbessern und wie wir als Nutzerinnen und Nutzer bewusste Entscheidungen treffen können.</p>
+<h2 id="2-methoden">2 Methoden</h2>
+<h3 id="21-inhaltsbasierte-filterung">2.1 Inhaltsbasierte Filterung</h3>
+<p>Die Inhaltsfilterung analysiert die Merkmale der Objekte (z. B. Filme, Produkte, Artikel) und Benutzervorlieben und versucht, auf der Grundlage dieser Merkmalen geeignete Empfehlungen zu generieren.</p>
+<p>Der Prozess der Inhaltsbasierten Filterung beinhaltet in der Regel die folgenden Schritte:</p>
+<p><strong>Objekt-Profileerstellung:</strong> Für jedes Objekt werden relevante Merkmale extrahiert und daraus ein oder mehrere Profile erstellt. Bei Filmen könnten dies beispielsweise Genre, Schauspieler, Regisseur oder Handlungsbeschreibung sein. Die Merkmale können aus Metadaten oder Inhalten des Objekts (z.B. Textanalyse) gewonnen werden. </p>
+<p><strong>Benutzer-Profilerstellung:</strong> Für jeden Benutzer wird ein Profil erstellt, das seine Vorlieben basierend auf seinen vergangenen Bewertungen oder Interaktionen widerspiegelt. Das Profil kann durch Gewichtung der Merkmale entsprechend der Wichtigkeit für den Benutzer erstellt werden.</p>
+<p><strong>Übereinstimmungsberechnung:</strong> Die Ähnlichkeit zwischen Objektvektoren kann mit drei Methoden berechnet werden: </p>
+<ul>
+<li>Euklidischer Abstand</li>
+<li>Pearson-Korrelation und </li>
+<li>Kosinus-Ähnlichkeit, die wir in unserer Arbeit genauer betrachten.</li>
+</ul>
+<p>Kosinus-Ähnlichkeit ist ein Maß dafür, wie ähnlich zwei Vektoren sind. Der Kosinus des Winkels zwischen zwei Vektoren wird bestimmt. </p>
+<div class="arithmatex">\[
+Kosinus&#8209;Ähnlichkeit(u, i) = cos(u,i)= \frac{u \cdot i}{\|u\| \cdot \|i\|}
+\]</div>
+<p>Der Nutzervektor <span class="arithmatex">\(u\)</span> repräsentiert die Präferenzen, Eigenschaften oder Merkmale des Nutzers, während der Objektvektor <span class="arithmatex">\(i\)</span> die Merkmale oder Eigenschaften des Items oder eines anderen Nutzers darstellt.
+Die Euklidische Norm <span class="arithmatex">\(∥u∥\)</span> des Nutzervektors gibt an, wie groß der Vektor ist, während die Euklidische Norm <span class="arithmatex">\(∥i∥\)</span> des Objektvektors dessen Größe angibt.
+Das Skalarprodukt <span class="arithmatex">\(u⋅i\)</span> zwischen dem Nutzervektor <span class="arithmatex">\(u\)</span> und dem Objektvektor <span class="arithmatex">\(i\)</span> ergibt sich aus der Summe der Produkte der entsprechenden Elemente beider Vektoren.</p>
+<p>Der Kosinus des eingeschlossenen Nullwinkels ist <span class="arithmatex">\(1\)</span>, was 100 % Ähnlichkeit bedeutet. Für jeden anderen Winkel ist der Kosinus des eingeschlossenen Winkels kleiner als <span class="arithmatex">\(1\)</span>.</p>
+<p><strong>Empfehlungsgenerierung:</strong> Basierend auf den Ähnlichkeiten werden Objekte ausgewählt, die dem Benutzer empfohlen werden sollen. Dies können Objekte sein, die eine hohe Ähnlichkeit zu den vom Benutzer bevorzugten Merkmalen aufweisen.</p>
+<h3 id="22-kollaborative-filterung">2.2 Kollaborative Filterung</h3>
+<p>Die kollaborative Filterung ist ein Ansatz, der die vergangenen Bewertungen eines Benutzers nutzt, um eine Datenbank (Benutzer-Objekt-Matrix) von Präferenzen zu erstellen und Vorhersagen über Gegenstände zu treffen, die mit den Vorlieben des Benutzers übereinstimmen. Sie wird in zwei Hauptkategorien unterteilt: memory-basierte kollaborative Filterung und modellbasierte kollaborative Filterung.</p>
+<h4 id="221-memory-basierte-kollaborative-filterung">2.2.1 Memory-basierte kollaborative Filterung</h4>
+<p>Die klassische kollaborative Filterung umfasst den memory-basierten Ansatz. Dieser Ansatz nutzt Informationen über die Vergangenheit von Benutzern und/oder Objekten, um Empfehlungen zu generieren. Der Schwerpunkt liegt auf der Speicherung und Auswertung von Informationen über Benutzerinteraktionen und Bewertungen, um Ähnlichkeiten zwischen Benutzern oder Objekten zu berechnen. </p>
+<p>Es gibt zwei Haupttypen memory-basierter Ansätze, beide sind k-nearest neighbor Algorithmen, aber sie haben dennoch große Unterschiede:</p>
+<h4 id="benutzer-basierte-methode">Benutzer-basierte Methode:</h4>
+<p>Das Benutzer-basierte Verfahren analysiert die Ähnlichkeit zwischen Benutzern. Die Idee ist, dass Benutzer mit ähnlichen Vorlieben ähnliche Interaktionen mit Objekten haben. Das Empfehlungssystem sucht nach Benutzern mit ähnlichem Verhalten und generiert basierend auf deren Bewertungen Empfehlungen für einen bestimmten Benutzer. </p>
+<figure>
+<p><img alt="User-basierte-Methode" src="../img/Empfehlungssysteme/user-user.png" width="600" />
+  </p>
+<figcaption> Eine Illustration der Benutzer-basierte-Methode.</figcaption>
+</figure>
+<h4 id="objekt-basierte-methode">Objekt-basierte Methode:</h4>
+<p>Das Objekt-basierte Verfahren konzentriert sich auf die Ähnlichkeit zwischen Objekten. Die Hauptidee besteht darin, ähnliche Objekte anhand von Bewertungen oder Benutzerinteraktionen zu finden. Das Empfehlungssystem vergleicht Benutzer-Bewertung-Modelle für verschiedene Objekte und sucht nach ähnlichen Objekte. </p>
+<figure>
+<p><img alt="Objekt-basierte-Methode" src="../img/Empfehlungssysteme/item-item.png" width="600" />
+  </p>
+<figcaption> Illustration der Objekt-basierte-Methode. </figcaption>
+</figure>
+<p>In beiden Fällen kann Ähnlichkeitsmaß wie die Kosinus-Ähnlichkeit oder andere verwendet werden, um die Ähnlichkeit zwischen Benutzern oder  Objekten zu berechnen.</p>
+<h4 id="222-modellbasierte-kollaborative-filterung">2.2.2 Modellbasierte kollaborative Filterung</h4>
+<p>Bei der Verwendung von memory-basierte Methoden entsteht das Problem, dass die Benutzer-Objekt-Matrix aufgrund einer großen Anzahl von fehlenden Bewertungen sehr dünn besetzt ist. Diese Datenspärlichkeit beeinträchtigt die Fähigkeit, Benutzervorlieben genau einzuschätzen und zuverlässige Empfehlungen zu geben. </p>
+<p>Ein Lösungsansatz für dieses Problem besteht in der Verwendung von modellbasierten Methoden. Im Gegensatz zu memory-basierte Methoden lernen modellbasierte Algorithmen aus den vorhandenen Bewertungen ein Modell, das dann zur Vorhersage fehlender Bewertungen genutzt werden kann. Diese Modelle können auf Techniken wie Clustering, Bayes'schen Klassifikatoren oder Matrixfaktorisierung basieren.</p>
+<p><strong>Singular Value Decomposition (SVD) / Singulärwertzerlegung</strong><br />
+Obwohl es verschiedene Algorithmen gibt, konzentrieren wir uns hauptsächlich auf die Matrixfaktorisierung mit SVD. Die zentrale Idee bei der SVD-basierten Matrixfaktorisierung besteht darin, eine niedrigdimensionale Approximation der ursprünglichen Bewertungsmatrix zu finden. Diese niedrigdimensionale Approximation ermöglicht es uns, die wichtigsten latenten Faktoren zu erfassen, die zu Benutzervorlieben und Objekteigenschaften beitragen. In einem Filmempfehlungssystem könnten latenten Faktoren beispielsweise zugrunde liegende Attribute wie Genre, Regisseur oder Schauspieler darstellen.</p>
+<p>Angenommen, wir haben eine Matrix <span class="arithmatex">\(A_{m \times p}\)</span>, in der die <span class="arithmatex">\(m\)</span> Zeilen die Benutzer repräsentieren und die <span class="arithmatex">\(p\)</span> Spalten die Objekte darstellen. Das Ziel des SVD-Theorems besteht darin, die hochdimensionale Matrix <span class="arithmatex">\(A_{m \times p}\)</span> in drei Matrizen mit geringerer Dimension aufzuteilen. Das Theorem besagt:</p>
+<div class="arithmatex">\[
+A = UΣV^T
+\]</div>
+<p><span class="arithmatex">\(U\)</span> steht für die Benutzermatrix, <span class="arithmatex">\(Σ\)</span> ist eine diagonale Matrix mit den Singulärwerten und <span class="arithmatex">\(V^T\)</span>  bezeichnet die Objektmatrix. Die Singulärwerte in der <span class="arithmatex">\(Σ\)</span>-Matrix werden in absteigender Reihenfolge sortiert. Durch Auswahl der obersten <span class="arithmatex">\(k\)</span> Singulärwerte und ihrer entsprechenden Spalten in <span class="arithmatex">\(U\)</span> und <span class="arithmatex">\(V^T\)</span> reduzieren wir die Dimensionalität der Matrizen. Der Wert von <span class="arithmatex">\(k\)</span> bestimmt die Anzahl der beibehaltenen latenten Faktoren. </p>
+<p>Wenn wir uns das Filmempfehlungssystem als Beispiel nehmen, geht dieser Ansatz davon aus, dass es versteckte Beziehungen zwischen Benutzern und Filmen gibt, die sich auf die Bewertung eines Benutzers für einen bestimmten Film auswirken. Konkret wird angenommen, dass es eine Reihe von <span class="arithmatex">\(k\)</span> Faktoren gibt, die bestimmen, wie ein Benutzer einen Film bewertet, und dass diese Faktoren durch die Rang-<span class="arithmatex">\(k\)</span> SVD erfasst werden können.</p>
+<p><strong>Training des Modells mit Surprise Library</strong><br />
+In der Surprise-Bibliothek ist SVD als Empfehlungssystem-Modul implementiert. Im Wesentlichen geht es darum, das Empfehlungsproblem in ein Optimierungsproblem umzuwandeln. Wir können die Güte unserer Vorhersagen für die Nutzerbewertungen von Objekten messen. Eine häufig verwendete Metrik dafür ist der Root Mean Squared Error (RMSE). Je niedriger der RMSE, desto besser die Güte.</p>
+<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">surprise</span> <span class="kn">import</span> <span class="n">SVD</span>
+
+<span class="c1"># Create a reader object</span>
+<span class="n">reader</span> <span class="o">=</span> <span class="n">Reader</span><span class="p">()</span>
+
+<span class="c1"># Load the dataset from the DataFrame, specifying the columns for userId, movieId, and rating</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">load_from_df</span><span class="p">(</span><span class="n">df_ratings</span><span class="p">[[</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span> <span class="s2">&quot;movieId&quot;</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">]],</span> <span class="n">reader</span><span class="p">)</span>
+
+<span class="c1"># Instantiate the SVD algorithm</span>
+<span class="n">svd</span> <span class="o">=</span> <span class="n">SVD</span><span class="p">()</span>
+
+<span class="c1"># Run 5-fold cross-validation and print results</span>
+<span class="n">cross_validate</span><span class="p">(</span><span class="n">svd</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">measures</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;RMSE&quot;</span><span class="p">,</span> <span class="s2">&quot;MAE&quot;</span><span class="p">],</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+Um eine Bewertung für einen bestimmten Benutzer vorherzusagen, kann die Methode <code>predict()</code> verwendet werden. Beachten Sie jedoch, dass der Benutzer in Ihrer Datenbank vorhanden sein muss.
+<div class="highlight"><pre><span></span><code><span class="n">predicted_rating</span> <span class="o">=</span> <span class="n">svd</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">movie_id</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">predicted_rating</span><span class="o">.</span><span class="n">est</span>
+</code></pre></div>
+<strong>Hyperparameter Tuning</strong><br />
+Bei der Optimierung des SVD-Modells in der Surprise-Bibliothek gibt es mehrere wichtige Hyperparameter zu beachten:</p>
+<p><code>n_factors</code>: Dieser Hyperparameter bestimmt die Anzahl der latenten Faktoren oder Dimensionen, die zur Darstellung von Benutzern und Objekten verwendet werden. Durch Erhöhung der Anzahl der Faktoren können möglicherweise komplexere Beziehungen erfasst werden, es kann jedoch auch zu Overfitting kommen.</p>
+<p><code>n_epochs</code>: Dieser Hyperparameter repräsentiert die Anzahl der Iterationen oder Epochen, die während des Optimierungsprozesses verwendet werden. Durch Erhöhung der Anzahl der Epochen kann das Modell besser aus den Daten lernen, aber zu viele Epochen können ebenfalls zu Overfitting führen.</p>
+<p><code>lr_all</code>: Dieser Hyperparameter steuert die Lernrate, die den Schrittweite im Optimierungsalgorithmus bestimmt. Eine höhere Lernrate kann zu schnellerer Konvergenz führen, aber auch dazu führen, dass das optimale Ergebnis überschritten wird.</p>
+<p><code>reg_all</code>: Dieser Hyperparameter steuert den Regularisierungsterm für alle Parameter im Modell. Regularisierung hilft, Overfitting zu verhindern, indem eine Strafe für komplexe Modelle hinzugefügt wird. Die Anpassung dieses Hyperparameters kann einen Kompromiss zwischen der Erfassung nützlicher Muster und der Vermeidung von Overfitting darstellen.</p>
+<h3 id="23-hybride-empfehlungssysteme">2.3 Hybride Empfehlungssysteme</h3>
+<p>Sowohl das Inhaltsbasierte als auch das kollaborative Filtermodell haben ihre Einschränkungen. Inhaltsbasierte Empfehlungssysteme haben die Einschränkung, dass sie stark von den verfügbaren Merkmalen oder Attributen eines Objekts abhängen, um Ähnlichkeiten zu ermitteln. Dadurch können sie Schwierigkeiten haben, komplexe und subtile Zusammenhänge zwischen verschiedenen Objekten zu erfassen, die sich nicht einfach durch Attribute beschreiben lassen.</p>
+<p>Auf der anderen Seite können kollaborative Filterungssysteme Einschränkungen aufweisen, wenn es um die Bewältigung des sogenannten "Cold-Start"-Problems geht. Dieses Problem tritt auf, wenn ein neuer Benutzer oder ein neues Objekt in das System eingeführt wird und keine ausreichenden Informationen über die Vorlieben oder Ähnlichkeiten zu anderen Benutzern oder Objekten vorliegen. Dadurch kann die Genauigkeit der Empfehlungen in solchen Situationen beeinträchtigt werden.</p>
+<p>Die Idee hinter hybriden Techniken besteht darin, dass eine Kombination von Algorithmen genauere und effektivere Empfehlungen liefert als ein einzelner Algorithmus, da die Nachteile eines Algorithmus durch einen anderen Algorithmus überwunden werden können. Indem verschiedene Empfehlungsmethoden miteinander verbunden werden, können hybride Filtertechniken die Stärken der einzelnen Ansätze nutzen und gleichzeitig deren Schwächen reduzieren. Dadurch ermöglichen sie eine verbesserte Personalisierung und Präzision bei den Empfehlungen für Benutzer.</p>
+<p>Das Hybrid-Empfehlungsmodell ist in sieben Typen unterteilt: </p>
+<table>
+<thead>
+<tr>
+<th>Typ</th>
+<th>Beschreibung</th>
+<th>Vorteile</th>
+<th>Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gewichtet</td>
+<td>Eine Methode, bei der die Gewichtung allmählich angepasst wird, je nachdem, inwieweit die Bewertung eines Gegenstandes durch den Benutzer mit der durch das Empfehlungssystem vorhergesagten Bewertung übereinstimmt.</td>
+<td>Nutzung der Stärken verschiedener Empfehlungssysteme, einfache Implementierung.</td>
+<td>P-tango</td>
+</tr>
+<tr>
+<td>Schalten</td>
+<td>Wechselt zwischen Empfehlungstechniken basierend auf einer heuristischen Methode, die die Fähigkeit zur Erzeugung guter Bewertungen berücksichtigt. Löst spezifische Probleme einzelner Methoden.</td>
+<td>Vermeidet Probleme spezifischer Methoden, sensibel für Stärken und Schwächen der Empfehlungssysteme.</td>
+<td>DailyLearner</td>
+</tr>
+<tr>
+<td>Kaskade</td>
+<td>Nach der Erstellung einer Kandidatenliste unter Verwendung eines Empfehlungssystemmodells mit ähnlichem Geschmack wie der Benutzer kombiniert die Methode das zuvor verwendete Empfehlungssystemmodell mit einem anderen Modell, um die Kandidatenliste nach den für den Benutzer am besten geeigneten Artikeln zu sortieren.</td>
+<td>Verfeinert Empfehlungen durch Iteration, effizient und tolerant gegenüber Störungen.</td>
+<td>EntreeC</td>
+</tr>
+<tr>
+<td>Gemischt</td>
+<td>Kombiniert Empfehlungsergebnisse verschiedener Techniken gleichzeitig für jeden Artikel und liefert mehrere Empfehlungen.</td>
+<td>Bietet mehrere Empfehlungen pro Artikel, individuelle Leistungen beeinflussen die Gesamtleistung in einem begrenzten Bereich nicht.</td>
+<td>PTV-System, Profinder, PickAFlick</td>
+</tr>
+<tr>
+<td>Merkmalskombination</td>
+<td>Bezieht sich auf die Integration von Merkmalen, die von einer Empfehlungstechnik erzeugt wurden, in eine andere Technik. Durch die Einbeziehung spezifischer Merkmale oder Bewertungen einer Technik als zusätzliche Eingabe für eine andere Technik wird der Empfehlungsprozess verbessert, indem verschiedene Informationsquellen genutzt werden, um die Genauigkeit und Relevanz der Empfehlungen zu steigern.</td>
+<td>Nutzt kollaborative Daten in Verbindung mit anderen Techniken, reduziert die Abhängigkeit von der kollaborativen Filterung.</td>
+<td>Pipper</td>
+</tr>
+<tr>
+<td>Funktionserweiterung</td>
+<td>Nutzt Bewertungen und zusätzliche Informationen, die von vorherigen Empfehlungssystemen generiert werden. Erfordert zusätzliche Funktionalität der Empfehlungssysteme.</td>
+<td>Fügt dem primären Empfehlungssystem eine geringe Anzahl von Merkmalen hinzu, verbessert die Genauigkeit der Empfehlungen.</td>
+<td>Libra-System</td>
+</tr>
+<tr>
+<td>Meta-Ebene</td>
+<td>Verwendet das interne Modell einer Technik als Eingabe für eine andere. Bietet umfassendere Informationen im Vergleich zu einzelnen Bewertungen.</td>
+<td>Löst das Problem der Datenspärlichkeit bei kollaborativen Filterungstechniken, nutzt umfassende Modelle für verbesserte Empfehlungen.</td>
+<td>LaboUr</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-anwendungen">3 Anwendungen</h2>
+<p>Empfehlungssysteme finden in sehr vielen Bereichen Anwendung und tragen dazu bei, die Entscheidungsfindung von Benutzern zu erleichtern. Hier werden einige der Hauptanwendungen von Empfehlungssystemen aufgezeigt:</p>
+<ul>
+<li><strong>E-Commerce:</strong> Online-Shopping-Plattformen wie Amazon oder Zalando nutzen Empfehlungssysteme, um ihren Kunden Produkte vorzuschlagen, die ihren individuellen Vorlieben entsprechen. Basierend auf dem bisherigen Kaufverhalten, den Produktbewertungen und den Präferenzen anderen Nutzern werden personalisierte Produktvorschläge gemacht, um die Einkaufserfahrung zu verbessern und die Kundenbindung zu stärken.</li>
+<li><strong>Streaming-Dienste:</strong> Plattformen wie Netflix und YouTube verwenden Empfehlungssysteme, um Nutzern Inhalte vorzuschlagen, die ihren Geschmack treffen. Basierend auf dem Seh- und Hörverhalten sowie den Bewertungen vergangener Inhalte werden individuelle Serienempfehlungen und Musikvorschläge generiert, um das Unterhaltungserlebnis zu personalisieren.</li>
+<li><strong>Soziale Medien:</strong> Hier setzen Facebook, Instagram und Twitter Empfehlungssysteme ein, um Nutzern relevante Inhalte, Beiträge und Kontakte anzuzeigen. Basierend auf dem sozialen Netzwerk, den Interaktionen und den Vorlieben der Nutzer werden Beiträge von Freunden, Seiten oder Themen empfohlen, um das Engagement und die Nutzung der Plattform zu fördern.</li>
+<li><strong>Musikdienste:</strong> Musik-Streaming-Dienste wie Spotify oder Apple Musik nutzen Empfehlungssysteme, um personalisierte Wiedergabelisten zu erstellen. "Discover Weekly" und "Release Radar" sind Beispiele dafür, wie Empfehlungssysteme basierend auf dem individuellen Musikgeschmack der Nutzer neue Künstler, Songs und Alben vorschlagen.</li>
+<li><strong>Nachrichten und Content-Aggregatoren:</strong> Empfehlungssysteme werden auch in Nachrichten-Apps und Content-Aggregatoren eingesetzt, um Nutzern relevante Artikel, Blogposts und Nachrichten vorzuschlagen. Basierend auf den Präferenzen, dem Leseverhalten und den Interessen werden personalisierte Newsfeeds und Inhaltszusammenstellungen erstellt.</li>
+<li><strong>Reise- und Hotelbuchungen:</strong> Empfehlungssysteme kommen auch in der Tourismusbranche zum Einsatz. Plattformen wie Booking.com oder Airbnb nutzen sie, um Nutzern maßgeschneiderte Hotelvorschläge, Reiserouten und Attraktionen zu präsentieren, die ihren individuellen Vorlieben und Bedürfnissen entsprechen.</li>
+</ul>
+<p>Diese Anwendungen von Empfehlungssystemen sind nur einige Beispiele für die vielfältigen Einsatzmöglichkeiten dieser Technologie. Ob im Bereich des Online-Shoppings, der Unterhaltung, der sozialen Interaktion oder der Informationsbeschaffung, Empfehlungssysteme spielen eine zentrale Rolle dabei, unsere Erlebnisse zu verbessern, relevante Inhalte zu entdecken und unsere Zeit effizienter zu nutzen.</p>
+<h2 id="4-fazit">4 Fazit</h2>
+<p>Empfehlungssysteme sind zu einem integralen Bestandteil unseres digitalen Lebens geworden und bieten personalisierte und relevante Vorschläge für eine Vielzahl von Produkten, Dienstleistungen und Inhalten. Diese Arbeit behandelt die verschiedenen Arten von Empfehlungssystemen, einschließlich inhaltsbasierter, kollaborativer Filterung und hybrider Ansätze.</p>
+<p>Die inhaltsbasierte Filterung nutzt die Merkmale von Objekten und die Benutzerpräferenzen, um Empfehlungen zu generieren. Dieser Ansatz ist effektiv, wenn die Benutzerpräferenzen stark von den Eigenschaften des Inhalts abhängen. Bei der kollaborativen Filterung werden hingegen das Benutzerverhalten und die Interaktionen verwendet, um Ähnlichkeiten zwischen den Benutzern zu identifizieren und Empfehlungen auf der Grundlage dieser Ähnlichkeiten zu geben. Dieser Ansatz ist besonders wertvoll, wenn explizite Rückmeldungen wie Bewertungen oder Rezensionen verfügbar sind. Hybride Empfehlungssysteme kombinieren mehrere Ansätze, um deren Stärken zu nutzen und ihre Einschränkungen zu berücksichtigen.</p>
+<p>Jeder Empfehlungsansatz hat Vor- und Nachteile. Die inhaltsbasierte Filterung kann Schwierigkeiten bei der Merkmalsextraktion und dem möglichen "Filterblasen"-Effekt haben. Die kollaborative Filterung kann mit Herausforderungen wie dem "Cold Start" und der Datenspärlichkeit konfrontiert sein. Hybride Systeme müssen die Komplexität bewältigen, um verschiedene Ansätze effektiv zu kombinieren und qualitativ hochwertige Empfehlungen bereitzustellen.</p>
+<p>Obwohl Empfehlungssysteme insgesamt beträchtliche Vorteile bieten, ist es wichtig zu erkennen, dass sie auch ethische Bedenken aufwerfen. Der Prozess basiert stark auf der Erfassung und Analyse von Benutzerdaten, wodurch erhöhte Aufmerksamkeit für den Datenschutz und effektive Datenschutzmaßnahmen erforderlich sind. Transparenz und Benutzerkontrolle spielen eine entscheidende Rolle bei der Verwaltung der erfassten Daten und ihrer anschließenden Verwendung. Zusätzlich muss die Präsenz von Vorurteilen oder Ungerechtigkeiten in Empfehlungsalgorithmen schnell angegangen werden, da solche Empfehlungen bestehende Ungleichheiten verstärken und bestimmte Vorlieben festigen können.</p>
+<p>Zusammenfassend ist es unbestreitbar, dass Empfehlungssysteme unsere Konsumgewohnheiten, Entscheidungsfähigkeiten und Gesamterfahrungen als Benutzer maßgeblich verändert haben. Diese Systeme bieten nicht nur die Möglichkeit, die Benutzerzufriedenheit zu steigern, sondern leisten auch wichtige Unterstützung für Unternehmen. Es ist jedoch entscheidend, Empfehlungssysteme mit einem kritischen Blick zu betrachten und ihre Einschränkungen und ethischen Implikationen zu berücksichtigen.</p>
+<h2 id="5-weiterfuhrendes-material">5 Weiterführendes Material</h2>
+<h3 id="51-podcast">5.1 Podcast</h3>
+<p>Hier Link zum Podcast.</p>
+<h3 id="52-talk">5.2 Talk</h3>
+<p>Hier einfach Youtube oder THD System embedden.</p>
+<h3 id="53-demo">5.3 Demo</h3>
+<p>Hier Link zum Demo Video<br />
+<a href="https://github.com/Gary0417/movie_recommendation_system">Link zum GitHub Repository</a></p>
+<h2 id="6-literaturliste">6 Literaturliste</h2>
+<p><a href="https://doi.org/10.3390/electronics11010141">Ko, H. Y., Lee, S. Y., Park, Y., &amp; Choi, A. L. (2022). A Survey of Recommendation Systems: Recommendation Models, Techniques, and Application Fields. Electronics; MDPI. https://doi.org/10.3390/electronics11010141</a></p>
+<p><a href="https://doi.org/10.1016/j.eij.2015.06.005">Isinkaye, F. O., Folajimi, Y., &amp; Ojokoh, B. A. (2015). Recommendation systems: Principles, methods and evaluation. Egyptian Informatics Journal; Elsevier BV. https://doi.org/10.1016/j.eij.2015.06.005</a></p>
+<p><a href="https://towardsdatascience.com/introduction-to-recommender-systems-6c66cf15ada">Baptiste Rocca (2019). Introduction to recommender systems
+Overview of some major recommendation algorithms. https://towardsdatascience.com/introduction-to-recommender-systems-6c66cf15ada</a></p>
+<p><a href="https://ieeexplore.ieee.org/abstract/document/1423975">G. Adomavicius, A. Tuzhilin. (2005). Toward the next generation of recommender systems: a survey of the state-of-the-art and possible extensions.  https://ieeexplore.ieee.org/abstract/document/1423975</a></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../../javascripts/katex.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1505 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Spracherkennung/">
+      
+      
+        <link rel="next" href="../T12_feature-extraction/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.1, mkdocs-material-9.1.21">
+    
+    
+      
+        <title>T09 - Dialekte in der Spracherkennung - Seminar Aktuelle Themen der künstlichen Intelligenz</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.eebd395e.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+      <link rel="stylesheet" href="../../javascripts/mathjax.js">
+    
+      <link rel="stylesheet" href="https://polyfill.io/v3/polyfill.min.js?features=es6">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#t09-dialekte-in-der-spracherkennung" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Seminar Aktuelle Themen der künstlichen Intelligenz" class="md-header__button md-logo" aria-label="Seminar Aktuelle Themen der künstlichen Intelligenz" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Seminar Aktuelle Themen der künstlichen Intelligenz
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              T09 - Dialekte in der Spracherkennung
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Seminar Aktuelle Themen der künstlichen Intelligenz" class="md-nav__button md-logo" aria-label="Seminar Aktuelle Themen der künstlichen Intelligenz" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Seminar Aktuelle Themen der künstlichen Intelligenz
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Aktuelles
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Themen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Themen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Einf%C3%A4rben%20von%20Bildern/" class="md-nav__link">
+        Einfärben von Bildern - Zwei Ansätze
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Empfehlungssysteme/" class="md-nav__link">
+        Empfehlungssysteme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Face_Aging/" class="md-nav__link">
+        Face Aging
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LLMs/" class="md-nav__link">
+        Large Language Models
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Spracherkennung/" class="md-nav__link">
+        Spracherkennung
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          T09 - Dialekte in der Spracherkennung
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        T09 - Dialekte in der Spracherkennung
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    Abstract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-einleitung" class="md-nav__link">
+    1 Einleitung
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Einleitung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-automatische-spracherkennung" class="md-nav__link">
+    1.1 Automatische Spracherkennung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-schweizerdeutsch" class="md-nav__link">
+    1.2 Schweizerdeutsch
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-methoden" class="md-nav__link">
+    2 Methoden
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Methoden">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-datenerfassung-und-annotation" class="md-nav__link">
+    2.1 Datenerfassung und Annotation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-daten-augmentierung" class="md-nav__link">
+    2.2 Daten-Augmentierung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-domain-anpassung" class="md-nav__link">
+    2.3 Domain-Anpassung
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-stand-der-forschung" class="md-nav__link">
+    3 Stand der Forschung
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Stand der Forschung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-datensatze" class="md-nav__link">
+    3.1 Datensätze
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 Datensätze">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schweizer-dialektsammlung-2022" class="md-nav__link">
+    Schweizer Dialektsammlung (2022)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swissdial-2021" class="md-nav__link">
+    SwissDial (2021)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#honorable-mentions" class="md-nav__link">
+    Honorable Mentions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-modelle" class="md-nav__link">
+    3.2 Modelle
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Modelle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#whisper" class="md-nav__link">
+    Whisper
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xlsr" class="md-nav__link">
+    XLSR
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-kommerzielle-dienste" class="md-nav__link">
+    3.3 Kommerzielle Dienste
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Kommerzielle Dienste">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloud-anbieter" class="md-nav__link">
+    Cloud-Anbieter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#toggl" class="md-nav__link">
+    Töggl
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-anwendungen" class="md-nav__link">
+    4 Anwendungen
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Anwendungen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-vorbereitende-schritte" class="md-nav__link">
+    4.1 Vorbereitende Schritte
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Vorbereitende Schritte">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#laden-des-datensatzes" class="md-nav__link">
+    Laden des Datensatzes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merkmalsextraktion" class="md-nav__link">
+    Merkmalsextraktion
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tokenisierung-von-text" class="md-nav__link">
+    Tokenisierung von Text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kombination-von-feature-extraktor-und-tokenizer" class="md-nav__link">
+    Kombination von Feature Extraktor und Tokenizer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aufbereitung-der-daten" class="md-nav__link">
+    Aufbereitung der Daten
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definieren-eines-data-collators" class="md-nav__link">
+    Definieren eines Data Collators
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definieren-einer-evaluierungsmetrik" class="md-nav__link">
+    Definieren einer Evaluierungsmetrik
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-training" class="md-nav__link">
+    4.2 Training
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-auswertung" class="md-nav__link">
+    4.3 Auswertung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-modellvergleich" class="md-nav__link">
+    4.4 Modellvergleich
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-fazit" class="md-nav__link">
+    5 Fazit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-weiterfuhrendes-material" class="md-nav__link">
+    6 Weiterführendes Material
+  </a>
+  
+    <nav class="md-nav" aria-label="6 Weiterführendes Material">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-podcast" class="md-nav__link">
+    6.1 Podcast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-talk" class="md-nav__link">
+    6.2 Talk
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-demo" class="md-nav__link">
+    6.3 Demo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-literaturliste" class="md-nav__link">
+    7 Literaturliste
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T12_feature-extraction/" class="md-nav__link">
+        Feature Extraction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TextToSpeech/" class="md-nav__link">
+        Text-to-Speech
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Zeitserienanalyse/" class="md-nav__link">
+        Zeitserienanalyse
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bayesian_modeling/" class="md-nav__link">
+        Bayesian Modeling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../t7_Process_Mining/" class="md-nav__link">
+        Process Mining
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../transfer_learning_nlp/" class="md-nav__link">
+        Transfer Learning in der Sprachverarbeitung
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../impressum/" class="md-nav__link">
+        Impressum
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    Abstract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-einleitung" class="md-nav__link">
+    1 Einleitung
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Einleitung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-automatische-spracherkennung" class="md-nav__link">
+    1.1 Automatische Spracherkennung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-schweizerdeutsch" class="md-nav__link">
+    1.2 Schweizerdeutsch
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-methoden" class="md-nav__link">
+    2 Methoden
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Methoden">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-datenerfassung-und-annotation" class="md-nav__link">
+    2.1 Datenerfassung und Annotation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-daten-augmentierung" class="md-nav__link">
+    2.2 Daten-Augmentierung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-domain-anpassung" class="md-nav__link">
+    2.3 Domain-Anpassung
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-stand-der-forschung" class="md-nav__link">
+    3 Stand der Forschung
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Stand der Forschung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-datensatze" class="md-nav__link">
+    3.1 Datensätze
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 Datensätze">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schweizer-dialektsammlung-2022" class="md-nav__link">
+    Schweizer Dialektsammlung (2022)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swissdial-2021" class="md-nav__link">
+    SwissDial (2021)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#honorable-mentions" class="md-nav__link">
+    Honorable Mentions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-modelle" class="md-nav__link">
+    3.2 Modelle
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Modelle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#whisper" class="md-nav__link">
+    Whisper
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xlsr" class="md-nav__link">
+    XLSR
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-kommerzielle-dienste" class="md-nav__link">
+    3.3 Kommerzielle Dienste
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Kommerzielle Dienste">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloud-anbieter" class="md-nav__link">
+    Cloud-Anbieter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#toggl" class="md-nav__link">
+    Töggl
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-anwendungen" class="md-nav__link">
+    4 Anwendungen
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Anwendungen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-vorbereitende-schritte" class="md-nav__link">
+    4.1 Vorbereitende Schritte
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Vorbereitende Schritte">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#laden-des-datensatzes" class="md-nav__link">
+    Laden des Datensatzes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merkmalsextraktion" class="md-nav__link">
+    Merkmalsextraktion
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tokenisierung-von-text" class="md-nav__link">
+    Tokenisierung von Text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kombination-von-feature-extraktor-und-tokenizer" class="md-nav__link">
+    Kombination von Feature Extraktor und Tokenizer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aufbereitung-der-daten" class="md-nav__link">
+    Aufbereitung der Daten
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definieren-eines-data-collators" class="md-nav__link">
+    Definieren eines Data Collators
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definieren-einer-evaluierungsmetrik" class="md-nav__link">
+    Definieren einer Evaluierungsmetrik
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-training" class="md-nav__link">
+    4.2 Training
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-auswertung" class="md-nav__link">
+    4.3 Auswertung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-modellvergleich" class="md-nav__link">
+    4.4 Modellvergleich
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-fazit" class="md-nav__link">
+    5 Fazit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-weiterfuhrendes-material" class="md-nav__link">
+    6 Weiterführendes Material
+  </a>
+  
+    <nav class="md-nav" aria-label="6 Weiterführendes Material">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-podcast" class="md-nav__link">
+    6.1 Podcast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-talk" class="md-nav__link">
+    6.2 Talk
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-demo" class="md-nav__link">
+    6.3 Demo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-literaturliste" class="md-nav__link">
+    7 Literaturliste
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="t09-dialekte-in-der-spracherkennung">T09 - Dialekte in der Spracherkennung</h1>
+<p>von <em>Muhammad Daniel BIN MOHD KHIR, Sofia GUTORANSKA, und Jimmy TAN</em></p>
+<h2 id="abstract">Abstract</h2>
+<p>Die automatische Spracherkennung (Automatic Speech Recognition, ASR) verspricht eine fließende, natürlichsprachliche Schnittstelle für die Interaktion von Menschen mit ihren digitalen Gegenübern. Trotz bemerkenswerter Fortschritte in diesem Bereich gibt es immer noch Herausforderungen, die gemeistert werden müssen. Eine davon ist das einzigartige Problem der dialektalen Varietäten in der gesprochenen Sprache. Dieser Bericht befasst sich mit dem speziellen Thema der Dialekte in der Spracherkennung und beleuchtet die Schwierigkeiten, mit denen ASR-Systeme konfrontiert sind, wenn sie mit dialektalen Eingaben umgehen müssen, sowie mögliche Verfahren zum Umgang mit diesen Problemen.</p>
+<p>Dieser Bericht wird von einem Podcast, einem Fachvortrag und einer Code-Demo begleitet. Der Podcast führt den Leser in das Thema ein und gibt einen kurzen Überblick darüber, was Dialekte sind und warum derzeitige Spracherkennungssysteme Probleme mit ihnen haben. Er beleuchtet außerdem, warum dies ein wichtiges Problem ist, das gelöst werden muss.</p>
+<p>Der Fachvortrag befasst sich ausführlich mit den Techniken und Ansätzen, die zur Behandlung von Dialekten verwendet werden, wie z. B. Daten-Augmentierung und Domain-Anpassung. Darüber hinaus wird ein kurzer Überblick über den Stand der Technik bei ASR-Modellen wie Whisper und XLSR vermittelt.</p>
+<p>Schließlich wird in der Code-Demo der Vorgang zum Fine-Tuning eines Whisper-Modells für den schweizerdeutschen Zürcher Dialekt veranschaulicht.</p>
+<h2 id="1-einleitung">1 Einleitung</h2>
+<div class="admonition quote">
+<p class="admonition-title">Gespräch mit dem Sprachassistent Siri</p>
+<p>— Hej Siri, tuä mal em Alex ahlütta!<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
+<p>— Entschuldigung, das habe ich leider nicht verstanden.</p>
+</div>
+<p>Das ist leider häufig der Fall, wenn man versucht, mit modernen Sprachassistenten in einem Dialekt zu reden. Sie sind einfach nicht in der Lage, mit nicht standardisierter Sprache umzugehen. Da es sich bei Dialekten um eine Nische handelt, fehlt es an Forschung und industriereifen Lösungen zur Lösung dieses Problems. Aber was genau sind Dialekte, und warum haben unsere derzeitigen KI-Systeme Probleme mit ihnen?</p>
+<p>Dialekte sind Varianten einer Sprache, die in einer bestimmten Region überwiegend gesprochen werden. In den deutschsprachigen Teilen der Welt ist Hochdeutsch die Standardsprache - sie wird als offizielle Regierungssprache und als Sprache in den Medien verwendet. Varianten wie Bayerisch und Züritüütsch sind Dialekte, die sich stark von den Standardsprachen unterscheiden. So sehr, dass ein Muttersprachler oft kein einziges Wort davon verstehen kann. Dialekte können sich in folgenden Aspekten von Standardsprachen unterscheiden:</p>
+<ul>
+<li>lexikalisch - der Dialekt verwendet andere Wörter für ein Objekt; ein abweichender Wortschatz</li>
+<li>akustisch - die Aussprache der Wörter ist anders</li>
+<li>orthografisch - dieselben Wörter werden in einem Dialekt anders geschrieben</li>
+</ul>
+<p>Auf der ganzen Welt gibt es unzählige Dialekte. Dieser Artikel wird sich nur auf Dialekte im Schweizerdeutschen konzentrieren, da diese Dialekte von einer bedeutenden Gruppe von Menschen in der DACH-Region gesprochen werden und auf diesem Gebiet viel geforscht wird.</p>
+<p>In den folgenden Abschnitten werden einige Begriffe erläutert, die zum Verständnis der weiteren Ausarbeitung notwendig sind.</p>
+<h3 id="11-automatische-spracherkennung">1.1 Automatische Spracherkennung</h3>
+<p>Die automatische Spracherkennung (<em>eng: Automatic Speech Recognition</em>, kurz ASR) ist der rechnerische Prozess, gesprochene Sprache in geschriebenen Text umzuwandeln. Es ist auch unter vielen anderen Namen bekannt, wie z. B. Speech to Text. ASR ist heute vor allem in Sprachassistenten wie Siri oder Alexa zu finden. Diese im Handy eingebetteten Agenten nutzen ASR, um Sprachbefehle des Benutzers zu erkennen, um bestimmte Aktionen auszuführen. Beispielsweise lässt sich mit einem Sprachbefehl einen Kontakt anrufen oder das Wetter abfragen. Ein weiterer Anwendungsfall für ASR ist die automatische Erstellung von Live-Transkriptionen für Videos auf Streaming-Seiten wie YouTube.</p>
+<h3 id="12-schweizerdeutsch">1.2 Schweizerdeutsch</h3>
+<p>Deutsch ist die dominierende Sprache der vier Hauptsprachen in der Schweiz, wobei 62% der Bevölkerung im Jahr 2020 Varianten vom Deutschen sprechen<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>. Es ist wichtig, zwischen Schweizerdeutsch und Hochdeutsch zu unterscheiden.</p>
+<p>Schweizerdeutsch ist kein einziger Dialekt von Hochdeutsch, sondern eine Gruppe von Dialekten, die in der Schweiz gesprochen werden. Die schweizen Mundarten können grob nach Kantonen (Verwaltungsregionen) unterteilt werden. Beispielsweise wird Bärndütsch in Bern gesprochen, und Züritüütsch in Zürich.</p>
+<p>Schweizerdeutsch wird hauptsächlich gesprochen und koexistiert mit Hochdeutsch, das die Hauptform der schriftlichen Kommunikation ist. Da es vor allem gesprochen wird, hat es keine standardisierte Rechtschreibung, und jeder Dialekt unterscheidet sich in Phonetik, Grammatik und Wortschatz von anderen Dialekten. Der Berner Dialekt zum Beispiel wandelt das hochdeutsche <em>l</em> in ein <em>u</em> um. Das Wort a<em>l</em>t wird a<em>u</em>t ausgesprochen<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>.</p>
+<p>Da sich diese Dialekte auf die Region konzentrieren, gibt es im Vergleich zum Hochdeutsch oder Englisch nur wenige Korpora und Daten zu ihnen, was das Schweizerdeutsch zu einer Low Resource Language macht. Aus diesem Grund und wegen der unzähligen regionalen Variationen ist die automatische Spracherkennung für Schweizerdeutsch eine fortlaufende Herausforderung.</p>
+<h2 id="2-methoden">2 Methoden</h2>
+<p>Es gibt jedoch einige Methoden zum Umgang mit Low Resource Languages wie Schweizerdeutsch beim Training von ASR-Modellen. Diese werden im Folgenden dargelegt.</p>
+<h3 id="21-datenerfassung-und-annotation">2.1 Datenerfassung und Annotation</h3>
+<p>Um robuste und genaue ASR-Modelle für Dialekte zu trainieren, werden große Mengen an annotierten Daten benötigt. Die Datenerfassung in großem Umfang umfasst verschiedene Sprecher aus dem spezifischen dialektischen Hintergrund und ermöglicht es dem Modell, die Variationen und Nuancen zu erfassen, die in dieser spezifischen dialektischen Sprache vorhanden sind.</p>
+<p>Zu diesen Daten gehören Audioaufnahmen sowie deren Transkriptionen und dialektische Labels, die für das Training und die Bewertung der Spracherkennungsmodelle wichtig sind. Die Audioaufnahmen können aus verschiedenen Kanälen stammen, einschließlich öffentlicher Sprachdatensätze, Audioarchiven, Interviews oder durch Aufnahme spezifischer Dialektsprecher in einer kontrollierten Umgebung. Die Datenannotation erfolgt oft auf zwei Arten, manuell und automatisch.</p>
+<p>Die manuelle Annotation erfordert, dass der Muttersprachler in diesem speziellen Dialekt die Audiodaten manuell transkribiert, was sehr zeit- und ressourcenintensiv ist, aber sehr genau. Die automatische Transkription hingegen verwendet bereits trainierte Modelle für die automatische Transkription. Dieser Ansatz ist jedoch oft nicht machbar im Falle von Dialekten. Es gibt noch nicht viele Open-Source-Lösungen, die Dialekte genau transkribieren können, und vorhandene Modelle, die auf Standardsprachen trainiert wurden, liefern ungenaue Ergebnisse für dialektische Daten. Aus diesen Gründen werden manuelle Transkriptionen in diesem Kontext oft bevorzugt.</p>
+<h3 id="22-daten-augmentierung">2.2 Daten-Augmentierung</h3>
+<p>Um die gesammelten Daten zu erweitern, kann man die Technik der Daten Augmentierung (<em>eng: Data Augmentation</em>) nutzen. Bei diesem Ansatz werden zusätzliche Trainingsbeispiele durch Anwendung verschiedener Transformationen auf die vorhandenen Daten generiert. Diese Transformationen können Variationen in Geschwindigkeit, Tonhöhe oder Hintergrundgeräuschen sein<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>. Indem das ASR-Modell einem vielfältigeren Datensatz ausgesetzt wird, wird es widerstandsfähiger gegen verschiedene dialektische Variationen und generalisiert besser auf ungesehene Datenpunkte.</p>
+<h3 id="23-domain-anpassung">2.3 Domain-Anpassung</h3>
+<p>Die Domain-Anpassung (<em>eng: Domain Adaptation</em>) befasst sich mit der Anpassung des ASR-Modells an eine spezifische Domäne oder Anwendung, in der die Daten von den ursprünglichen Trainingsdaten abweichen könnten<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup>. Im Kontext von Dialekten wird die Domain-Anpassung entscheidend, da sich die akustischen Eigenschaften, der Wortschatz und die sprachlichen Muster erheblich von der Standardsprache unterscheiden können, auf der das ursprüngliche Modell trainiert wurde.</p>
+<p>Techniken zur Domain-Anpassung zielen darauf ab, die Lücke zwischen den dialektischen Daten und dem vortrainierten Modell mithilfe von Transfer-Learning zu überbrücken. Das vortrainierte Modell, das allgemeine akustische und linguistische Darstellungen aus High Resource Languages gelernt hat, kann als Ausgangspunkt für das Training des ASR-Modells auf dialektischen Daten verwendet werden.</p>
+<p>Durch die Initialisierung des Modells mit diesen vortrainierten Gewichten kann es von dem Wissen profitieren, das aus der Standardsprache gelernt wurde, und sich dann durch weiteres Training an den spezifischen Dialekt anpassen. Aufgrund dessen kann man eine kleinere Menge an in-domain-dialektischen Daten nutzen, um das Modell zu optimieren. Dies hilft dem Modell, sich besser auf die spezifischen dialektischen Variationen einzustellen und verbessert seine Leistung in diesem Bereich.</p>
+<h2 id="3-stand-der-forschung">3 Stand der Forschung</h2>
+<p>Im folgenden Abschnitt werden Ressourcen für den Umgang mit Schweizerdeutsch in der ASR, wie Datensätze und Modelle, vorgestellt.</p>
+<h3 id="31-datensatze">3.1 Datensätze</h3>
+<p>Modelle für maschinelles Lernen sind "garbage in, garbage out". Daher ist es von größter Bedeutung, gute Daten zu haben, aus denen die Modelle lernen können. In diesem Teil werden die verfügbaren schweizerdeutschen Datensätze vorgestellt. Alle genannten Datensätze sind öffentlich zugänglich.</p>
+<h4 id="schweizer-dialektsammlung-2022">Schweizer Dialektsammlung (2022)</h4>
+<p>Die Schweizer-Dialektsammlung<sup id="fnref:6"><a class="footnote-ref" href="#fn:6">6</a></sup> umfasst insgesamt 200 Stunden gesprochenes Audiomaterial von 4000 Sprechern verschiedener Dialekte, Altersgruppen und Geschlechter. Die Audiodaten sind mit Sprecherangaben und Transkriptionen in Hochdeutsch annotiert. Die gesprochenen Texte stammen von Sätzen aus dem deutschen Common Voice Corpus sowie aus Schweizer Nachrichtenquellen.</p>
+<p>Inspiriert durch das <a href="https://commonvoice.mozilla.org/" target="_blank">Mozilla CommonVoice Projekt</a> haben die Kuratoren des Korpus ein Open-Source-Tool verwendet, um die Aufnahme und Validierung der gesprochenen Audiodaten per Crowdfunding zu ermöglichen. Die Datensammlung wurde stark beworben und spielerisch gestaltet, da die Autoren mit Schweizer Medien zusammenarbeiteten, um eine große Reichweite zu erzielen. Es wurden Wettbewerbe veranstaltet, um zur Teilnahme zu ermutigen, wie z.B. ein kantonsübergreifender Wettbewerb, bei dem es darum ging, welcher Kanton die meisten Aufnahmen erstellen konnte.</p>
+<h4 id="swissdial-2021">SwissDial (2021)</h4>
+<p>SwissDial<sup id="fnref:7"><a class="footnote-ref" href="#fn:7">7</a></sup> ist ein paralleles Audiokorpus, das 8 Hauptdialekte abdeckt, wovon jeder Dialekt mindestens 3 Stunden an Audiodaten enthält. Parallel bedeutet, dass das Korpus gesprochene Äußerungen von den identischen Sätzen je Dialekt enthält. Jeder Datenpunkt ist mit entsprechenden Transkriptionen sowohl im Dialekt als auch im Hochdeutschen annotiert. Die Domäne erstreckt sich über ein breites Spektrum von Themen wie Kultur, Wirtschaft, Wissenschaft und Politik. Das Korpus wurde erstellt, indem für jeden Dialekt ein Annotator ausgewählt und professionelle Aufnahmen durchgeführt wurden, um ihre Stimmen einzufangen.</p>
+<h4 id="honorable-mentions">Honorable Mentions</h4>
+<p>Die oben genannten Datensätze stellen aufgrund ihrer Breite und ihres Umfangs die aktuelle Crème de la Crème dar. Sie können leicht für die Entwicklung datengetriebener Schweizerdeutscher NLP-Anwendungen verwendet werden. Andere verfügbare Datensätze wie das Swiss Parliament Corpus<sup id="fnref:8"><a class="footnote-ref" href="#fn:8">8</a></sup>, ArchiMob<sup id="fnref:9"><a class="footnote-ref" href="#fn:9">9</a></sup> und Radio Rottu Oberwallis<sup id="fnref:10"><a class="footnote-ref" href="#fn:10">10</a></sup> sind entweder fachspezifisch, enthalten keine hochdeutschen Transkripte oder haben zu wenig Daten für ein optimales Modell-Finetuning.</p>
+<h3 id="32-modelle">3.2 Modelle</h3>
+<p>In diesem Abschnitt werden zwei gängige End-to-End-Modelle, Whisper und XLSR, kurz erläutert. End-to-End-Modelle verwenden Audiodaten als Eingabe und geben transkribierten Text aus dem Audiomaterial aus. Dies macht sie für Praktiker leicht anwendbar, da Zwischenschritte wie das Chunking von Audiodaten in 30-Sekunden-Intervallen und die Generierung von Log-Mel-Spektrogrammen in das Modelltraining integriert sind und während der Inferenz nicht separat durchgeführt werden müssen.</p>
+<h4 id="whisper">Whisper</h4>
+<p>Whisper<sup id="fnref:11"><a class="footnote-ref" href="#fn:11">11</a></sup> ist ein Sequence to Sequence Spracherkennungs- und Übersetzungsmodell, das von OpenAI veröffentlicht wurde. Es wurde mit 680.000 Stunden gelabelter Audiotranskriptionsdaten trainiert, von denen 243.000 nicht-englische Daten sind. Dank der riesigen Menge an Trainingsdaten ist Whisper robust gegenüber Akzenten, Hintergrundgeräuschen und Fachsprache. Es zeichnet sich durch Zero-Shot-Learning aus und erfordert oft kein vorheriges Fine-Tuning für domänenspezifische Aufgaben. Aufgrund seiner hervorragenden Leistung und Benutzerfreundlichkeit wurde Whisper in beliebte kommerzielle Produkte wie <a href="https://auphonic.com/features#speechrec" target="_blank">Auphonic</a>, ein Podcasting-Tool mit KI, integriert.</p>
+<p>Der Archiktekur von Whisper ist unten abgebildet<sup id="fnref:12"><a class="footnote-ref" href="#fn:12">12</a></sup>.</p>
+<figure>
+<p><img alt="Whisper Architecture" src="../img/T9-Dialekt/t9-whisper-arch.svg" />
+  </p>
+<figcaption>Fig. 1: Der Encoder-Decoder-Transformer Architektur von Whisper.</figcaption>
+</figure>
+<h4 id="xlsr">XLSR</h4>
+<p>XLSR<sup id="fnref:13"><a class="footnote-ref" href="#fn:13">13</a></sup> basiert auf Wav2Vec 2.0 und ist ein mehrsprachiges Modell, das auf 60.000 Stunden ungelabelter Audiodaten trainiert wurde. Es führt unüberwachte maskierte Vorhersagen durch, d.h. es lernt Zwischenzuordnungen von Sprachaudio zu versteckten Zuständen im Modell. XLSR muss finetuned werden, um kontinuierliche Zuordnungen für Transkriptionen zu erzeugen.</p>
+<h3 id="33-kommerzielle-dienste">3.3 Kommerzielle Dienste</h3>
+<p>Es gibt auch Unternehmen, die Sprache-zu-Text-Dienste als Online-Dienste für Kunden anbieten. Diese werden im Anschluss beschrieben.</p>
+<h4 id="cloud-anbieter">Cloud-Anbieter</h4>
+<p>Die drei großen Cloud-Anbieter (<a href="https://aws.amazon.com/transcribe/" target="_blank">AWS</a>, <a href="https://azure.microsoft.com/en-us/products/cognitive-services/speech-to-text" target="_blank">Azure</a> und <a href="https://cloud.google.com/speech-to-text" target="_blank">GCP</a>) bieten alle kostenpflichtige APIs für ihre Text-to-Speech-Dienste an. Die APIs richten sich jedoch eher an Softwareentwickler, um ASR-Produkte mit ihren Diensten zu entwickeln, und sind nicht auf Endbenutzer ausgerichtet. Alle unterstützen die Transkription von schweizerdeutschem Audio.</p>
+<h4 id="toggl">Töggl</h4>
+<p><a href="https://xn--tggl-5qa.ch/" target="_blank">Töggl</a> ist ein kostenpflichtiger TTS-Dienst von recapp, einem Schweizer Unternehmen, das sich auf die Spracherkennung von Dialekten spezialisiert hat. Es handelt sich um eine Webanwendung, die aus hochgeladenen Audiodateien Texttranskriptionen erstellt. Töggl richtet sich an Studenten und Journalisten, die in der Schweiz leben. Gemäss den AGB dürfen nämlich nur in der Schweiz wohnhafte Personen den Dienst nutzen. Im Gegensatz zu den Cloud-Anbietern ist Töggl datenschutzbewusst und bietet maßgeschneiderte On-Premise-Lösungen für Unternehmen an.</p>
+<h2 id="4-anwendungen">4 Anwendungen</h2>
+<p>Die oben dargestellten vortrainierten Modelle zeigen beeindruckende Ergebnisse. Es lohnt sich jedoch zu prüfen, ob durch Fine-Tuning eines bereits vorhandenen Modells mit einem der oben beschriebenen schweizerdeutschen Datensätze noch Verbesserungen erzielt werden können. Eine mögliche Verbesserung wäre, dass das Modell in der Lage ist, Transkriptionen in Schweizerdeutsch anstelle von Hochdeutsch auszugeben.</p>
+<p>Dieser Teil erläutert die Schritte, die für das Fine-Tuning eines Whisper-Modells erforderlich sind. Anschließend wird das finetuned Whisper-Modell mit den nicht-finetuned Versionen der Modelle Whisper und XLSR verglichen. Der ganze Vorgang basiert auf einer <a href="https://huggingface.co/blog/fine-tune-whisper" target="_blank">Anleitung von HuggingFace</a><sup id="fnref:14"><a class="footnote-ref" href="#fn:14">14</a></sup>.</p>
+<h3 id="41-vorbereitende-schritte">4.1 Vorbereitende Schritte</h3>
+<p>Bevor das Modell tatsächlich finetuned wird, müssen einige vorbereitende Schritte durchgeführt werden. Dazu gehören das Laden und Verarbeiten des Datensatzes sowie das Laden einiger Hilfsklassen. Dieser Prozess wird in den folgenden Unterabschnitten beschrieben.</p>
+<h4 id="laden-des-datensatzes">Laden des Datensatzes</h4>
+<p>Für das Finetuning wurde der SwissDial-Datensatz gewählt, da er ein grosses Audio-Korpus mit schweizerdeutschen und hochdeutschen Transkriptionen enthält. Dies ermöglicht einen einfachen Vergleich. SwissDial wurde bereits <a href="#swissdial-2021">oben</a> beschrieben.</p>
+<p>Da der Datensatz 8 verschiedene Dialekte enthält, wurde nur der Zürcher Dialekt (ZH) für das Finetuning ausgewählt, da er die meisten Audiodaten enthält, insgesamt 4,55 Stunden. Die Daten wurden in einem Verhältnis von 80:20 in Trainings- und Testdatensätze aufgeteilt, was zu 3,64 Stunden Trainingsdaten und den verbleibenden 0,91 Stunden für Tests führt. Ein Validierungs-Split wurde nicht durchgeführt, da nur wenige Daten zur Verfügung standen.</p>
+<p>Der Datensatz muss zunächst verarbeitet werden. Er besteht aus einer Reihe von .wav-Audiodateien, die jeweils einen anderen Satz repräsentieren. Zusätzlich gibt es eine JSON-Datei, in der die Metadaten gespeichert sind. Die Metadaten enthalten Transkriptionen sowohl im Dialekt als auch im Hochdeutsch, sowie weitere Informationen wie die Domäne des Satzes.</p>
+<p>Mit der Python-Bibliothek <em>pandas</em> wurden die Metadaten in einen DataFrame importiert, manipuliert und bereinigt. Der endgültige DataFrame bestand aus 3 Spalten: Die hochdeutsche Transkription, die Zürcher Dialekttranskription, sowie der Pfad zur entsprechenden Audiodatei. Dieser finale DataFrame umfasst die Metadaten unseres Korpus.</p>
+<figure>
+<p><img alt="Bereinigte DataFrame" src="../img/T9-Dialekt/t9-cleaned-data.png" />
+  </p>
+<figcaption>Fig. 2: Der finale, bereinigte DataFrame.</figcaption>
+</figure>
+<p>Mit Hilfe der HuggingFace <a href="https://huggingface.co/docs/datasets/index" target="_blank"><em>datasets</em></a> Bibliothek werden die Metadaten und die Audiodateien zu einem einzigen Audio-Dataset-Objekt zusammengefasst, um sie später leichter verarbeiten zu können.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;audiofolder&quot;</span><span class="p">,</span> <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;../dataset/zh/&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="merkmalsextraktion">Merkmalsextraktion</h4>
+<p>Sprachsignale können als eindimensionale Arrays betrachtet werden, die sich mit der Zeit verändern. Jeder Wert entspricht der Amplitude des Signals zu einem bestimmten Zeitpunkt. Kontinuierliche Sprache enthält eine unendliche Anzahl von Amplitudenwerten. Für den Computer ist dies ein Problem, da er diskrete Signale erwartet.</p>
+<p>Um dieses Problem zu lösen, muss das Sprachsignal in festen Zeitschritten gesampelt werden. Das Intervall, in dem die Audiodaten abgetastet werden, wird als Abtastrate (<em>eng: Sample Rate</em>) bezeichnet. Diese wird normalerweise in Samples pro Sekunde oder Hertz (Hz) gemessen.</p>
+<p>Die Abtastrate der Audiodaten muss mit der von Whisper erwarteten Rate identisch sein. Andernfalls kann es zu unerwarteten Ergebnissen kommen, da Audiosignale mit unterschiedlichen Abtastraten unterschiedlich verteilt werden. Für Whisper werden für die Trainingsdaten Audiodaten mit einer Abtastrate von 16 kHz benötigt.</p>
+<p>Die HuggingFace <a href="https://huggingface.co/docs/transformers/index" target="_blank"><em>Transformers</em></a> Bibliothek bietet praktische Hilfsklassen für das Finetuning und Training eines Whisper-Modells. Hier wird die <code>WhisperFeatureExtractor</code> Klasse für folgende Aufgaben verwendet:</p>
+<ul>
+<li>Resampling des Eingangssignals auf 16 kHz.</li>
+<li>Auffüllen oder Kürzen von Audiosamples auf eine feste Länge von 30 Sekunden.</li>
+<li>Umwandlung von Audio-Samples in Log-Mel-Spektrogramme.</li>
+</ul>
+<p>Log-Mel-Spektrogramme sind eine visuelle Darstellung der Frequenz eines Signals und sind das, was Whisper als Eingabe erwartet. Ein beispielhaftes Spektrogramm ist unten abgebildet<sup id="fnref:15"><a class="footnote-ref" href="#fn:15">15</a></sup>.</p>
+<figure>
+<p><img alt="Log-Mel Spectrogram" src="../img/T9-Dialekt/t9-spectrogram.jpg" />
+  </p>
+<figcaption>Fig. 3: Die Umwandlung von einem Audiosignal in ein Log-Mel-Spektrogramm.</figcaption>
+</figure>
+<h4 id="tokenisierung-von-text">Tokenisierung von Text</h4>
+<p>Whisper gibt eine Serie von Text-Tokens aus, die für Menschen unverständlich sind. Diese Zahlenreihen stellen Indizes für bestimmte Wörter im internen Wörterbuch von Whisper dar und sind byte-pair kodiert. Diese Kodierungen werden mit Hilfe eines so genannten Tokenizers in echten Text umgewandelt.</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">encoded_tokens</span>
+<span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">84</span><span class="p">,</span> <span class="mi">368</span><span class="p">,</span> <span class="mi">40512</span><span class="p">,</span> <span class="mi">271</span><span class="p">,</span> <span class="mi">948</span><span class="p">,</span> <span class="mi">20731</span><span class="p">,</span> <span class="mi">302</span><span class="p">,</span> <span class="o">...</span> <span class="mi">13</span><span class="p">]</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">decoded_tokens</span>
+<span class="n">Au</span> <span class="n">de</span> <span class="n">Bewis</span> <span class="n">enthaltet</span> <span class="n">analytischi</span> <span class="n">Schwäche</span> <span class="n">wo</span> <span class="n">erscht</span> <span class="n">spöter</span> <span class="n">händ</span> <span class="n">chöne</span> <span class="n">besitigt</span> <span class="n">werde</span><span class="o">.</span>
+</code></pre></div>
+<p>Weitere Informationen zu Byte-Paar-Kodierungen gibt es in diesem <a href="https://huggingface.co/learn/nlp-course/chapter6/5?fw=pt#bytepair-encoding-tokenization" target="_blank">HuggingFace-Tutorial</a>.</p>
+<p>Hier erledigt die Hilfsklasse <code>WhisperTokenizer</code> genau das.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">WhisperTokenizer</span>
+
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">WhisperTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;openai/whisper-small&quot;</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s2">&quot;transcribe&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Um zu kontrollieren, ob der Tokenizer korrekt arbeitet, kann man einen bestimmten Datenpunkt heraussuchen und den Eingabe-String mit seiner tokenisierten und dekodierten Variante vergleichen.</p>
+<div class="highlight"><pre><span></span><code><span class="n">input_str</span> <span class="o">=</span> <span class="n">dataset_tt</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;ch_zh&quot;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">input_str</span><span class="p">)</span><span class="o">.</span><span class="n">input_ids</span>
+<span class="n">decoded_str</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">input_str</span>
+<span class="n">De</span> <span class="n">Nils</span> <span class="n">Puk</span> <span class="n">hät</span> <span class="n">ihn</span> <span class="n">lut</span> <span class="n">ahgschroue</span> <span class="n">und</span> <span class="n">gschwört</span> <span class="n">sich</span> <span class="n">zräche</span><span class="o">.</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">decoded_str</span>
+<span class="n">De</span> <span class="n">Nils</span> <span class="n">Puk</span> <span class="n">hät</span> <span class="n">ihn</span> <span class="n">lut</span> <span class="n">ahgschroue</span> <span class="n">und</span> <span class="n">gschwört</span> <span class="n">sich</span> <span class="n">zräche</span><span class="o">.</span>
+</code></pre></div>
+<h4 id="kombination-von-feature-extraktor-und-tokenizer">Kombination von Feature Extraktor und Tokenizer</h4>
+<p>Der Feature Extractor und der Tokenizer können zur einfacheren Verwendung in einer einzigen Prozessor-Klasse kombiniert werden. Dies wird mit der Utility-Klasse WhisperProcessor gemacht. Dadurch wird das spätere Training vereinfacht, da nur der Prozessor und das Modell verfolgt werden müssen.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">WhisperProcessor</span>
+
+<span class="n">processor</span> <span class="o">=</span> <span class="n">WhisperProcessor</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;openai/whisper-small&quot;</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s2">&quot;transcribe&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="aufbereitung-der-daten">Aufbereitung der Daten</h4>
+<p>Hier kommt der zuvor vorbereitete Audio-Dataset ins Spiel.</p>
+<p>Jeder Datenpunkt enthält Folgendes:</p>
+<ul>
+<li>den Pfad zur Audiodatei.</li>
+<li>ein eindimensionales Array, das die Audiodaten repräsentiert.</li>
+<li>Sample-Rate (22kHz).</li>
+<li>Transkription in Hochdeutsch.</li>
+<li>Transkription im Zürcher Dialekt.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">single_data_point</span>
+
+<span class="p">{</span>
+  <span class="s2">&quot;audio&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;dataset/zh/ch_zh_2239.wav&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;array&quot;</span><span class="p">:</span> <span class="n">array</span><span class="p">([</span><span class="mf">1.50373509e-07</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.17052582e-07</span><span class="p">]),</span>
+    <span class="s2">&quot;sampling_rate&quot;</span><span class="p">:</span> <span class="mi">22050</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;de&quot;</span><span class="p">:</span> <span class="s2">&quot;Der Nis Puk schrie ihn laut an und schwor, sich zu rächen.&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;ch_zh&quot;</span><span class="p">:</span> <span class="s2">&quot;De Nils Puk hät ihn lut ahgschroue und gschwört sich zräche.&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Jeder Datenpunkt muss so verarbeitet werden, dass:</p>
+<ul>
+<li>die Sample-Rate auf 16 kHz reduziert wird.</li>
+<li>das Audio-Array in ein Log-Mel-Spektrogramm umgewandelt wird.</li>
+<li>die Zürcher Dialekttranskription tokenisiert wird.</li>
+</ul>
+<p>Die Funktion <code>prepare_dataset</code> erledigt genau das. Zusätzlich ermöglicht die <code>map</code> Funktion die parallele Verarbeitung des Datensatzes, was die Vorverarbeitung beschleunigt.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">prepare_dataset</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
+    <span class="c1"># load and resample audio data from 22050Hz to 16kHz</span>
+    <span class="n">audio</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">&quot;audio&quot;</span><span class="p">]</span>
+
+    <span class="c1"># compute log-Mel input features from input audio array</span>
+    <span class="n">batch</span><span class="p">[</span><span class="s2">&quot;input_features&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature_extractor</span><span class="p">(</span><span class="n">audio</span><span class="p">[</span><span class="s2">&quot;array&quot;</span><span class="p">],</span> <span class="n">sampling_rate</span><span class="o">=</span><span class="n">audio</span><span class="p">[</span><span class="s2">&quot;sampling_rate&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">input_features</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># encode taget text to label ids</span>
+    <span class="n">batch</span><span class="p">[</span><span class="s2">&quot;labels&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">batch</span><span class="p">[</span><span class="s2">&quot;ch_zh&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">input_ids</span>
+
+    <span class="k">return</span> <span class="n">batch</span>
+
+<span class="n">dataset_after_prep</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">prepare_dataset</span><span class="p">,</span> <span class="n">remove_columns</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">column_names</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">],</span> <span class="n">num_proc</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="definieren-eines-data-collators">Definieren eines Data Collators</h4>
+<p>Ein Data Collator fasst Inputdaten zu einem Batch zusammen, der später für das Training verwendet wird. Wenn der Collator aufgerufen wird, werden die oben beschriebenen Vorverarbeitungsschritte für jeden Batch durchlaufen. Anstatt den Feature Extractor und den Tokenizer separat zu verwenden, kann hier der kombinierte WhisperProcessor genutzt werden. Es gibt auch einige zusätzliche Schritte für die Umwandlung in PyTorch-Tensoren und das Padding von Labels.</p>
+<h4 id="definieren-einer-evaluierungsmetrik">Definieren einer Evaluierungsmetrik</h4>
+<p>Zur Bewertung der Leistung des Modells wird die Word-Error-Rate (WER) verwendet. Die WER ist eine gängige Metrik zur Beurteilung von ASR-Modellen und wird wie folgt berechnet:</p>
+<div class="arithmatex">\[
+WER = \frac{S + D + I}{N}
+\]</div>
+<p>Wobei:</p>
+<ul>
+<li>S - Anzahl der substituierten Wörter (in der Ausgabe ersetzte Wörter)</li>
+<li>D - Anzahl der gelöschten Wörter (in der Ausgabe fehlende Wörter)</li>
+<li>I - Anzahl der eingefügten Wörter (in der Ausgabe hinzugefügte Wörter)</li>
+<li>N - Gesamtzahl der Wörter</li>
+</ul>
+<p>Je niedriger der WER-Wert, desto besser ist die Leistung des Modells, da es weniger Inkonsistenzen zwischen der generierten Ausgabe und der Ground Truth gibt.</p>
+<p>Die HuggingFace <a href="https://huggingface.co/docs/evaluate/index" target="_blank"><em>evaluate</em></a> Bibliothek stellt eine fertige Implementierung der WER-Metrik zur Verfügung. Diese kann dann in eine Hilfsfunktion, <code>compute_metrics</code>, verpackt werden, die die Prognosen verarbeitet und das endgültige WER berechnet.</p>
+<h3 id="42-training">4.2 Training</h3>
+<p>Vor dem Training sind noch einige Schritte notwendig. Zunächst muss ein vortrainierter Checkpoint des Whisper-Modells aus dem Hugging Face Hub geladen werden. Danach müssen einige Trainingsargumente definiert werden, z. B. die Lernrate, die Schritte für das Checkpointing und der Speicherplatz für die Logs.</p>
+<p>Schließlich können die Trainingsargumente, das vortrainierte Modell, der Datensatz, der Data Collator und der Metrikrechner an eine Trainer Klasse übergeben werden.</p>
+<p>Das Training wird dann einfach mit einem Aufruf von <code>trainer.train()</code> durchgeführt.</p>
+<p>Je nach Hardware kann das Training etwa 10-20 Stunden dauern.</p>
+<h3 id="43-auswertung">4.3 Auswertung</h3>
+<p>Das finetuned Modell für den Zürcher Dialekt ist auf dem <a href="https://huggingface.co/ss0ffii/whisper-small-german-swiss" target="_blank">Hugging Face Hub</a> verfügbar.</p>
+<p>Vor dem Finetuning lag der WER auf dem Testdatensatz bei 77%, was ziemlich hoch ist. Nach dem Finetuning sinkt dieser Wert jedoch auf einer wesentlich handlicheren 30%.</p>
+<p>Zur Erinnerung: Je niedriger der WER, desto besser, da das Modell genauere Transkriptionen liefert. Etwa 30% der mit dem finetuned Modell ermittelten Ergebnisse stimmen nicht mit dem Ground Truth überein.</p>
+<p>Der WER für die Trainingsdaten liegt jedoch bei sehr niedrigen 9,41%. Dies könnte bedeuten, dass Overfitting stattgefunden hat und das Modell schlecht generalisieren kann, so dass es bei fremden, vorher ungesehenen Daten schlechter abschneidet.</p>
+<h3 id="44-modellvergleich">4.4 Modellvergleich</h3>
+<p>In diesem Abschnitt werden die generierten Transkriptionen des finetuned Whisper-Modells mit zwei anderen Modellen verglichen: dem kleinen Whisper Modell und einem XLSR-Modell, das für Deutsch finetuned wurde<sup id="fnref:16"><a class="footnote-ref" href="#fn:16">16</a></sup>. Da während des Trainings kein Holdout-Set definiert wurde, wurden 5 zufällige Datenpunkte aus einem anderen Dialekt (Graubünden, GR) zum Vergleich genommen.</p>
+<figure>
+<p><img alt="Modellvergleich" src="../img/T9-Dialekt/t9-model-comparison.png" />
+  </p>
+<figcaption>Fig. 4: Tabelle zum Vergleich von 3 Modellen.</figcaption>
+</figure>
+<p>Die obenstehende Tabelle zeigt die 5 Datenpunkte, zusammen mit den Ground Truth Labels und den vorhergesagten Transkriptionen. Die zweite bis vierte Spalte zeigen die Ground Truth Labels für Hochdeutsch, den Zürcher Dialekt und den Graubündner Dialekt, während die letzten drei Spalten die Vorhersagen der jeweiligen Modelle für den Graubündner Dialekt enthalten.</p>
+<p>Wenn man einen anderen Dialekt zum Vergleich benutzt, gibt es einige Punkte, die zu beachten sind. Erstens sind einige lexikalische Abweichungen zu beobachten - im Zürcher Dialekt wird "Momentan" verwendet, während das entsprechende Wort in Graubünden stattdessen "Derziit" heißt. Auch in der Schreibweise gibt es Unterschiede, zum Beispiel beim Wort "nicht", das in Zürich als "nöd" und in Graubünden als "nit" transkribiert wird.</p>
+<p>Das kleine Whisper-Modell ist in der Lage, weitgehend genaue Transkriptionen zu liefern, die die grobe Bedeutung des Satzes erfassen. Allerdings wird Sätze auf Hochdeutsch transkribiert, da noch kein Fine-Tuning für Schweizerdeutsch vorgenommen wurde. Nach dem Fine-Tuning des Modells stimmen die Vorhersagen besser mit dem Label überein und können die meisten Besonderheiten des Dialekts berücksichtigen. Dies korrespondiert mit einer niedrigeren Word-Error-Rate.</p>
+<p>Das XLSR-Modell (in der Tabelle als Wave2Vec bezeichnet) weist die meisten Unterschiede auf. Der Tokenizer des Modells spielt hier die entscheidende Rolle. Der Tokenizer von Whisper kann Satzzeichen und Großschreibung verarbeiten, während der Tokenizer von XLSR dies nicht tut. Dies führt zu Vorhersagen, die weniger mit den Labels übereinstimmen, und somit zu einem höheren WER. Eine mögliche Verbesserung wäre jedoch, auch das XLSR-Modell finezutunen, um festzustellen, wie es dann abschneidet.</p>
+<p>Insgesamt sind alle drei Modelle in der Lage, einen schweizerdeutschen Dialekt mit unterschiedlicher Genauigkeit zu transkribieren. Das finetuned Whisper-Modell zeigt die Fähigkeit, die besonderen Merkmale des Dialekts zu erfassen.</p>
+<h2 id="5-fazit">5 Fazit</h2>
+<p>Zusammenfassend lässt sich sagen, dass Dialekte erhebliche Herausforderungen für automatische Spracherkennungssysteme darstellen, da sie von den Standardsprachen abweichen. Die einzigartigen Eigenschaften dialektaler Variationen, wie lexikalische, akustische und orthografische Unterschiede, stellen aktuelle ASR-Modelle vor Schwierigkeiten. Allerdings werden diese Herausforderungen durch laufende Forschung und Fortschritte auf diesem Gebiet angegangen.</p>
+<p>Zu den Key-Takeaways gehört die deutliche Verbesserung, die durch das Finetuning des Whisper-Modells speziell für schweizerdeutsche Dialekte erzielt wurde. Durch das Training des Modells anhand des SwissDial-Datensatzes, der annotierte Audioaufnahmen und Transkriptionen sowohl in Schweizerdeutsch als auch in Hochdeutsch enthält, zeigte das finetuned Whisper-Modell eine bemerkenswerte Reduzierung der Word-Error-Rate. Diese Verbesserung weist darauf hin, dass das finetuned Modell besser in der Lage ist, die einzigartigen phonetischen und sprachlichen Merkmale von schweizerdeutschen Dialekten zu erfassen.</p>
+<p>Darüber hinaus spielen öffentlich verfügbare Datensätze wie die Schweizer Dialektsammlung und SwissDial eine wichtige Rolle zur Verbesserung von ASR-Modellen bei. Besonders umfangreich ist die Schweizer Dialektsammlung mit 200 Stunden Audiomaterial von 4000 Sprechern unterschiedlicher Dialekte, Altersgruppen und Geschlechter. Modellen wie Whisper und XLSR lassen sich leicht auf Dialekte finetunen, sofern genügend Daten vorhanden sind. Der einfache Zugang zu solchen Datensätzen und Modellen ermöglicht es Praktikern, ASR-Systeme, die mit Dialekte umgehen können, aufzubauen.</p>
+<p>Zudem bieten Techniken wie Daten-Augmentierung und Domain-Anpassung die Möglichkeit, mit Dialekten zu arbeiten. Die Daten-Augmentierung macht ASR-Modelle robuster gegenüber dialektalen Varietäten, indem die Daten auf verschiedene Weise transformiert werden, um zusätzliche Trainingsbeispiele zu erstellen. Die Domain-Anpassung setzt Transfer-Learning ein, um gelernte akustischen und sprachlichen Muster von High-Resource Languages auf Dialekten anzuwenden und somit bessere Leistungen für Dialekten zu liefern.</p>
+<p>​​Es ist noch ein weiter Weg, bis ASR-Systeme Dialekte problemlos verstehen und verarbeiten können. Die in diesem Bericht vorgestellten Methoden und Anwendungen sind jedoch bedeutende Fortschritte in diesem Bereich. In der Zukunft wird es sicherlich noch weitere spannende Entwicklungen geben.</p>
+<h2 id="6-weiterfuhrendes-material">6 Weiterführendes Material</h2>
+<h3 id="61-podcast">6.1 Podcast</h3>
+<p>Hier Link zum Podcast.</p>
+<h3 id="62-talk">6.2 Talk</h3>
+<p>Hier einfach Youtube oder THD System embedden.</p>
+<h3 id="63-demo">6.3 Demo</h3>
+<p>Hier Link zum Demo Video.</p>
+<p>Der Repository befindet sich <a href="https://mygit.th-deg.de/sg07789/sat-dialect_in_sr">hier</a>.</p>
+<h2 id="7-literaturliste">7 Literaturliste</h2>
+<p>Die Literatur in den Fußnoten sind hier vollständig zitiert.</p>
+<p>[2] ‘Sprachen | Bundesamt für Statistik’. https://www.bfs.admin.ch/bfs/de/home/statistiken/bevoelkerung/sprachen-religionen/sprachen.html (accessed Jun. 27, 2023).</p>
+<p>[3] Scherrer, Y., &amp; Rambow, O. (2010). Natural language processing for the Swiss German dialect area. Semantic Approaches in Natural Language Processing-Proceedings of the Conference on Natural Language Processing 2010 (KONVENS), 93–102.</p>
+<p>[4] T.-S. Nguyen, S. Stüker, J. Niehues, and A. Waibel, ‘Improving Sequence-To-Sequence Speech Recognition Training with On-The-Fly Data Augmentation’, in ICASSP 2020 - 2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), May 2020, pp. 7689–7693. doi: 10.1109/ICASSP40776.2020.9054130.</p>
+<p>[5] T. Wang, Z. Ding, W. Shao, H. Tang, and K. Huang, ‘Towards Fair Cross-Domain Adaptation via Generative Learning’, in 2021 IEEE Winter Conference on Applications of Computer Vision (WACV), Waikoloa, HI, USA: IEEE, Jan. 2021, pp. 454–463. doi: 10.1109/WACV48630.2021.00050.</p>
+<p>[6] M. Plüss et al., ‘SDS-200: A Swiss German Speech to Standard German Text Corpus’. arXiv, May 19, 2022. doi: 10.48550/arXiv.2205.09501.</p>
+<p>[7] P. Dogan-Schönberger, J. Mäder, and T. Hofmann, ‘SwissDial: Parallel Multidialectal Corpus of Spoken Swiss German’. arXiv, Mar. 21, 2021. Accessed: Jun. 27, 2023. [Online]. Available: http://arxiv.org/abs/2103.11401</p>
+<p>[8] M. Plüss, L. Neukom, C. Scheller, and M. Vogel, ‘Swiss Parliaments Corpus, an Automatically Aligned Swiss German Speech to Standard German Text Corpus’. arXiv, Jun. 09, 2021. Accessed: Jun. 27, 2023. [Online]. Available: http://arxiv.org/abs/2010.02810</p>
+<p>[9] T. Samardžić, Y. Scherrer, and E. Glaser, ‘ArchiMob - A Corpus of Spoken Swiss German’, in Proceedings of the Tenth International Conference on Language Resources and Evaluation (LREC’16), Portorož, Slovenia: European Language Resources Association (ELRA), May 2016, pp. 4061–4066. Accessed: Jun. 27, 2023. [Online]. Available: https://aclanthology.org/L16-1641</p>
+<p>[10] P. N. Garner, D. Imseng, and T. Meyer, Eds., ‘Automatic Speech Recognition and Translation of a Swiss German Dialect: Walliserdeutsch’, Proceedings of Interspeech, 2014, doi: 10.21437/Interspeech.2014-480.</p>
+<p>[11] A. Radford, J. W. Kim, T. Xu, G. Brockman, C. McLeavey, and I. Sutskever, ‘Robust Speech Recognition via Large-Scale Weak Supervision’. arXiv, Dec. 06, 2022. doi: 10.48550/arXiv.2212.04356.</p>
+<p>[12] ‘Introducing Whisper’. https://openai.com/research/whisper (accessed Jun. 29, 2023).</p>
+<p>[13] A. Conneau, A. Baevski, R. Collobert, A. Mohamed, and M. Auli, ‘Unsupervised Cross-lingual Representation Learning for Speech Recognition’. arXiv, Dec. 15, 2020. doi: 10.48550/arXiv.2006.13979.</p>
+<p>[14] ‘Fine-Tune Whisper For Multilingual ASR with 🤗 Transformers’. https://huggingface.co/blog/fine-tune-whisper (accessed Jun. 30, 2023).</p>
+<p>[15] ‘SpecAugment: A New Data Augmentation Method for Automatic Speech Recognition’, Apr. 22, 2019. https://ai.googleblog.com/2019/04/specaugment-new-data-augmentation.html (accessed Jun. 29, 2023).</p>
+<p>[16]    J. Grosman, Fine-tuned XLSR-53 large model for speech recognition in German. https://huggingface.co/jonatasgrosman/wav2vec2-large-xlsr-53-german, 2021. [Online]. Available: https://huggingface.co/jonatasgrosman/wav2vec2-large-xlsr-53-german</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Hej Siri, ruf den Alex mal an!&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>‘Sprachen | Bundesamt für Statistik’.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>Scherrer, Y., &amp; Rambow, O. (2010). Natural language processing for the Swiss German dialect area.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>T.-S. Nguyen, S. Stüker, J. Niehues, and A. Waibel, ‘Improving Sequence-To-Sequence Speech Recognition Training with On-The-Fly Data Augmentation’.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p>T. Wang, Z. Ding, W. Shao, H. Tang, and K. Huang, ‘Towards Fair Cross-Domain Adaptation via Generative Learning’.&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p>M. Plüss et al., ‘SDS-200: A Swiss German Speech to Standard German Text Corpus’.&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:7">
+<p>P. Dogan-Schönberger, J. Mäder, and T. Hofmann, ‘SwissDial: Parallel Multidialectal Corpus of Spoken Swiss German’.&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:8">
+<p>M. Plüss, L. Neukom, C. Scheller, and M. Vogel, ‘Swiss Parliaments Corpus, an Automatically Aligned Swiss German Speech to Standard German Text Corpus’.&#160;<a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:9">
+<p>T. Samardžić, Y. Scherrer, and E. Glaser, ‘ArchiMob - A Corpus of Spoken Swiss German’.&#160;<a class="footnote-backref" href="#fnref:9" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:10">
+<p>P. N. Garner, D. Imseng, and T. Meyer, Eds., ‘Automatic Speech Recognition and Translation of a Swiss German Dialect: Walliserdeutsch’.&#160;<a class="footnote-backref" href="#fnref:10" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:11">
+<p>A. Radford, J. W. Kim, T. Xu, G. Brockman, C. McLeavey, and I. Sutskever, ‘Robust Speech Recognition via Large-Scale Weak Supervision’.&#160;<a class="footnote-backref" href="#fnref:11" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:12">
+<p>Bildquelle: ‘Introducing Whisper’.&#160;<a class="footnote-backref" href="#fnref:12" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+<li id="fn:13">
+<p>A. Conneau, A. Baevski, R. Collobert, A. Mohamed, and M. Auli, ‘Unsupervised Cross-lingual Representation Learning for Speech Recognition’.&#160;<a class="footnote-backref" href="#fnref:13" title="Jump back to footnote 13 in the text">&#8617;</a></p>
+</li>
+<li id="fn:14">
+<p>‘Fine-Tune Whisper For Multilingual ASR with 🤗 Transformers’. https://huggingface.co/blog/fine-tune-whisper (accessed Jun. 30, 2023).&#160;<a class="footnote-backref" href="#fnref:14" title="Jump back to footnote 14 in the text">&#8617;</a></p>
+</li>
+<li id="fn:15">
+<p>Bildquelle: ‘SpecAugment: A New Data Augmentation Method for Automatic Speech Recognition’.&#160;<a class="footnote-backref" href="#fnref:15" title="Jump back to footnote 15 in the text">&#8617;</a></p>
+</li>
+<li id="fn:16">
+<p>J. Grosman, Fine-tuned XLSR-53 large model for speech recognition in German.&#160;<a class="footnote-backref" href="#fnref:16" title="Jump back to footnote 16 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../../javascripts/katex.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        
+      
+    
+  </body>
+</html>

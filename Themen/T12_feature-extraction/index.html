@@ -1,0 +1,1124 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../T09_Dialekte_Spracherkennung/">
+      
+      
+        <link rel="next" href="../TextToSpeech/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.1, mkdocs-material-9.1.21">
+    
+    
+      
+        <title>Feature Extraction - Seminar Aktuelle Themen der künstlichen Intelligenz</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.eebd395e.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+      <link rel="stylesheet" href="../../javascripts/mathjax.js">
+    
+      <link rel="stylesheet" href="https://polyfill.io/v3/polyfill.min.js?features=es6">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#feature-extraction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Seminar Aktuelle Themen der künstlichen Intelligenz" class="md-header__button md-logo" aria-label="Seminar Aktuelle Themen der künstlichen Intelligenz" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Seminar Aktuelle Themen der künstlichen Intelligenz
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Feature Extraction
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Seminar Aktuelle Themen der künstlichen Intelligenz" class="md-nav__button md-logo" aria-label="Seminar Aktuelle Themen der künstlichen Intelligenz" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Seminar Aktuelle Themen der künstlichen Intelligenz
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Aktuelles
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Themen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Themen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Einf%C3%A4rben%20von%20Bildern/" class="md-nav__link">
+        Einfärben von Bildern - Zwei Ansätze
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Empfehlungssysteme/" class="md-nav__link">
+        Empfehlungssysteme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Face_Aging/" class="md-nav__link">
+        Face Aging
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LLMs/" class="md-nav__link">
+        Large Language Models
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Spracherkennung/" class="md-nav__link">
+        Spracherkennung
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T09_Dialekte_Spracherkennung/" class="md-nav__link">
+        T09 - Dialekte in der Spracherkennung
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Feature Extraction
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Feature Extraction
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    Abstract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vorwort" class="md-nav__link">
+    Vorwort
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methoden" class="md-nav__link">
+    Methoden
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interpretierbarkeit" class="md-nav__link">
+    Interpretierbarkeit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#effizienz" class="md-nav__link">
+    Effizienz
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#robustheit" class="md-nav__link">
+    Robustheit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#probleme" class="md-nav__link">
+    Probleme
+  </a>
+  
+    <nav class="md-nav" aria-label="Probleme">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datenqualitat" class="md-nav__link">
+    Datenqualität
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#korrelation-und-kollinearitat" class="md-nav__link">
+    Korrelation und Kollinearität
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#over-und-underfitting" class="md-nav__link">
+    Over und Underfitting
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skalierbarkeit" class="md-nav__link">
+    Skalierbarkeit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subjektivitat" class="md-nav__link">
+    Subjektivität
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anwendungen" class="md-nav__link">
+    Anwendungen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fazit" class="md-nav__link">
+    Fazit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#weiterfuhrendes-material" class="md-nav__link">
+    Weiterführendes Material
+  </a>
+  
+    <nav class="md-nav" aria-label="Weiterführendes Material">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#podcast" class="md-nav__link">
+    Podcast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#talk" class="md-nav__link">
+    Talk
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demo" class="md-nav__link">
+    Demo
+  </a>
+  
+    <nav class="md-nav" aria-label="Demo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-demo" class="md-nav__link">
+    Code Demo.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#literaturliste" class="md-nav__link">
+    Literaturliste
+  </a>
+  
+    <nav class="md-nav" aria-label="Literaturliste">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hesami-mohsen-jones-a-2020-application-of-artificial-intelligence-models-and-optimization-algorithms-in-plant-cell-and-tissue-culture-applied-microbiology-and-biotechnology-101007s00253-020-10888-2" class="md-nav__link">
+    Hesami, Mohsen &amp; Jones, A.. (2020). Application of artificial intelligence models and optimization algorithms in plant cell and tissue culture. Applied Microbiology and Biotechnology. 10.1007/s00253-020-10888-2.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpswwwopensourceagendacomprojectssaliency-detection-convolutional-autoencoder" class="md-nav__link">
+    https://www.opensourceagenda.com/projects/saliency-detection-convolutional-autoencoder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#khoshdeli-mina-cong-richard-parvin-bahram-2017-detection-of-nuclei-in-he-stained-sections-using-convolutional-neural-networks" class="md-nav__link">
+    Khoshdeli, Mina &amp; Cong, Richard &amp; Parvin, Bahram. (2017). Detection of Nuclei in H&amp;E Stained Sections Using Convolutional Neural Networks.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpstowardsdatasciencecomautoencoders-vs-pca-when-to-use-which-73de063f5d7" class="md-nav__link">
+    https://towardsdatascience.com/autoencoders-vs-pca-when-to-use-which-73de063f5d7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpswwwkagglecomcompetitionsvsb-power-line-fault-detectiondata" class="md-nav__link">
+    https://www.kaggle.com/competitions/vsb-power-line-fault-detection/data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpsarxivorgpdf210304874pdf" class="md-nav__link">
+    https://arxiv.org/pdf/2103.04874.pdf
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paul-s-symons-d-d-altmanninger-m-ertel-w-2020-autoencoder-based-feature-learning-for-human-activity-recognition" class="md-nav__link">
+    Paul, S., Symons, D. D., Altmanninger, M., &amp; Ertel, W. (2020). Autoencoder Based Feature Learning for Human Activity Recognition.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpswwwresearchgatenetpublication301632899_an_overview_of_convolutional_and_autoencoder_deep_learning_algorithm" class="md-nav__link">
+    https://www.researchgate.net/publication/301632899_An_overview_of_Convolutional_and_AutoEncoder_Deep_Learning_Algorithm
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sainath-t-n-kingsbury-b-saon-g-soltau-h-mohamed-a-r-dahl-g-ramabhadran-b-2013-deep-convolutional-neural-networks-for-large-scale-speech-tasks" class="md-nav__link">
+    Sainath, T. N., Kingsbury, B., Saon, G., Soltau, H., Mohamed, A. R., Dahl, G., &amp; Ramabhadran, B. (2013). Deep Convolutional Neural Networks for Large-scale Speech Tasks.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analytics-vidhya-2018-august-feature-engineering-for-machine-learning-a-comprehensive-overview-httpswwwanalyticsvidhyacomblog201808dimensionality-reduction-techniques-python" class="md-nav__link">
+    Analytics Vidhya. (2018, August). Feature engineering for machine learning: A comprehensive overview. https://www.analyticsvidhya.com/blog/2018/08/dimensionality-reduction-techniques-python/
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TextToSpeech/" class="md-nav__link">
+        Text-to-Speech
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Zeitserienanalyse/" class="md-nav__link">
+        Zeitserienanalyse
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bayesian_modeling/" class="md-nav__link">
+        Bayesian Modeling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../t7_Process_Mining/" class="md-nav__link">
+        Process Mining
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../transfer_learning_nlp/" class="md-nav__link">
+        Transfer Learning in der Sprachverarbeitung
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../impressum/" class="md-nav__link">
+        Impressum
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    Abstract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vorwort" class="md-nav__link">
+    Vorwort
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methoden" class="md-nav__link">
+    Methoden
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interpretierbarkeit" class="md-nav__link">
+    Interpretierbarkeit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#effizienz" class="md-nav__link">
+    Effizienz
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#robustheit" class="md-nav__link">
+    Robustheit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#probleme" class="md-nav__link">
+    Probleme
+  </a>
+  
+    <nav class="md-nav" aria-label="Probleme">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datenqualitat" class="md-nav__link">
+    Datenqualität
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#korrelation-und-kollinearitat" class="md-nav__link">
+    Korrelation und Kollinearität
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#over-und-underfitting" class="md-nav__link">
+    Over und Underfitting
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skalierbarkeit" class="md-nav__link">
+    Skalierbarkeit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subjektivitat" class="md-nav__link">
+    Subjektivität
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anwendungen" class="md-nav__link">
+    Anwendungen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fazit" class="md-nav__link">
+    Fazit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#weiterfuhrendes-material" class="md-nav__link">
+    Weiterführendes Material
+  </a>
+  
+    <nav class="md-nav" aria-label="Weiterführendes Material">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#podcast" class="md-nav__link">
+    Podcast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#talk" class="md-nav__link">
+    Talk
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demo" class="md-nav__link">
+    Demo
+  </a>
+  
+    <nav class="md-nav" aria-label="Demo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-demo" class="md-nav__link">
+    Code Demo.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#literaturliste" class="md-nav__link">
+    Literaturliste
+  </a>
+  
+    <nav class="md-nav" aria-label="Literaturliste">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hesami-mohsen-jones-a-2020-application-of-artificial-intelligence-models-and-optimization-algorithms-in-plant-cell-and-tissue-culture-applied-microbiology-and-biotechnology-101007s00253-020-10888-2" class="md-nav__link">
+    Hesami, Mohsen &amp; Jones, A.. (2020). Application of artificial intelligence models and optimization algorithms in plant cell and tissue culture. Applied Microbiology and Biotechnology. 10.1007/s00253-020-10888-2.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpswwwopensourceagendacomprojectssaliency-detection-convolutional-autoencoder" class="md-nav__link">
+    https://www.opensourceagenda.com/projects/saliency-detection-convolutional-autoencoder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#khoshdeli-mina-cong-richard-parvin-bahram-2017-detection-of-nuclei-in-he-stained-sections-using-convolutional-neural-networks" class="md-nav__link">
+    Khoshdeli, Mina &amp; Cong, Richard &amp; Parvin, Bahram. (2017). Detection of Nuclei in H&amp;E Stained Sections Using Convolutional Neural Networks.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpstowardsdatasciencecomautoencoders-vs-pca-when-to-use-which-73de063f5d7" class="md-nav__link">
+    https://towardsdatascience.com/autoencoders-vs-pca-when-to-use-which-73de063f5d7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpswwwkagglecomcompetitionsvsb-power-line-fault-detectiondata" class="md-nav__link">
+    https://www.kaggle.com/competitions/vsb-power-line-fault-detection/data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpsarxivorgpdf210304874pdf" class="md-nav__link">
+    https://arxiv.org/pdf/2103.04874.pdf
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paul-s-symons-d-d-altmanninger-m-ertel-w-2020-autoencoder-based-feature-learning-for-human-activity-recognition" class="md-nav__link">
+    Paul, S., Symons, D. D., Altmanninger, M., &amp; Ertel, W. (2020). Autoencoder Based Feature Learning for Human Activity Recognition.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpswwwresearchgatenetpublication301632899_an_overview_of_convolutional_and_autoencoder_deep_learning_algorithm" class="md-nav__link">
+    https://www.researchgate.net/publication/301632899_An_overview_of_Convolutional_and_AutoEncoder_Deep_Learning_Algorithm
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sainath-t-n-kingsbury-b-saon-g-soltau-h-mohamed-a-r-dahl-g-ramabhadran-b-2013-deep-convolutional-neural-networks-for-large-scale-speech-tasks" class="md-nav__link">
+    Sainath, T. N., Kingsbury, B., Saon, G., Soltau, H., Mohamed, A. R., Dahl, G., &amp; Ramabhadran, B. (2013). Deep Convolutional Neural Networks for Large-scale Speech Tasks.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analytics-vidhya-2018-august-feature-engineering-for-machine-learning-a-comprehensive-overview-httpswwwanalyticsvidhyacomblog201808dimensionality-reduction-techniques-python" class="md-nav__link">
+    Analytics Vidhya. (2018, August). Feature engineering for machine learning: A comprehensive overview. https://www.analyticsvidhya.com/blog/2018/08/dimensionality-reduction-techniques-python/
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="feature-extraction">Feature Extraction</h1>
+<p>von <em>Robert Gess, Roxana Buder und Saed Abed</em></p>
+<h2 id="abstract">Abstract</h2>
+<p>Die Extraktion von Merkmalen spielt eine wichtige Rolle in der Datenanalyse und Modellierung. Bei der Feature Extraction geht es darum, relevante Informationen aus einem Datensatz zu identifizieren und in komprimierter Form zu repräsentieren. In diesem Artikel werden drei gängige Methoden der Feature Extraction vorgestellt: PCA (Principal Component Analysis), CNN (Convolutional Neural Networks) und Autoencoder.
+PCA ermöglicht die Reduzierung der Dimensionalität eines Datensatzes, indem es die Richtungen identifiziert, in denen die Daten streuen. CNNs sind in der Lage, automatisch Merkmale aus Daten zu extrahieren, ohne dass explizit definierte Merkmale festgelegt werden müssen. Sie lernen hierarchische Repräsentationen der Daten und können komplexe Merkmale erfassen. Autoencoder sind neuronale Netzwerke, die versuchen, eine komprimierte Darstellung der Daten im latenten Raum zu erzeugen.
+Diese Methoden der Feature Extraction finden in verschiedenen Anwendungsbereichen Anwendung, wie der Bildverarbeitung, der Sprachverarbeitung, der Genetik und vielen anderen. Sie bieten die Möglichkeit, relevante Merkmale zu identifizieren, die zur Verbesserung von Modellen und zur Gewinnung wertvoller Erkenntnisse beitragen können.</p>
+<h2 id="vorwort">Vorwort</h2>
+<p>Bei der Extraktion von Merkmalen ist es wichtig, zwischen Feature extraction und feature selection zu unterscheiden. Während Feature extraction den Prozess der Umwandlung von Daten in neue repräsentative Merkmale beschreibt, bezieht sich feature selection auf die Auswahl der relevantesten vorhandenen Merkmale.
+<img alt="Online Image" src="../img/feature_extraction/img1.png" />
+In diesem Artikel werden drei Methoden der Feature Extraction betrachtet: PCA (Principal Component Analysis), CNN (Convolutional Neural Networks) und Autoencoder.</p>
+<h2 id="methoden">Methoden</h2>
+<p><img alt="Online Image" src="https://www.researchgate.net/publication/344399773/figure/fig2/AS:941024662790149@1601369171686/An-example-of-principal-component-analysis-PCA-for-a-two-dimensional-data-set.png" />
+* PCA: Die Principal Component Analysis (PCA) ist eine häufig verwendete Methode zur Reduzierung der Dimensionalität eines Datensatzes. Sie basiert auf der Berechnung der Hauptkomponenten, die die Eigenvektoren der Kovarianzmatrix des Datensatzes sind. Die Hauptkomponenten erfassen die Richtungen, in denen die Daten streuen, und können als neue Features verwendet werden. PCA hat den Vorteil, dass sie eine lineare Abbildung der Daten ermöglicht und eine komprimierte Darstellung der Informationen liefert.<br />
+<img alt="Online Image" src="https://www.researchgate.net/profile/Bahram-Parvin/publication/314090304/figure/fig1/AS:466483080896512@1488229641387/A-CNN-is-composed-of-two-basic-parts-of-feature-extraction-and-classification-Feature.png" />
+* CNN: Convolutional Neural Networks (CNNs) sind in der Lage, automatisch Merkmale aus Daten zu extrahieren, ohne dass explizit definierte Merkmale festgelegt werden müssen. Durch das Training eines CNNs lernen die Hidden Layer im Netzwerk, Merkmale auf verschiedenen Abstraktionsebenen zu erkennen. Diese hierarchische Repräsentation der Daten ermöglicht die Extraktion von komplexen Merkmalen. CNNs werden häufig dann genutzt, wenn man Daten hat die sich in 2D darstellen lassen, doch das ist keine zwingende Voraussetzung.<br />
+<img alt="Online Image" src="https://user-images.githubusercontent.com/26786663/27525317-b3026976-5a77-11e7-8767-8f4a06e5b696.jpg" />
+* Autoencoder: Ein Autoencoder ist ein spezieller Typ neuronaler Netzwerke, der versucht, die Eingabedaten möglichst genau zu rekonstruieren. Während des Trainings lernt der Autoencoder eine komprimierte Darstellung der Daten im sogenannten latenten Raum. Der Encoder reduziert die Dimensionalität der Daten und erzeugt eine komprimierte Darstellung, während der Decoder die Daten aus diesem Code rekonstruiert. Autoencoder haben den Vorteil, dass sie ohne Labels trainiert werden können und eine effiziente Methode zur Dimensionalitätsreduktion darstellen. Die Tatsache dass Autoencoder auf dem Input selbst optimiert werden hat allerdings nicht immer Vorteile.  </p>
+<h2 id="interpretierbarkeit">Interpretierbarkeit</h2>
+<p>Die Interpretierbarkeit der resultierenden Features kann abhängig von dem Ziel welches man erreichen möchte von großer Wichtigkeit sein. Daher wird bis heute an neuartigen Möglichkeiten gesucht um diese besser interpretieren zu können. Im Folgenden geht es um den aktuellsten Stand der Dinge.</p>
+<ul>
+<li>PCA: Die Hauptkomponenten der PCA sind Linearkombinationen der ursprünglichen Variablen. Daher können wir die Beiträge der einzelnen Variablen zur Gesamtvarianz der Daten analysieren und interpretieren. Einige ursprüngliche Merkmale tragen einen positiven Beitrag bei, während andere weniger relevant sind.  </li>
+<li>CNN: Im Gegensatz zur PCA sind CNNs aufgrund ihrer komplexen Architektur und der Verwendung nichtlinearer Aktivierungsfunktionen schwerer zu interpretieren. Die Merkmale, die von den Hidden Layern gelernt werden, sind abstrakt und schwer in natürlicher Sprache zu beschreiben. In den ersten Layern werden oft einfache Muster wie Kanten erkannt, während in den späteren Layern komplexere Merkmale wie z. B. ganze Gesichter erkannt werden.  </li>
+<li>Autoencoder: Die Interpretierbarkeit von Autoencodern liegt zwischen PCA und CNN. Obwohl der latente Raum des Autoencoders keine direkte physikalische Bedeutung hat, können wir dennoch versuchen, bestimmte Merkmale zu identifizieren, indem wir die Werte im latenten Raum analysieren und Muster erkennen. Die Interpretation ist jedoch meist subjektiver und weniger klar als bei der PCA.  </li>
+</ul>
+<p>Die Möglichkeiten diese Features zu analysieren halten sich bisher bei den meisten Methoden in Grenzen, doch kann man mit großen Mühen in der Regel zumindest ein bisschen transparenz schaffen.</p>
+<h2 id="effizienz">Effizienz</h2>
+<p>Unter Effizienz verstehen wir im Folgenden zwei Dinge, und zwar die offensichtliche, also wie viel Rechenaufwand eine Methode zur Folge hat und als zweites wie viele Daten benötigt werden um ein Ergebnis zu erhalten.</p>
+<ul>
+<li>PCA: PCA ist in der Regel schnell zu berechnen, da es auf einfachen mathematischen Operationen basiert. Die Effizienz hängt jedoch von der Datenqualität ab und davon, ob ausreichend Datenpunkte für eine zuverlässige Extraktion vorhanden sind.  </li>
+<li>CNN: Convolutional Neural Networks erfordern normalerweise eine große Menge an Trainingsdaten welche zudem noch gelabelt sein müssen, um gute Ergebnisse zu erzielen. Das Training eines CNNs kann zeitaufwändig sein, da viele Parameter optimiert werden müssen. Darüber hinaus erfordert das Training von CNNs in der Regel leistungsstarke Hardware-Ressourcen wie GPUs.  </li>
+<li>Autoencoder: Autoencoder sind effizient in Bezug auf die Datenbeschaffung, da sie unsupervised Modelle sind und keine Labels für das Training benötigen. Sie können mit einer relativ kleinen Datenmenge arbeiten. Das Training eines Autoencoders kann jedoch je nach Netzwerkarchitektur, Datengröße und Dimensionalität ebenfalls Zeit in Anspruch nehmen.  </li>
+</ul>
+<h2 id="robustheit">Robustheit</h2>
+<p>Die Robustheit der Feature Extraction bezieht sich auf die Fähigkeit der Methoden, mit verschiedenen Herausforderungen wie Rauschen, Variationen (also Skalierung und Rotation) und Ausreißern umzugehen. Hier sind die Robustheitsaspekte der einzelnen Methoden:</p>
+<ul>
+<li>PCA: PCA ist empfindlich gegenüber Rauschen, da es dazu führen kann, dass die Varianz auf bestimmte Komponenten verteilt wird, die das Rauschen widerspiegeln, anstatt die tatsächlich relevanten Merkmale abzubilden. Es gibt jedoch Variationen von PCA, die robust gegenüber Rauschen und Ausreißern sind, z. B. durch die Schätzung der Kovarianzmatrix.  </li>
+<li>CNN: CNNs sind robuster gegenüber Variationen im räumlichen Kontext, aber sie können Schwierigkeiten haben, mit stark unterschiedlich skalierten Daten oder häufigen Rotationen umzugehen. Die Effizienz von CNNs kann durch geeignete Datenaufbereitungstechniken (vor Allem Data Augmentation) verbessert werden.  </li>
+<li>Autoencoder: Autoencoder sind in der Regel robust gegenüber Rauschen und können es im Rekonstruktionsprozess herausfiltern. Bei Variationen und Ausreißern kann die Robustheit von Autoencodern variieren und hängt von der Netzwerkarchitektur und den verwendeten Trainingsstrategien ab.  </li>
+</ul>
+<p>Generell muss man dazu aber sagen, dass Datensätze mit rauschenden Daten, vielen Ausreißern, wenig Variation und Varianz bei den aller meisten Methoden zu eher weniger robusten Modellen führt.</p>
+<h2 id="probleme">Probleme</h2>
+<p>Anders als im Präsenzvortrag werden nun ein paar generelle Probleme vorgestellt die so auf die meisten Methden zutreffen. Dieser andere Ansatz ist gewählt worden, da im Präsenzvortrag nicht genug Zeit war um ausführlich darüber zu reden.</p>
+<h3 id="datenqualitat">Datenqualität</h3>
+<p>Die Qualität der Daten ist ein entscheidender Faktor bei der Feature Extraction. Wenn die Daten fehlerhaft, unvollständig oder mit Rauschen behaftet sind, kann dies zu unzuverlässigen oder irreführenden Merkmalsrepräsentationen führen. Rauschen kann die Korrelationen zwischen den Merkmalen stören und zu einer schlechten Extraktion der relevanten Informationen führen. Daher ist es wichtig, Datenbereinigungsschritte durchzuführen und Rauschen zu reduzieren, bevor man mit der Feature Extraction beginnt.</p>
+<h3 id="korrelation-und-kollinearitat">Korrelation und Kollinearität</h3>
+<p>Korrelation und Kollinearität zwischen den Merkmalen können ebenfalls ein Problem darstellen. Wenn zwei oder mehr Merkmale stark miteinander korreliert sind oder eine hohe Kollinearität aufweisen, kann dies zu Redundanz in den extrahierten Merkmalen führen. Dies kann die Interpretation und Leistung des Modells beeinträchtigen. Es ist wichtig, korrelierte Merkmale zu identifizieren und gegebenenfalls Maßnahmen zu ergreifen, um die Korrelation zu reduzieren oder zu eliminieren, zum Beispiel durch den Einsatz von Techniken wie der Kovarianzmatrixanalyse.</p>
+<h3 id="over-und-underfitting">Over und Underfitting</h3>
+<p>Overfitting und Underfitting sind Probleme, die bei der Feature Extraction auftreten können und die Leistung des Modells beeinträchtigen. Overfitting tritt auf, wenn das Modell zu stark auf die spezifischen Merkmale des Trainingsdatensatzes abgestimmt ist und daher bei neuen Daten schlechte Vorhersagen macht. Underfitting hingegen tritt auf, wenn das Modell zu einfach ist und nicht in der Lage ist, die relevanten Informationen aus den Daten zu extrahieren. Um Overfitting und Underfitting zu vermeiden, müssen geeignete Regularisierungstechniken und Modellevaluationstechniken angewendet werden. Unter diesem Problem leider unter den verglichenen Methoden aber vor allem der Autoencoder aufgrund seines Funktionsprinzips den loss zu berechnen indem der input als referenz verwendet wird.  </p>
+<h3 id="skalierbarkeit">Skalierbarkeit</h3>
+<p>Die Skalierbarkeit der Feature Extraction-Methoden kann ebenfalls ein Problem sein, insbesondere wenn große Datensätze verarbeitet werden müssen. Manche Methoden erfordern umfangreiche Berechnungen und können bei großen Datenmengen zeitaufwändig sein. Es ist wichtig, effiziente Algorithmen und Implementierungen zu wählen, um die Skalierbarkeit sicherzustellen und die Verarbeitungszeit zu minimieren. Hier sind vor allem Methoden die auf Basis von Neuronalen Netzwerken arbeiten gemeint, da diese sehr schnell groß werden können und dann sehr viel Rechenleistung benötigen können.  </p>
+<h3 id="subjektivitat">Subjektivität</h3>
+<p>Die Interpretation der extrahierten Merkmale kann subjektiv sein und von verschiedenen Personen unterschiedlich ausgelegt werden. Ein Merkmal kann für eine Person offensichtlich sein, während es für eine andere Person nicht intuitiv erscheint. Die Subjektivität der Interpretation kann zu Unsicherheiten und unterschiedlichen Schlussfolgerungen führen. Es ist wichtig, die Interpretation der Merkmale zu dokumentieren und bei Bedarf Expertenwissen hinzuzuziehen, um eine objektive und konsistente Interpretation zu gewährleisten.</p>
+<h2 id="anwendungen">Anwendungen</h2>
+<ul>
+<li>PCA: PCA wird häufig verwendet, um die Dimensionalität von Datensätzen zu reduzieren und relevante Merkmale zu extrahieren. Sie findet Anwendung in der Bildverarbeitung, der Sprachverarbeitung, der Genetik und anderen Bereichen, in denen die Reduzierung der Dimensionalität und die Identifizierung von Hauptkomponenten von Bedeutung sind.  </li>
+<li>CNN: CNNs sind besonders nützlich bei der Verarbeitung von Bildern und visuellen Daten. Sie werden in der Bilderkennung, der Objekterkennung, der Gesichtserkennung und vielen anderen Bildverarbeitungsaufgaben eingesetzt, bei denen die Extraktion von Merkmalen aus Bildern wichtig ist.  </li>
+<li>Autoencoder: Autoencoder finden Anwendung in der Datenkompression, der Rekonstruktion fehlender oder beschädigter Daten und der Generierung von neuen Datenbeispielen. Sie werden auch in der Anomalieerkennung und der Dimensionalitätsreduktion eingesetzt, um eine kompakte Darstellung der Daten zu erzeugen.  </li>
+</ul>
+<h2 id="fazit">Fazit</h2>
+<p>Die Extraktion von Merkmalen ist ein wesentlicher Schritt in der Datenanalyse und Modellierung. Die vorgestellten Methoden der Feature Extraction, wie PCA, CNN und Autoencoder, bieten verschiedene Ansätze, um relevante Merkmale aus einem Datensatz zu extrahieren. Jede Methode hat ihre eigenen Stärken und Schwächen, und die Wahl der Methode hängt von den spezifischen Anforderungen und Eigenschaften des Datensatzes ab. Indem wir die richtige Methode auswählen und anwenden, können wir eine komprimierte und repräsentative Darstellung der Daten erhalten, die zur Verbesserung von Modellen und zur Gewinnung wertvoller Erkenntnisse beiträgt.</p>
+<h2 id="weiterfuhrendes-material">Weiterführendes Material</h2>
+<h3 id="podcast">Podcast</h3>
+<p>Hier Link zum Podcast.</p>
+<h3 id="talk">Talk</h3>
+<p>Hier einfach Youtube oder THD System embedden.</p>
+<h3 id="demo">Demo</h3>
+<p>Hier Link zum Demo Video </p>
+<h4 id="code-demo"><a href="https://mygit.th-deg.de/sa13291/ki-seminar">Code Demo</a>.</h4>
+<h2 id="literaturliste">Literaturliste</h2>
+<h4 id="hesami-mohsen-jones-a-2020-application-of-artificial-intelligence-models-and-optimization-algorithms-in-plant-cell-and-tissue-culture-applied-microbiology-and-biotechnology-101007s00253-020-10888-2">Hesami, Mohsen &amp; Jones, A.. (2020). Application of artificial intelligence models and optimization algorithms in plant cell and tissue culture. Applied Microbiology and Biotechnology. 10.1007/s00253-020-10888-2.</h4>
+<h4 id="httpswwwopensourceagendacomprojectssaliency-detection-convolutional-autoencoder">https://www.opensourceagenda.com/projects/saliency-detection-convolutional-autoencoder</h4>
+<h4 id="khoshdeli-mina-cong-richard-parvin-bahram-2017-detection-of-nuclei-in-he-stained-sections-using-convolutional-neural-networks">Khoshdeli, Mina &amp; Cong, Richard &amp; Parvin, Bahram. (2017). Detection of Nuclei in H&amp;E Stained Sections Using Convolutional Neural Networks.</h4>
+<h4 id="httpstowardsdatasciencecomautoencoders-vs-pca-when-to-use-which-73de063f5d7">https://towardsdatascience.com/autoencoders-vs-pca-when-to-use-which-73de063f5d7</h4>
+<h4 id="httpswwwkagglecomcompetitionsvsb-power-line-fault-detectiondata">https://www.kaggle.com/competitions/vsb-power-line-fault-detection/data</h4>
+<h4 id="httpsarxivorgpdf210304874pdf">https://arxiv.org/pdf/2103.04874.pdf</h4>
+<h4 id="paul-s-symons-d-d-altmanninger-m-ertel-w-2020-autoencoder-based-feature-learning-for-human-activity-recognition">Paul, S., Symons, D. D., Altmanninger, M., &amp; Ertel, W. (2020). Autoencoder Based Feature Learning for Human Activity Recognition.</h4>
+<h4 id="httpswwwresearchgatenetpublication301632899_an_overview_of_convolutional_and_autoencoder_deep_learning_algorithm">https://www.researchgate.net/publication/301632899_An_overview_of_Convolutional_and_AutoEncoder_Deep_Learning_Algorithm</h4>
+<h4 id="sainath-t-n-kingsbury-b-saon-g-soltau-h-mohamed-a-r-dahl-g-ramabhadran-b-2013-deep-convolutional-neural-networks-for-large-scale-speech-tasks">Sainath, T. N., Kingsbury, B., Saon, G., Soltau, H., Mohamed, A. R., Dahl, G., &amp; Ramabhadran, B. (2013). Deep Convolutional Neural Networks for Large-scale Speech Tasks.</h4>
+<h4 id="analytics-vidhya-2018-august-feature-engineering-for-machine-learning-a-comprehensive-overview-httpswwwanalyticsvidhyacomblog201808dimensionality-reduction-techniques-python">Analytics Vidhya. (2018, August). Feature engineering for machine learning: A comprehensive overview. https://www.analyticsvidhya.com/blog/2018/08/dimensionality-reduction-techniques-python/</h4>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../../javascripts/katex.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        
+      
+    
+  </body>
+</html>

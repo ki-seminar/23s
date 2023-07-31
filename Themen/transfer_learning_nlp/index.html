@@ -1,0 +1,1877 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../t7_Process_Mining/">
+      
+      
+        <link rel="next" href="../../impressum/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.1, mkdocs-material-9.1.21">
+    
+    
+      
+        <title>Transfer Learning in der Sprachverarbeitung - Seminar Aktuelle Themen der künstlichen Intelligenz</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.eebd395e.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+      <link rel="stylesheet" href="../../javascripts/mathjax.js">
+    
+      <link rel="stylesheet" href="https://polyfill.io/v3/polyfill.min.js?features=es6">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#transfer-learning-in-der-sprachverarbeitung" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Seminar Aktuelle Themen der künstlichen Intelligenz" class="md-header__button md-logo" aria-label="Seminar Aktuelle Themen der künstlichen Intelligenz" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Seminar Aktuelle Themen der künstlichen Intelligenz
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Transfer Learning in der Sprachverarbeitung
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Seminar Aktuelle Themen der künstlichen Intelligenz" class="md-nav__button md-logo" aria-label="Seminar Aktuelle Themen der künstlichen Intelligenz" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Seminar Aktuelle Themen der künstlichen Intelligenz
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Aktuelles
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Themen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Themen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Einf%C3%A4rben%20von%20Bildern/" class="md-nav__link">
+        Einfärben von Bildern - Zwei Ansätze
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Empfehlungssysteme/" class="md-nav__link">
+        Empfehlungssysteme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Face_Aging/" class="md-nav__link">
+        Face Aging
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LLMs/" class="md-nav__link">
+        Large Language Models
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Spracherkennung/" class="md-nav__link">
+        Spracherkennung
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T09_Dialekte_Spracherkennung/" class="md-nav__link">
+        T09 - Dialekte in der Spracherkennung
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T12_feature-extraction/" class="md-nav__link">
+        Feature Extraction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TextToSpeech/" class="md-nav__link">
+        Text-to-Speech
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Zeitserienanalyse/" class="md-nav__link">
+        Zeitserienanalyse
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bayesian_modeling/" class="md-nav__link">
+        Bayesian Modeling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../t7_Process_Mining/" class="md-nav__link">
+        Process Mining
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Transfer Learning in der Sprachverarbeitung
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Transfer Learning in der Sprachverarbeitung
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    Abstract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-einleitung-und-motivation" class="md-nav__link">
+    1. Einleitung und Motivation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-stand-der-forschung" class="md-nav__link">
+    2. Stand der Forschung
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-methoden" class="md-nav__link">
+    3. Methoden
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Methoden">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-definition" class="md-nav__link">
+    3.1 Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-herausforderungen" class="md-nav__link">
+    3.2 Herausforderungen
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Herausforderungen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321-ablehnung-schlechter-informationen" class="md-nav__link">
+    3.2.1 Ablehnung schlechter Informationen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322-auswahl-der-quellaufgabe" class="md-nav__link">
+    3.2.2 Auswahl der Quellaufgabe
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#323-modellierung-von-aufgabenahnlichkeit" class="md-nav__link">
+    3.2.3 Modellierung von Aufgabenähnlichkeit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-kategorisierung" class="md-nav__link">
+    3.3 Kategorisierung
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Kategorisierung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331-modelladaption-und-inkrementelles-lernen" class="md-nav__link">
+    3.3.1 Modelladaption und inkrementelles Lernen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332-heterogenes-transfer-learning" class="md-nav__link">
+    3.3.2 Heterogenes Transfer Learning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multitask-learning" class="md-nav__link">
+    Multitask-Learning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-deep-transfer-learning" class="md-nav__link">
+    3.4 Deep Transfer Learning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-modelltransfer" class="md-nav__link">
+    3.5 Modelltransfer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-anwendungen" class="md-nav__link">
+    4. Anwendungen
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Anwendungen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-daten-visualisierung" class="md-nav__link">
+    4.1 Daten - Visualisierung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-daten-vorbereitung" class="md-nav__link">
+    4.2 Daten - Vorbereitung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-bert-bidirectional-encoder-representations-from-transformers" class="md-nav__link">
+    4.3 BERT (Bidirectional Encoder Representations from Transformers)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-model" class="md-nav__link">
+    4.4 Model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-einfrieren-der-schichten" class="md-nav__link">
+    4.5 Einfrieren der Schichten
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-fine-tuning" class="md-nav__link">
+    4.6 Fine-Tuning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#47-inference" class="md-nav__link">
+    4.7 Inference
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-fazit" class="md-nav__link">
+    5. Fazit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-weiterfuhrendes-material" class="md-nav__link">
+    6. Weiterführendes Material
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Weiterführendes Material">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-podcast" class="md-nav__link">
+    6.1 Podcast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-talk" class="md-nav__link">
+    6.2 Talk
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-demo" class="md-nav__link">
+    6.3 Demo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-literaturliste" class="md-nav__link">
+    6.4 Literaturliste
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../impressum/" class="md-nav__link">
+        Impressum
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    Abstract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-einleitung-und-motivation" class="md-nav__link">
+    1. Einleitung und Motivation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-stand-der-forschung" class="md-nav__link">
+    2. Stand der Forschung
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-methoden" class="md-nav__link">
+    3. Methoden
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Methoden">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-definition" class="md-nav__link">
+    3.1 Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-herausforderungen" class="md-nav__link">
+    3.2 Herausforderungen
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Herausforderungen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321-ablehnung-schlechter-informationen" class="md-nav__link">
+    3.2.1 Ablehnung schlechter Informationen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322-auswahl-der-quellaufgabe" class="md-nav__link">
+    3.2.2 Auswahl der Quellaufgabe
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#323-modellierung-von-aufgabenahnlichkeit" class="md-nav__link">
+    3.2.3 Modellierung von Aufgabenähnlichkeit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-kategorisierung" class="md-nav__link">
+    3.3 Kategorisierung
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Kategorisierung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331-modelladaption-und-inkrementelles-lernen" class="md-nav__link">
+    3.3.1 Modelladaption und inkrementelles Lernen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332-heterogenes-transfer-learning" class="md-nav__link">
+    3.3.2 Heterogenes Transfer Learning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multitask-learning" class="md-nav__link">
+    Multitask-Learning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-deep-transfer-learning" class="md-nav__link">
+    3.4 Deep Transfer Learning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-modelltransfer" class="md-nav__link">
+    3.5 Modelltransfer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-anwendungen" class="md-nav__link">
+    4. Anwendungen
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Anwendungen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-daten-visualisierung" class="md-nav__link">
+    4.1 Daten - Visualisierung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-daten-vorbereitung" class="md-nav__link">
+    4.2 Daten - Vorbereitung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-bert-bidirectional-encoder-representations-from-transformers" class="md-nav__link">
+    4.3 BERT (Bidirectional Encoder Representations from Transformers)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-model" class="md-nav__link">
+    4.4 Model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-einfrieren-der-schichten" class="md-nav__link">
+    4.5 Einfrieren der Schichten
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-fine-tuning" class="md-nav__link">
+    4.6 Fine-Tuning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#47-inference" class="md-nav__link">
+    4.7 Inference
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-fazit" class="md-nav__link">
+    5. Fazit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-weiterfuhrendes-material" class="md-nav__link">
+    6. Weiterführendes Material
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Weiterführendes Material">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-podcast" class="md-nav__link">
+    6.1 Podcast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-talk" class="md-nav__link">
+    6.2 Talk
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-demo" class="md-nav__link">
+    6.3 Demo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-literaturliste" class="md-nav__link">
+    6.4 Literaturliste
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="transfer-learning-in-der-sprachverarbeitung">Transfer Learning in der Sprachverarbeitung</h1>
+<p>von <em>Simon Wolf, Tim Staudinger und Miguel Meindl</em></p>
+<h2 id="abstract">Abstract</h2>
+<p>Die Sprachverarbeitung ist ein grundlegender Aspekt der künstlichen Intelligenz (KI) und hat in den letzten Jahren beträchtliche Fortschritte erzielt.
+Eine vielversprechende Methode zur Verbesserung der Leistung von Sprachmodellen ist Transfer Learning. Dies ermöglicht es,
+vortrainierte Modelle auf eine neue Aufgabe anzuwenden, indem das bereits erlernte Wissen auf eine verwandte Aufgabe angewendet wird.</p>
+<p>Der Podcast bietet eine oberflächliche Einführung in das Thema, um fachfremde Zuhörer mit den grundlegenden Konzepten vertraut zu machen. Es wird erklärt, wie Transfer Learning funktioniert und genutzt werden kann. Außerdem wird ein Überblick über verschiedene Anwendungsfälle gegeben und die Herausforderungen von Transfer Learning beleuchtet. Zudem wird der Einfluss der Datenmenge und Qualität auf das Ergebnis diskutiert.</p>
+<p>Der Fachvortrag liefert einen tieferen Einblick in das Thema. Hier wird zunächst versucht, die verschiedenen Aspekte von Transfer Learning einzuordnen. Die Herausforderungen zur Vermeidung von negativem Transfer werden herausgearbeitet und potenzielle Lösungen aufgezeigt. Anschließend werden die verschiedenen Kategorien elaboriert, um einen Überblick zu geben. Modernere Ansätze mit Hilfe von Deep Learning werden vorgestellt und deren Vorteile aufgezeigt. Anschließend wird der Ansatz des Modelltransfers näher erläutert.</p>
+<p>Im Schlussteil der Arbeit wird anhand eines konkreten Beispiels gezeigt, wie Transfer Learning angewandt werden kann.
+Hierfür wird das Sprachmodell <em>BERT</em> auf den Anwendungsfall der Fake-News-Erkennung trainiert. Die einzelnen Phasen dieses Prozesses
+werden im Detail erläutert und mit Codebeispielen veranschaulicht.</p>
+<h2 id="1-einleitung-und-motivation">1. Einleitung und Motivation</h2>
+<p>In der heutigen digitalen Zeit hat die Spracherkennung einen enormen Einfluss auf unser tägliches Leben. Von virtuellen Assistenten
+über Sprachbefehle in mobilen Geräten bis hin zu automatisierten Kundenservice-Systemen – die Fähigkeit, menschliche Sprache zu verstehen
+und zu verarbeiten, hat zahlreiche Anwendungen revolutioniert. Doch die Entwicklung präziser und effizienter Spracherkennungssysteme 
+stellt nach wie vor eine Herausforderung dar.</p>
+<p>Die Anwendungsmöglichkeiten von Transfer Learning in der Spracherkennung sind vielfältig. Egal ob es darum geht, 
+Sprachbefehle in Smart-Home-Geräten zu erkennen, Transkriptionen von Audioaufnahmen zu erstellen oder Sprachanrufe automatisch zu analysieren, 
+Transfer Learning bietet eine effektive Methode, um maßgeschneiderte Modelle für spezifische Aufgaben zu entwickeln.</p>
+<p>Transfer Learning bietet in der Spracherkennung eine Reihe von Vorteilen. Anstatt Modelle von Grund auf neu zu trainieren kann auf bereits existierende 
+Modelle zurückgegriffen werden. Dadurch wird nicht nur die Trainingszeit erheblich verkürzt, sondern auch der Bedarf an umfangreichen Datenmengen reduziert.</p>
+<p>Des Weiteren ermöglicht es die Nutzung von vortrainiertem Wissen, das bereits in einem anderen Kontext erworben wurde. 
+Dieses Wissen kann auf die Spracherkennung angewendet werden, um eine bessere Anpassung an spezifische Aufgaben zu erreichen. 
+Dadurch wird die Genauigkeit der Spracherkennungssysteme verbessert, selbst wenn die verfügbare Datenmenge begrenzt ist.</p>
+<p>Die Idee von Transfer Learning hat ihre Wurzeln in der Künstlichen Intelligenz und dem maschinellen Lernen. In den letzten Jahrzehnten wurden 
+verschiedene Ansätze und Techniken entwickelt, um Transfer Learning zu ermöglichen. Diese Fortschritte haben die Spracherkennung maßgeblich beeinflusst.</p>
+<h2 id="2-stand-der-forschung">2. Stand der Forschung</h2>
+<p>Doch wie sieht der aktuelle Stand der Forschung aus? Welche neuen Ansätze und Techniken wurden entwickelt, um die Effizienz und Genauigkeit von Spracherkennungssystemen weiter zu verbessern? Im nachfolgenden Abschnitt wird genauer auf diese Themen eingegangen.</p>
+<p>In den letzten Jahren hat die Forschung intensiv daran gearbeitet, Transfer Learning in der Spracherkennung voranzutreiben. 
+Ein herausragendes Beispiel für ein erfolgreiches vortrainiertes Sprachmodell ist ChatGPT. Durch den Einsatz von vortrainierten Modellen
+als Ausgangspunkt können Spracherkennungsmodelle von dem breiten Wissen profitieren, das in Modellen wie beispielsweise ChatGPT vorhanden ist. 
+Dies ermöglicht eine verbesserte Sprachverarbeitung. Durch die Übertragung des vortrainierten Wissens
+auf spezifische Spracherkennungsaufgaben können Modelle schneller und genauer lernen, wodurch die Genauigkeit der Spracherkennungssysteme erhöht wird.</p>
+<p>Ein weiterer vielversprechender Ansatz ist die Kombination von Transfer Learning mit Active Learning. 
+Active Learning ermöglicht es, gezielt unsichere Beispiele auszuwählen, um das Modell iterativ zu trainieren. Durch den gezielten Einsatz von Transfer Learning 
+in Kombination mit Active Learning können Spracherkennungsmodelle schneller und effizienter lernen. Das Modell kann von bereits gelernten Aufgaben 
+profitieren und sich schneller an neue Spracherkennungsaufgaben anpassen.</p>
+<p>Darüber hinaus wird als weiterer Ansatz Transfer Learning mit anderen Techniken wie beispielsweise Reinforcement Learning kombiniert. 
+Reinforcement Learning-Algorithmen können eingesetzt werden, um die Interaktion mit dem Spracherkennungssystem zu verbessern und es an spezifische Nutzerpräferenzen anzupassen. Eine weitere Möglichkeit stellt die Kombination mit Generative Adversarial Networks (GANs) dar. Ziel dieses Ansatzes ist es, die Datenmenge durch künstlich generierte Texte zu erhöhen. Diese Kombinationen eröffnen neue Möglichkeiten, die Leistungsfähigkeit von Spracherkennungssystemen zu steigern.</p>
+<p>Ein weiterer vielversprechender Aspekt ist die Erweiterung von Transfer Learning auf mehrsprachige Szenarien. 
+Indem Modelle auf verschiedenen Sprachen trainiert und dann auf neue Sprachen übertragen werden, kann die Effizienz und Genauigkeit 
+der Spracherkennung in verschiedenen Sprachen verbessert werden. Dies ist besonders relevant in globalen Umgebungen, 
+in denen mehrsprachige Unterstützung von entscheidender Bedeutung ist.</p>
+<p>Der aktuelle Stand der Forschung im Bereich Transfer Learning in der Spracherkennung zeigt das Potenzial dieser Technik. 
+Durch den Einsatz von vortrainierten Sprachmodellen wie ChatGPT, kombiniert mit Active Learning, Reinforcement Learning und anderen Techniken, 
+können Spracherkennungssysteme effizienter, präziser und anpassungsfähiger trainiert werden.</p>
+<h2 id="3-methoden">3. Methoden</h2>
+<h3 id="31-definition">3.1 Definition</h3>
+<p>Die Motivation für Transfer Learning basiert auf der Idee des "Lernens zu lernen", die besagt, dass die Fähigkeit zu Lernen von Grund auf oft begrenzt ist und daher so viel wie möglich aus früheren Erfahrungen genutzt werden sollte.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="DEFINITION" src="../img/TransferLearningNLP/definition.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Abbildung 1: Visualisierung von Transfer Learning:</td>
+</tr>
+<tr>
+<td style="text-align: center;">Die linke Seite stellt das Quellsystem dar, die rechte Seite das Zielsystem. X1 und X2 sind die Featureräume, Y1 und Y2 die Labelräume der jeweiligen Modelle M1 und M2. P1(X) und P2(X) sind die jeweiligen Wahrscheinlichkeitsverteilungen der Features.</td>
+</tr>
+</tbody>
+</table>
+<p>Es gibt verschiedene Kategorien des Transfer Learnings, die je nach Beziehung zwischen dem bereits Gelernten (Quelle) und dem Neuen (Ziel) entwickelt wurden. Auf einige davon wird im späteren Verlauf im Kapitel "Kategorisierung" noch eingegangen. Es ist allerdings zu Erwähnen, dass die Einteilung in diese Kategorien nicht immer eindeutig ist. Des Weiteren ist die Zugehörigkeit dieser zum Transfer Learning teilweise umstritten.</p>
+<h3 id="32-herausforderungen">3.2 Herausforderungen</h3>
+<p>Die mit Abstand größte Herausforderung von Transfer Learning besteht im simplen Konzept: 
+    <strong>Positiven Transfer erzeugen, negativen Transfer vermeiden.</strong></p>
+<p>Die Vorhersagefähigkeit von Transfermethoden hängt von der semantischen Ähnlichkeit zwischen den Aufgabenstellungen im Quell- und Zielsystem ab. Bei einer starken Beziehung und einer geeigneten Ausnutzung durch die Transfermethode kann die Vorhersagekraft in der Zielaufgabe deutlich verbessert werden. Ist die Beziehung zwischen den Aufgaben jedoch unzureichend oder wird sie von der Transfermethode nicht optimal genutzt, kann die Leistung abnehmen.</p>
+<p>Um negativen Transfer zu vermeiden, müssen Transfermethoden vorsichtig sein und die Beziehung zwischen Quell- und Zielaufgabe berücksichtigen. Vorsichtige Ansätze führen möglicherweise zu geringerem positivem Transfer, bieten jedoch Schutz vor negativem Transfer. Aggressive Ansätze erzielen möglicherweise größere Leistungssteigerungen, bergen jedoch auch das Risiko von negativem Transfer, wenn die Quellaufgabe nicht gut zur Zielaufgabe passt.</p>
+<h4 id="321-ablehnung-schlechter-informationen">3.2.1 Ablehnung schlechter Informationen</h4>
+<p>Eine Möglichkeit negativen Transfer zu vermeiden besteht darin, dass schädliche Informationen der Quellaufgabe während des Lernens der Zielaufgabe erkannt und abgelehnt werden. Eine Methode, um dies zu erreichen, ist das optionenbasierte Transfer Learning im Bereich des Reinforcement Learning, bei dem der Agent basierend auf der Leistung bestimmte Optionen auswählt oder ablehnt. Ein weiterer Ansatz ist der KBKR-Ratschlag-Algorithmus (Advice-Taking Algorithm), der die Ratschläge der Quellaufgabe als weiche Einschränkung berücksichtigt. Zusätzlich wurden Methoden zur Erkennung von negativem Transfer entwickelt, z.B. durch die Verwendung eines Hyperpriors, dessen Varianz mit der Unähnlichkeit der Aufgaben korreliert. Dadurch kann entschieden werden, ob überhaupt ein Transfer stattfinden sollte.</p>
+<h4 id="322-auswahl-der-quellaufgabe">3.2.2 Auswahl der Quellaufgabe</h4>
+<p>Um negativen Transfer zu vermeiden, können mehrere Quellaufgaben zur Auswahl stehen. Eine Möglichkeit besteht darin, die Aufgaben nach Schwierigkeitsgrad zu ordnen und eine Quellaufgabe auszuwählen, die nur moderat schwieriger ist als die Zielaufgabe. Eine andere Methode ist die Suche nach ähnlichen Aufgaben mit Hilfe von Graphenrepräsentationen. Zudem kann auch die Auswahl aus Kandidatenlösungen einer Quellaufgabe anstelle von Quellaufgaben selbst in Betracht gezogen werden. Dieser Ansatz ermöglicht die Berücksichtigung der Komplexität der Modelle und die Auswahl einer geeigneten Auflösung für den Transfer.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="CHOOSING_SOURCE_TASK" src="../img/TransferLearningNLP/herausforderung_choosing_source_task.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Abbildung 2: Visualisierung der Auswahl der Quellaufgabe:</td>
+</tr>
+<tr>
+<td style="text-align: center;">Eine Möglichkeit, negativen Transfer zu vermeiden, besteht darin, eine geeignete Quellaufgabe auszuwählen, von der der Transfer erfolgen soll. In diesem Beispiel wird Task 2 als am Relevantesten ausgewählt.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="323-modellierung-von-aufgabenahnlichkeit">3.2.3 Modellierung von Aufgabenähnlichkeit</h4>
+<p>Bei der Auswahl von Quellaufgaben kann es vorteilhaft sein, mehrere Aufgaben zu berücksichtigen, anstatt nur eine auszuwählen. Einige Ansätze modellieren explizit die Beziehungen zwischen den Aufgaben und integrieren diese Informationen in die Transfermethode. Dies ermöglicht eine bessere Nutzung des Wissens aus den Quellaufgaben und verringert das Risiko von negativem Transfer. Beispiele für solche Ansätze sind die Entwicklung von Ähnlichkeitsmaßen für Aufgaben im Bereich des Reinforcement Learning, die Konstruktion eines Graphen zur Darstellung der Aufgaben und die Verwendung von Kernel-Methoden zur Berechnung eines Ähnlichkeitskerns für die Zielaufgabe.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="MODELING_TASK_SIMULARITY" src="../img/TransferLearningNLP/Modeling_task_similarity.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Abbildung 3: Modellierung von Aufgabenähnlichkeit:</td>
+</tr>
+<tr>
+<td style="text-align: center;">Eine andere Möglichkeit, negativen Transfer zu vermeiden, besteht darin, das Verhältnis zwischen den Quellaufgaben und der Zielaufgabe zu modellieren und das Wissen unter Berücksichtigung dieser Beziehungen zu kombinieren.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33-kategorisierung">3.3 Kategorisierung</h3>
+<p>Die folgende Tabelle gibt einen Überblick über die Gebiete des Transferlernens.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="TABLE_CATEGORIES" src="../img/TransferLearningNLP/table_categories.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Abbildung 4: Überblickstabelle über die Kategorien von Transfer Learning:</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">X:</td>
+<td style="text-align: left;">Feature space (Audio-, Text-, Bilddaten, …)</td>
+</tr>
+<tr>
+<td style="text-align: left;">y:</td>
+<td style="text-align: left;">Label space (Phoneme, Kategorien, …)</td>
+</tr>
+<tr>
+<td style="text-align: left;">M(X):</td>
+<td style="text-align: left;">Model</td>
+</tr>
+<tr>
+<td style="text-align: left;">P(X):</td>
+<td style="text-align: left;">Verteilung der Features</td>
+</tr>
+<tr>
+<td style="text-align: left;">+:</td>
+<td style="text-align: left;">Daten und Tasks sind <strong>gleich</strong> für Quell- und Zieldomäne</td>
+</tr>
+<tr>
+<td style="text-align: left;">-:</td>
+<td style="text-align: left;">Daten und Tasks sind <strong>unterschiedlich</strong> für Quell- und Zieldomäne</td>
+</tr>
+</tbody>
+</table>
+<h4 id="331-modelladaption-und-inkrementelles-lernen">3.3.1 Modelladaption und inkrementelles Lernen</h4>
+<p>Die einfachste Art des Transfer Learnings ist die Modelladaption. Hier bleiben das Model und die Label- und Featureräume gleich, wobei das vorhandene Modell an die veränderte Datenverteilung angepasst wird. Es gibt verschiedene Ansätze für die Modellanpassung, wie die Maximum-a-posteriori-Schätzung (MAP) und den Maximum-Likelihood-Lineare-Regression (MLLR) Algorithmus. Falls sich die Verteilung stetig ändert, spricht man von inkrementellem Lernen. Die Anpassung kann supervised oder unsupervised erfolgen. Falls das Quellmodell allerdings erst die Label generieren muss, spricht man von semi-supervised Learning. Eine alternative Herangehensweise mit ungelabelten Daten umzugehen, besteht darin, neue Merkmale zu extrahieren, indem Daten aus Quell- und Ziel- Domänen linear abgeleitet werden. Dies kann mit Hilfe von Techniken wie der transfer component analysis (TCA) erreicht werden. In einigen Fällen können ungelabelte Daten verwendet werden, um robustere Merkmale abzuleiten. Dieser Ansatz wird als self-taught learning bezeichnet und ähnelt dem Konzept des tiefen Repräsentationslernens.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="DISTRIBUTIONS" src="../img/TransferLearningNLP/Distributions.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Abbildung 5: Beispiel für die A-priori-Verteilung, die Likelihood-Funktion der Daten sowie die A-posteriori-Verteilung.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="332-heterogenes-transfer-learning">3.3.2 Heterogenes Transfer Learning</h4>
+<p>Heterogenes Transfer Learning bezieht sich auf den Fall, in dem sich die Merkmale der Quell- und Ziel-Domänen unterscheiden, während die Labels und das Modell unverändert bleiben. Das Ziel besteht darin, die vorhandene Entsprechung zwischen den Domänen zu nutzen, um Wissen von einer Domäne auf die andere zu übertragen. Frühere Ansätze konzentrierten sich auf die Definition und Nutzung der Entsprechung auf Instanzebene. Aktuellere Ansätze zielen darauf ab, gemeinsame Repräsentationen der Quell- und Ziel-Domänen zu finden, entweder durch Matrixfaktorisierung, RBM-basiertes latentes Faktorlernen oder durch die Kombination von Deep Learning und Transfer Learning. Eine besondere Herausforderung besteht darin, aus sehr unterschiedlichen Aufgaben zu lernen, bei denen sich der Labelraum von der Ziel-Domäne unterscheidet. Das Lernen von Korrespondenzen zwischen solchen unabhängigen, aber analogen Domänen ist für Maschinen schwierig, obwohl Menschen dazu neigen, Analogien leichter zu erkennen. Aktuelle Fortschritte im Bereich des Deep Learning bieten jedoch neue Möglichkeiten durch ein einheitliches Framework für Representation Learning und Multitask Learning.</p>
+<h4 id="multitask-learning">Multitask-Learning</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="MULTITASK_LEARNING" src="../img/TransferLearningNLP/multitask_learning.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Abbildung 6: Grafische Darstellung von Multitask Learning</td>
+</tr>
+</tbody>
+</table>
+<p>Multitask Learning bezieht sich auf den Fall, in dem die Merkmalsräume der Quell- und Ziel-Domänen identisch, jedoch die Aufgabenlabels signifikant unterschiedlich sind. Bei diesem Ansatz wird angenommen, dass die Quell- und Ziel-Aufgaben eng miteinander verbunden sind und das Lernen einer Aufgabe das Lernen der anderen Aufgabe in Form einer gegenseitigen Regularisierung unterstützt. Multitask Learning ist ein allgemeiner Ansatz, der auf verschiedene Modelle angewendet werden kann, einschließlich Kernel-Regression und k-nearest neighbor. Die Bewertung der Relevanz von zwei Aufgaben ist eine Herausforderung, und es gibt interessante Ansätze, die die Überlappung verschiedener Aufgaben im selben semantischen Raum zur Schätzung der Relevanz verwenden.</p>
+<p>Eine Möglichkeit eine solche Schätzung durchzuführen ist es einen Score für die Überlappung der semantischen Räume zu definieren:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="MULTITASK_SIMULARITY_SCORE" src="../img/TransferLearningNLP/Multitask_simularity_score.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Abbildung 7: Definition eines Überlappungsscores der semantischen Räume bei Multitask-Learning</td>
+</tr>
+</tbody>
+</table>
+<p>Der hier definierte Score weist einen Wert zwischen 0 und 1 auf. Eine starke Überlappung weist einen Wert nahe 1 auf.</p>
+<h3 id="34-deep-transfer-learning">3.4 Deep Transfer Learning</h3>
+<p>Deep Learning hat einen starken Einfluss auf Transfer Learning, insbesondere in den Bereichen der gesprochenen und geschriebenen Sprache. Es umfasst verschiedene Modelle wie Deep Belief Networks, Deep Boltzmann Machines, Deep Autoencoders, Deep Neural Networks und Deep Recurrent Neural Networks. Diese Modelle sind in der Lage, mehrschichtige Repräsentationen zu lernen, die eine hierarchische Verarbeitung von Informationen nachahmen. Das mehrschichtige Feature-Lernen bietet mehrere Vorteile, wie Robustheit gegenüber Datenvariationen, hierarchische Parameterverteilung, die Möglichkeit des Supervised Learnings und die Anpassungsfähigkeit an spezifische Aufgaben durch feinabstimmendes Training. Dadurch bietet Deep Learning einen geeigneten Rahmen für das Transfer Learning, bei dem robuste Features gelernt werden, die von mehreren Merkmalen und Aufgaben gemeinsam genutzt werden.</p>
+<p>In einer beispielhaften Umsetzung von Deep Transfer Learning werden bei einem großen Modell die meisten Schichten bis zu einem gewissen Punkt eingefroren. Die Restlichen werden anschließend neu trainiert. In folgender Visualisierung wird dies illustriert:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="VISUALIZED_DEEP_TRANSFER_LEARNING" src="../img/TransferLearningNLP/visualized_deep_transfer_learning.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Abbildung 8: Visualisierung von Deep Transfer Learning mit gefrorenen Schichten.</td>
+</tr>
+</tbody>
+</table>
+<p>Folgende Abbildung zeigt eine Transfer Learning Architektur, die auf tiefer Repräsentation basiert. Im linken Teil der Abbildung findet das gemeinsame Training statt, bei dem unterschiedliche Eingabemerkmale durch Vorverarbeitungsnetzwerke in einen gemeinsamen semantischen Raum projiziert werden. Die gemeinsamen Merkmale umfassen aussagekräftige Faktoren, die für mehrere Aufgaben verwendet werden können. Alleinstehend handelt es sich bei der linken Seite der Abbildung im Wesentlichen um ein Multitask-Learning.</p>
+<p>Im rechten Teil der Abbildung wird die Anpassungsphase dargestellt, in der neue Daten für die Zielaufgabe bereitgestellt werden, entweder mit oder ohne Labels. Das Modell wird mit den neuen Daten aktualisiert, die einer anderen Verteilung folgen als in der gemeinsamen Trainingsphase.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="DEEP_TRANSFER_LEARNING" src="../img/TransferLearningNLP/deep_transfer_learning.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Abbildung 9: Visualisierung von Deep Transfer Learning</td>
+</tr>
+</tbody>
+</table>
+<p>Ein großer Vorteil des Unsupervised Trainings ist die Fähigkeit, den Merkmalsextraktor ohne gelabelte Daten zu trainieren und somit den Bedarf an gelabelten Daten zu reduzieren. Durch Unsupervised Learning kann die überwachte Lernphase verbessert werden, indem Konvergenzgeschwindigkeit, Datenmenge und Modellqualität beeinflusst werden.</p>
+<p>In der Studie "Domain adaptation for large-scale sentiment classiﬁcation: A deep learning approach" von X. Glorot et al. wurden hochrangige Merkmale mittels Unsupervised Learning extrahiert. Die Ergebnisse zeigten, dass diese abstrakten Merkmale domänenunabhängig sind und erfolgreich auf neue Domänen übertragen werden können, ohne Anpassungen vorzunehmen. Ähnliche Ergebnisse wurden auch in anderen Studien erzielt, z.B. bei der Übertragung von CNN-basierten Merkmalen auf Bilderkennungsaufgaben. Es wurde gezeigt, dass nur wenige gelabelte Daten ausreichen, um Modelle anzupassen und unbekannte Objekte zu erkennen. In einigen Fällen kann sogar die Beziehung zwischen Eingangsdaten, Aufgabenvektor und Aufgabenlabels in einem Deep-Network erlernt werden, was zu Zero-Data Learning und Zero-Shot Learning führt.</p>
+<h3 id="35-modelltransfer">3.5 Modelltransfer</h3>
+<p>Beim Transfer von Wissen zwischen Modellen gibt es verschiedene Ansätze. Ein häufig verwendetes Verfahren ist das Modelltransferverfahren, bei dem das im Quellmodell gelernte Wissen auf das Zielmodell übertragen wird. Dabei kann das Quellmodell beispielsweise ein Gaussian mixture model (GMM) sein, während das Zielmodell ein Deep Neural Network (DNN) ist. Das Wissen wird durch Initialisierung und Anpassung des Zielmodells mithilfe des GMM genutzt.</p>
+<p>Ein weiterer Ansatz ist das Lehrer-Schüler-Modell, bei dem ein neues Modell von einem bestehenden Modell lernt. Das Lehrermodell enthält bereits reichhaltiges Wissen, das zur Anleitung des Schülermodells genutzt wird. Es gibt verschiedene Methoden, um das Wissen des Lehrermodells auf das Schülermodell zu übertragen.</p>
+<p>Eine Möglichkeit ist das Abgleichen der Aktivierungen (Logit matching) des Schülermodells mit denen des Lehrermodells. Dabei werden die Logits verglichen, um eine möglichst geringe quadratische Abweichung zu erzielen. Eine andere Methode ist die Verwendung von "dark knowledge", bei der die Ausgaben des Schülermodells an die Ausgaben des Lehrermodells angepasst werden. Im Folgenden wird erklärt, wie hier die loss function errechnet wird.</p>
+<p>Die Loss Funktion des Schülermodells wird wie folgt errechnet:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="DARK_KNOWLEDGE_DESTILATION_FORMULA" src="../img/TransferLearningNLP/dark_knowledge_destilation_formula.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Abbildung 10: Formel zur Errechnung der Loss Funktion des Schülermodells mit Hilfe von Dark Knowledge Destilation</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="DARK_KNOWLEDGE_DESTILATION_ROADMAP" src="../img/TransferLearningNLP/dark_knowledge_destilation_roadmap.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Abbildung 11: Roadmap zum besseren Verständnis der Formel</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">L:</td>
+<td style="text-align: left;">Loss function wird errechnet aus Schüler- und Lehrer- loss function</td>
+</tr>
+<tr>
+<td style="text-align: left;">T:</td>
+<td style="text-align: left;">“Temperatur Parameter” Wenn T=1: Softmax-Funktion, mit zunehmendem T wird die Wahrscheinlichkeitsverteilung, die von der Softmax-Funktion generiert wird, weicher und liefert mehr Informationen darüber, welche Klassen das Lehrermodell als ähnlicher zur vorhergesagten Klasse betrachtet hat.</td>
+</tr>
+<tr>
+<td style="text-align: left;">H:</td>
+<td style="text-align: left;">Cross Entropy loss function</td>
+</tr>
+<tr>
+<td style="text-align: left;">W:</td>
+<td style="text-align: left;">Child model Parameter</td>
+</tr>
+<tr>
+<td style="text-align: left;">zs und zt:</td>
+<td style="text-align: left;">Logits von Lehrer- und Schülermodell</td>
+</tr>
+<tr>
+<td style="text-align: left;">τ, α und β:</td>
+<td style="text-align: left;">Hyperparameter</td>
+</tr>
+<tr>
+<td style="text-align: left;">σ:</td>
+<td style="text-align: left;">Softmax Funktion</td>
+</tr>
+<tr>
+<td style="text-align: left;">x:</td>
+<td style="text-align: left;">Input</td>
+</tr>
+<tr>
+<td style="text-align: left;">y:</td>
+<td style="text-align: left;">Wahres Label</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-anwendungen">4. Anwendungen</h2>
+<p>Im Folgenden wird anhand eines Beispiels die Vorgehensweise bei der Implementierung von Transfer Learning in der Sprachverarbeitung erläutert.
+Konkret geht es hierbei um die Implementierung einer Fake-News-Erkennung. </p>
+<p>Zunächst ein kurzer Überblick über die einzelnen Phasen, welche wir durchlaufen werden. In Phase 1 werden die Daten visualisiert und vorbereitet. 
+Phase 2 beschäftigt sich mit dem Large Language Model <em>BERT</em>, welches wir für unseren Anwendungsfall fine-tunen wollen. Es wird auf die ursprünglichen Anwendungsfälle 
+eingegangen, wofür das Modell einst trainiert wurde. Anschließend wird das Modell angepasst, damit es für die Fake-News-Erkennung verwendet werden kann. 
+Ein entscheidender Schritt im Transfer Learning ist das Einfrieren der einzelnen Schichten. Dies wird im Phase 4 erläutert bevor in Phase 5 das Modell trainiert wird. 
+Zu guter Letzt muss das Modell noch evaluiert werden.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="STEPS" src="../img/TransferLearningNLP/steps.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Abbildung 12: Verschiedene Phasen der Code Demo</td>
+</tr>
+</tbody>
+</table>
+<h3 id="41-daten-visualisierung">4.1 Daten - Visualisierung</h3>
+<p>Beide Datensätze bestehen aus folgenden Variablen:
+- <em>title:</em> Entspricht der Schlagzeile des Artikels. Diese Variable wird später zum Trainieren verwendet.
+- <em>text:</em> Enthält den gesamten Text des Artikels.
+- <em>subject:</em> Beschreibt, wo der Artikel veröffentlicht wurde.
+- <em>date:</em> Datum der Veröffentlichung</p>
+<p>Hierbei fällt auf, dass keine Variable Auskunft darüber gibt, ob der Artikel fake oder tatsächlich wahr ist. Bevor die Datensätze zusammengefügt werden, 
+muss zunächst diese Variable generiert werden.</p>
+<div class="highlight"><pre><span></span><code><span class="n">true_data</span><span class="p">[</span><span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;True&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">true_data</span><span class="p">)</span>
+<span class="n">fake_data</span><span class="p">[</span><span class="s1">&#39;Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Fake&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">fake_data</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">true_data</span><span class="p">,</span> <span class="n">fake_data</span><span class="p">])</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Target</span><span class="p">)[</span><span class="s1">&#39;Fake&#39;</span><span class="p">]</span>
+</code></pre></div>
+<p>Als Nächstes wurde die Verteilung der Daten visualisiert, um sicherzustellen, dass ein ausbalancierter Datensatz vorliegt. Mit einer Verteilung von 
+52,3 % Fake- und 47,7 % Echt-Daten, ist dies der Fall. Die Länge der Schlagzeilen wurde ebenfalls visualisiert. Diese wird später beim Tokenisieren noch eine Rolle spielen.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="STEPS" src="../img/TransferLearningNLP/length_headers.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Abbildung 13: Länge der Überschriften</td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-daten-vorbereitung">4.2 Daten - Vorbereitung</h3>
+<p>Wie bei jedem maschinellen Lernverfahren müssen die Daten in Trainings-, Validierungs- und Testdaten aufgeteilt werden. 
+Da ein Modell mit Textdaten nicht arbeiten kann, müssen diese zunächst tokenisiert werden. Damit ist gemeint, dass die Wörter in sogenannte Tokens umgewandelt werden, welche wiederum numerische Repräsentationen darstellen. </p>
+<p>Da wir das Sprachmodell BERT verwenden wollen, nehmen wir hierfür <em>BertTokenizerFast</em>, welcher speziell für das Modell entwickelt wurde. Dieser verwendet den WordPiece-Algorithmus, 
+welcher auf der Idee basiert, häufig vorkommende Zeichenfolgen in einem Textkorpus zu identifizieren und sie zu einem neuen Wort zusammenzufügen. </p>
+<p>Zusätzlich zum Text, welcher tokenisiert werden soll, sind folgende Parameter zu übergeben:
+- <em>max_length:</em> Dieser Parameter definiert die maximale Länge einer Sequence. Wenn wir uns die Grafik <em>Länge der Überschriften</em> nochmals genauer ansehen fällt auf, 
+dass die meisten Schlagzeilen unter 20 Wörter haben. Um nicht unnötig große Datenmenge verarbeiten zu müssen, setzen wir die maximale Länge der Sequenzen daher auf diesen Wert.
+- <em>padding:</em> Da unser Modell mit einer bestimmten Anzahl an Tokens rechnet, müssen wir diesen Parameter auf <em>true</em> setzen. Dies sorgt dafür, dass Schlagzeilen welche weniger
+als 20 Wörter enthalten, am Ende der Sequenz mit Nullen aufgefüllt werden. 
+- <em>truncation:</em> Es gibt allerdings auch Schlagzeilen mit mehr als 20 Wörtern. Wird dieser Parameter auf <em>true</em> gesetzt, so werden alle Sequenzen länger als der definierte 
+Wert bei <em>max_length</em> abgeschnitten.</p>
+<div class="highlight"><pre><span></span><code><span class="n">MAX_LENGTH</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">BertTokenizerFast</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;bert-base-uncased&#39;</span><span class="p">)</span>
+<span class="n">tokens_train</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">batch_encode_plus</span><span class="p">(</span>
+    <span class="n">train_text</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="n">max_length</span><span class="o">=</span><span class="n">MAX_LENGTH</span><span class="p">,</span>
+    <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">tokens_val</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">batch_encode_plus</span><span class="p">(</span>
+    <span class="n">val_text</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="n">max_length</span><span class="o">=</span><span class="n">MAX_LENGTH</span><span class="p">,</span>
+    <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">tokens_test</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">batch_encode_plus</span><span class="p">(</span>
+    <span class="n">test_text</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="n">max_length</span><span class="o">=</span><span class="n">MAX_LENGTH</span><span class="p">,</span>
+    <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Betrachten wir nun die Ausgabe des Tokenizers anhand eines Beispiels. Als Rückgabewert erhalten wir ein Dictionary mit drei key-value Paaren:
+- <em>input_ids:</em> Enthält die tokenisierten Sequenzen. Bei genauer Betrachtung fällt auf, dass diese jeweils mit dem Wert 101 starten und 
+mit 102 enden. Das hat den Grund, dass diese Tokens keine Wörter darstellen, sondern dem Algorithmus den Anfang und das Ende einer 
+Sequenz signalisieren. Des Weiteren kann der zuvor beschriebene Effekt des <em>padding</em> bei der zweiten Sequenz beobachtet werden. Hier wurden 
+zwei Nullen an das Ende angefügt, damit Sequenz 1 und 2 die gleiche Länge haben.
+- <em>token_type_ids:</em> Wird beim Umgang mit Sequenzpaaren verwendet und gibt an welcher Token zu welchem Satz gehört. Dies ist für unseren Anwendungsfall jedoch nicht relevant.
+- <em>attention_mask:</em> Binäre Sequenz, die angibt, welche Token vom Modell berücksichtigt bzw. ignoriert werden sollen. Beispielsweise sollen die Einträge welche bei Sequenz 2 durch <em>padding</em> hinzugefügt wurden, nicht beachtet werden.</p>
+<div class="highlight"><pre><span></span><code><span class="n">sample_data</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Build a fake news detection model.&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;Using a bert model.&quot;</span><span class="p">]</span>
+
+<span class="n">tokenized_sample_data</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">batch_encode_plus</span><span class="p">(</span><span class="n">sample_data</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tokenized_sample_data</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="s1">&#39;input_ids&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="mi">101</span><span class="p">,</span> <span class="mi">3857</span><span class="p">,</span> <span class="mi">1037</span><span class="p">,</span> <span class="mi">8275</span><span class="p">,</span> <span class="mi">2739</span><span class="p">,</span> <span class="mi">10788</span><span class="p">,</span> <span class="mi">2944</span><span class="p">,</span> <span class="mi">1012</span><span class="p">,</span> <span class="mi">102</span><span class="p">],</span> <span class="p">[</span><span class="mi">101</span><span class="p">,</span> <span class="mi">2478</span><span class="p">,</span> <span class="mi">1037</span><span class="p">,</span> <span class="mi">14324</span><span class="p">,</span> <span class="mi">2944</span><span class="p">,</span> <span class="mi">1012</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
+ <span class="s1">&#39;token_type_ids&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> 
+ <span class="s1">&#39;attention_mask&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+ <span class="p">}</span>
+</code></pre></div>
+<p>Da wir nun wissen, welche Daten wir an das Modell übergeben müssen und wie diese aussehen, werden die Daten im nächsten Schritt zu Tensoren konvertiert. Dies ist notwendig, da wir mit der PyTorch-Bibliothek arbeiten wollen und diese auf Tensoren als grundlegende Datenstruktur für Berechnungen aufbaut. Des Weiteren verwenden wir einen sogenannten <em>data loader</em>, welcher uns beim Laden und Verwalten der Daten behilflich ist und uns diese in Batches aufteilt.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Convert lists to tensors</span>
+<span class="n">train_seq</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">tokens_train</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">])</span>
+<span class="n">train_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">tokens_train</span><span class="p">[</span><span class="s1">&#39;attention_mask&#39;</span><span class="p">])</span>
+<span class="n">train_y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">train_labels</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+
+<span class="c1"># Crate data loader</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="n">train_seq</span><span class="p">,</span> <span class="n">train_mask</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
+<span class="n">train_sampler</span> <span class="o">=</span> <span class="n">RandomSampler</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+<span class="n">train_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">sampler</span><span class="o">=</span><span class="n">train_sampler</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="43-bert-bidirectional-encoder-representations-from-transformers">4.3 BERT (Bidirectional Encoder Representations from Transformers)</h3>
+<p>Das bekannte Large Language Model <em>Bert (Bidirectional Encoder Representations from Transformers)</em> wird als Ausgangspunkt verwendet. Das Modell wurde 2018 von Google veröffentlicht und wurde mittlerweile für eine Vielzahl von NLP-Aufgaben eingesetzt. Ursprünglich wurde das Modell auf einem großen Textkorpus trainiert, 
+welcher beispielsweise die gesamte Wikipedia (2.5 Milliarden Wörter) und den sogenannten BookCorpus (985 Millionen Wörter) enthält.
+Das Training wurde hierfür in zwei Phasen aufgeteilt:
+- <em>Masked Language Modeling:</em> In dieser Phase wurden 15 % der Wörter zufällig maskiert. Die Aufgabe bestand nun darin, die maskierten Wörter basierend auf dem Kontext vorherzusagen. 
+Dabei lernte das Modell die Beziehungen zwischen Wörtern innerhalb von Sätzen. Nachfolgend befindet sich die beschriebene Funktion als ein ausführbares Codebeispiel. </p>
+<div class="highlight"><pre><span></span><code><span class="n">unmasker</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s1">&#39;fill-mask&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s1">&#39;bert-base-uncased&#39;</span><span class="p">)</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;I will need an [MASK] because it is raining.&quot;</span>
+<span class="n">unmasker</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li><em>Next Sentence Prediction:</em> Als nächsten Schritt musste das Modell die Beziehungen zwischen Sätzen lernen. Hierfür wurde die Aufgabe so umgewandelt, dass das Modell vorhersagen sollte, 
+ob zwei Sätze aufeinanderfolgen. Wie für die erste Phase wird auch hierfür ein Codebeispiel zur Verfügung gestellt. Das Modell soll vorhersagen, ob Satz 1 und 2 bzw. Satz 2 und 3 
+in einer Beziehung zueinander stehen.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">model</span> <span class="o">=</span> <span class="n">BertForNextSentencePrediction</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;bert-base-uncased&quot;</span><span class="p">)</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">BertTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;bert-base-uncased&quot;</span><span class="p">)</span>
+
+<span class="n">sentences</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Elon Musk lives in California.&quot;</span><span class="p">,</span> <span class="s2">&quot;You can&#39;t buy anything on sundays in germany.&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;You are not supposed to work on sundays in germany.&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">sentences</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">sentences</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+    <span class="n">prediction</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">outputs</span><span class="o">.</span><span class="n">logits</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">prediction</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The sentences belong together.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The sentences do not belong together.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="44-model">4.4 Model</h3>
+<p>In Phase 3 erstellen wir ein Modell, welches die Architektur des BERT Modells als Grundlage verwendet. Um das Modell auf unseren Anwendungsfall anzupassen, fügen wir weitere Schichten hinzu. So werden beispielsweise zwei Linear-Layers hinzugefügt, um die Anzahl der Ausgänge auf zwei (Fake/Wahr) zu reduzieren. Ebenfalls wird die Regularisierungstechnik <em>Dropout</em> angewandt, um Overfitting vorzubeugen.</p>
+<p>In der <em>forward</em> Funktion wird definiert, wie die Eingabe durch das Modell fließt und die Ausgabe berechnet wird.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">BERT_Arch</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bert</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">BERT_Arch</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bert</span> <span class="o">=</span> <span class="n">bert</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relu</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">768</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">softmax</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LogSoftmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sent_id</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
+        <span class="n">cls_hs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bert</span><span class="p">(</span><span class="n">sent_id</span><span class="p">,</span> <span class="n">attention_mask</span><span class="o">=</span><span class="n">mask</span><span class="p">)[</span><span class="s1">&#39;pooler_output&#39;</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">cls_hs</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+</code></pre></div>
+<h3 id="45-einfrieren-der-schichten">4.5 Einfrieren der Schichten</h3>
+<p>Beim Transfer Learning werden oft bestimmte Schichten des vortrainierten Modells eingefroren, um die Gewichte während des Trainings nicht zu aktualisieren. Dies wird aus folgenden Gründen gemacht:
+- Schutz des bereits gelernten Wissens
+- Reduzieren der Trainingszeit
+- Prävention vor Overfitting</p>
+<p>Besonders nützlich ist dies, wenn die ursprüngliche Aufgabe Ähnlichkeiten mit der neuen Aufgabe aufweist. Es gibt drei verschiedene Ansätze welche verfolgt werden können. Im Folgenden werden diese stichpunktartig beschrieben.
+1. <em>Keine Schichten einfrieren:</em> 
+   1. Es wird das gesamte Modell trainiert
+   2. Großer Datensatz benötigt
+   3. Die ursprüngliche Aufgabe unterscheidet sich stark von der neuen Aufgabe</p>
+<ol>
+<li><em>Teilweises einfrieren der Schichten:</em></li>
+<li>Es werden nur die unteren Schichten eingefroren</li>
+<li>Die oberen Schichten werden trainiert</li>
+<li>
+<p>Mittelgroßer Datensatz notwendig</p>
+</li>
+<li>
+<p><em>Alle Schichten einfrieren:</em></p>
+</li>
+<li>Alle Schichte des vortrainierten Modells werden eingefroren</li>
+<li>Nur die aufgabenspezifische Schichten werden trainiert</li>
+<li>Kleiner Datensatz</li>
+<li>Ähnlichkeiten zwischen ursprünglicher und neuer Aufgabe sind vorhanden</li>
+</ol>
+<p>Für unseren Anwendungsfall wählen wir Methode 3. Hierfür iterieren wir über die einzelnen Schichten des BERT Modells und setzten den Parameter <em>requires_grad</em> jeweils auf den Wert <em>false</em>. Dadurch wird verhindert, dass der Gradient während des Trainings berechnet und die Gewichte aktualisiert werden.</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">bert</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+    <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">False</span>
+</code></pre></div>
+<h3 id="46-fine-tuning">4.6 Fine-Tuning</h3>
+<p>Wie es für Pytorch üblich ist, müssen nun die Trainings- und Evaluierungsschleife implementiert werden. In der Trainingsschleife erfolgt pro Iteration der gleiche Ablauf:
+1. <em>Datenbereitstellung:</em> Die Eingabedaten und die Labels werden aus den aktuellen Batch extrahiert.
+2. <em>Vorwärtsdurchlauf:</em> Die Eingabedaten werden in das Modell gegeben, welches Vorhersagen generiert.
+3. <em>Fehlerberechnung:</em> Es folgt ein Abgleich der vorhergesagten Werte mit den tatsächlichen Werten.
+4. <em>Rückwärtsdurchlauf und Gewichtsaktualisierung:</em> Der Backpropagation-Algorithmus wird verwendet, um die Gradienten der Gewichte des Modells zu berechnen. Der Optimizer nutzt diese Gradienten, um die Gewichte entsprechend anzupassen und das Modell zu optimieren.</p>
+<p>Ähnlich verhält sich die Evaluierungsschleife, mit dem Unterschied, dass der Rückwärtsdurchlauf nicht durchgeführt wird.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">train</span><span class="p">():</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="n">total_loss</span><span class="p">,</span> <span class="n">total_accuracy</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">step</span><span class="p">,</span> <span class="n">batch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">train_dataloader</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">step</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  Batch </span><span class="si">{:&gt;5,}</span><span class="s1">  of  </span><span class="si">{:&gt;5,}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_dataloader</span><span class="p">)))</span>
+
+        <span class="n">input_id</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">batch</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">preds</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_id</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">cross_entropy</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+        <span class="n">total_loss</span> <span class="o">=</span> <span class="n">total_loss</span> <span class="o">+</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">clip_grad_norm_</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+    <span class="n">avg_loss</span> <span class="o">=</span> <span class="n">total_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_dataloader</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">avg_loss</span>
+</code></pre></div>
+<p>Nachdem das Modell trainiert wurde, ist es an der Zeit die Performance des Modells auf den Testdaten zu überprüfen. Die folgende Tabelle zeigt die erhaltenen Metriken:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>precision</th>
+<th>recall</th>
+<th>f1-score</th>
+<th>support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>3212</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>3523</td>
+</tr>
+<tr>
+<td>accuracy</td>
+<td></td>
+<td></td>
+<td>0.99</td>
+<td>6735</td>
+</tr>
+<tr>
+<td>macro avg</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>6735</td>
+</tr>
+<tr>
+<td>weighted avg</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>6735</td>
+</tr>
+</tbody>
+</table>
+<h3 id="47-inference">4.7 Inference</h3>
+<p>Um mit dem Modell Vorhersagen machen zu können, müssen folgende Schritte durchgeführt werden:
+1. Tokenisieren der Schlagzeile 
+<div class="highlight"><pre><span></span><code><span class="n">unseen_news_text</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Donald Trump Sends Out Embarrassing New Year’s Eve Message; This is Disturbing&quot;</span><span class="p">]</span>
+
+<span class="n">MAX_LENGTH</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">BertTokenizerFast</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;bert-base-uncased&#39;</span><span class="p">)</span>
+<span class="n">tokens_unseen</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">batch_encode_plus</span><span class="p">(</span>
+    <span class="n">unseen_news_text</span><span class="p">,</span>
+    <span class="n">max_length</span><span class="o">=</span><span class="n">MAX_LENGTH</span><span class="p">,</span>
+    <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</code></pre></div>
+2. <em>input_ids</em> und <em>attention_mask</em> zu Tensoren konvertieren
+<div class="highlight"><pre><span></span><code><span class="n">unseen_seq</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">tokens_unseen</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">])</span>
+<span class="n">unseen_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">tokens_unseen</span><span class="p">[</span><span class="s1">&#39;attention_mask&#39;</span><span class="p">])</span>
+</code></pre></div>
+3. Vorhersage und Ausgabe
+<div class="highlight"><pre><span></span><code><span class="n">preds</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">unseen_seq</span><span class="p">,</span> <span class="n">unseen_mask</span><span class="p">)</span>
+<span class="n">preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">pred</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">preds</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">pred</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Headline </span><span class="si">{</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> is True&quot;</span><span class="p">)</span>
+        <span class="k">continue</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Headline </span><span class="si">{</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> is Fake&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<h2 id="5-fazit">5. Fazit</h2>
+<p>Transfer Learning in der Sprachverarbeitung hat sich als eine vielversprechende Methode erwiesen, um die Leistung von Sprachmodellen zu verbessern. Es ermöglicht die Anwendung vortrainierter Modelle auf neue sprachverarbeitende Aufgaben, indem das bereits erworbene Wissen auf eine andere, verwandte Aufgabe übertragen wird. In den letzten Jahren wurden bedeutende Fortschritte im Bereich des Transfer Learning in der Sprachverarbeitung erzielt, insbesondere mit Hilfe von Deep Learning-Modellen wie BERT.</p>
+<p>Die Anwendung von Transfer Learning bietet eine Reihe von Vorteilen. Es verkürzt nicht nur die Trainingszeit erheblich, sondern reduziert auch den Bedarf an umfangreichen Datenmengen. Durch die Nutzung vortrainierten Wissens, das in einem anderen Kontext erworben wurde, kann die Genauigkeit von Spracherkennungssystemen verbessert werden, selbst wenn nur begrenzte Daten zur Verfügung stehen. Transfer Learning ermöglicht die Entwicklung maßgeschneiderter Modelle für spezifische sprachverarbeitende Aufgaben und findet Anwendung in verschiedenen Bereichen wie der Sprachbefehlserkennung, der Transkription von Audioaufnahmen und der automatisierten Analyse von Sprachanrufen.</p>
+<p>Der aktuelle Stand der Forschung zeigt das Potenzial dieser Technik. Forscher haben verschiedene Ansätze und Techniken entwickelt, um die Effizienz und Genauigkeit von Spracherkennungssystemen weiter zu verbessern. Die Kombination von Transfer Learning mit Active Learning, Reinforcement Learning und Generative Adversarial Networks eröffnet neue Möglichkeiten, um die Leistungsfähigkeit der Systeme zu steigern. Die Erweiterung des Transfer Learning auf mehrsprachige Szenarien ermöglicht eine verbesserte Spracherkennung in verschiedenen Sprachen.</p>
+<p>Die Implementierung erfordert eine sorgfältige Vorbereitung der Daten, die Auswahl geeigneter vortrainierter Modelle und die Anpassung des Modells an die spezifische Aufgabe. Das Einfrieren bestimmter Schichten des vortrainierten Modells während des Trainings kann den Schutz des bereits gelernten Wissens gewährleisten und die Trainingszeit reduzieren. Durch das Fine-Tuning des Modells können optimale Ergebnisse erzielt werden.</p>
+<p>Insgesamt ist Transfer Learning ein vielversprechender Ansatz, um präzisere und effizientere Spracherkennungssysteme zu entwickeln. Mit weiteren Fortschritten in der Forschung und der Anwendung von Deep Learning-Modellen wird Transfer Learning eine immer wichtigere Rolle in der künstlichen Intelligenz und im maschinellen Lernen spielen. Es eröffnet neue Möglichkeiten für die Verbesserung von Spracherkennungssystemen und hat das Potenzial, unsere tägliche Interaktion mit sprachbasierten Technologien weiter zu verbessern.</p>
+<h2 id="6-weiterfuhrendes-material">6. Weiterführendes Material</h2>
+<h3 id="61-podcast">6.1 Podcast</h3>
+<p><a href="">Der Campus Talk - Silicon Forest</a></p>
+<h3 id="62-talk">6.2 Talk</h3>
+<p><a href="">Video Fachvortrag</a></p>
+<h3 id="63-demo">6.3 Demo</h3>
+<p><a href="">Video Code Demonstration</a></p>
+<p><a href="https://github.com/StaudTim/NLP-TransferLearning">Source Code</a></p>
+<h3 id="64-literaturliste">6.4 Literaturliste</h3>
+<p><a href="https://www.jmlr.org/papers/volume10/taylor09a/taylor09a.pdf?ref=https://codemonkey.link">Taylor, Matthew E., and Peter Stone. "Transfer learning for reinforcement learning domains: A survey." Journal of Machine Learning Research 10, no. 7 2009.</a></p>
+<p><a href="https://arxiv.org/pdf/1511.06066.pdf">Wang, Dong, and Thomas Fang Zheng. "Transfer learning for speech and language processing." 2015 Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA). IEEE, 2015.</a></p>
+<p><a href="https://books.google.co.uk/books?hl=en&amp;lr=&amp;id=X_jpBwAAQBAJ&amp;oi=fnd&amp;pg=PA4&amp;dq=S.+Thrun+and+L.+Pratt,+Learning+to+learn.+Springer+Science+%26+Business+Media,+2012.&amp;ots=gWUg2XChul&amp;sig=FJLVnquImEbPqfMCw9XYCMLywQA&amp;redir_esc=y#v=onepage&amp;q=S.%20Thrun%20and%20L.%20Pratt%2C%20Learning%20to%20learn.%20Springer%20Science%20%26%20Business%20Media%2C%202012.&amp;f=false">S. Thrun and L. Pratt, Learning to learn. Springer Science &amp; Business Media, 2012.</a></p>
+<p><a href="https://www.cse.ust.hk/~qyang/Docs/2009/tkde_transfer_learning.pdf">S. J. Pan and Q. Yang, “A survey on transfer learning,” Knowledge and
+Data Engineering, IEEE Transactions on, vol. 22, no. 10, pp. 1345–
+1359, 2010.</a></p>
+<p><a href="https://ftp.cs.wisc.edu/machine-learning/shavlik-group/torrey.handbook09.pdf">Torrey, Lisa, and Jude Shavlik. "Transfer learning." Handbook of research on machine learning applications and trends: algorithms, methods, and techniques. IGI global, 2010. 242-264.</a></p>
+<p><a href="https://link.springer.com/content/pdf/10.1023/A:1007379606734.pdf">R. Caruana, “Multitask learning,” Machine learning, vol. 28, no. 1, pp.
+41–75, 1997.</a></p>
+<p><a href="http://speech.csie.ntu.edu.tw/previous_version/Channel-MAP(SAP-1994).pdf">J.-L. Gauvain and C.-H. Lee, “Maximum a posteriori estimation for
+multivariate Gaussian mixture observations of Markov chains,” IEEE
+Transactions on Speech and audio processing, vol. 2, no. 2, pp. 291–
+298, 1994.</a></p>
+<p><a href="https://www.eecs.yorku.ca/course_archive/2007-08/W/6328/Reading/Leg_MLLR.pdf">C. J. Leggetter and P. Woodland, “Maximum likelihood linear re-
+gression for speaker adaptation of continuous density hidden Markov
+models,” Computer Speech &amp; Language, vol. 9, no. 2, pp. 171–185,
+1995.</a></p>
+<p><a href="https://www.vislab.ucr.edu/PUBLICATIONS/pubs/Chapters/2007/Learningastatistical07.pdf">P. E. Utgoff, “Incremental induction of decision trees,” Machine
+learning, vol. 4, no. 2, pp. 161–186, 1989.</a></p>
+<p><a href="https://dl.acm.org/doi/pdf/10.1145/279943.279962">A. Blum and T. Mitchell, “Combining labeled and unlabeled data
+with co-training,” in Proceedings of the eleventh annual conference
+on Computational learning theory. ACM, 1998, pp. 92–100.</a></p>
+<p><a href="https://people.cs.umass.edu/~mahadeva/papers/IJCAI2011-DA.pdf">C. Wang and S. Mahadevan, “Heterogeneous domain adaptation using
+manifold alignment,” in IJCAI Proceedings-International Joint Confer-
+ence on Artiﬁcial Intelligence, vol. 22, no. 1, 2011, p. 1541.</a></p>
+<p><a href="https://ojs.aaai.org/index.php/AAAI/article/view/8090/7948">Y. Zhu, Y. Chen, Z. Lu, S. J. Pan, G.-R. Xue, Y. Yu, and Q. Yang,
+“Heterogeneous transfer learning for image classiﬁcation.” in AAAI,
+2011.</a></p>
+<p><a href="https://dro.deakin.edu.au/articles/conference_contribution/Incremental_learning_of_temporally-coherent_gaussian_mixture_models/20953423/1/files/37238638.pdf">O. Arandjelovic and R. Cipolla, “Incremental learning of temporally-
+coherent Gaussian mixture models,” Society of Manufacturing Engi-
+neers (SME) Technical Papers, pp. 1–1, 2006.</a></p>
+<p><a href="https://people.montefiore.uliege.be/declercq/publications/Declercq-visapp2008.pdf">A. Declercq and J. H. Piater, “Online learning of Gaussian mixture
+models-a two-level approach.” in VISAPP (1), 2008, pp. 605–611.</a></p>
+<p><a href="https://minds.wisconsin.edu/bitstream/handle/1793/60444/TR1530.pdf?sequence=1">X. Zhu, “Semi-supervised learning literature survey,” Computer Sci-
+ences TRP 1530, University of Wisconsin C Madison, 2005.</a></p>
+<p><a href="https://repository.hkust.edu.hk/ir/bitstream/1783.1-6830/1/ijcai09.pdf">S. J. Pan, I. W. Tsang, J. T. Kwok, and Q. Yang, “Domain adaptation
+via transfer component analysis,” Neural Networks, IEEE Transactions
+on, vol. 22, no. 2, pp. 199–210, 2011.</a></p>
+<p><a href="https://dl.acm.org/doi/abs/10.1145/1273496.1273592">R. Raina, A. Battle, H. Lee, B. Packer, and A. Y. Ng, “Self-taught
+learning: transfer learning from unlabeled data,” in Proceedings of the
+24th international conference on Machine learning. ACM, 2007, pp.
+759–766.</a></p>
+<p><a href="https://arxiv.org/pdf/1008.0716.pdf">P. Prettenhofer and B. Stein, “Cross-lingual adaptation using structural
+correspondence learning,” ACM Transactions on Intelligent Systems
+and Technology (TIST), vol. 3, no. 1, p. 13, 2011.</a></p>
+<p><a href="https://proceedings.neurips.cc/paper/2008/file/0060ef47b12160b9198302ebdb144dcf-Paper.pdf">W. Dai, Y. Chen, G.-R. Xue, Q. Yang, and Y. Yu, “Translated learning:
+Transfer learning across different feature spaces,” in Advances in neural
+information processing systems, 2008, pp. 353–360.</a></p>
+<p><a href="http://people.ee.duke.edu/~lcarin/cvpr_adapt.pdf">B. Kulis, K. Saenko, and T. Darrell, “What you saw is not what you get:
+Domain adaptation using asymmetric kernel transforms,” in Computer
+Vision and Pattern Recognition (CVPR), 2011 IEEE Conference on.
+IEEE, 2011, pp. 1785–1792.</a></p>
+<p><a href="https://ojs.aaai.org/index.php/AAAI/article/view/7925/7784">B. Wei and C. J. Pal, “Heterogeneous transfer learning with RBMs.”
+in AAAI, 2011.</a></p>
+<p><a href="https://d1wqtxts1xzle7.cloudfront.net/30758870/xiaoxiaoICDM10_2-libre.pdf?1392059836=&amp;response-content-disposition=inline%3B+filename%3DTransfer_learning_on_heterogenous_featur.pdf&amp;Expires=1688671236&amp;Signature=LNuc-RFqUc1ETIeQ1ipza5eKg12X2dbaqCZOO4GAfPzpXe7s3ivwui0q48gQLxt13fgTnoerFfyMnFy~23H8ZpgVFASBH8nJKrcSh4TDce6XYjY5voFU9R9Po27~eAtQOMIklk1vfNIV9XTVLtPk1c2lu5SODx-m7e0k9EWI~tSMlow1dJeequ0mCEar8LRHhIHxTplYgS0i1C4NHYh5P9xMqQCSrFGwHK2XpP~fXxfh0hLT81LszAIbek7tDOeQk-Oy1eF2jMjMFOU66SV67qYCBmdYuBvWOinrNsE-oO-psjh-1lGz2mqgcwEk2NPMQR8hKxYR79NHKVU5XvuTiQ__&amp;Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA">X. Shi, Q. Liu, W. Fan, P. S. Yu, and R. Zhu, “Transfer learning
+on heterogenous feature spaces via spectral transformation,” in Data
+Mining (ICDM), 2010 IEEE 10th International Conference on. IEEE,
+2010, pp. 1049–1054.</a></p>
+<p><a href="https://arxiv.org/ftp/arxiv/papers/1206/1206.4660.pdf">L. Duan, D. Xu, and I. Tsang, “Learning with augmented features
+for heterogeneous domain adaptation,” arXiv preprint arXiv:1206.4660,
+2012.</a></p>
+<p><a href="https://ojs.aaai.org/index.php/AAAI/article/view/8961/8820">J. T. Zhou, S. J. Pan, I. W. Tsang, and Y. Yan, “Hybrid heterogeneous
+transfer learning through deep learning,” in Twenty-Eighth AAAI Con-
+ference on Artiﬁcial Intelligence, 2014.</a></p>
+<p><a href="https://onlinelibrary.wiley.com/doi/pdfdirect/10.1207/s15516709cog0702_3">D. Gentner, “Structure-mapping: A theoretical framework for analogy,”
+Cognitive science, vol. 7, no. 2, pp. 155–170, 1983.</a></p>
+<p><a href="https://psycnet.apa.org/record/1997-02239-004">D. Gentner and K. J. Holyoak, “Reasoning and learning by analogy:
+Introduction.” American Psychologist, vol. 52, no. 1, p. 32, 1997.</a></p>
+<p><a href="https://aclanthology.org/W06-1615.pdf">J. Blitzer, R. McDonald, and F. Pereira, “Domain adaptation with struc-
+tural correspondence learning,” in Proceedings of the 2006 conference
+on empirical methods in natural language processing. Association
+for Computational Linguistics, 2006, pp. 120–128.</a></p>
+<p><a href="https://ojs.aaai.org/index.php/AAAI/article/view/7907/7766">H.-Y. Wang and Q. Yang, “Transfer learning by structural analogy,” in
+AAAI. Citeseer, 2011.</a></p>
+<p><a href="https://apps.dtic.mil/sti/pdfs/ADA120124.pdf">J. G. Carbonell, Learning by analogy: Formulating and generalizing
+plans from past experience. Springer, 1983.</a></p>
+<p><a href="https://www.jair.org/index.php/jair/article/download/10253/24418/">J. Baxter, “A model of inductive bias learning,” J. Artif. Intell.
+Res.(JAIR), vol. 12, pp. 149–198, 2000.</a></p>
+<p><a href="https://link.springer.com/content/pdf/10.1007/s10994-010-5217-4.pdf">J. Guinney, Q. Wu, and S. Mukherjee, “Estimating variable structure
+and dependence in multitask learning via gradients,” Machine Learning,
+vol. 83, no. 3, pp. 265–287, 2011.</a></p>
+<p><a href="http://proceedings.mlr.press/v22/romera12/romera12.pdf">B. Romera-Paredes, A. Argyriou, N. Berthouze, and M. Pontil, “Ex-
+ploiting unrelated tasks in multi-task learning,” in International Con-
+ference on Artiﬁcial Intelligence and Statistics, 2012, pp. 951–959.</a></p>
+<p><a href="https://arxiv.org/pdf/1505.04630.pdf">D. Wang, C. Liu, Z. Tang, Z. Zhang, and M. Zhao, “Recurrent
+neural network training with dark knowledge transfer,” arXiv preprint
+arXiv:1505.04630, 2015.</a></p>
+<p><a href="https://arxiv.org/pdf/1506.02256.pdf">Z. Tang, D. Wang, Y. Pan, and Z. Zhang, “Knowledge transfer pre-
+training,” arXiv preprint arXiv:1506.02256, 2015.</a></p>
+<p><a href="https://proceedings.neurips.cc/paper/2014/file/ea8fcd92d59581717e06eb187f10666d-Paper.pdf">J. Ba and R. Caruana, “Do deep nets really need to be deep?” in
+Advances in Neural Information Processing Systems, 2014, pp. 2654–
+2662.</a></p>
+<p><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/HintonDengYuEtAl-SPM2012.pdf">G. Hinton, L. Deng, D. Yu, G. E. Dahl, A.-r. Mohamed, N. Jaitly,
+A. Senior, V. Vanhoucke, P. Nguyen, T. N. Sainath et al., “Deep neural
+networks for acoustic modeling in speech recognition: The shared
+views of four research groups,” IEEE Signal Processing Magazine,
+vol. 29, no. 6, pp. 82–97, 2012.</a></p>
+<p><a href="http://dx.doi.org/10.1561/2000000039">L. Deng and D. Yu, “Deep learning: Methods and applications,”
+Foundations and Trends in Signal Processing, vol. 7, no. 3-4, pp. 197–
+387, 2013</a></p>
+<p><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/ICASSP_DeepTextLearning_v07.pdf">X. He, J. Gao, and L. Deng, “Deep learning for natural language
+processing and related applications (Tutorial at ICASSP),” in IEEE
+International Conference on Acoustics, Speech, and Signal Processing
+(ICASSP), 2014.</a></p>
+<p><a href="https://nlp.stanford.edu/~manning/xyzzy/Hirschberg-Manning-Science-2015.pdf">J. Hirschberg and C. D. Manning, “Advances in natural language
+processing,” Science, vol. 349, no. 6245, pp. 261–266, 2015.</a></p>
+<p><a href="https://www.cs.utoronto.ca/~hinton/absps/ncfast.pdf">G. E. Hinton, S. Osindero, and Y.-W. Teh, “A fast learning algorithm
+for deep belief nets,” Neural computation, vol. 18, no. 7, pp. 1527–
+1554, 2006.</a></p>
+<p><a href="http://proceedings.mlr.press/v5/salakhutdinov09a/salakhutdinov09a.pdf">R. Salakhutdinov and G. E. Hinton, “Deep boltzmann machines,” in
+International Conference on Artiﬁcial Intelligence and Statistics, 2009,
+pp. 448–455.</a></p>
+<p><a href="https://proceedings.neurips.cc/paper/2006/file/5da713a690c067105aeb2fae32403405-Paper.pdf">Y. Bengio, P. Lamblin, D. Popovici, H. Larochelle et al., “Greedy
+layer-wise training of deep networks,” Advances in neural information
+processing systems, vol. 19, p. 153, 2007.</a></p>
+<p><a href="https://www.jmlr.org/papers/volume11/vincent10a/vincent10a.pdf?ref=https://githubhelp.com">P. Vincent, H. Larochelle, I. Lajoie, Y. Bengio, and P.-A. Manzagol,
+“Stacked denoising autoencoders: Learning useful representations in a
+deep network with a local denoising criterion,” The Journal of Machine
+Learning Research, vol. 11, pp. 3371–3408, 2010.</a></p>
+<p><a href="https://citeseerx.ist.psu.edu/document?repid=rep1&amp;type=pdf&amp;doi=6658bbf68995731b2083195054ff45b4eca38b3a">G. E. Dahl, D. Yu, L. Deng, and A. Acero, “Context-dependent pre-
+trained deep neural networks for large-vocabulary speech recognition,”
+Audio, Speech, and Language Processing, IEEE Transactions on,
+vol. 20, no. 1, pp. 30–42, 2012.</a></p>
+<p><a href="https://arxiv.org/pdf/1303.5778.pdf%C3%AF%C2%BC%E2%80%B0%C3%AF%C2%BC%C5%A1%E2%80%9C%C3%A5%C2%A6%E2%80%9A%C3%A6%C5%BE%C5%93LSTM%C3%A7%E2%80%9D%C2%A8%C3%A4%C2%BA%C5%BD%C3%A9%C5%A1%20%C3%A8%E2%80%94%20%C3%A5%C2%B1%E2%80%9A%C3%AF%C2%BC%C5%92%C3%A6%CB%86%E2%80%98%C3%A4%C2%BB%C2%AC%C3%A5%C2%B0%E2%80%A0%C3%A5%C2%BE%E2%80%94%C3%A5%CB%86%C2%B0">A. Graves, A.-R. Mohamed, and G. Hinton, “Speech recognition with
+deep recurrent neural networks,” in Proceedings of IEEE International
+Conference on Acoustics, Speech and Signal Processing (ICASSP).
+IEEE, 2013, pp. 6645–6649.</a></p>
+<p><a href="http://www.iro.umontreal.ca/~lisa/bib/pub_subject/finance/pointeurs/ALT2011.pdf">Y. Bengio and O. Delalleau, “On the expressive power of deep
+architectures,” in Algorithmic Learning Theory. Springer, 2011, pp.
+18–36.</a></p>
+<p><a href="https://thetalkingmachines.com/sites/default/files/2018-12/unified_nlp.pdf">R. Collobert and J. Weston, “A uniﬁed architecture for natural lan-
+guage processing: Deep neural networks with multitask learning,” in
+Proceedings of the 25th international conference on Machine learning.
+ACM, 2008, pp. 160–167.</a></p>
+<p><a href="https://citeseerx.ist.psu.edu/document?repid=rep1&amp;type=pdf&amp;doi=6bdccfe195bc49d218acc5be750aa49e41f408e4">L. Deng, J. Li, J.-T. Huang, K. Yao, D. Yu, F. Seide, M. Seltzer,
+G. Zweig, X. He, J. Williams et al., “Recent advances in deep learning
+for speech research at Microsoft,” in Acoustics, Speech and Signal
+Processing (ICASSP), 2013 IEEE International Conference on. IEEE,
+2013, pp. 8604–8608.</a></p>
+<p><a href="https://scholarworks.utep.edu/cgi/viewcontent.cgi?article=3698&amp;context=open_etd">S. M. Gutstein, Transfer learning techniques for deep neural nets. The
+University of Texas at El Paso, 2010.</a></p>
+<p><a href="https://ai.stanford.edu/~ang/papers/icml11-MultimodalDeepLearning.pdf">J. Ngiam, A. Khosla, M. Kim, J. Nam, H. Lee, and A. Y. Ng,
+“Multimodal deep learning,” in Proceedings of the 28th international
+conference on machine learning (ICML-11), 2011, pp. 689–696.</a></p>
+<p><a href="http://www.iro.umontreal.ca/∼bengioy/dlbook">Y. Bengio, I. J. Goodfellow, and A. Courville, Deep Learning, 2015, book in preparation for MIT Press.</a></p>
+<p><a href="https://dbirman.github.io/learn/hierarchy/pdfs/Hinton2006.pdf">G. E. Hinton and R. R. Salakhutdinov, “Reducing the dimensionality of
+data with neural networks,” Science, vol. 313, no. 5786, pp. 504–507,
+2006.</a></p>
+<p><a href="http://www.iro.umontreal.ca/~lisa/bib/pub_subject/language/pointeurs/ICML2011_sentiment.pdf">X. Glorot, A. Bordes, and Y. Bengio, “Domain adaptation for large-
+scale sentiment classiﬁcation: A deep learning approach,” in Proceed-
+ings of the 28th International Conference on Machine Learning (ICML-
+11), 2011, pp. 513–520.</a></p>
+<p><a href="https://openaccess.thecvf.com/content_cvpr_2014/papers/Oquab_Learning_and_Transferring_2014_CVPR_paper.pdf">M. Oquab, L. Bottou, I. Laptev, and J. Sivic, “Learning and transferring
+mid-level image representations using convolutional neural networks,”
+in Computer Vision and Pattern Recognition (CVPR), 2014 IEEE
+Conference on. IEEE, 2014, pp. 1717–1724.</a></p>
+<p><a href="https://ieeexplore.ieee.org/ielaam/6687317/9098178/7480825-aam.pdf">W. Zhang, R. Li, T. Zeng, Q. Sun, S. Kumar, J. Ye, and S. Ji, “Deep
+model based transfer and multi-task learning for biological image
+analysis,” in Proceedings of the 21th ACM SIGKDD International
+Conference on Knowledge Discovery and Data Mining. ACM, 2015,
+pp. 1475–1484.</a></p>
+<p><a href="https://www.cs.huji.ac.il/w~daphna/course/student%20lectures/cobi%20cario.pdf">L. Fei-Fei, R. Fergus, and P. Perona, “One-shot learning of object cate-
+gories,” Pattern Analysis and Machine Intelligence, IEEE Transactions
+on, vol. 28, no. 4, pp. 594–611, 2006.</a></p>
+<p><a href="https://cdn.aaai.org/AAAI/2008/AAAI08-103.pdf">H. Larochelle, D. Erhan, and Y. Bengio, “Zero-data learning of new
+tasks.” in AAAI, vol. 1, no. 2, 2008, p. 3.</a></p>
+<p><a href="https://proceedings.neurips.cc/paper/2013/file/2d6cc4b2d139a53512fb8cbb3086ae2e-Paper.pdf">R. Socher, M. Ganjoo, C. D. Manning, and A. Ng, “Zero-shot learning
+through cross-modal transfer,” in Advances in neural information
+processing systems, 2013, pp. 935–943.</a></p>
+<p><a href="http://proceedings.mlr.press/v27/bengio12a/bengio12a.pdf">Y. Bengio, “Deep learning of representations for unsupervised and
+transfer learning,” in ICML Unsupervised and Transfer Learning, 2012.</a></p>
+<p><a href="https://lirias.kuleuven.be/retrieve/23910">T. Croonenborghs, K. Driessens, and M. Bruynooghe. "Learning relational skills for
+inductive transfer in relational reinforcement learning." In International Conference
+on Inductive Logic Programming, 2007.</a></p>
+<p><a href="https://ftp.cs.wisc.edu/machine-learning/shavlik-group/torrey.icml-wkshp06.pdf">L. Torrey, J. Shavlik, T. Walker, and R. Maclin. "Relational skill transfer via
+advice taking." In ICML Workshop on Structural Knowledge Transfer for Machine
+Learning, 2006.</a></p>
+<p><a href="https://citeseerx.ist.psu.edu/document?repid=rep1&amp;type=pdf&amp;doi=abbc5430f09fa5e4ed6a1efb105593eca0722bf0">L. Torrey, T. Walker, J. Shavlik, and R. Maclin. "Using advice to transfer knowledge
+acquired in one reinforcement learning task to another." In European Conference
+on Machine Learning, 2005.</a></p>
+<p><a href="https://pal.sri.com/wp-content/uploads/publications/calo/2005/rosenstein-marx-kaelbling-dietterich-hnb-nips2005-transfer-workshop.pdf">M. Rosenstein, Z. Marx, L. Kaelbling, and T. Dietterich. "To transfer or not to
+transfer." In NIPS Workshop on Inductive Transfer, 2005.</a></p>
+<p><a href="https://d1wqtxts1xzle7.cloudfront.net/30660437/ICAPS07WS-taylor-libre.pdf?1391830165=&amp;response-content-disposition=inline%3B+filename%3DAccelerating_search_with_transferred_heu.pdf&amp;Expires=1688673123&amp;Signature=FqvwkocrPPwfZcyyxPDMJt3WbgEiy~YWTCyMNzLKYuBxo6Hy99oIstgrcen1kEHBi2cs2fKAfe9jqG8vaXrOeCAMRStyI3LIhk3LHbA4LGsGTnrHrpQebqS~QFpLUATcaHgmCdJHbnMtlLGU~FGvpU6p568xDYt52873lJ9cVIzECC1iuAojIXPQJtImLhujywzzxsFN4muPP27n01DgB967ekWxTo-ZXM0-W8yLcp3gBP22ocflwJ4FYYJV5q08a6-5vi2AWt8-vMX2co1eqDH~qGwZigPnp3UP1kKWzykoIlmY2A-e-agMOSa4tzWhz~kc~6uM8~kK74BLhuEaRA__&amp;Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA">M. Taylor, G. Kuhlmann, and P. Stone. "Accelerating search with transferred
+heuristics." In ICAPS Workshop on AI Planning and Learning, 2007.</a></p>
+<p><a href="https://citeseerx.ist.psu.edu/document?repid=rep1&amp;type=pdf&amp;doi=65873acfc47fdc16a29a7415ed96f8983eee050d">E. Talvitie and S. Singh. "An experts algorithm for transfer learning. In Interna-
+tional Joint Conference on Artiﬁcial Intelligence, 2007.</a></p>
+<p><a href="https://www.cs.utexas.edu/~ai-lab/pubs/ECML07-rulegraphs.pdf">G. Kuhlmann and P. Stone. "Graph-based domain mapping for transfer learning in
+general games." In European Conference on Machine Learning, 2007.</a></p>
+<p><a href="https://www.cis.upenn.edu/~eeaton/papers/Eaton2006Knowledge.pdf">E. Eaton and M. DesJardins. "Knowledge transfer with a multiresolution ensemble
+of classiﬁers." In ICML Workshop on Structural Knowledge Transfer for Machine
+Learning, 2006.</a></p>
+<p><a href="https://scholarsarchive.byu.edu/cgi/viewcontent.cgi?article=2006&amp;context=facpub">C. Carroll and K. Seppi. "Task similarity measures for transfer in reinforcement
+learning task libraries." In IEEE International Joint Conference on Neural Net-
+works, 2005.</a></p>
+<p><a href="https://link.springer.com/content/pdf/10.1007/978-3-540-87479-9_39.pdf?pdf=inline%20link">E. Eaton, M. DesJardins, and T. Lane. "Modeling transfer relationships between
+learning tasks for improved inductive transfer." In European Conference on Machine
+Learning, 2008.</a></p>
+<p><a href="https://citeseerx.ist.psu.edu/document?repid=rep1&amp;type=pdf&amp;doi=45b132687d62da38ca2ce0a05e4b52bcf51f1f6f">U. Ruckert and S. Kramer. "Kernel-based inductive transfer." In European Confer-
+ence on Machine Learning, 2008.</a></p>
+<p><a href="https://onlinelibrary.wiley.com/doi/full/10.1002/9781118784235.eelt0084">Bardovi‐Harlig K, Sprouse RA. "Negative versus positive transfer." The TESOL encyclopedia of English language teaching. 2018 Feb 12:1-6.</a></p>
+<p><a href="https://www.researchgate.net/profile/Ommo-Hueppop/publication/326111028_A_short_introduction_to_bayes_statistics_with_R_for_ornithologists/links/5b3db7a0aca272078511a8da/A-short-introduction-to-bayes-statistics-with-R-for-ornithologists.pdf">Korner-Nievergelt, Fränzi &amp; Hüppop, Ommo. "A short introduction to bayes statistics with R for ornithologists." Vogelwarte. 2016. pp. 181-194.</a></p>
+<p><a href="https://intellabs.github.io/distiller/knowledge_distillation.html#hinton-et-al-2015">Knowledge Distillation, 2023.07.06</a></p>
+<p><a href="http://www.niculescu-mizil.org/papers/rtpp364-bucila.rev2.pdf">Buciluǎ, Cristian, Rich Caruana, and Alexandru Niculescu-Mizil. "Model compression." In Proceedings of the 12th ACM SIGKDD international conference on Knowledge discovery and data mining, pp. 535-541. 2006.</a></p>
+<p><a href="https://arxiv.org/pdf/1503.02531.pdf">Hinton, Geoffrey, Oriol Vinyals, and Jeff Dean. "Distilling the knowledge in a neural network." arXiv preprint arXiv:1503.02531 2015.</a></p>
+<p><a href="https://arxiv.org/pdf/1705.04288.pdf">Tann, Hokchhay, Soheil Hashemi, R. Iris Bahar, and Sherief Reda. "Hardware-software codesign of accurate, multiplier-free deep neural networks." In Proceedings of the 54th Annual Design Automation Conference 2017, pp. 1-6. 2017.</a></p>
+<p><a href="https://arxiv.org/pdf/1711.05852.pdf">Mishra, Asit, and Debbie Marr. "Apprentice: Using knowledge distillation techniques to improve low-precision network accuracy." arXiv preprint arXiv:1711.05852 2017.</a></p>
+<p><a href="https://arxiv.org/pdf/1802.05668.pdf">Polino, Antonio, Razvan Pascanu, and Dan Alistarh. "Model compression via distillation and quantization." arXiv preprint arXiv:1802.05668 2018.</a></p>
+<p><a href="https://arxiv.org/pdf/1709.06030.pdf">Ashok, Anubhav, Nicholas Rhinehart, Fares Beainy, and Kris M. Kitani. "N2n learning: Network to network compression via policy gradient reinforcement learning." arXiv preprint arXiv:1709.06030 2017.</a></p>
+<p><a href="https://arxiv.org/pdf/1801.05787.pdf">Theis, Lucas, Iryna Korshunova, Alykhan Tejani, and Ferenc Huszár. "Faster gaze prediction with dense networks and fisher pruning." arXiv preprint arXiv:1801.05787 2018.</a></p>
+<p><a href="https://huggingface.co/docs/transformers/preprocessing">Preprocess data for Natural Language Processing</a></p>
+<p><a href="https://www.analyticsvidhya.com/blog/2021/09/an-explanatory-guide-to-bert-tokenizer/">An Explanatory Guide to BERT Tokenizer</a></p>
+<p><a href="https://huggingface.co/bert-base-uncased">BERT base model (uncased)</a></p>
+<p><a href="https://neptune.ai/blog/transfer-learning-guide-examples-for-images-and-text-in-keras">Transfer Learning Guide: A Practical Tutorial With Examples for Images and Text in Keras</a></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../../javascripts/katex.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        
+      
+    
+  </body>
+</html>
